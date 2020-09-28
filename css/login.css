@@ -39,13 +39,11 @@ h6 {
 /*# sourceMappingURL=login.css.map */
 
 .login-container{
-  padding: 10px;
   background: #333333;
   margin-top: 33%;
   text-align: center;
   color: #FADCAC;
 }
-
 
 .form-container {
   padding: 40px;
