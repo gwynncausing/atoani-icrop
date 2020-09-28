@@ -8,7 +8,7 @@
         "global/_fonts.scss",
         "global/_global.scss",
         "login/_navbar.scss",
-        "_form-content.scss"
+        "_form-registration.scss"
     ],
     "names": [],
     "file": "registration.css"
