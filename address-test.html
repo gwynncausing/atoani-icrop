@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <h1>Hello, world!</h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <label for="province">Province:</label>
+        <select name="province" id="province">
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="municipality">municipality:</label>
+        <select name="municipality" id="municipality">
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <label for="barangay">barangay:</label>
+        <select name="barangay" id="barangay">
+        </select>
+      </div>
+    </div>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+<script>
+  function titleCase(str) {
+    var splitStr = str.toLowerCase().split('  [\(\)]');
+    for (var i = 0; i < splitStr.length; i++) {
+      // You do not need to check if i is larger than splitStr length, as your for does that for you
+      // Assign it back to the array
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    // Directly return the joined string
+    return splitStr.join(' ');
+  }
+
+  function loadSelectData(id,data){
+    for (var i = 0; i < data.length; i++) {
+      $('#'+id).append($("<option></option>")
+        .attr("value", data[i])
+        .text(data[i]));
+    }
+  }
+
+  let phAddress = {};
+  $.getJSON("philippine_address_2019v2.json", function (data) {
+    //$('#province').append($("<option></option>").attr("value", data).text(data));
+    phAddress = data;
+    console.log(phAddress);
+    $.each(data, function (key, value) {
+      var provinces = Object.keys(value.province_list)
+      loadSelectData('province',provinces);
+    });
+    loadMunicipality();
+    loadBarangay();
+  });
+
+  let municipalities = {};
+  $('#province').change(function(){
+    console.log($("#province option:selected").text());
+    for(region in phAddress){
+      //console.log(phAddress[region].province_list);
+      for(province in phAddress[region].province_list){
+        if ($("#province option:selected").text() == province){
+          console.log("found");
+          municipalities = phAddress[region].province_list[province];
+        }
+      }
+    }
+    console.log(municipalities);
+    $('#municipality').empty();
+    loadSelectData('municipality',Object.keys(municipalities.municipality_list));
+  });
+
+  function loadMunicipality(){
+    for(region in phAddress){
+      //console.log(phAddress[region].province_list);
+      for(province in phAddress[region].province_list){
+        if ($("#province option:selected").text() == province){
+          console.log("found");
+          municipalities = phAddress[region].province_list[province];
+        }
+      }
+    }
+    console.log(municipalities);
+    $('#municipality').empty();
+    loadSelectData('municipality',Object.keys(municipalities.municipality_list));
+  }
+
+  let barangays = {};
+  $('#municipality').change(function(){
+    let selected = $("#municipality option:selected").text();
+    console.log();
+    for(municipality in municipalities.municipality_list){
+      if (selected == municipality){
+        barangays = municipalities.municipality_list[municipality];
+      }
+    }
+    console.log(barangays);
+    $('#barangay').empty();
+    loadSelectData('barangay',barangays.barangay_list);
+  });
+
+  function loadBarangay(){
+    let selected = $("#municipality option:selected").text();
+    console.log();
+    for(municipality in municipalities.municipality_list){
+      if (selected == municipality){
+        barangays = municipalities.municipality_list[municipality];
+      }
+    }
+    console.log(barangays);
+    $('#barangay').empty();
+    loadSelectData('barangay',barangays.barangay_list);
+  }
+</script>
+
+</html>

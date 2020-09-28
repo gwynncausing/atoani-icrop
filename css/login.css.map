@@ -4,9 +4,9 @@
     "sources": [
         "login.scss",
         "index.scss",
-        "_variables.scss",
-        "_fonts.scss",
-        "_global.scss",
+        "global/_variables.scss",
+        "global/_fonts.scss",
+        "global/_global.scss",
         "login/_navbar.scss"
     ],
     "names": [],

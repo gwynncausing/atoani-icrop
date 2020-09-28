@@ -1,0 +1,33 @@
+.form-registration{
+    color: $white-color;
+    background-color: $tertiary-color;
+    width: 100%;
+    border-radius: 0.5rem;
+    
+    a{
+        color: $white-color;
+    }
+
+    .form-header{   
+        background-color: $secondary-color;
+        height: 2.75rem;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+
+    .form-body{
+        width: 91%;
+
+        #number-prep{
+            border:0; 
+            background: none; 
+            color: $white-color;
+        }
+
+        #submit{
+            background-color: $secondary-color;
+            color: $white-color;
+            width: 7rem;
+        }
+    }
+}
