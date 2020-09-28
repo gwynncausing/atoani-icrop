@@ -1,0 +1,18 @@
+.navbar {
+    background: $tertiary-color;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    a {
+        color: $text-color;
+    }
+    a.dropdown-item {
+        color: $black;
+        &:hover {
+            background: $tertiary-color;
+            color: $text-color;
+        }
+    }
+    .navbar-toggler-icon {
+        color: $white-color;
+    }
+}
