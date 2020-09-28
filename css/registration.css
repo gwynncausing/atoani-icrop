@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Sriracha&display=swap");
+body {
+  background-color: #114a44;
+  font-family: "Lato", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Sriracha", cursive;
+}
+
+.navbar {
+  background: #0b3531;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.navbar a {
+  color: #fafafa;
+}
+
+.navbar a.dropdown-item {
+  color: #0a0a0a;
+}
+
+.navbar a.dropdown-item:hover {
+  background: #0b3531;
+  color: #fafafa;
+}
+
+.navbar .navbar-toggler-icon {
+  color: #fafafa;
+}
+/*# sourceMappingURL=registration.css.map */
