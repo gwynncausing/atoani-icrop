@@ -36,4 +36,36 @@ h6 {
 .navbar .navbar-toggler-icon {
   color: #fafafa;
 }
+
+.form-registration {
+  color: #fafafa;
+  background-color: #0b3531;
+  min-height: 500px;
+  width: 100%;
+}
+
+.form-registration a {
+  color: #fafafa;
+}
+
+.form-registration .form-header {
+  background-color: #628474;
+  height: 2.75rem;
+}
+
+.form-registration .form-body {
+  width: 91%;
+}
+
+.form-registration .form-body #number-prep {
+  border: 0;
+  background: none;
+  color: #fafafa;
+}
+
+.form-registration .form-body #submit {
+  background-color: #628474;
+  color: #fafafa;
+  width: 6rem;
+}
 /*# sourceMappingURL=registration.css.map */
