@@ -1,160 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-        <!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <link rel="stylesheet" href="./css/registration.css">
+    <link rel="stylesheet" href="./css/registration.css">
 
-    </head>
+</head>
 
-    <body class="body-font">
+<body class="body-font">
 
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="#">AtoANI iCROP</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">AtoANI iCROP</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Language
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Bisaya</a>
+                            <a class="dropdown-item" href="#">English</a>
+                            <a class="dropdown-item" href="#">Tagalog</a>
+                        </div>
+                    </li>
+                </ul>
+                <div class="my-lg-0">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact Us</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Language
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Bisaya</a>
-                                <a class="dropdown-item" href="#">English</a>
-                                <a class="dropdown-item" href="#">Tagalog</a>
-                            </div>
+                            <a class="nav-link" href="#">Register</a>
                         </li>
                     </ul>
-                    <div class="my-lg-0">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Register</a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <div class="container pr-0 pl-0 pb-4 mt-5 form-registration">
-            <div class="form-header d-flex justify-content-between align-items-center pl-3 pr-3">
-                <span>Registration</span>
-            </div>
-
-            <div class="form-body mt-4 ml-auto mr-auto">
-                <form>
-                    <div class="form-row row-12 mt-5">
-                        <div class="form-group col-md-6">
-                            <span class="mr-1">I am a&nbsp.&nbsp;.&nbsp. </span>
-                            <div class="form-check form-check-inline ">
-                                <input name="account-type" class="form-check-input" type="radio" id="farmer" value="Farmer">
-                                <label class="form-check-label" for="farmer">Farmer</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input name="account-type" class="form-check-input" type="radio" id="customer" value="Customer">
-                                <label class="form-check-label" for="customer">Customer</label>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6 text-right" >
-                            Fields with asterisk * are required.
-                        </div>
-                    </div>
-
-                    <div class="form-row row-12 mt-5">
-                        <div class="form-group col-md-4">
-                            <label for="last-name">Last Name *</label>
-                            <input class="form-control" type="text" name="last-name" id="last-name" placeholder="Last Name">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="first-name">First Name *</label>
-                            <input class="form-control" type="text" name="first-name" id="first-name" placeholder="First Name">
-                        </div>
-                        <div class="form-group col-md-4" >
-                            <label for="last-name">Middle Name</label>
-                            <input class="form-control" type="text" name="middle-name" id="middle-name" placeholder="Middle Name">
-                        </div>
-                    </div>
-
-                    <div class="form-row row-12 mt-5">
-                        <div class="form-group col-md-3 col-xs-6  col-6">
-                            <label for="province">Province *</label>
-                            <select class="form-control" name="province" id="province" placeholder="Province">
-                                <option value="">Cebu</option>
-                                <option value="">Manila</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3 col-xs-6 col-6">
-                            <label for="city">City *</label>
-                            <select class="form-control" name="city" id="city" placeholder="City">
-                                <option value="">Cebu</option>
-                                <option value="">Manila</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3 col-xs-6  col-5">
-                            <label for="last-name">Barangay *</label>
-                            <select class="form-control" type="text" name="barangay" id="barangay" placeholder="Barangay">
-                                <option value="">Cebu</option>
-                                <option value="">Manila</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3 col-xs-6  col-7">
-                            <label for="last-name">Street / House No. *</label>
-                            <input class="form-control" type="text" name="street" id="street" placeholder="Street">
-                        </div>
-                    </div>
-
-                    <div class="form-row row-12 mt-5">
-                        <div class="form-group col-6 col-md-4 col-xs-6">
-                            <label for="contact-number">Contact Number *</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="number-prep">+63</span>
-                                </div>
-                                <input class="form-control" type="text" name="contact-number" id="contact-number" placeholder="Contact Number">
-                            </div>
-                        </div>
-                        <div class="form-group col-6 col-md-4 col-xs-6">
-                            <label for="email">Email *</label>
-                            <input class="form-control" type="text" name="email" id="email" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="form-row row-12 d-flex mt-5 justify-content-between">
-                        <a href="#">I already have an account</a>
-                        <input id="submit" class="btn" type="submit" value="Sign Up"/>
-                    </div>
-                </form>
-
-            <div>
+    <div class="container pr-0 pl-0 pb-4 mt-5 form-registration">
+        <div class="form-header d-flex justify-content-between align-items-center pl-3 pr-3">
+            <span>Registration</span>
         </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <div class="form-body mt-4 ml-auto mr-auto">
+            <form>
+                <div class="form-row row-12 mt-5">
+                    <div class="form-group col-md-6">
+                        <span class="mr-1">I am a&nbsp.&nbsp;.&nbsp. </span>
+                        <div class="form-check form-check-inline ">
+                            <input name="account-type" class="form-check-input" type="radio" id="farmer" value="Farmer">
+                            <label class="form-check-label" for="farmer">Farmer</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input name="account-type" class="form-check-input" type="radio" id="customer"
+                                value="Customer">
+                            <label class="form-check-label" for="customer">Customer</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 text-right">
+                        Fields with asterisk * are required.
+                    </div>
+                </div>
 
-    </body>
+                <div class="form-row row-12 mt-5">
+                    <div class="form-group col-md-4">
+                        <label for="last-name">Last Name *</label>
+                        <input class="form-control" type="text" name="last-name" id="last-name" placeholder="Last Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="first-name">First Name *</label>
+                        <input class="form-control" type="text" name="first-name" id="first-name"
+                            placeholder="First Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="last-name">Middle Name</label>
+                        <input class="form-control" type="text" name="middle-name" id="middle-name"
+                            placeholder="Middle Name">
+                    </div>
+                </div>
+
+                <div class="form-row row-12 mt-5">
+                    <div class="form-group col-md-3 col-xs-6  col-6">
+                        <label for="province">Province *</label>
+                        <select class="form-control" name="province" id="province">
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3 col-xs-6 col-6">
+                        <label for="city">City *</label>
+                        <select class="form-control" name="city" id="city">
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3 col-xs-6  col-5">
+                        <label for="last-name">Barangay *</label>
+                        <select class="form-control" type="text" name="barangay" id="barangay">
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3 col-xs-6  col-7">
+                        <label for="last-name">Street / House No. *</label>
+                        <input class="form-control" type="text" name="street" id="street" placeholder="Street">
+                    </div>
+                </div>
+
+                <div class="form-row row-12 mt-5">
+                    <div class="form-group col-6 col-md-4 col-xs-6">
+                        <label for="contact-number">Contact Number *</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="number-prep">+63</span>
+                            </div>
+                            <input class="form-control" type="text" name="contact-number" id="contact-number"
+                                placeholder="Contact Number">
+                        </div>
+                    </div>
+                    <div class="form-group col-6 col-md-4 col-xs-6">
+                        <label for="email">Email *</label>
+                        <input class="form-control" type="text" name="email" id="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-row row-12 d-flex mt-5 justify-content-between">
+                    <a href="#">I already have an account</a>
+                    <input id="submit" class="btn" type="submit" value="Sign Up" />
+                </div>
+            </form>
+
+            <div>
+            </div>
+
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+                crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+                crossorigin="anonymous"></script>
+
+</body>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+<script>
+    //TODO: Sentence Case, Alphabetical Order
+    //i plan to Sentence case the addresse so dis stolen from stackoverflow, to be tested cause am noob
+    function titleCase(str) {
+        var splitStr = str.toLowerCase().split('  [\(\)]');
+        for (var i = 0; i < splitStr.length; i++) {
+            // You do not need to check if i is larger than splitStr length, as your for does that for you
+            // Assign it back to the array
+            splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+        }
+        // Directly return the joined string
+        return splitStr.join(' ');
+    }
+
+    //loading data to the select tags based on ID of tag, data here is a list/array
+    function loadSelectData(id, data) {
+        for (var i = 0; i < data.length; i++) {
+            $('#' + id).append($("<option></option>")
+                .attr("value", data[i])
+                .text(data[i]));
+        }
+    }
+
+    //loads the cities/municipalities from json file
+    function loadCity() {
+        //take note of the json file structure for philippines addresses
+        //directly get the provinces since there is no region select tag/dropdown
+        for (region in phAddress) {
+            //region here is the key(e.g 4A, 01, NCR), which will be used to get the province_list json object that is nested in the region json (refer to json file)
+            for (province in phAddress[region].province_list) {
+                //check if the key in province_list of that region matches the selected province in dropdown menu
+                if ($("#province option:selected").text() == province) {
+                    //set municipalities variable to the matching province to extract the municipalities/cities nestedin the province_list json
+                    municipalities = phAddress[region].province_list[province];
+                }
+            }
+        }
+        //resets the select tag or else it will just be added to existing options
+        $('#city').empty();
+        //loads the municipality_list which is an array of keys (refer to json file)
+        loadSelectData('city', Object.keys(municipalities.municipality_list));
+    }
+    //loads the barangays from json file, the same logic with loadCity() function
+    function loadBarangay() {
+        let selected = $("#city option:selected").text();
+        for (municipality in municipalities.municipality_list) {
+            if (selected == municipality) {
+                barangays = municipalities.municipality_list[municipality];
+            }
+        }
+        $('#barangay').empty();
+        loadSelectData('barangay', barangays.barangay_list);
+    }
+
+    //update cities and barangay select tags when province selection is changed, same logic with loadCity() function
+    let municipalities = {};
+    $('#province').change(function () {
+        console.log($("#province option:selected").text());
+        for (region in phAddress) {
+            //console.log(phAddress[region].province_list);
+            for (province in phAddress[region].province_list) {
+                if ($("#province option:selected").text() == province) {
+                    console.log("found");
+                    municipalities = phAddress[region].province_list[province];
+                }
+            }
+        }
+        console.log(municipalities);
+        $('#city').empty();
+        $('#barangay').empty();
+        loadSelectData('city', Object.keys(municipalities.municipality_list));
+        loadCity();
+        loadBarangay();
+    });
+    
+    //update barangay select tag when cities selection is changed
+    let barangays = {};
+    $('#city').change(function () {
+        let selected = $("#city option:selected").text();
+        console.log();
+        for (municipality in municipalities.municipality_list) {
+            if (selected == municipality) {
+                barangays = municipalities.municipality_list[municipality];
+            }
+        }
+        console.log(barangays);
+        $('#barangay').empty();
+        loadSelectData('barangay', barangays.barangay_list);
+    });
+
+    
+    let phAddress = {};
+    $( document ).ready(function() {
+        //getJSON is an ajax call to fetch the json content
+        $.getJSON("philippine_address_2019v2.json", function (data) {
+            //assigns the data to ph address, to be used by other functions like loadCity()
+            phAddress = data;
+            console.log(phAddress);
+            //traversing the region and getting the province list as an array using Objects.keys then adding it to the dropdown for provinces
+            $.each(data, function (key, value) {
+                var provinces = Object.keys(value.province_list)
+                loadSelectData('province', provinces);
+            });
+            loadCity();
+            loadBarangay();
+        });
+    });
+</script>
 
 </html>
