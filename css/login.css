@@ -3,6 +3,7 @@
 body {
   background-color: #114a44;
   font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
 }
 
 h1,
@@ -36,4 +37,37 @@ h6 {
 .navbar .navbar-toggler-icon {
   color: #fafafa;
 }
+<<<<<<< HEAD
+
+.form-login {
+  color: #fafafa;
+  background-color: #0b3531;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.form-login a {
+  color: #fafafa;
+}
+
+.form-login .form-header {
+  background-color: #628474;
+  height: 2.75rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.form-login .form-body #number-prep {
+  border: 0;
+  background: none;
+  color: #fafafa;
+}
+
+.form-login .form-body #submit {
+  background-color: #628474;
+  color: #fafafa;
+  width: 7rem;
+}
+=======
+>>>>>>> 95512762aec2813d7aeff66f5544d6f17e652c54
 /*# sourceMappingURL=login.css.map */
