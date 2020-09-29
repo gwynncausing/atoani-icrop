@@ -15,11 +15,11 @@
 
     textFields.forEach(field => {
         field.addEventListener("input", e => {
-            checkValidity(e.target)
+            displayValidity(e.target)
         })
     })
 
-    const checkValidity = (field) => {
+    const displayValidity = (field) => {
         field.classList.remove('is-valid');
         field.classList.remove('is-invalid');
 
@@ -28,5 +28,5 @@
         else
             field.classList.add('is-invalid');
     }
-        
+
 })()

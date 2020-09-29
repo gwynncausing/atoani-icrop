@@ -72,8 +72,8 @@
                                 <span class="mr-1">I am a&nbsp.&nbsp;.&nbsp. </span>
                             </div>
                             <div class="col-md-2 ml-4 float-left form-check form-check-inline ">
-                                <input name="account-type" class="form-check-input" type="radio" id="farmer" value="Farmer">
-                                <label class="form-check-label" for="farmer">Farmer</label>
+                                <input name="account-type" class="form-check-input" type="radio" id="farmer" value="Farmer" checked>
+                                <label class="form-check-label" for="farmer" >Farmer</label>
                             </div>
                             <div class="col-md-2 ml-4 float-left form-check form-check-inline">
                                 <input name="account-type" class="form-check-input" type="radio" id="customer" value="Customer">
@@ -90,9 +90,6 @@
                     <div class="form-group col-md-4">
                         <label for="last-name">Last Name *</label>
                         <input class="form-control" type="text" name="last-name" id="last-name" placeholder="Last Name" maxlength="30" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid Last Name.
-                        </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="first-name">First Name *</label>
@@ -133,12 +130,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="number-prep">+63</span>
                             </div>
-                            <input class="form-control" type="text" name="contact-number" id="contact-number" placeholder="Contact Number" required>
+                            <input class="form-control" type="tel" pattern=".{10}" name="contact-number" maxlength="10" id="contact-number" placeholder="9000000000" required>
                         </div>
                     </div>
                     <div class="form-group col-12 col-md-4">
                         <label for="email">Email *</label>
-                        <input class="form-control" type="email" name="email" id="email" placeholder="Email" required>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="Email" maxlength="30" required>
                     </div>
                     <div class="form-group col-12 col-md-4">
                         <label for="company-name">Company Name *</label>
@@ -167,22 +164,30 @@
     //TODO: Sentence Case, Alphabetical Order
     //i plan to Sentence case the addresse so dis stolen from stackoverflow, to be tested cause am noob
     function titleCase(str) {
-        var splitStr = str.toLowerCase().split('  [\(\)]');
+        var splitStr = str.toLowerCase().split(" ");
         for (var i = 0; i < splitStr.length; i++) {
             // You do not need to check if i is larger than splitStr length, as your for does that for you
             // Assign it back to the array
             splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
         }
         // Directly return the joined string
-        return splitStr.join(' ');
+        return uppercaseParenthesis(splitStr.join(' '));
     }
-
+    function uppercaseParenthesis(str){
+        let openingParenthesis = str.indexOf("(");
+        if(openingParenthesis!=-1){
+            return str.replace(str[openingParenthesis+1],str[openingParenthesis+1].toUpperCase());
+        }
+        return str;
+    }
     //loading data to the select tags based on ID of tag, data here is a list/array
     function loadSelectData(id, data) {
+        data.sort();
         for (var i = 0; i < data.length; i++) {
             $('#' + id).append($("<option></option>")
-                .attr("value", data[i])
-                .text(data[i]));
+            .attr("value", (data[i]+''))
+            .text(titleCase(data[i]+'')));
+            //console.log('the type is' + typeof(data[i]));
         }
     }
 
@@ -194,7 +199,7 @@
             //region here is the key(e.g 4A, 01, NCR), which will be used to get the province_list json object that is nested in the region json (refer to json file)
             for (province in phAddress[region].province_list) {
                 //check if the key in province_list of that region matches the selected province in dropdown menu
-                if ($("#province option:selected").text() == province) {
+                if ($("#province option:selected").text().toLowerCase() == province.toLowerCase()) {
                     //set municipalities variable to the matching province to extract the municipalities/cities nestedin the province_list json
                     municipalities = phAddress[region].province_list[province];
                 }
@@ -209,7 +214,7 @@
     function loadBarangay() {
         let selected = $("#city option:selected").text();
         for (municipality in municipalities.municipality_list) {
-            if (selected == municipality) {
+            if (selected.toLowerCase() == municipality.toLowerCase()) {
                 barangays = municipalities.municipality_list[municipality];
             }
         }
@@ -219,18 +224,15 @@
 
     //update cities and barangay select tags when province selection is changed, same logic with loadCity() function
     let municipalities = {};
-    $('#province').change(function() {
-        console.log($("#province option:selected").text());
+    $('#province').change(function () {
         for (region in phAddress) {
             //console.log(phAddress[region].province_list);
             for (province in phAddress[region].province_list) {
-                if ($("#province option:selected").text() == province) {
-                    console.log("found");
+                if ($("#province option:selected").text().toLowerCase() == province.toLowerCase()) {
                     municipalities = phAddress[region].province_list[province];
                 }
             }
         }
-        console.log(municipalities);
         $('#city').empty();
         $('#barangay').empty();
         loadSelectData('city', Object.keys(municipalities.municipality_list));
@@ -242,9 +244,8 @@
     let barangays = {};
     $('#city').change(function() {
         let selected = $("#city option:selected").text();
-        console.log();
         for (municipality in municipalities.municipality_list) {
-            if (selected == municipality) {
+            if (selected.toLowerCase() == municipality.toLowerCase()) {
                 barangays = municipalities.municipality_list[municipality];
             }
         }
@@ -260,12 +261,14 @@
         $.getJSON("philippine_address_2019v2.json", function(data) {
             //assigns the data to ph address, to be used by other functions like loadCity()
             phAddress = data;
-            console.log(phAddress);
             //traversing the region and getting the province list as an array using Objects.keys then adding it to the dropdown for provinces
             $.each(data, function(key, value) {
                 var provinces = Object.keys(value.province_list)
                 loadSelectData('province', provinces);
             });
+            var sortedOptions = $("#province option").sort(function (a,b) { return a.value.toUpperCase().localeCompare(b.value.toUpperCase()) });
+            $("#province").empty();
+            $("#province").append(sortedOptions);
             loadCity();
             loadBarangay();
         });
