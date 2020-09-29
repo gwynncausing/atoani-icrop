@@ -1,4 +1,4 @@
-.form-registration {
+.form-login {
     color: $white-color;
     background-color: $tertiary-color;
     width: 100%;
@@ -13,10 +13,9 @@
         border-top-right-radius: 0.5rem;
     }
     .form-body {
-        width: 91%;
         #number-prep {
             border: 0;
-            background: #165a53;
+            background: none;
             color: $white-color;
         }
         #submit {
