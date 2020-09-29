@@ -3,6 +3,7 @@
 body {
   background-color: #114a44;
   font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
 }
 
 h1,
@@ -36,38 +37,34 @@ h6 {
 .navbar .navbar-toggler-icon {
   color: #fafafa;
 }
+
+.form-login {
+  color: #fafafa;
+  background-color: #0b3531;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.form-login a {
+  color: #fafafa;
+}
+
+.form-login .form-header {
+  background-color: #628474;
+  height: 2.75rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.form-login .form-body #number-prep {
+  border: 0;
+  background: none;
+  color: #fafafa;
+}
+
+.form-login .form-body #submit {
+  background-color: #628474;
+  color: #fafafa;
+  width: 7rem;
+}
 /*# sourceMappingURL=login.css.map */
-
-.login-container{
-  background: #333333;
-  margin-top: 33%;
-  text-align: center;
-  color: #FADCAC;
-}
-
-.form-container {
-  padding: 40px;
-}
-
-.btn {
-  width: 50%;
-  background-color: #537162;
-  border: 2px solid #BBDACA;
-  color: white;
-}
-
-.btn:hover {
-  background: #BBDACA;
-}
-
-.form-control {
-  background-color: #537162;
-  color: white;
-}
-
-.feather-container{
-  background-color: #537162;
-  border: 2px solid #537162;
-  border-radius: 5px;
-  padding: 5px;
-}
