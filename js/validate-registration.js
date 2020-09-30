@@ -1,8 +1,7 @@
 ( validate = () => {
     
     const forms = document.querySelector(".registration-form")
-    const textFields = document.querySelectorAll("form input[required]")
-
+    const textFields = forms.querySelectorAll("form input[required]")
 
     forms.addEventListener("submit", e => {
         if(forms.checkValidity() === false){

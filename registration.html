@@ -90,10 +90,16 @@
                     <div class="form-group col-md-4">
                         <label for="last-name">Last Name *</label>
                         <input class="form-control" type="text" name="last-name" id="last-name" placeholder="Last Name" maxlength="30" required>
+                        <div class="invalid-feedback">
+                            Please enter your last name.
+                        </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="first-name">First Name *</label>
                         <input class="form-control" type="text" name="first-name" id="first-name" placeholder="First Name" required>
+                        <div class="invalid-feedback">
+                            Please enter your first name.
+                        </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="last-name">Middle Name</label>
@@ -118,12 +124,16 @@
                         </select>
                     </div>
                     <div class="form-group col-12 col-md-3">
-                        <label for="last-name">Street / House No. *</label>
-                        <input class="form-control" type="text" name="street" id="street" placeholder="Street" maxlength="30" required>
+                        <label for="last-name">Street / House No. </label>
+                        <input class="form-control" type="text" name="street" id="street" placeholder="Street" maxlength="30">
                     </div>
                 </div>
 
+                
                 <div class="form-row row-12 mt-5">
+                    <div class="col-12 mb-3">
+                        <small>You must have either an email, a mobile number or both.</small>
+                    </div>
                     <div class="form-group col-12 col-md-4">
                         <label for="contact-number">Contact Number *</label>
                         <div class="input-group">
@@ -131,15 +141,21 @@
                                 <span class="input-group-text" id="number-prep">+63</span>
                             </div>
                             <input class="form-control" type="tel" pattern=".{10}" name="contact-number" maxlength="10" id="contact-number" placeholder="9000000000" required>
+                            <div class="invalid-feedback">
+                                Please enter your phone number in this format: 9XXXXXXXXX
+                            </div>
                         </div>
                     </div>
                     <div class="form-group col-12 col-md-4">
-                        <label for="email">Email *</label>
-                        <input class="form-control" type="email" name="email" id="email" placeholder="Email" maxlength="30" required>
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="Email" maxlength="30">
+                        <div class="invalid-feedback">
+                            Please enter your email address in format: yourname@example.com
+                        </div>
                     </div>
                     <div class="form-group col-12 col-md-4">
-                        <label for="company-name">Company Name *</label>
-                        <input class="form-control" type="text" name="email" id="company-name" placeholder="Company Name" maxlength="30" required>
+                        <label for="company-name">Company Name</label>
+                        <input class="form-control" type="text" name="email" id="company-name" placeholder="Company Name" maxlength="30">
                     </div>
                 </div>
                 <div class="form-row row-12 d-flex mt-5 justify-content-between">
