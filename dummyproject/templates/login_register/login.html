@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -9,11 +10,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <!-- Customized CSS -->
-    <link rel="stylesheet" href="css/login.css">
-
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Customized CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 
     <title>AtoANI iCROP</title>
 </head>
@@ -52,7 +53,7 @@
                 <div class="my-lg-0">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
+                            <a class="nav-link" href="{% url 'login_register:register' %}">Register</a>
                         </li>
                     </ul>
                 </div>
@@ -60,7 +61,44 @@
         </div>
     </nav>
 
-    <div class="container p-0 form-login mt-5 w-50">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-4 login">
+
+                <form class="form-login">
+                    <div class="form-header d-flex pl-3">
+                        <h3 class="m-0">Login</h3>
+                    </div>
+                    <div class="row justify-content-center mt-5">
+                        <label>Log in to AtoANI iCROP</label>
+                    </div>
+                    <div class="form-body justify-content-center">
+                        <div>
+                            <input type="text" class="form-control" id="phoneNumber">
+                        </div>
+                        <div class="form-group mt-3">
+                            <input type="password" class="form-control" id="password">
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group pl-4 mt-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="rememberCheckbox">
+                                    <label class="form-check-label" for="rememberCheckbox">Remember me</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-block btnSignIn">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!--
+    <div class="container-fluid p-0 form-login mt-5 w-50">
         <div class="form-header d-flex justify-content-between align-items-center pl-3">
             <h5 class="m-0">Login</h5>
         </div>
@@ -72,40 +110,27 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group mx-auto mt-5 col-md-4">
-                        <label for="last-name">Last Name *</label>
-                        <input class="form-control" type="text" name="last-name" id="last-name" placeholder="Last Name">
+                    <div class="form-group mx-auto mt-1 col-6 col-md-6 col-sm-6">
+                        <input class="form-control" type="text" name="phone-num" id="phone-num" placeholder="Phone Number">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group mx-auto mt-1 col-6 col-md-6 col-sm-6">
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-check mx-auto mt-1  mb-5 col-2 col-md-2 col-sm-2 pl-4">
+                        <input class="form-check-input" type="checkbox" value="" id="rememberCheckbox">
+                        <label class="form-check-label" for="rememberCheckbox">Remember me</label>
+                    </div>
+                    <div class="form-group mt-1 mb-5 col-4 col-md-4 col-sm-2">
+                        <button type="submit" class="btn btn-primary btnSignIn">Sign In</button>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="row justify-content-center d-none">
-            <div class="col-md-4">
-                <div class="login-container">
-                    <form class="form-container">
-                        <h3>Login</h3>
-                        <div class="form-group row">
-                            <div class="col-md-2 feather-container">
-                                <img src="images/login/phone.svg">
-                            </div>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" id="phoneNumber">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-2 feather-container">
-                                <img src="images/login/lock.svg">
-                            </div>
-                            <div class="col-md-10">
-                                <input type="password" class="form-control" id="password">
-                            </div>
-                        </div>
-                        <button type="submit" class="btn">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    </div> -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
