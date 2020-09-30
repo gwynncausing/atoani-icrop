@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -9,11 +10,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <!-- Customized CSS -->
-    <link rel="stylesheet" href="css/login.css">
-
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Customized CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 
     <title>AtoANI iCROP</title>
 </head>
@@ -52,7 +53,7 @@
                 <div class="my-lg-0">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
+                            <a class="nav-link" href="{% url 'login_register:register' %}">Register</a>
                         </li>
                     </ul>
                 </div>
