@@ -91,6 +91,7 @@ $('#city').change(function() {
 
 
 let phAddress = {};
+//address url comes from django, therefore is using underscore (_) instead of camelCase
 function loadAddresses(address_url){
   //getJSON is an ajax call to fetch the json content
   $.getJSON(address_url, function(data) {
