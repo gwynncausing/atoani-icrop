@@ -70,7 +70,7 @@ class Customer(models.Model):
     location = models.ForeignKey(Location_Soil,on_delete=models.CASCADE)
     contact_number = models.CharField(max_length=14)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
-
+    
     def set_location(self, new_location):
         setattr(self, 'location', new_location)
         self.save()
@@ -81,6 +81,8 @@ class Customer(models.Model):
 
     def __str__(self):
         return str(self.name)
+    
+
 
 class Order(models.Model):
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
