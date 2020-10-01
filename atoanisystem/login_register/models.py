@@ -21,13 +21,17 @@ class Crop(models.Model):
     productivity = models.FloatField()
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Location(models.Model):
     name = models.CharField(max_length=220)
-
+    # to match the html form
+    street = models.CharField(max_length=100,default="")
+    brgy = models.CharField(max_length=50,default="")
+    city = models.CharField(max_length=50,default="")
+    province = models.CharField(max_length=50,default="")
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Soil_type(models.Model):
     name = models.CharField(max_length=220)
@@ -35,8 +39,11 @@ class Soil_type(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Soil Types"
+
 class Location_Soil(models.Model):
-    location = models.ManyToManyField(Location)
+    location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     soil_type = models.ManyToManyField(Soil_type)
 
     def __str__(self):
@@ -46,8 +53,8 @@ class Location_Soil(models.Model):
         verbose_name_plural = "Location-Soil type Relations"
 
 class Location_Crop(models.Model):
-    location = models.ManyToManyField(Location)
-    name = models.ManyToManyField(Crop)
+    location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
+    name = models.ManyToManyField(Crop, help_text="Crop name")
 
     def __str__(self):
         return "{} - {}".format(self.location, self.name)
@@ -56,8 +63,8 @@ class Location_Crop(models.Model):
         verbose_name_plural = "Location-Crop Relations"
 
 class Crop_Soil(models.Model):
+    name = models.ForeignKey(Crop, null=True, on_delete=models.CASCADE, help_text="Crop name")
     soil_type = models.ManyToManyField(Soil_type)
-    name = models.ManyToManyField(Crop)
 
     def __str__(self):
         return "{} - {}".format(self.name, self.soil_type)
@@ -67,10 +74,12 @@ class Crop_Soil(models.Model):
 
 class Customer(models.Model):
     name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    location = models.ForeignKey(Location_Soil,on_delete=models.CASCADE)
+    #location = models.ForeignKey(Location_Soil, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location,on_delete=models.CASCADE)
     contact_number = models.CharField(max_length=14)
+    company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
-    
+    is_approved = models.BooleanField(default=False)
     def set_location(self, new_location):
         setattr(self, 'location', new_location)
         self.save()
@@ -124,9 +133,12 @@ class Order(models.Model):
 
 class Farmer(models.Model):
     name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    location = models.ForeignKey(Location_Soil, on_delete=models.CASCADE)
+    #location = models.ForeignKey(Location_Soil, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     contact_number = models.CharField(max_length=14, verbose_name=True)
+    company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=True)
+    is_approved = models.BooleanField(default=False)
     land_area = models.FloatField(help_text="Farmer's land area in square meters")
     is_available = models.BooleanField(help_text="Is the farmer able to take up orders?")
 
@@ -162,3 +174,4 @@ class Order_Pairing(models.Model):
 
     class Meta:
         ordering = ['-expected_time']
+        verbose_name_plural = "Order Pairings"

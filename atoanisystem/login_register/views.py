@@ -1,6 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import View
+<<<<<<< HEAD
 from django.http import HttpResponse
+||||||| 135075e
+=======
+from django.contrib.auth.models import User, auth
+>>>>>>> 407bb2658656e25c3d4e48ba200a8c41be193c37
 # Create your views here.
 
 #from .forms import CustomerForm, FarmerForm
@@ -8,6 +13,19 @@ from django.http import HttpResponse
 class LoginView(View):
     def get(self,request):
         return render(request,'login_register/login.html')
+    
+    def post(self, request):
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = auth.authenticate(username = username, password = password)
+        if user is not None:
+            auth.login(request, user)
+            if user.is_staff:
+                return redirect("/admin")
+            else:
+                return HttpResponse("login success")    # for testing
+        else:
+            return redirect("/login") # for testing
 
 class RegistrationView(View):
     def get(self,request):
