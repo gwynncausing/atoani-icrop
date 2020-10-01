@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import View
 from django.http import JsonResponse
 from .models import Customer, Farmer, Location
+from django.contrib.auth.models import User
+from django.contrib import auth
 from .forms import *
 # Create your views here.
 
@@ -31,41 +33,28 @@ class RegistrationView(View):
     def post(self,request):
         if request.is_ajax():
             # check contact number if it already exists
-            if Customer.objects.filter(contact_number=request.POST.get('contact-number')).exists() and Farmer.objects.filter(contact_number=request.POST.get('contact-number')).exists():
+            if Customer.objects.filter(contact_number=request.POST.get('contact_number')).exists() or Farmer.objects.filter(contact_number=request.POST.get('contact_number')).exists():
                 return JsonResponse({'result':'not ok'},status=500)
             else:
                 return JsonResponse({'result':'ok'},status=200)
+        firstname = request.POST.get('first-name')
+        lastname = request.POST.get('last-name')
+        username = request.POST.get('contact_number')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = User.objects.create_user(first_name=firstname,last_name=lastname,username=username,email=email,password=password)
+        location_form = LocationForm(request.POST)
         account_type = request.POST.get('account-type')
         if account_type == 'Farmer':
-            print("FARMEEERRRRRRRRR")
             form = FarmerForm(request.POST)
         if account_type == 'Customer':
-            print("CUSTOMERRRRR")
             form = CustomerForm(request.POST)
-        print(form)
-        print("IS VALID?")
-        print(form.is_valid())
-        return HttpResponse("Fail")
-        # if account_type == 'customer':
-        #     form = CustomerForm(request.POST)
-        # else:
-        #     form = FarmerForm(request.POST)
-        # if form.is_valid():
-        #     farmer = request.POST.get('account-type')
-        #     first_name = request.POST.get('first-name')
-        #     last_name = request.POST.get('last-name')
-        #     middle_name = request.POST.get('middle-name')
-        #     province = request.POST.get('province')
-        #     city = request.POST.get('city')
-        #     barangay = request.POST.get('barangay')
-        #     street = request.POST.get('street')
-        #     contact_number = request.POST.get('contact_number')
-        #     company_name = request.POST.get('company_name')
-        #     email = request.POST.get('email')
-        #     password = request.POST.get('password')
-            
-        #     form.save()
-
-        #     return HttpResponse("Success")
-        # else:
-        #     return HttpResponse("Fail")
+        if form.is_valid() and location_form.is_valid():
+            location = location_form.save(commit=False)
+            location.name = str(location.province)+','+str(location.city)+','+str(location.brgy)+','+str(location.street)
+            location.save()
+            new_user = form.save(commit=False)
+            new_user.name = user
+            new_user.location = location
+            new_user.save()
+        return HttpResponse(form.errors)
