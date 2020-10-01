@@ -21,13 +21,13 @@ class Crop(models.Model):
     productivity = models.FloatField()
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Location(models.Model):
     name = models.CharField(max_length=220)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Soil_type(models.Model):
     name = models.CharField(max_length=220)
@@ -35,8 +35,11 @@ class Soil_type(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Soil Types"
+
 class Location_Soil(models.Model):
-    location = models.ManyToManyField(Location)
+    location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     soil_type = models.ManyToManyField(Soil_type)
 
     def __str__(self):
@@ -46,8 +49,8 @@ class Location_Soil(models.Model):
         verbose_name_plural = "Location-Soil type Relations"
 
 class Location_Crop(models.Model):
-    location = models.ManyToManyField(Location)
-    name = models.ManyToManyField(Crop)
+    location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
+    name = models.ManyToManyField(Crop, help_text="Crop name")
 
     def __str__(self):
         return "{} - {}".format(self.location, self.name)
@@ -56,8 +59,8 @@ class Location_Crop(models.Model):
         verbose_name_plural = "Location-Crop Relations"
 
 class Crop_Soil(models.Model):
+    name = models.ForeignKey(Crop, null=True, on_delete=models.CASCADE, help_text="Crop name")
     soil_type = models.ManyToManyField(Soil_type)
-    name = models.ManyToManyField(Crop)
 
     def __str__(self):
         return "{} - {}".format(self.name, self.soil_type)
@@ -160,3 +163,4 @@ class Order_Pairing(models.Model):
 
     class Meta:
         ordering = ['-expected_time']
+        verbose_name_plural = "Order Pairings"
