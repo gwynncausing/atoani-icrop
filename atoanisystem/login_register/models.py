@@ -90,6 +90,8 @@ class Customer(models.Model):
 
     def __str__(self):
         return str(self.name)
+    
+
 
 class Order(models.Model):
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

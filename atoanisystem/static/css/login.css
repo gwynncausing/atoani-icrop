@@ -43,6 +43,7 @@ h6 {
   background-color: #0b3531;
   width: 100%;
   border-radius: 0.5rem;
+  margin-top: 30%;
 }
 
 .form-login a {
@@ -56,15 +57,19 @@ h6 {
   border-top-right-radius: 0.5rem;
 }
 
+.form-login .form-body {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
 .form-login .form-body #number-prep {
   border: 0;
   background: none;
   color: #fafafa;
 }
 
-.form-login .form-body #submit {
+.form-login .form-body .btnSignIn {
   background-color: #628474;
   color: #fafafa;
-  width: 7rem;
 }
 /*# sourceMappingURL=login.css.map */
