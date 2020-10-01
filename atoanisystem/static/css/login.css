@@ -39,6 +39,7 @@ h6 {
 }
 
 .form-login {
+  margin-top: 20%;
   color: #fafafa;
   background-color: #0b3531;
   width: 100%;
@@ -67,4 +68,14 @@ h6 {
   color: #fafafa;
   width: 7rem;
 }
+
+.form-login .form-body{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.btnSignIn{
+  background-color: #628474;
+}
+
 /*# sourceMappingURL=login.css.map */
