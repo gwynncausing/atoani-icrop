@@ -23,3 +23,5 @@ class LoginView(View):
 class RegistrationView(View):
     def get(self,request):
         return render(request,'login_register/registration.html')
+    def post(self,request):
+        return render(request,'login_register/registration.html')

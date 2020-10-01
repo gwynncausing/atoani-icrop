@@ -25,7 +25,11 @@ class Crop(models.Model):
 
 class Location(models.Model):
     name = models.CharField(max_length=220)
-
+    # to match the html form
+    street = models.CharField(max_length=100,default="")
+    brgy = models.CharField(max_length=50,default="")
+    city = models.CharField(max_length=50,default="")
+    province = models.CharField(max_length=50,default="")
     def __str__(self):
         return self.name
 
@@ -67,10 +71,12 @@ class Crop_Soil(models.Model):
 
 class Customer(models.Model):
     name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    location = models.ForeignKey(Location_Soil,on_delete=models.CASCADE)
+    #location = models.ForeignKey(Location_Soil, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location,on_delete=models.CASCADE)
     contact_number = models.CharField(max_length=14)
+    company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
-
+    is_approved = models.BooleanField(default=False)
     def set_location(self, new_location):
         setattr(self, 'location', new_location)
         self.save()
@@ -122,9 +128,12 @@ class Order(models.Model):
 
 class Farmer(models.Model):
     name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    location = models.ForeignKey(Location_Soil, on_delete=models.CASCADE)
+    #location = models.ForeignKey(Location_Soil, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     contact_number = models.CharField(max_length=14, verbose_name=True)
+    company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=True)
+    is_approved = models.BooleanField(default=False)
     land_area = models.FloatField(help_text="Farmer's land area in square meters")
     is_available = models.BooleanField(help_text="Is the farmer able to take up orders?")
 
