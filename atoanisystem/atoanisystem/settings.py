@@ -91,8 +91,15 @@ WSGI_APPLICATION = 'atoanisystem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'atoanisystem',
+        'USER': 'root',
+        'PASSWORD': '', 
+        'HOST': '',
+        'PORT': '',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
@@ -134,5 +141,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = ( os.path.join('static'), )
+STATICFILES_DIRS = [
+os.path.join(BASE_DIR, "static_project")
+]
 
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
