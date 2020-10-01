@@ -65,7 +65,8 @@
         </div>
 
         <div class="form-body mt-4 ml-auto mr-auto">
-            <form class="registration-form" novalidate>
+            <form class="registration-form" method="POST" novalidate>
+                {% csrf_token %}
                 <div class="form-row row-12 mt-5">
                     <div class="form-group col-md-6 col-push-12 order-md-1 order-2 mt-md-0 mt-4">
                         <div class="row d-flex float-left">
@@ -140,7 +141,7 @@
                             </div>
                             <input class="form-control" type="tel" pattern=".{10,11}" name="contact-number" maxlength="11" id="contact-number" placeholder="9000000000" required>
                             <div class="invalid-feedback">
-                                Please enter your phone number in one of these formats: <br />9XXXXXXXXX or 09XXXXXXXXX
+                                Invalid contact number or contact number already in use.
                             </div>
                         </div>
                     </div>

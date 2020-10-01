@@ -1,12 +1,43 @@
+let checkContactFromServer = function(button){
+    return function(){
+        button.classList.remove('is-valid');
+        button.classList.remove('is-invalid');
+        checkContactNumber(button);
+    }
+}
+
+function checkContactNumber(input){
+    const form = document.querySelector(".registration-form")
+    let formData = new FormData(form);
+    $.ajax({
+        url: '',
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            input.classList.add('is-valid');
+        },
+        error: function(response){
+            input.classList.add('is-invalid');
+        }
+    });
+}
+
 ( validate = () => {
-    
     const forms = document.querySelector(".registration-form")
     const textFields = forms.querySelectorAll("form input[required]")
     
+    const contact = document.getElementById('contact-number');
+    contact.addEventListener('input',checkContactFromServer(contact));
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
         //Calls necessary functions if validation fails
-        if(forms.checkValidity() === false){
+        if(!checkContactNumber(forms)){
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        else if(forms.checkValidity() === false){
             e.preventDefault();
             e.stopPropagation();
         }
@@ -32,3 +63,4 @@
             field.classList.add('is-invalid');
     }
 })()
+
