@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import View
 from django.http import JsonResponse
 from .models import Customer, Farmer, Location
+from .forms import *
 # Create your views here.
 
 #from .forms import CustomerForm, FarmerForm
@@ -35,27 +36,36 @@ class RegistrationView(View):
             else:
                 return JsonResponse({'result':'ok'},status=200)
         account_type = request.POST.get('account-type')
-        form = None
+        if account_type == 'Farmer':
+            print("FARMEEERRRRRRRRR")
+            form = FarmerForm(request.POST)
+        if account_type == 'Customer':
+            print("CUSTOMERRRRR")
+            form = CustomerForm(request.POST)
+        print(form)
+        print("IS VALID?")
+        print(form.is_valid())
+        return HttpResponse("Fail")
         # if account_type == 'customer':
         #     form = CustomerForm(request.POST)
         # else:
         #     form = FarmerForm(request.POST)
-        if form.is_valid():
-            farmer = request.POST.get('account-type')
-            first_name = request.POST.get('first-name')
-            last_name = request.POST.get('last-name')
-            middle_name = request.POST.get('middle-name')
-            province = request.POST.get('province')
-            city = request.POST.get('city')
-            barangay = request.POST.get('barangay')
-            street = request.POST.get('street')
-            contact_number = request.POST.get('contact_number')
-            company_name = request.POST.get('company_name')
-            email = request.POST.get('email')
-            password = request.POST.get('password')
+        # if form.is_valid():
+        #     farmer = request.POST.get('account-type')
+        #     first_name = request.POST.get('first-name')
+        #     last_name = request.POST.get('last-name')
+        #     middle_name = request.POST.get('middle-name')
+        #     province = request.POST.get('province')
+        #     city = request.POST.get('city')
+        #     barangay = request.POST.get('barangay')
+        #     street = request.POST.get('street')
+        #     contact_number = request.POST.get('contact_number')
+        #     company_name = request.POST.get('company_name')
+        #     email = request.POST.get('email')
+        #     password = request.POST.get('password')
             
-            form.save()
+        #     form.save()
 
-            return HttpResponse("Success")
-        else:
-            return HttpResponse("Fail")
+        #     return HttpResponse("Success")
+        # else:
+        #     return HttpResponse("Fail")

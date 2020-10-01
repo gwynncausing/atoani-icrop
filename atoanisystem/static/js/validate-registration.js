@@ -33,11 +33,7 @@ function checkContactNumber(input){
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
         //Calls necessary functions if validation fails
-        if(!checkContactNumber(forms)){
-            e.preventDefault();
-            e.stopPropagation();
-        }
-        else if(forms.checkValidity() === false){
+        if(forms.checkValidity() === false){
             e.preventDefault();
             e.stopPropagation();
         }

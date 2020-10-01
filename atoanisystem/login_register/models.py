@@ -139,8 +139,8 @@ class Farmer(models.Model):
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=True)
     is_approved = models.BooleanField(default=False)
-    land_area = models.FloatField(help_text="Farmer's land area in square meters")
-    is_available = models.BooleanField(help_text="Is the farmer able to take up orders?")
+    #land_area = models.FloatField(help_text="Farmer's land area in square meters")
+    #is_available = models.BooleanField(help_text="Is the farmer able to take up orders?")
 
     def set_location(self, new_location):
         setattr(self, 'location', new_location)
