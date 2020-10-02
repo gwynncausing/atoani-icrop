@@ -1,44 +1,46 @@
 from django import forms
 from .models import Farmer, Customer, Location
+from django.contrib.auth.models import User
 
 class FarmerForm(forms.ModelForm):
+    name = forms.ModelChoiceField(queryset=User.objects.all(),required=False)
     middlename = forms.CharField(required=False)
-    street = forms.CharField(required=False)
-    email = forms.CharField(required=False)
     company = forms.CharField(required=False)
+    location = forms.ModelChoiceField(queryset=Location.objects.all(),required=False)
     # use the class Meta to specify the model for the customer form
     class Meta:
         model = Farmer
         # fields to check for is_valid() method
-        fields = (  'firstname', 'middlename', 'lastname',
-                    #address
-                    'street', 'brgy', 'city', 'province',
+        fields = (  'name','middlename',
                     #contact
-                    'email','contact_number',
+                    'contact_number',
                     #company
                     'company',
+                    #location
+                    'location'
                     )
 class CustomerForm(forms.ModelForm):
+    name = forms.ModelChoiceField(queryset=User.objects.all(),required=False)
     middlename = forms.CharField(required=False)
-    street = forms.CharField(required=False)
-    email = forms.CharField(required=False)
     company = forms.CharField(required=False)
+    location = forms.ModelChoiceField(queryset=Location.objects.all(),required=False)
     # use the class Meta to specify the model for the customer form
     class Meta:
         model = Customer
         # fields to check for is_valid() method
-        fields = (  'firstname', 'middlename', 'lastname',
-                    #address
-                    'street', 'brgy', 'city', 'province',
+        fields = (  'name','middlename',
                     #contact
-                    'email','contact_number',
+                    'contact_number',
                     #company
                     'company',
+                    #location
+                    'location'
                     )
-class Location(forms.ModelForm):
+class LocationForm(forms.ModelForm):
     street = forms.CharField(required=False)
+    name = forms.CharField(required=False)
     # use the class Meta to specify the model for the customer form
     class Meta:
-        model = Farmer
+        model = Location
         # fields to check for is_valid() method
         fields = ('street', 'brgy', 'city', 'province',)

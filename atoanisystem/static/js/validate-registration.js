@@ -1,15 +1,35 @@
+let checkContactFromServer = function(button){
+    return function(){
+        button.classList.remove('is-valid');
+        button.classList.remove('is-invalid');
+        checkContactNumber(button);
+    }
+}
+
+function checkContactNumber(input){
+    const form = document.querySelector(".registration-form")
+    let formData = new FormData(form);
+    $.ajax({
+        url: '',
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            input.classList.add('is-valid');
+        },
+        error: function(response){
+            input.classList.add('is-invalid');
+        }
+    });
+}
+
 ( validate = () => {
-    
     const forms = document.querySelector(".registration-form")
     const textFields = forms.querySelectorAll("form input[required]")
-
-    const password = forms.querySelector("form .view-password");
-    const passwordConfirm = forms.querySelector("form .view-password-confirm");
-
-    const email = forms.querySelector("form input[type=email]");
-
-    let i = 0;
-
+    
+    const contact = document.getElementById('contact-number');
+    contact.addEventListener('input',checkContactFromServer(contact));
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
 
@@ -114,3 +134,4 @@
     
 
 })()
+

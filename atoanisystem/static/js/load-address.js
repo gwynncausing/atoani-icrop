@@ -20,7 +20,7 @@ function loadSelectData(id, data) {
   data.sort();
   for (var i = 0; i < data.length; i++) {
       $('#' + id).append($("<option></option>")
-      .attr("value", (data[i]+''))
+      .attr("value", titleCase(data[i]+''))
       .text(titleCase(data[i]+'')));
       //console.log('the type is' + typeof(data[i]));
   }

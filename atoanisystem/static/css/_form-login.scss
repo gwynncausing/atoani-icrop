@@ -3,6 +3,7 @@
     background-color: $tertiary-color;
     width: 100%;
     border-radius: 0.5rem;
+    margin-top: 30%;
     a {
         color: $white-color;
     }
@@ -13,15 +14,16 @@
         border-top-right-radius: 0.5rem;
     }
     .form-body {
+        padding-left: 10%;
+        padding-right: 10%;
         #number-prep {
             border: 0;
             background: none;
             color: $white-color;
         }
-        #submit {
+        .btnSignIn {
             background-color: $secondary-color;
             color: $white-color;
-            width: 7rem;
         }
     }
 }
