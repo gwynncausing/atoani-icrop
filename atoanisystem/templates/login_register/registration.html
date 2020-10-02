@@ -14,6 +14,11 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <link rel="stylesheet" href="{% static '/css/registration.css' %}">
+<!-- Password Validation Script -->
+
+
+        
+
 
 </head>
 
@@ -64,121 +69,153 @@
             <span>Registration</span>
         </div>
 
-        <div class="form-body mt-4 ml-auto mr-auto">
-            <form class="registration-form" novalidate>
-                <div class="form-row row-12 mt-5">
-                    <div class="form-group col-md-6 col-push-12 order-md-1 order-2 mt-md-0 mt-4">
-                        <div class="row d-flex float-left">
-                            <div class="col-md-4">
-                                <span class="mr-1">I am a&nbsp.&nbsp;.&nbsp. </span>
-                            </div>
-                            <div class="col-md-2 ml-4 float-left form-check form-check-inline ">
+        <div class="row-12 pr-sm-5 pr-3 mt-4 text-right">Fields with * are required</div>
+
+        <div class="form-body ml-auto mr-auto">
+            <form class="registration-form" novalidate autocomplete="off">
+                <div class="container pl-0 pr-0 mt-5 group-inputs">
+                    <div class="group-title row-12 d-flex justify-content-between pr-3 pl-3 pb-2 pt-2">
+                        <span>Account Information</span>
+                    </div>
+
+                    <div class="form-row row-12 pr-5 pl-5 mt-4">
+                        <div class="form-group d-flex align-items-center col-md-1  col-12">
+                            <span class="mr-1">I am a</span>
+                        </div>
+                        <div class="form-group col-md-11   col-12 d-flex">
+                            <div class="d-flex justify-content-center form-check text-center form-check-inline account-type">
                                 <input name="account-type" class="form-check-input" type="radio" id="farmer" value="Farmer" checked>
                                 <label class="form-check-label" for="farmer" >Farmer</label>
                             </div>
-                            <div class="col-md-2 ml-4 float-left form-check form-check-inline">
+                            <div class="d-flex justify-content-center form-check form-check-inline account-type">
                                 <input name="account-type" class="form-check-input" type="radio" id="customer" value="Customer">
                                 <label class="form-check-label" for="customer">Customer</label>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 order-md-2 order-1 text-right">
-                        <i>Fields with asterisk * are required.</i>
-                    </div>
-                </div>
 
-                <div class="form-row row-12 mt-4">
-                    <div class="form-group col-md-4">
-                        <label for="first-name">First Name *</label>
-                        <input class="form-control" type="text" name="first-name" id="first-name" placeholder="First Name" required>
-                        <div class="invalid-feedback">
-                            Please enter your first name.
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="last-name">Middle Name</label>
-                        <input class="form-control" type="text" name="middle-name" id="middle-name" placeholder="Middle Name">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="last-name">Last Name *</label>
-                        <input class="form-control" type="text" name="last-name" id="last-name" placeholder="Last Name" maxlength="30" required>
-                        <div class="invalid-feedback">
-                            Please enter your last name.
-                        </div>
-                    </div>
-                </div>
 
-                <div class="form-row row-12 mt-5">
-                    <div class="form-group col-12 col-md-3">
-                        <label for="province">Province *</label>
-                        <select class="form-control" name="province" id="province">
-                        </select>
-                    </div>
-                    <div class="form-group col-12 col-md-3">
-                        <label for="city">City *</label>
-                        <select class="form-control" name="city" id="city">
-                        </select>
-                    </div>
-                    <div class="form-group col-12 col-md-3">
-                        <label for="last-name">Barangay *</label>
-                        <select class="form-control" name="barangay" id="barangay">
-                        </select>
-                    </div>
-                    <div class="form-group col-12 col-md-3">
-                        <label for="last-name">Street / House No. </label>
-                        <input class="form-control" type="text" name="street" id="street" placeholder="Street" maxlength="30">
-                    </div>
-                </div>
-
-                
-                <div class="form-row row-12 mt-5">
-                    <div class="form-group col-12 col-md-4">
-                        <label for="contact-number">Contact Number *</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="number-prep">+63</span>
-                            </div>
-                            <input class="form-control" type="tel" pattern=".{10,11}" name="contact-number" maxlength="11" id="contact-number" placeholder="9000000000" required>
+                    <div class="form-row row-12 mt-1 pb-4 pr-5 pl-5">
+                        <div  class="form-group col-12 col-md-4">
+                            <label for="username">Username *</label>
+                            <input class="form-control" type="text" name="username" id="username" placeholder="Username" maxlength="16" required>
                             <div class="invalid-feedback">
-                                Please enter your phone number in one of these formats: <br />9XXXXXXXXX or 09XXXXXXXXX
+                                Please enter your username.
                             </div>
-                        </div>  
-                    </div>
-                    <div class="form-group col-12 col-md-4">
-                        <label for="email">Email</label>
-                        <input class="form-control" type="email" name="email" id="email" placeholder="Email" maxlength="30">
-                        <div class="invalid-feedback">
-                            Please enter your email address in format: yourname@example.com
                         </div>
-                    </div>
-                    <div class="form-group col-12 col-md-4">
-                        <label for="company-name">Company Name</label>
-                        <input class="form-control" type="text" name="email" id="company-name" placeholder="Company Name" maxlength="30">
+
+                        <div class="form-group col-12 col-md-4 input-group">
+                            <label for="password">Password *</label>
+                            <div class="input-group pr-password">
+                                <input class="form-control" type="password" name="street" id="pr-password"  maxlength="16" autocomplete="new-password" required >
+                                <div class="input-group-append" >
+                                    <span class="input-group-text view-password fa fa-eye" id="prep"></span>
+                                </div>
+                                <div class="invalid-feedback">
+                                    You must have a strong password.
+                                </div>
+                                <div class="valid-feedback">
+                                    Nice Password
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-12 col-md-4">
+                            <label for="confirm-password">Confirm Password *</label>
+                            <div class="input-group">
+                                <input class="form-control" type="password" name="street" id="confirm-password"  maxlength="16" required>
+                                <div class="input-group-append">
+                                     <span class="input-group-text view-password-confirm fa fa-eye" id="prep"></span>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Password doesn't match.
+                                </div>
+                                <div class="valid-feedback">
+                                    Password Match
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="form-row row-12 mt-5">
-                    <div class="form-group col-12 col-md-4">
-                        <label for="password">Password</label>
-                        <input class="form-control" type="password" name="password" id="password" placeholder="Password" value="" maxlength="16" required>
-                        <div class="invalid-feedback">
-                            Please enter your password.
+                <div class="container pl-0 pr-0 mt-5 group-inputs">
+                    <div class="group-title row-12 d-flex pr-3 pl-3 pb-2 pt-2">
+                        Personal Information
+                    </div>
+
+                    <div class="form-row row-12 mt-4 pr-5 pl-5">
+                        <div class="form-group col-md-4">
+                            <label for="first-name">First Name *</label>
+                            <input class="form-control" type="text" name="first-name" id="first-name" placeholder="First Name" required maxlength="30">
+                            <div class="invalid-feedback">
+                                Please enter your first name.
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="last-name">Last Name *</label>
+                            <input class="form-control" type="text" name="last-name" id="last-name" placeholder="Last Name" maxlength="30" required maxlength="30">
+                            <div class="invalid-feedback">
+                                Please enter your last name.
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group col-12 col-md-4">
-                        <label for="confirm-password">Confirm Password</label>
-                        <input class="form-control" type="password" name="street" id="street" placeholder="Street" maxlength="16" required>
-                        <div class="invalid-feedback">
-                            Password doesn't match.
+
+                    <div class="form-row row-12 mt-2 pr-5 pl-5">
+                        <div class="form-group col-12 col-md-3 col-sm-6">
+                            <label for="province">Province *</label>
+                            <select class="form-control" name="province" id="province">
+                            </select>
+                        </div>
+                        <div class="form-group col-12 col-md-3 col-sm-6">
+                            <label for="city">City *</label>
+                            <select class="form-control" name="city" id="city">
+                            </select>
+                        </div>
+                        <div class="form-group col-12 col-md-3 col-sm-6">
+                            <label for="last-name">Barangay *</label>
+                            <select class="form-control" name="barangay" id="barangay">
+                            </select>
+                        </div>
+                        <div class="form-group col-12 col-md-3 col-sm-6">
+                            <label for="last-name">Street / House No. </label>
+                            <input class="form-control" type="text" name="street" id="street" placeholder="Street" maxlength="30">
                         </div>
                     </div>
+                     
+                    <div class="form-row row-12 mt-2 pr-5 pl-5">
+                        <div class="form-group col-12 col-md-4">
+                            <label for="contact-number">Contact Number *</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="prep">+63</span>
+                                </div>
+                                <input class="form-control" type="tel" pattern=".{10,11}" name="contact-number" maxlength="11" id="contact-number" placeholder="9000000000" required>
+                                <div class="invalid-feedback">
+                                    Please enter your phone number in one of these formats: <br />9XXXXXXXXX or 09XXXXXXXXX
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="form-group col-12 col-md-4 email">
+                            <label for="email">Email</label>
+                            <input class="form-control" type="email" name="email" id="email" placeholder="Email" maxlength="30">
+                            <div class="invalid-feedback">
+                                Please enter your email address in format: yourname@example.com
+                            </div>
+                        </div>
+                        <div class="form-group col-12 col-md-4">
+                            <label for="company-name">Company Name</label>
+                            <input class="form-control" type="text" name="email" id="company-name" placeholder="Company Name" maxlength="30">
+                        </div>
+                    </div>
+
+                    <div class="form-row row-12 d-flex mt-3 pb-4 justify-content-between pr-5 pl-5">
+                        <a href="#" class="order-sm-1 order-2 mt-xs-0 mt-2">I already have an account</a>
+                        <input id="submit" class="btn order-sm-1 order-1 " type="submit" value="Sign Up">
+                    </div>
+
                 </div>
 
-                
-                <div class="form-row row-12 d-flex mt-5 justify-content-between">
-                    <a href="#">I already have an account</a>
-                    <input id="submit" class="btn" type="submit" value="Sign Up">
-                </div>
             </form>
 
             <div>
@@ -186,18 +223,35 @@
 
             <!-- Optional JavaScript -->
             <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            
+            
+            <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+            
+            <!--Password Validation -->
+            <!--Dont transfer these files -->
+            <script src="{% static '/js/password/password-validator.js' %}" type="text/javascript"></script>
+            <script src="{% static '/js/validate-registration.js' %}" type="text/javascript"></script>  
+            
+
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
+
+        
 </body>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
-</script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script src="{% static '/js/load-address.js' %}"></script>
-<script src="{% static '/js/validate-registration.js' %}"></script>
 <script>
     $(document).ready(function() {
         loadAddresses("{% static '/js/philippine_address_2019v2.json' %}");
     });
 </script>
+
+
+
+
+
+
+
 </html>

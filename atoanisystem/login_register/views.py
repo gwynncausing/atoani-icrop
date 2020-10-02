@@ -1,11 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import View
-<<<<<<< HEAD
-from django.http import HttpResponse
-||||||| 135075e
-=======
 from django.contrib.auth.models import User, auth
->>>>>>> 407bb2658656e25c3d4e48ba200a8c41be193c37
 # Create your views here.
 
 #from .forms import CustomerForm, FarmerForm

@@ -2,23 +2,61 @@
     
     const forms = document.querySelector(".registration-form")
     const textFields = forms.querySelectorAll("form input[required]")
-    
+
+    const password = forms.querySelector("form .view-password");
+    const passwordConfirm = forms.querySelector("form .view-password-confirm");
+
+    const email = forms.querySelector("form input[type=email]");
+
+    let i = 0;
+
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
-        //Calls necessary functions if validation fails
+
         if(forms.checkValidity() === false){
             e.preventDefault();
             e.stopPropagation();
         }
-        //Bootstrap was-validated class for sucessful validation
-        forms.classList.add("was-validated");
+        
+        //forms.classList.add('was-validated');
+        textFields.forEach(field => {
+            if(field.name !== "password" && field.name != 'confirm-password')
+                displayValidity(field);
+            else{
+                if(field.name === 'confirm-password'){
+                    if(isPassWordsSame(field.value, password.value) === false){
+                        field.classList.remove('is-valid');
+                        field.classList.add('is-invalid');
+
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }
+            }
+        })
+
+        //if(isPasswordValid === false)
+        //    console.log("hello")
+        //    consoleshowMessage();
+
+        //e.preventDefault();
+        //e.stopPropagation();
     })
 
     //Adds event listener to all required textfields
     textFields.forEach(field => {
         field.addEventListener("input", e => {
-            displayValidity(e.target)
+            
+            console.log(e.target.id)
+            if(e.target.id !== "pr-password"){
+                displayValidity(e.target)
+                console.log("password not allowed here");
+            }
         })
+    })
+
+    email.addEventListener("input", (e) => {
+        displayValidity(e.target);
     })
 
     //Displays the validation message/response
@@ -31,4 +69,48 @@
         else
             field.classList.add('is-invalid');
     }
+
+
+    password.addEventListener('click', (e) => {
+        if(e.target.classList.contains('fa-eye')){
+            e.target.classList.add('fa-eye-slash');
+            e.target.classList.remove('fa-eye');
+            $('#pr-password').prop('type', 'text');
+        }
+        else{
+            e.target.classList.add('fa-eye');
+            e.target.classList.remove('fa-eye-slash');
+            $('#pr-password').prop('type', 'password');
+        }
+    })
+
+    passwordConfirm.addEventListener('click', (e) => {
+        if(e.target.classList.contains('fa-eye')){
+            e.target.classList.add('fa-eye-slash');
+            e.target.classList.remove('fa-eye');
+            $('#confirm-password').prop('type', 'text');
+        }
+        else{
+            e.target.classList.add('fa-eye');
+            e.target.classList.remove('fa-eye-slash');
+            $('#confirm-password').prop('type', 'password');
+        }        
+    });
+
+    $('#confirm-password').on('input', (e) => {
+        $('#confirm-password').removeClass('is-valid');
+        $('#confirm-password').removeClass('is-invalid');
+
+        if(isPassWordsSame($('#pr-password').val(), e.target.value))
+            $('#confirm-password').addClass("is-valid")
+        else
+            $('#confirm-password').addClass("is-invalid")
+        
+        console.log("hello")
+    })
+
+    const isPassWordsSame = (p1, p2) => p1 === p2;
+
+    
+
 })()
