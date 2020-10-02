@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import View
 from django.http import JsonResponse
 from .models import Customer, Farmer, Location
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib import auth
 from .forms import *
 # Create your views here.
@@ -12,7 +12,7 @@ from .forms import *
 class LoginView(View):
     def get(self,request):
         return render(request,'login_register/login.html')
-    
+
     def post(self, request):
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -29,7 +29,7 @@ class LoginView(View):
 class RegistrationView(View):
     def get(self,request):
         return render(request,'login_register/registration.html')
-    
+
     def post(self,request):
         if request.is_ajax():
             # check contact number if it already exists
@@ -45,6 +45,7 @@ class RegistrationView(View):
         user = User.objects.create_user(first_name=firstname,last_name=lastname,username=username,email=email,password=password)
         location_form = LocationForm(request.POST)
         account_type = request.POST.get('account-type')
+        Group.objects.get(name=account_type).user_set.add(user)
         if account_type == 'Farmer':
             form = FarmerForm(request.POST)
         if account_type == 'Customer':
