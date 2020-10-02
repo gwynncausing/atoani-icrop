@@ -3,6 +3,7 @@ from django.views.generic import View
 from django.http import JsonResponse
 from .models import Customer, Farmer, Location
 from django.contrib.auth.models import User, Group
+from django.contrib.auth import logout
 from django.contrib import auth
 from .forms import *
 # Create your views here.
@@ -17,8 +18,15 @@ class LoginView(View):
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = auth.authenticate(username = username, password = password)
+        is_approved = False
         if user is not None:
             auth.login(request, user)
+            if hasattr(user,'farmer'):
+                is_approved = user.farmer.is_approved
+            if hasattr(user,'customer'):
+                is_approved = user.customer.is_approved
+            if not is_approved:
+                return render(request,'login_register/needs-approval.html',{'user': request.user})
             if user.is_staff:
                 return redirect("/admin")
             else:
@@ -39,6 +47,7 @@ class RegistrationView(View):
                 return JsonResponse({'result':'ok'},status=200)
         firstname = request.POST.get('first-name')
         lastname = request.POST.get('last-name')
+        #replace by username field 
         username = request.POST.get('contact_number')
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -58,4 +67,21 @@ class RegistrationView(View):
             new_user.name = user
             new_user.location = location
             new_user.save()
-        return HttpResponse(form.errors)
+        return redirect('login_register:login')
+
+class ApprovalView(View):
+    def get(self,request):
+        if request.user.is_authenticated:
+            print("AUTHENTICATED")
+            print(request.user)
+            return render(request,'login_register/needs-approval.html',{'user': request.user})
+        else:
+            return render(request,'login_register/login.html')
+
+class LogoutView(View):
+    def get(self,request):
+        logout(request)
+        return  redirect("/login")
+    def post(self,request):
+        logout(request)
+        return  redirect("/login")
