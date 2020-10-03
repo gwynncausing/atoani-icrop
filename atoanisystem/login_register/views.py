@@ -69,8 +69,8 @@ class RegistrationView(View):
             new_user.name = user
             new_user.location = location
             new_user.save()
-        return HttpResponse(location_form.errors)
-        #return redirect('login_register:login')
+        #return HttpResponse(location_form.errors)
+        return redirect('login_register:login')
 
 class ApprovalView(View):
     def get(self,request):

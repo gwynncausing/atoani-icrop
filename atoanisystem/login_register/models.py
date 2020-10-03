@@ -6,18 +6,35 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
+from login_register.auxfunctions import *
+from enum import Enum
 #from django.utils import timezone
 # Create your models here
+
+class Months(Enum):
+    January = 1
+    Febuary = 2
+    March = 3
+    April = 4
+    May = 5
+    June = 6
+    July = 7
+    August = 8
+    September = 9
+    October = 10
+    November = 11
+    December = 12
 
 class Crop(models.Model):
     name = models.CharField(max_length=220)
     is_seasonal = models.BooleanField()
-    season_start = models.PositiveIntegerField(blank=True,null=True)
-    season_end = models.PositiveIntegerField(blank=True,null=True)
-    land_area_requirement = models.FloatField()
-    harvest_weight_per_land_area = models.FloatField()
-    harvest_time = models.PositiveIntegerField()
-    productivity = models.FloatField()
+    season_start = models.CharField(max_length=20,choices=[(tag, tag.value) for tag in Months],blank=True,null=True,\
+                    help_text="Start of the harvest season.")
+    season_end = models.CharField(max_length=20,choices=[(tag, tag.value) for tag in Months],blank=True,null=True, \
+                    help_text="End of the harvest seasons.")
+    harvest_weight_per_land_area = models.FloatField(help_text="Harvest weight per land area in tons/ha")
+    harvest_time = models.PositiveIntegerField(help_text="Harvest time in days")
+    productivity = models.FloatField(help_text="Arbitrary for now, set it later can be overriden.")
 
     def __str__(self):
         return str(self.name)
@@ -92,6 +109,12 @@ class Customer(models.Model):
         except:
             return None
 
+    def __str__(self):
+        return str(self.name)
+
+    def get_customer_name(self):
+        return get_name(self.contact_number)
+
     class Meta:
         ordering = ['name']
 
@@ -152,6 +175,9 @@ class Farmer(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    def get_farmer_name(self):
+        return get_name(self.contact_number)
 
     class Meta:
         ordering = ['location','name','-registration_date']
