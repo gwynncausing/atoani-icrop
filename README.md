@@ -8,3 +8,4 @@ This recommendation system aims to help farmers using data analytics. The system
 - Hyksos Gwynn Causing
 - Joshua Rosalijos
 - Anthony Martin Navarez
+- Rafale Bacalla
