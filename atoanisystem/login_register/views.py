@@ -27,10 +27,10 @@ class LoginView(View):
                 is_approved = user.farmer.is_approved
             if hasattr(user,'customer'):
                 is_approved = user.customer.is_approved
-            if not is_approved:
-                return render(request,'login_register/needs-approval.html',{'user': request.user})
             if user.is_staff:
                 return redirect("/admin")
+            elif not is_approved:
+                return render(request,'login_register/needs-approval.html',{'user': request.user})
             else:
                 return HttpResponse("login success")    # for testing
         else:
