@@ -28,12 +28,13 @@ class Months(Enum):
 class Crop(models.Model):
     name = models.CharField(max_length=220)
     is_seasonal = models.BooleanField()
-    season_start = models.CharField(max_length=20,choices=[(tag, tag.value) for tag in Months],blank=True,null=True)
-    season_end = models.CharField(max_length=20,choices=[(tag, tag.value) for tag in Months],blank=True,null=True)
-    land_area_requirement = models.FloatField()
-    harvest_weight_per_land_area = models.FloatField()
-    harvest_time = models.PositiveIntegerField()
-    productivity = models.FloatField()
+    season_start = models.CharField(max_length=20,choices=[(tag, tag.value) for tag in Months],blank=True,null=True,\
+                    help_text="Start of the harvest season.")
+    season_end = models.CharField(max_length=20,choices=[(tag, tag.value) for tag in Months],blank=True,null=True, \
+                    help_text="End of the harvest seasons.")
+    harvest_weight_per_land_area = models.FloatField(help_text="Harvest weight per land area in tons/ha")
+    harvest_time = models.PositiveIntegerField(help_text="Harvest time in days")
+    productivity = models.FloatField(help_text="Arbitrary for now, set it later can be overriden.")
 
     def __str__(self):
         return str(self.name)
