@@ -1,9 +1,7 @@
-let checkContactFromServer = function(button){
-    return function(){
-        button.classList.remove('is-valid');
-        button.classList.remove('is-invalid');
-        checkContactNumber(button);
-    }
+function checkContactFromServer(button){
+    button.classList.remove('is-valid');
+    button.classList.remove('is-invalid');
+    checkContactNumber(button);
 }
 
 function checkContactNumber(input){
@@ -27,12 +25,11 @@ function checkContactNumber(input){
 ( validate = () => {
     const forms = document.querySelector(".registration-form")
     const textFields = forms.querySelectorAll("form input[required]")
-    
-    const contact = document.getElementById('contact-number');
-    contact.addEventListener('input',checkContactFromServer(contact));
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
-
+        
+        //checkContactFromServer(contact);
+        
         if(forms.checkValidity() === false){
             e.preventDefault();
             e.stopPropagation();
@@ -66,15 +63,15 @@ function checkContactNumber(input){
     //Adds event listener to all required textfields
     textFields.forEach(field => {
         field.addEventListener("input", e => {
-            
-            console.log(e.target.id)
+            //console.log(e.target.id)
             if(e.target.id !== "pr-password"){
                 displayValidity(e.target)
-                console.log("password not allowed here");
+                //console.log("password not allowed here");
             }
         })
     })
 
+    const email = document.getElementById('email');
     email.addEventListener("input", (e) => {
         displayValidity(e.target);
     })
@@ -90,7 +87,7 @@ function checkContactNumber(input){
             field.classList.add('is-invalid');
     }
 
-
+    const password = document.getElementById('pr-password');
     password.addEventListener('click', (e) => {
         if(e.target.classList.contains('fa-eye')){
             e.target.classList.add('fa-eye-slash');
@@ -103,7 +100,7 @@ function checkContactNumber(input){
             $('#pr-password').prop('type', 'password');
         }
     })
-
+    const passwordConfirm = document.getElementById('confirm-password');
     passwordConfirm.addEventListener('click', (e) => {
         if(e.target.classList.contains('fa-eye')){
             e.target.classList.add('fa-eye-slash');
@@ -115,6 +112,12 @@ function checkContactNumber(input){
             e.target.classList.remove('fa-eye-slash');
             $('#confirm-password').prop('type', 'password');
         }        
+    });
+    
+    const contact = document.getElementById('contact-number');
+    contact.addEventListener('input',(e) => {
+        checkContactFromServer(contact);
+        displayValidity(contact);
     });
 
     $('#confirm-password').on('input', (e) => {

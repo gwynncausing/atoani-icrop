@@ -50,9 +50,9 @@ class RegistrationView(View):
         firstname = request.POST.get('first-name')
         lastname = request.POST.get('last-name')
         #replace by username field 
-        username = request.POST.get('contact_number')
+        username = request.POST.get('username')
         email = request.POST.get('email')
-        password = request.POST.get('password')
+        password = request.POST.get('password1')
         user = User.objects.create_user(first_name=firstname,last_name=lastname,username=username,email=email,password=password)
         location_form = LocationForm(request.POST)
         account_type = request.POST.get('account-type')
@@ -69,7 +69,8 @@ class RegistrationView(View):
             new_user.name = user
             new_user.location = location
             new_user.save()
-        return redirect('login_register:login')
+        return HttpResponse(location_form.errors)
+        #return redirect('login_register:login')
 
 class ApprovalView(View):
     def get(self,request):

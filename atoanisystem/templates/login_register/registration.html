@@ -70,7 +70,8 @@
         <div class="row-12 pr-sm-5 pr-3 mt-4 text-right">Fields with * are required</div>
 
         <div class="form-body ml-auto mr-auto">
-            <form class="registration-form" novalidate autocomplete="off">
+            <form class="registration-form" novalidate autocomplete="off" method="POST">
+                {% csrf_token %}
                 <div class="container pl-0 pr-0 mt-5 group-inputs">
                     <div class="group-title row-12 d-flex justify-content-between pr-3 pl-3 pb-2 pt-2">
                         <span>Account Information</span>
@@ -105,7 +106,7 @@
                         <div class="form-group col-12 col-md-4 input-group">
                             <label for="password">Password *</label>
                             <div class="input-group pr-password">
-                                <input class="form-control" type="password" name="street" id="pr-password"  maxlength="16" autocomplete="new-password" required >
+                                <input class="form-control" type="password" name="password1" id="pr-password"  maxlength="16" autocomplete="new-password" required >
                                 <div class="input-group-append" >
                                     <span class="input-group-text view-password fa fa-eye" id="prep"></span>
                                 </div>
@@ -121,9 +122,9 @@
                         <div class="form-group col-12 col-md-4">
                             <label for="confirm-password">Confirm Password *</label>
                             <div class="input-group">
-                                <input class="form-control" type="password" name="street" id="confirm-password"  maxlength="16" required>
+                                <input class="form-control" type="password" name="password2" id="confirm-password"  maxlength="16" required>
                                 <div class="input-group-append">
-                                     <span class="input-group-text view-password-confirm fa fa-eye" id="prep"></span>
+                                    <span class="input-group-text view-password-confirm fa fa-eye" id="prep"></span>
                                 </div>
                                 <div class="invalid-feedback">
                                     Password doesn't match.
@@ -172,7 +173,7 @@
                         </div>
                         <div class="form-group col-12 col-md-3 col-sm-6">
                             <label for="last-name">Barangay *</label>
-                            <select class="form-control" name="barangay" id="barangay">
+                            <select class="form-control" name="brgy" id="barangay">
                             </select>
                         </div>
                         <div class="form-group col-12 col-md-3 col-sm-6">
@@ -180,7 +181,7 @@
                             <input class="form-control" type="text" name="street" id="street" placeholder="Street" maxlength="30">
                         </div>
                     </div>
-                     
+                    
                     <div class="form-row row-12 mt-2 pr-5 pl-5">
                         <div class="form-group col-12 col-md-4">
                             <label for="contact-number">Contact Number *</label>
@@ -188,9 +189,13 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="prep">+63</span>
                                 </div>
-                                <input class="form-control" type="tel" pattern=".{10,11}" name="contact-number" maxlength="11" id="contact-number" placeholder="9000000000" required>
+                                <input class="form-control" type="tel" pattern=".{10,11}" name="contact_number" maxlength="11" id="contact-number" placeholder="9000000000" required>
                                 <div class="invalid-feedback">
-                                    Please enter your phone number in one of these formats: <br />9XXXXXXXXX or 09XXXXXXXXX
+                                    Please check if:<br>
+                                    <ul>
+                                        <li>is not already in use by other users</li>
+                                        <li>your phone number in one of these formats: 9xxxxxxxxx or 09xxxxxxxxx</li>
+                                    </ul>
                                 </div>
                             </div>  
                         </div>
@@ -203,7 +208,7 @@
                         </div>
                         <div class="form-group col-12 col-md-4">
                             <label for="company-name">Company Name</label>
-                            <input class="form-control" type="text" name="email" id="company-name" placeholder="Company Name" maxlength="30">
+                            <input class="form-control" type="text" name="company" id="company-name" placeholder="Company Name" maxlength="30">
                         </div>
                     </div>
 
