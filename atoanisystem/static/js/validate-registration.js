@@ -1,10 +1,29 @@
-function checkContactFromServer(button){
-    button.classList.remove('is-valid');
-    button.classList.remove('is-invalid');
-    checkContactNumber(button);
+function checkFromServer(inputElement,inputName){
+    inputElement.classList.remove('is-valid');
+    inputElement.classList.remove('is-invalid');
+    const form = document.querySelector(".registration-form");
+    doesInputExist(form,inputElement,inputName);
 }
 
-function checkContactNumber(input){
+function doesInputExist(form,inputElement,inputName){
+    let formData = new FormData(form);
+    formData.append('input',inputName);
+    $.ajax({
+        url: '',
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            inputElement.classList.add('is-valid');
+        },
+        error: function(response){
+            inputElement.classList.add('is-invalid');
+        }
+    });
+}
+
+function check(input){
     const form = document.querySelector(".registration-form")
     let formData = new FormData(form);
     $.ajax({
@@ -116,8 +135,14 @@ function checkContactNumber(input){
     
     const contact = document.getElementById('contact-number');
     contact.addEventListener('input',(e) => {
-        checkContactFromServer(contact);
+        checkFromServer(contact,'contact_number');
         displayValidity(contact);
+    });
+
+    const username = document.getElementById('username');
+    contact.addEventListener('input',(e) => {
+        checkFromServer(username,'username');
+        displayValidity(username);
     });
 
     $('#confirm-password').on('input', (e) => {
