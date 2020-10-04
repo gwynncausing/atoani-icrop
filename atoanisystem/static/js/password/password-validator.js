@@ -216,12 +216,16 @@ let isPasswordValid = false;
 			passwordConfirm.classList.remove("is-valid");
 			passwordConfirm.classList.add("is-invalid");
 		}
-		//if(isPasswordValid === true){
-		//	if(passwordConfirm.value.trim()  !== "" && passwordConfirm.value === $(this).val()){
-		//		passwordConfirm.classList.remove("is-invalid");
-		//		passwordConfirm.classList.add("is-valid");			
-		//	}
-		//}
+		if(isPasswordValid === true){
+			if(passwordConfirm.value.trim()  !== "" && passwordConfirm.value === $(this).val()){
+				passwordConfirm.classList.remove("is-invalid");
+				passwordConfirm.classList.add("is-valid");			
+			}
+			else{
+				passwordConfirm.classList.remove("is-valid");
+				passwordConfirm.classList.add("is-invalid");		
+			}
+		}
 	});
 
 	const displayPasswordValidity = () => {
