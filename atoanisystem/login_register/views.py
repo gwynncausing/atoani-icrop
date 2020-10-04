@@ -54,6 +54,12 @@ class RegistrationView(View):
                     return JsonResponse({'result':'not ok'},status=500)
                 else:
                     return JsonResponse({'result':'ok'},status=200)
+            elif request.POST.get('input') == 'email':
+                # check username if it already exists
+                if User.objects.filter(email=request.POST.get('email')).exists():
+                    return JsonResponse({'result':'not ok'},status=500)
+                else:
+                    return JsonResponse({'result':'ok'},status=200)
             else:
                 pass
         firstname = request.POST.get('first-name')
