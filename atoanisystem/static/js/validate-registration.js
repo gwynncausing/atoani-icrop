@@ -41,82 +41,99 @@ function check(input){
     });
 }
 
+//make this as global variable
+const passwordConfirm = document.querySelector("#password-confirm");
+
+//make these variables within this scopse
 ( validate = () => {
     const forms = document.querySelector(".registration-form")
     const textFields = forms.querySelectorAll("form input[required]")
+
+    const password = forms.querySelector("#pr-password");
+
+    const passwordEye = forms.querySelector(".view-password");
+    const passwordConfirmEye = forms.querySelector(".view-password-confirm");
+
+    const email = document.getElementById('email');
+    const contact = document.getElementById('contact-number');
+
+    const contactInfo = document.querySelector("#contact-info");
+
+    let isEmailValid = false;
+    let isContactValid = false;
+
+
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
-        
-        //checkContactFromServer(contact);
-        
-        if(forms.checkValidity() === false){
+
+        //check if email or phone number is answered
+        if(isEmailValid || isContactValid){
+            contactInfo.value = "contact-info";
+            displayValidity(contactInfo);
+        }
+
+        //check the validity of each fields
+        textFields.forEach(field => {
+            if(displayValidity(field) == false){
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        });
+
+        //check if both passwords are the same
+        if(!isPasswordsSame(password.value, passwordConfirm.value)){
+            passwordConfirm.classList.remove("is-valid");
+            passwordConfirm.classList.add("is-invalid")
+
             e.preventDefault();
             e.stopPropagation();
         }
-        
-        //forms.classList.add('was-validated');
-        textFields.forEach(field => {
-            if(field.name !== "password" && field.name != 'confirm-password')
-                displayValidity(field);
-            else{
-                if(field.name === 'confirm-password'){
-                    if(isPassWordsSame(field.value, password.value) === false){
-                        field.classList.remove('is-valid');
-                        field.classList.add('is-invalid');
 
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                }
-            }
-        })
-
-        //if(isPasswordValid === false)
-        //    console.log("hello")
-        //    consoleshowMessage();
-
-        //e.preventDefault();
-        //e.stopPropagation();
     })
 
-    //Adds event listener to all required textfields
+    /*start - Important Listeners*/
+    
+    //required field event input listeners
     textFields.forEach(field => {
         field.addEventListener("input", e => {
-            //console.log(e.target.id)
-            if(e.target.id !== "pr-password"){
+            if(e.target.id !== "pr-password" && e.target.name !== "contact_number")
                 displayValidity(e.target)
-                //console.log("password not allowed here");
-            }
         })
     })
 
-    const email = document.getElementById('email');
-    email.addEventListener("input", (e) => {
-        displayValidity(e.target);
+    //email input listener
+    email.addEventListener("input", (e) => {  
+        //if input length is 0
+        //make it neutral
+        if(e.target.value.toString().length === 0){
+            email.classList.remove("is-invalid");
+            email.classList.remove("is-valid");
+            isEmailValid = false;
+        }
+        else
+            isEmailValid = displayValidity(e.target);
     })
 
-    //Displays the validation message/response
-    const displayValidity = (field) => {
-        field.classList.remove('is-valid');
-        field.classList.remove('is-invalid');
+    //contact input listener
+    //checks availability of contact
+    contact.addEventListener('input', e => {
+        e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
 
-        if(field.checkValidity() === true)
-            field.classList.add('is-valid');
-        else
-            field.classList.add('is-invalid');
-    }
+        console.log(e.target.value.toString().length)
 
-    const password = document.getElementById('pr-password');
-    password.addEventListener('click', (e) => {
-        if(e.target.classList.contains('fa-eye')){
-            e.target.classList.add('fa-eye-slash');
-            e.target.classList.remove('fa-eye');
-            $('#pr-password').prop('type', 'text');
+        //if input length is 0
+        //make it neutral
+        if(e.target.value.toString().length === 0){
+            contact.classList.remove("is-invalid");
+            contact.classList.remove("is-valid");
+            isContactValid = false;
         }
         else{
-            e.target.classList.add('fa-eye');
-            e.target.classList.remove('fa-eye-slash');
-            $('#pr-password').prop('type', 'password');
+            isContactValid = displayValidity(e.target);
+
+            //check if email exist or not
+            if(isContactValid === true)
+                checkContactFromServer(contact)
         }
     })
     const passwordConfirm = document.getElementById('confirm-password');
@@ -144,22 +161,95 @@ function check(input){
         checkFromServer(username,'username');
         displayValidity(username);
     });
+    //contact.addEventListener('input',(e) => {
+        //checkContactFromServer(contact);
+    //    displayValidity(contact);
+    //});
 
-    $('#confirm-password').on('input', (e) => {
-        $('#confirm-password').removeClass('is-valid');
-        $('#confirm-password').removeClass('is-invalid');
+    //password eye/view click listener
+    //shows the input password into text
+    passwordEye.addEventListener('click', (e) => makePasswordShow(e.target, "#pr-password"));
 
-        if(isPassWordsSame($('#pr-password').val(), e.target.value))
-            $('#confirm-password').addClass("is-valid")
+    //confirm-password eye/view click listener
+    //shows the input password into text
+    passwordConfirmEye.addEventListener('click', (e) => makePasswordShow(e.target, "#password-confirm"));
+
+    passwordConfirm.addEventListener('input', (e) => {
+        passwordConfirm.classList.remove('is-valid');
+        passwordConfirm.classList.remove('is-invalid');
+
+        if(isPasswordsSame(password.value, e.target.value))
+            passwordConfirm.classList.add("is-valid")
         else
-            $('#confirm-password').addClass("is-invalid")
+            passwordConfirm.classList.add("is-invalid")
         
-        console.log("hello")
     })
 
-    const isPassWordsSame = (p1, p2) => p1 === p2;
+    /*end - Important Listeners*/
 
+    /*start - Helper Functions*/
+    //show or not the input password into text
+    const makePasswordShow = (field, id) => {
+        if(field.classList.contains('fa-eye')){
+            field.classList.add('fa-eye-slash');
+            field.classList.remove('fa-eye');
+            $(id).prop('type', 'text');
+
+            console.log("Show password")
+        }
+        else{
+            field.classList.add('fa-eye');
+            field.classList.remove('fa-eye-slash');
+            $(id).prop('type', 'password');
+            
+            console.log("Not show password")
+        }
+    }
+
+    //displays the validation message/response
+    const displayValidity = (field) => {
+        field.classList.remove('is-valid');
+        field.classList.remove('is-invalid');
+
+        if(field.checkValidity() === true){
+            field.classList.add('is-valid');
+            return true;
+        }
+        else{
+            field.classList.add('is-invalid');
+            return false;
+        }
+    }
+
+    //check if password and confirm password are same
+    const isPasswordsSame = (p1, p2) => p1 === p2;
+
+
+    function checkContactFromServer(button){
+        button.classList.remove('is-valid');
+        button.classList.remove('is-invalid');
+        checkContactNumber(button);
+    }
     
+    function checkContactNumber(input){
+        const form = document.querySelector(".registration-form")
+        let formData = new FormData(form);
+        $.ajax({
+            url: '',
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response){
+                input.classList.add('is-valid');
+            },
+            error: function(response){
+                input.classList.add('is-invalid');
+            }
+        });
+    }
+
+    /*end - Helper Functions*/
 
 })()
 
