@@ -122,7 +122,7 @@
                         <div class="form-group col-12 col-md-4">
                             <label for="confirm-password">Confirm Password *</label>
                             <div class="input-group">
-                                <input class="form-control" type="password" name="password2" id="confirm-password"  maxlength="16" required>
+                                <input class="form-control" type="password" name="password2" id="password-confirm"  maxlength="16" required>
                                 <div class="input-group-append">
                                     <span class="input-group-text view-password-confirm fa fa-eye" id="prep"></span>
                                 </div>
@@ -181,15 +181,23 @@
                             <input class="form-control" type="text" name="street" id="street" placeholder="Street" maxlength="30">
                         </div>
                     </div>
+
+                    <div class="form-row row-12 mt-3 pr-5 pl-5">
+                        <small>You may put your contact number or email or both. *</small>
+                        <input name="contact-info" id="contact-info" hidden  required/>
+                        <div class="invalid-feedback">
+                            Please enter your email or phone number 
+                        </div>
+                    </div>
                     
                     <div class="form-row row-12 mt-2 pr-5 pl-5">
                         <div class="form-group col-12 col-md-4">
-                            <label for="contact-number">Contact Number *</label>
+                            <label for="contact-number">Contact Number</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="prep">+63</span>
                                 </div>
-                                <input class="form-control" type="tel" pattern=".{10,11}" name="contact_number" maxlength="11" id="contact-number" placeholder="9000000000" required>
+                                <input class="form-control" type="text" name="contact_number" pattern=".{10,11}" maxlength="11"  id="contact-number" placeholder="9000000000">
                                 <div class="invalid-feedback">
                                     Please check if:<br>
                                     <ul>
@@ -199,16 +207,16 @@
                                 </div>
                             </div>  
                         </div>
-                        <div class="form-group col-12 col-md-4 email">
+                        <div class="form-group col-12 col-md-4 email pb-4">
                             <label for="email">Email</label>
                             <input class="form-control" type="email" name="email" id="email" placeholder="Email" maxlength="30">
                             <div class="invalid-feedback">
                                 Please enter your email address in format: yourname@example.com
                             </div>
                         </div>
-                        <div class="form-group col-12 col-md-4">
+                        <div class="form-group col-12 col-md-4 pb-3 ">
                             <label for="company-name">Company Name</label>
-                            <input class="form-control" type="text" name="company" id="company-name" placeholder="Company Name" maxlength="30">
+                            <input class="form-control" type="text" name="company" id="company-name" placeholder="Company Name" maxlength="100">
                         </div>
                     </div>
 
