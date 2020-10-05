@@ -63,6 +63,8 @@
             </div>
         </div>
     </nav>
+
+
     {% if user.is_authenticated %}
         <div class="container-fluid d-flex justify-content-center fill-height">
             <div id="row" class="row d-flex justify-content-center align-items-center w-100">
@@ -73,17 +75,6 @@
                 </div>
             </div>
         </div>
-        {% if user.is_approved %}
-        <div class="container-fluid d-flex justify-content-center fill-height">
-            <div id="row" class="row d-flex justify-content-center align-items-center w-100">
-                <div class="col-10 d-flex flex-column text-center">
-                    <h3>Hello, {{user.first_name}}</h3>
-                    <h4>This page is still under construction</h4>
-                    <span><i>Thank you for your patience.</i></span>
-                </div>
-            </div>
-        </div>
-        {% endif %}
     {% else %}
         <div class="container-fluid d-flex justify-content-center fill-height">
             <div id="row" class="row d-flex justify-content-center align-items-center w-100">
