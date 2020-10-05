@@ -14,31 +14,38 @@ from .forms import *
 
 class LoginView(View):
     def get(self,request):
-        return render(request,'login_register/login.html')
+        if request.user.is_authenticated:
+            return redirect("login_register:approval")  #For testing purposes. In the future, redirect to Customer/Farmer Dashboard
+        else:
+            return render(request,'login_register/login.html')
     def post(self, request):
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = auth.authenticate(username = username, password = password)
-        
         is_approved = False
         if user is not None:
             auth.login(request, user)
             if user.is_staff:
                 return redirect("/admin")
-            # if hasattr(user,'farmer'):
+            # elif hasattr(user,'farmer'):
             #     is_approved = user.farmer.is_approved
-            # if hasattr(user,'customer'):
+            # elif hasattr(user,'customer'):
             #     is_approved = user.customer.is_approved
-            # elif not is_approved:
+            # if not is_approved:
             #     return render(request,'login_register/needs-approval.html',{'user': request.user})
             else:
-                return render(request,'login_register/needs-approval.html',{'user': request.user})    # for testing
+                # return render(request,'login_register/needs-approval.html',{'user': request.user}) 
+                return redirect("login_register:approval")
         else:
             return redirect("login_register:login") # for testing
 
+
 class RegistrationView(View):
     def get(self,request):
-        return render(request,'login_register/registration.html')
+        if request.user.is_authenticated:
+            return redirect("login_register:approval") #For testing purposes. In the future, redirect to Customer/Farmer Dashboard
+        else:
+            return render(request,'login_register/registration.html')
 
     def post(self,request):
         if request.is_ajax():

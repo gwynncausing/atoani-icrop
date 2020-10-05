@@ -68,11 +68,12 @@
 
     
     <div class="container pr-0 pl-0 pb-4 mt-5 form-registration">
-        {% if not user.is_authenticated %}    
         <div class="form-header d-flex justify-content-between align-items-center pl-3 pr-3">
             <span>Registration</span>
         </div>
-        <div class="row-12 pr-sm-5 pr-3 mt-4 text-right">Fields with * are required</div>
+        <div class="row-12 pr-sm-5 pr-3 mt-4 text-right">
+            Fields with * are required
+        </div>
         <div class="form-body ml-auto mr-auto">
             <form class="registration-form" novalidate autocomplete="off" method="POST">
                 {% csrf_token %}
@@ -131,7 +132,7 @@
                                     <span class="input-group-text view-password-confirm fa fa-eye" id="prep"></span>
                                 </div>
                                 <div class="invalid-feedback">
-                                    Password doesn't match.
+                                    Password don't match.
                                 </div>
                                 <div class="valid-feedback">
                                     Password Match
@@ -229,17 +230,6 @@
 
             </form>
         </div>
-        {% else %}
-        <div class="container-fluid d-flex justify-content-center fill-height">
-            <div id="row" class="row d-flex justify-content-center align-items-center w-100 mt-5">
-                <div class="col-10 d-flex flex-column text-center">
-                    <h3>Hello, {{user.username}}</h3>
-                    <h4>You are already registered</h4>
-                    <a class="nav-link" href="{% url 'login_register:approval' %}">Click here</a>
-                </div>
-            </div>
-        </div>
-        {% endif %}
     </div>
 
 
