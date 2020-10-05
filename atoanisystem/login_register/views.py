@@ -23,18 +23,18 @@ class LoginView(View):
         is_approved = False
         if user is not None:
             auth.login(request, user)
+            if user.is_staff:
+                return redirect("/admin")
             if hasattr(user,'farmer'):
                 is_approved = user.farmer.is_approved
             if hasattr(user,'customer'):
                 is_approved = user.customer.is_approved
-            if user.is_staff:
-                return redirect("/admin")
             elif not is_approved:
                 return render(request,'login_register/needs-approval.html',{'user': request.user})
             else:
-                return HttpResponse("login success")    # for testing
+                return render(request,'login_register/needs-approval.html',{'user': request.user})    # for testing
         else:
-            return redirect("/login") # for testing
+            return HttpResponse("login failed") # for testing
 
 class RegistrationView(View):
     def get(self,request):
@@ -94,7 +94,7 @@ class ApprovalView(View):
             print(request.user)
             return render(request,'login_register/needs-approval.html',{'user': request.user})
         else:
-            return render(request,'login_register/login.html')
+            return render(request,'login_register/needs-approval.html',{'user': request.user})
 
 class LogoutView(View):
     def get(self,request):
@@ -103,3 +103,4 @@ class LogoutView(View):
     def post(self,request):
         logout(request)
         return  redirect("/login")
+
