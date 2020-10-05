@@ -1,0 +1,80 @@
+.body-dashoard{
+    position: relative; 
+    width: 90%; 
+    min-height: 180px; 
+    border: 2px #fff solid; 
+    border-radius: 0.5rem;
+
+    .title{
+        position: absolute;
+        left: 2rem;
+        top: -1rem;
+        background: $main-color;
+        font-weight: bold;
+    }
+
+    .orders{
+        height: 260px;
+        font-weight: bold;
+    }
+
+    .order-tab,
+    .order-table-holder, 
+    .reserved-orders,
+    .incoming-orders,
+    .finished-orders{
+        border-top-right-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+    }
+
+
+    .order-type{
+        height: 84%; 
+        color: $white-color;
+        font-size: 6rem;
+    }
+
+    .box, .tab{
+        border-radius: 0.5rem;
+    }
+
+    .box{
+        background: $tertiary-color; 
+        height: 2.75rem;
+        z-index: 4;
+    }
+
+    .reserved-orders{
+        background-color: #EBE324;  
+        cursor: pointer;
+       
+    }
+
+    .incoming-orders{
+        background-color: #51E49F;
+        cursor: pointer;
+    }
+
+    .finished-orders{
+        background-color: #5775DD;
+        cursor: pointer;
+    }
+
+    .order-table-holder{
+        background: $tertiary-color;
+    }
+    .order-tab{
+        font-weight: bold;
+        background-color: #51E49F;
+    }
+
+    .reserved-orders:hover, 
+    .incoming-orders:hover,
+    .finished-orders:hover{
+        cursor: pointer;
+    }
+
+    #farmer-table{
+    }
+    
+}

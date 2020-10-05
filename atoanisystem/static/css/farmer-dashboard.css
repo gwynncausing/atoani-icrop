@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Sriracha&display=swap");
+body {
+  background-color: #114a44;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Sriracha", cursive;
+}
+
+.navbar {
+  background: #0b3531;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.navbar a {
+  color: #fafafa;
+}
+
+.navbar a.dropdown-item {
+  color: #0a0a0a;
+}
+
+.navbar a.dropdown-item:hover {
+  background: #0b3531;
+  color: #fafafa;
+}
+
+.navbar .navbar-toggler-icon {
+  color: #fafafa;
+}
+
+.body-dashoard {
+  position: relative;
+  width: 90%;
+  min-height: 180px;
+  border: 2px #fff solid;
+  border-radius: 0.5rem;
+}
+
+.body-dashoard .title {
+  position: absolute;
+  left: 2rem;
+  top: -1rem;
+  background: #114a44;
+  font-weight: bold;
+}
+
+.body-dashoard .orders {
+  height: 260px;
+  font-weight: bold;
+}
+
+.body-dashoard .order-tab,
+.body-dashoard .order-table-holder,
+.body-dashoard .reserved-orders,
+.body-dashoard .incoming-orders,
+.body-dashoard .finished-orders {
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+}
+
+.body-dashoard .order-type {
+  height: 84%;
+  color: #fafafa;
+  font-size: 6rem;
+}
+
+.body-dashoard .box, .body-dashoard .tab {
+  border-radius: 0.5rem;
+}
+
+.body-dashoard .box {
+  background: #0b3531;
+  height: 2.75rem;
+  z-index: 4;
+}
+
+.body-dashoard .reserved-orders {
+  background-color: #EBE324;
+  cursor: pointer;
+}
+
+.body-dashoard .incoming-orders {
+  background-color: #51E49F;
+  cursor: pointer;
+}
+
+.body-dashoard .finished-orders {
+  background-color: #5775DD;
+  cursor: pointer;
+}
+
+.body-dashoard .order-table-holder {
+  background: #0b3531;
+}
+
+.body-dashoard .order-tab {
+  font-weight: bold;
+  background-color: #51E49F;
+}
+
+.body-dashoard .reserved-orders:hover,
+.body-dashoard .incoming-orders:hover,
+.body-dashoard .finished-orders:hover {
+  cursor: pointer;
+}
+/*# sourceMappingURL=farmer-dashboard.css.map */
