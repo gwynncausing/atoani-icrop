@@ -42,11 +42,26 @@ class RegistrationView(View):
 
     def post(self,request):
         if request.is_ajax():
-            # check contact number if it already exists
-            if Customer.objects.filter(contact_number=request.POST.get('contact_number')).exists() or Farmer.objects.filter(contact_number=request.POST.get('contact_number')).exists():
-                return JsonResponse({'result':'not ok'},status=500)
+            if request.POST.get('input') == 'contact_number':
+                # check contact number if it already exists
+                if Customer.objects.filter(contact_number=request.POST.get('contact_number')).exists() or Farmer.objects.filter(contact_number=request.POST.get('contact_number')).exists():
+                    return JsonResponse({'result':'not ok'},status=500)
+                else:
+                    return JsonResponse({'result':'ok'},status=200)
+            elif request.POST.get('input') == 'username':
+                # check username if it already exists
+                if User.objects.filter(username=request.POST.get('username')).exists():
+                    return JsonResponse({'result':'not ok'},status=500)
+                else:
+                    return JsonResponse({'result':'ok'},status=200)
+            elif request.POST.get('input') == 'email':
+                # check username if it already exists
+                if User.objects.filter(email=request.POST.get('email')).exists():
+                    return JsonResponse({'result':'not ok'},status=500)
+                else:
+                    return JsonResponse({'result':'ok'},status=200)
             else:
-                return JsonResponse({'result':'ok'},status=200)
+                pass
         firstname = request.POST.get('first-name')
         lastname = request.POST.get('last-name')
         #replace by username field 
