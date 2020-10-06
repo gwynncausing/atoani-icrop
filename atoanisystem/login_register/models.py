@@ -11,6 +11,7 @@ from enum import Enum
 #from django.utils import timezone
 # Create your models here
 
+# https://stackoverflow.com/questions/54802616/how-to-use-enums-as-a-choice-field-in-django-model
 class Months(Enum):
     January = 1
     Febuary = 2
@@ -25,12 +26,17 @@ class Months(Enum):
     November = 11
     December = 12
 
+    @classmethod
+    def choices(cls):
+        print((i.name,i.value) for i in cls)
+        return((i.name,i.value) for i in cls)
+
 class Crop(models.Model):
     name = models.CharField(max_length=220)
     is_seasonal = models.BooleanField()
-    season_start = models.CharField(max_length=20,choices=[(tag, tag.value) for tag in Months],blank=True,null=True,\
+    season_start = models.CharField(max_length=20,choices=Months.choices(),blank=True,null=True,\
                     help_text="Start of the harvest season.")
-    season_end = models.CharField(max_length=20,choices=[(tag, tag.value) for tag in Months],blank=True,null=True, \
+    season_end = models.CharField(max_length=20,choices=Months.choices(),blank=True,null=True, \
                     help_text="End of the harvest seasons.")
     harvest_weight_per_land_area = models.FloatField(help_text="Harvest weight per land area in tons/ha")
     harvest_time = models.PositiveIntegerField(help_text="Harvest time in days")
@@ -122,11 +128,12 @@ class Customer(models.Model):
 class Order(models.Model):
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    crop = models.OneToOneField(Crop, on_delete=models.CASCADE)
+    crop = models.ForeignKey(Crop, on_delete=models.CASCADE)
     order_date = models.DateTimeField(blank=True, auto_now_add=True, verbose_name=True)
     weight = models.FloatField()
     is_done = models.BooleanField(help_text="Is the order finished?")
     is_cancelled = models.BooleanField(help_text="Is the order cancelled?")
+    message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")
 
     def is_eligible(self):
         pass
@@ -186,6 +193,10 @@ class Order_Pairing(models.Model):
     order_id = models.OneToOneField(Order, on_delete=models.CASCADE)
     farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE)
     expected_time = models.DateTimeField(blank=True,null=True)
+    accepted_date = models.DateTimeField(blank=True,null=True)
+    harvested_date = models.DateTimeField(blank=True,null=True)
+    collected_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
+
 
     def __str__(self):
         return "{} - {}".format(self.order_id,self.farmer)
