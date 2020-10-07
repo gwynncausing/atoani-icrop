@@ -195,60 +195,6 @@
 
     <!-- Datatables JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
-    
-    <script>
-        $(document).ready( function () {
-            const farmerTableConfig = {
-                paging: false,
-                dom: `<
-                        <"d-flex float-left ml-5 mb-3 mt-4"
-                            <"mr-3 ml-1"f>
-                        >
-                        <"d-flex float-right ">
-                        <t>
-                        <"bottom"
-                            <"d-inline"
-                                <"float-left mt-0 ml-5 mb-3 pb-3"i>
-                            >   
-                        >
-                    >`,
-                columnDefs: [
-                    { orderable: false, "targets": 4 },
-                    {
-                        targets: 4,
-                        data: null,
-                        defaultContent: `<div class="button-container d-flex justify-content-center">
-                                        <button type="button" class="btn-primary mx-1" onclick="">
-                                            Reserve
-                                        </button>
-                                        <button type="button" class="btn-secondary mx-1" onclick="">
-                                            View
-                                        </button>
-                                        </div>`
-                    }
-                ],
-                //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
-                ajax: {
-                    url: '',
-                    dataSrc: "data"
-                },
-                //matches the data to appropriate column
-                columns: [
-                    { "data": 'crop_type' },
-                    { "data": 'demand' },
-                    { "data": 'land_area' },
-                    { "data": 'order_location'},
-                ],
-                //Adds data-id attribute to each row
-                // createdRow: function(row, data, dataIndex) {
-                //     $(row).attr('data-id', data.id);
-                // },
-            }
-            $('.farmer-table').DataTable(farmerTableConfig);
-        }); 
-    </script>
-
-
+    <script src="{% static '/js/farmer-dashboard.js' %}"></script>
 </body>
-
 </html>
