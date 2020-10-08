@@ -38,11 +38,15 @@ h6 {
   color: #fafafa;
 }
 
+body {
+  background: #fff;
+}
+
 .body-dashoard {
   position: relative;
   width: 90%;
   min-height: 180px;
-  border: 2px #fff solid;
+  border: 2px #114a44 solid;
   border-radius: 0.5rem;
 }
 
@@ -50,17 +54,17 @@ h6 {
   position: absolute;
   left: 2rem;
   top: -1rem;
-  background: #114a44;
+  background: #fff;
+  color: #114a44;
   font-weight: bold;
 }
 
 .body-dashoard .orders {
-  height: 260px;
+  height: 280px;
   font-weight: bold;
 }
 
 .body-dashoard .order-tab,
-.body-dashoard .order-table-holder,
 .body-dashoard .reserved-orders,
 .body-dashoard .incoming-orders,
 .body-dashoard .finished-orders {
@@ -68,9 +72,14 @@ h6 {
   border-top-left-radius: 0.5rem;
 }
 
+.body-dashoard .order-table-holder {
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
 .body-dashoard .order-type {
   height: 84%;
-  color: #fafafa;
+  color: #0b3531;
   font-size: 6rem;
 }
 
@@ -79,38 +88,126 @@ h6 {
 }
 
 .body-dashoard .box {
-  background: #0b3531;
+  background: #EBF2F2;
+  color: #0b3531;
   height: 2.75rem;
   z-index: 4;
+  -webkit-box-shadow: 0px 2px 6px 2px #e0e0e0;
+          box-shadow: 0px 2px 6px 2px #e0e0e0;
 }
 
 .body-dashoard .reserved-orders {
-  background-color: #EBE324;
+  background-color: #9387DF;
+  color: #fff;
   cursor: pointer;
 }
 
+.body-dashoard #finished-table .order-tab {
+  background: #5C5CE4;
+  color: #fff;
+}
+
+.body-dashoard #incoming-table .order-tab {
+  background: #D2467B;
+  color: #fff;
+}
+
+.body-dashoard #reserved-table .order-tab {
+  background: #9387DF;
+  color: #fff;
+}
+
+.body-dashoard .order-tab {
+  background: black;
+}
+
 .body-dashoard .incoming-orders {
-  background-color: #51E49F;
+  background-color: #D2467B;
+  color: #fff;
   cursor: pointer;
 }
 
 .body-dashoard .finished-orders {
-  background-color: #5775DD;
+  background-color: #5C5CE4;
+  color: #fff;
   cursor: pointer;
 }
 
 .body-dashoard .order-table-holder {
-  background: #0b3531;
-}
-
-.body-dashoard .order-tab {
-  font-weight: bold;
-  background-color: #51E49F;
+  background: #EBF2F2;
 }
 
 .body-dashoard .reserved-orders:hover,
 .body-dashoard .incoming-orders:hover,
 .body-dashoard .finished-orders:hover {
   cursor: pointer;
+}
+
+.body-dashoard .nav-tabs a {
+  text-decoration: none;
+  color: #0b3531;
+}
+
+.body-dashoard .nav-pills > li.active > a, .body-dashoard .nav-pills > li.active > a:hover, .body-dashoard .nav-pills > li.active {
+  color: black;
+  background: none;
+}
+
+.body-dashoard .nav-tabs > li.active > a, .body-dashoard .nav-tabs > li.active > a:focus, .body-dashoard .nav-tabs > li.active {
+  padding: 1rem;
+}
+
+.body-dashoard .nav-tabs {
+  border: 0;
+}
+
+.body-dashoard table {
+  width: 95%;
+  border-radius: 0.5rem;
+  color: #0b3531;
+  background-color: #fff;
+}
+
+.body-dashoard table thead {
+  color: #fafafa;
+  background: #0b3531;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  font-weight: normal;
+}
+
+.body-dashoard table thead th {
+  font-weight: normal;
+}
+
+.body-dashoard table thead th:first-child {
+  border-top-left-radius: 0.5rem;
+}
+
+.body-dashoard table thead th:last-child {
+  border-top-right-radius: 0.5rem;
+}
+
+.body-dashoard table tfoot td:not(:last-child), .body-dashoard table tfoot th:not(:last-child) {
+  border-right: 1px solid #0b3531;
+}
+
+.body-dashoard table tfoot td, .body-dashoard table tfoot th {
+  border-top: 0;
+  text-align: center;
+  font-weight: normal;
+}
+
+.body-dashoard .tab-content {
+  border-radius: 0.5rem;
+}
+
+.body-dashoard .order-table {
+  -webkit-box-shadow: 0px 0px 2px 2px #e0e0e0;
+          box-shadow: 0px 0px 2px 2px #e0e0e0;
+  min-height: 100px;
+  padding-bottom: 3rem;
+  background: #EBF2F2;
+  border-radius: 0.5rem;
 }
 /*# sourceMappingURL=farmer-dashboard.css.map */

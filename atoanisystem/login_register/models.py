@@ -8,9 +8,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from login_register.auxfunctions import *
 from enum import Enum
-#from django.utils import timezone
+from django.utils import timezone as tz
+from datetime import datetime as dt
 # Create your models here
 
+# https://stackoverflow.com/questions/54802616/how-to-use-enums-as-a-choice-field-in-django-model
 class Months(Enum):
     January = 1
     Febuary = 2
@@ -25,12 +27,17 @@ class Months(Enum):
     November = 11
     December = 12
 
+    @classmethod
+    def choices(cls):
+        print((i.name,i.value) for i in cls)
+        return((i.name,i.value) for i in cls)
+
 class Crop(models.Model):
     name = models.CharField(max_length=220)
     is_seasonal = models.BooleanField()
-    season_start = models.CharField(max_length=20,choices=[(tag, tag.value) for tag in Months],blank=True,null=True,\
+    season_start = models.CharField(max_length=20,choices=Months.choices(),blank=True,null=True,\
                     help_text="Start of the harvest season.")
-    season_end = models.CharField(max_length=20,choices=[(tag, tag.value) for tag in Months],blank=True,null=True, \
+    season_end = models.CharField(max_length=20,choices=Months.choices(),blank=True,null=True, \
                     help_text="End of the harvest seasons.")
     harvest_weight_per_land_area = models.FloatField(help_text="Harvest weight per land area in tons/ha")
     harvest_time = models.PositiveIntegerField(help_text="Harvest time in days")
@@ -122,18 +129,20 @@ class Customer(models.Model):
 class Order(models.Model):
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    crop = models.OneToOneField(Crop, on_delete=models.CASCADE)
-    order_date = models.DateTimeField(blank=True, auto_now_add=True, verbose_name=True)
+    crop = models.ForeignKey(Crop, on_delete=models.CASCADE)
+    order_date = models.DateTimeField(default=tz.now, verbose_name="Order date", help_text = "Date in which the order was done")
     weight = models.FloatField()
     is_done = models.BooleanField(help_text="Is the order finished?")
     is_cancelled = models.BooleanField(help_text="Is the order cancelled?")
+    message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")
 
     def is_eligible(self):
         pass
 
-    def set_value(self, attr:str, new_value):
+    def set_value(self, attr:[]):
         try:
-            setattr(self,attr,new_value)
+            for att in attr:
+                setattr(self,att[0],att[1])
             self.save()
         except:
             pass
@@ -186,6 +195,10 @@ class Order_Pairing(models.Model):
     order_id = models.OneToOneField(Order, on_delete=models.CASCADE)
     farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE)
     expected_time = models.DateTimeField(blank=True,null=True)
+    accepted_date = models.DateTimeField(blank=True,null=True)
+    harvested_date = models.DateTimeField(blank=True,null=True)
+    collected_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
+
 
     def __str__(self):
         return "{} - {}".format(self.order_id,self.farmer)

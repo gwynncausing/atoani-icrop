@@ -2,6 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, redirect, render
 from django.views.generic import View
+from login_register.models import Order
+from . import orderfunctions as of
 
 
 def checkLogin(self, request, currentUser):
@@ -42,6 +44,7 @@ class CustomerDashboardView(View):
         else:
             return redirect('login_register:login')
 
+#Farmer related views
 class FarmerDashboardView(View):
     def get(self,request):
         if request.user.is_authenticated:
@@ -60,24 +63,34 @@ class FarmerDashboardView(View):
                     return redirect("login_register:approval")
         else:
             return redirect('login_register:login')
+        return render(request,'dashboard/farmer-dashboard.html')
 
-#get the list of orders
-def get_incoming_orders():
-    dummy = [
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-    ]
-    return dummy
+class IncomingOrdersView(View):
+    def get(self,request):
+        if request.is_ajax():
+            #does not include deleted customer
+            arr = of.get_incoming_orders()
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request,'dashboard/customer-dashboard.html')
+
+class ReservedOrdersView(View):
+    def get(self,request):
+        if request.is_ajax():
+            #does not include deleted customer
+            arr = of.get_reserved_orders()
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request,'dashboard/customer-dashboard.html')
+
+class FinishedOrdersView(View):
+    def get(self,request):
+        if request.is_ajax():
+            #does not include deleted customer
+            arr = of.get_finished_orders()
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request,'dashboard/customer-dashboard.html')
 
 class TestView(View):
     def get(self,request):

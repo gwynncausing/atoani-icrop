@@ -1,8 +1,9 @@
+/*
 (switcthTab = () => {
-    const colors = ["#EBE324", "#5775DD", "#51E49F"];
-    const reserved = $(".reserved-orders");
-    const finished = $(".finished-orders");
-    const incoming = $(".incoming-orders");
+    const colors = ["#9387DF", "#5C5CE4", "#D2467B"];
+    const reserved = $("#nav-reserved-tab");
+    const finished = $("#nav-finished-tab");
+    const incoming = $("#nav-incoming-tab");
     const tab = $(".order-tab");
     
     reserved.click(e => {
@@ -21,3 +22,4 @@
     });
    
 })()
+*/
