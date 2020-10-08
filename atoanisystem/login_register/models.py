@@ -32,6 +32,18 @@ class Months(Enum):
         print((i.name,i.value) for i in cls)
         return((i.name,i.value) for i in cls)
 
+class Status(Enum):
+    Pending = "Pending"
+    Posted = "Posted"
+    Ongoing = "Ongoing"
+    Harvested= "Harvested"
+    Collected = "Collected"
+
+    @classmethod
+    def choices(cls):
+        print((i.name,i.value) for i in cls)
+        return((i.name,i.value) for i in cls)
+
 class Crop(models.Model):
     name = models.CharField(max_length=220)
     is_seasonal = models.BooleanField()
@@ -135,6 +147,7 @@ class Order(models.Model):
     is_done = models.BooleanField(help_text="Is the order finished?",default=False)
     is_reserved = models.BooleanField(help_text="Is the order reserved?",default=False)
     is_approved = models.BooleanField(help_text="Is the order approved by AtoANI?",default=False)
+    status = models.CharField(max_length=20, choices=Status.choices(), null=True, default="Pending")
     message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")
 
     def is_eligible(self):
