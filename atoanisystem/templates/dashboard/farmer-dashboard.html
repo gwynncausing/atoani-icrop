@@ -228,50 +228,12 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>3</th>
-                                <th>3</th>
-                                <th>3</th>
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>3</th>
-                                <th>3</th>
-                                <th>3</th>
-                            </tr>
-                                <tr>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>3</th>
-                                <th>3</th>
                                 <th></th>
-                            </tr>
-                            </tr>
-                                <tr>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>3</th>
-                                <th>3</th>
                                 <th></th>
-                            </tr> 
-                            </tr>
-                                <tr>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>3</th>
-                                <th>3</th>
                                 <th></th>
-                            </tr> 
-                            </tr>
-                                <tr>
-                                <th>2</th>
-                                <th>3</th>
-                                <th>3</th>
-                                <th>3</th>
                                 <th></th>
-                            </tr>      
+                                <th></th>
+                            </tr>    
                         </tfoot>
                     </div>
                 </div>
@@ -288,67 +250,14 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 
     <!-- Datatables JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
-    
-    <script>
-        $(document).ready( function () {
-            const farmerTableConfig = {
-                paging: false,
-                dom: `<
-                        <"d-flex float-left ml-5 mb-3 mt-4"
-                            <"mr-3 ml-1"f>
-                        >
-                        <"d-flex float-right ">
-                        <t>
-                        <"bottom"
-                            <"d-inline"
-                                <"float-left mt-0 ml-5 mb-3 pb-3"i>
-                            >   
-                        >
-                    >`,
-                columnDefs: [
-                    { orderable: false, "targets": 4 },
-                    {
-                        targets: 4,
-                        data: null,
-                        defaultContent: `<div class="button-container d-flex justify-content-center">
-                                        <button type="button" class="btn-primary mx-1" onclick="">
-                                            Reserve
-                                        </button>
-                                        <button type="button" class="btn-secondary mx-1" onclick="">
-                                            View
-                                        </button>
-                                        </div>`
-                    }
-                ],
-                //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
-                ajax: {
-                    url: '',
-                    dataSrc: "data"
-                },
-                //matches the data to appropriate column
-                columns: [
-                    { "data": 'crop_type' },
-                    { "data": 'demand' },
-                    { "data": 'land_area' },
-                    { "data": 'order_location'},
-                ],
-                //Adds data-id attribute to each row
-                // createdRow: function(row, data, dataIndex) {
-                //     $(row).attr('data-id', data.id);
-                // },
-            }
-            $('.farmer-table').DataTable(farmerTableConfig);
-        }); 
-    </script>
-
-
+    <script src="{% static '/js/farmer-dashboard.js' %}"></script>
 </body>
-
 </html>

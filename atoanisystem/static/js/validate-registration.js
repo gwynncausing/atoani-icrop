@@ -1,3 +1,46 @@
+function checkFromServer(inputElement,inputName){
+    inputElement.classList.remove('is-valid');
+    inputElement.classList.remove('is-invalid');
+    const form = document.querySelector(".registration-form");
+    doesInputExist(form,inputElement,inputName);
+}
+
+function doesInputExist(form,inputElement,inputName){
+    let formData = new FormData(form);
+    formData.append('input',inputName);
+    $.ajax({
+        url: '',
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            inputElement.classList.add('is-valid');
+        },
+        error: function(response){
+            inputElement.classList.add('is-invalid');
+        }
+    });
+}
+
+function check(input){
+    const form = document.querySelector(".registration-form")
+    let formData = new FormData(form);
+    $.ajax({
+        url: '',
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            input.classList.add('is-valid');
+        },
+        error: function(response){
+            input.classList.add('is-invalid');
+        }
+    });
+}
+
 //make this as global variable
 const passwordConfirm = document.querySelector("#password-confirm");
 
@@ -15,6 +58,19 @@ const passwordConfirm = document.querySelector("#password-confirm");
     const contact = document.getElementById('contact-number');
 
     const contactInfo = document.querySelector("#contact-info");
+
+    const username = document.getElementById('username');
+
+    //ERROR MESSAGES:
+
+    const usernameBlank  = "Please enter a username";
+    const usernameExists = "The username is already in use";
+
+    const contactInvalidFormat = "Phone number must be in one of these formats: 9xxxxxxxxx or 09xxxxxxxxx";
+    const contactExists = "The contact number is already in use";
+
+    const emailInvalidFormat = "Please enter your email address in format: yourname@example.com";
+    const emailExists = "The email address is already in use";
 
     let isEmailValid = false;
     let isContactValid = false;
@@ -67,8 +123,14 @@ const passwordConfirm = document.querySelector("#password-confirm");
             email.classList.remove("is-valid");
             isEmailValid = false;
         }
-        else
+        else{
+            document.getElementById("email-invalid").innerHTML = emailInvalidFormat;
             isEmailValid = displayValidity(e.target);
+            if(isEmailValid){
+                document.getElementById("email-invalid").innerHTML = emailExists;
+                checkFromServer(email,'email');
+            }
+        }
     })
 
     //contact input listener
@@ -86,18 +148,35 @@ const passwordConfirm = document.querySelector("#password-confirm");
             isContactValid = false;
         }
         else{
+            document.getElementById("contact-invalid").innerHTML = contactInvalidFormat;
             isContactValid = displayValidity(e.target);
-
-            //check if email exist or not
-            if(isContactValid === true)
-                checkContactFromServer(contact)
+            //check if contact exists or not
+            if(isContactValid === true){
+                document.getElementById("contact-invalid").innerHTML = contactExists;
+                checkFromServer(contact,'contact_number');
+            }
         }
     })
 
-    //contact.addEventListener('input',(e) => {
-        //checkContactFromServer(contact);
-    //    displayValidity(contact);
-    //});
+    contact.addEventListener('keydown', function(event) {
+        const key = event.key; // const {key} = event; ES6+
+        if (key == "Backspace") {
+            document.getElementById("contact-invalid").innerHTML = contactInvalidFormat;
+            contact.classList.remove("is-invalid");
+            contact.classList.remove("is-valid");
+        }
+    });
+
+    username.addEventListener('input',(e) => {
+        if(e.target.value.toString().length === 0){
+            document.getElementById("username-invalid").innerHTML = usernameBlank;
+            displayValidity(username);
+        }
+        else{
+            document.getElementById("username-invalid").innerHTML = usernameExists;
+            checkFromServer(username,'username');
+        }
+    });
 
     //password eye/view click listener
     //shows the input password into text
@@ -157,31 +236,7 @@ const passwordConfirm = document.querySelector("#password-confirm");
     //check if password and confirm password are same
     const isPasswordsSame = (p1, p2) => p1 === p2;
 
-
-    function checkContactFromServer(button){
-        button.classList.remove('is-valid');
-        button.classList.remove('is-invalid');
-        checkContactNumber(button);
-    }
-    
-    function checkContactNumber(input){
-        const form = document.querySelector(".registration-form")
-        let formData = new FormData(form);
-        $.ajax({
-            url: '',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response){
-                input.classList.add('is-valid');
-            },
-            error: function(response){
-                input.classList.add('is-invalid');
-            }
-        });
-    }
-     /*end - Helper Functions*/
+    /*end - Helper Functions*/
 
 })()
 

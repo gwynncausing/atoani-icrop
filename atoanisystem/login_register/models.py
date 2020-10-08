@@ -8,7 +8,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from login_register.auxfunctions import *
 from enum import Enum
-#from django.utils import timezone
+from django.utils import timezone as tz
+from datetime import datetime as dt
 # Create your models here
 
 # https://stackoverflow.com/questions/54802616/how-to-use-enums-as-a-choice-field-in-django-model
@@ -25,6 +26,18 @@ class Months(Enum):
     October = 10
     November = 11
     December = 12
+
+    @classmethod
+    def choices(cls):
+        print((i.name,i.value) for i in cls)
+        return((i.name,i.value) for i in cls)
+
+class Status(Enum):
+    Pending = "Pending"
+    Posted = "Posted"
+    Ongoing = "Ongoing"
+    Harvested= "Harvested"
+    Collected = "Collected"
 
     @classmethod
     def choices(cls):
@@ -129,18 +142,22 @@ class Order(models.Model):
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     crop = models.ForeignKey(Crop, on_delete=models.CASCADE)
-    order_date = models.DateTimeField(blank=True, auto_now_add=True, verbose_name=True)
+    order_date = models.DateTimeField(default=tz.now, verbose_name="Order date", help_text = "Date in which the order was done")
     weight = models.FloatField()
-    is_done = models.BooleanField(help_text="Is the order finished?")
-    is_cancelled = models.BooleanField(help_text="Is the order cancelled?")
+    land_area_needed = models.FloatField(null=True)
+    is_done = models.BooleanField(help_text="Is the order finished?",default=False)
+    is_reserved = models.BooleanField(help_text="Is the order reserved?",default=False)
+    is_approved = models.BooleanField(help_text="Is the order approved by AtoANI?",default=False)
+    status = models.CharField(max_length=20, choices=Status.choices(), null=True, default="Pending")
     message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")
 
     def is_eligible(self):
         pass
 
-    def set_value(self, attr:str, new_value):
+    def set_value(self, attr:[]):
         try:
-            setattr(self,attr,new_value)
+            for att in attr:
+                setattr(self,att[0],att[1])
             self.save()
         except:
             pass
@@ -206,6 +223,8 @@ class Order_Pairing(models.Model):
             return getattr(self,attr)
         except:
             return None
+
+    #Add get_status(self) after boss martin pushes his changes to order_pair model
 
     class Meta:
         ordering = ['-expected_time']
