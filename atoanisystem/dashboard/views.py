@@ -1,15 +1,65 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.shortcuts import HttpResponse, redirect, render
 from django.views.generic import View
+
+
+def checkLogin(self, request, currentUser):
+    if currentUser.is_authenticated:
+        if currentUser.is_staff:
+            return redirect("/admin")
+        elif hasattr(currentUser, 'farmer'):
+            if(currentUser.farmer.is_approved):
+                return redirect("dashboard:farmer")
+                # return render(request,'dashboard/farmer-dashboard.html')
+            else:
+                return redirect("login_register:approval")
+        elif hasattr(currentUser, 'customer'):
+            if(currentUser.customer.is_approved):
+                return redirect("dashboard:customer")
+                # return render(request,'dashboard/customer-dashboard.html')
+            else:
+                return redirect("login_register:approval")
+    else:
+        return False
 
 class CustomerDashboardView(View):
     def get(self,request):
-        return render(request,'dashboard/customer-dashboard.html')
+        if request.user.is_authenticated:
+            currentUser = request.user
+            if currentUser.is_staff:
+                return redirect("/admin")
+            elif hasattr(currentUser, 'farmer'):
+                if(currentUser.farmer.is_approved):
+                    return redirect("dashboard:farmer")
+                else:
+                    return redirect("login_register:approval")
+            elif hasattr(currentUser, 'customer'):
+                if(currentUser.customer.is_approved):
+                    return render(request,'dashboard/customer-dashboard.html')
+                else:
+                    return redirect("login_register:approval")
+        else:
+            return redirect('login_register:login')
 
 class FarmerDashboardView(View):
     def get(self,request):
-        return render(request,'dashboard/farmer-dashboard.html')
-
+        if request.user.is_authenticated:
+            currentUser = request.user
+            if currentUser.is_staff:
+                return redirect("/admin")
+            elif hasattr(currentUser, 'farmer'):
+                if(currentUser.farmer.is_approved):
+                    return render(request,'dashboard/farmer-dashboard.html')
+                else:
+                    return redirect("login_register:approval")
+            elif hasattr(currentUser, 'customer'):
+                if(currentUser.customer.is_approved):
+                    return render(request,'dashboard/customer-dashboard.html')
+                else:
+                    return redirect("login_register:approval")
+        else:
+            return redirect('login_register:login')
 
 #get the list of orders
 def get_incoming_orders():

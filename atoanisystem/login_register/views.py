@@ -1,52 +1,82 @@
-from django.shortcuts import render, redirect, HttpResponse
-from django.views.generic import View
-from django.contrib.auth.models import User, auth
-from django.http import JsonResponse
-from .models import Customer, Farmer, Location
-from django.contrib.auth.models import User, Group
-from django.contrib.auth import logout, login
 from django.contrib import auth
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group, User, auth
+from django.http import JsonResponse
+from django.shortcuts import HttpResponse, redirect, render
+from django.views.generic import View
+
 from .forms import *
+from .models import Customer, Farmer, Location
 
 # Create your views here.
 
 #from .forms import CustomerForm, FarmerForm
 
+# @login_required(login_url="/login")
 class LoginView(View):
     def get(self,request):
         if request.user.is_authenticated:
-            return redirect("login_register:approval")  #For testing purposes. In the future, redirect to Customer/Farmer Dashboard
+            currentUser = request.user
+            if currentUser.is_staff:
+                return redirect("/admin")
+            elif hasattr(currentUser, 'farmer'):
+                if(currentUser.farmer.is_approved):
+                    return redirect("dashboard:farmer")
+                    # return render(request,'dashboard/farmer-dashboard.html')
+                else:
+                    return redirect("login_register:approval")
+            elif hasattr(currentUser, 'customer'):
+                if(currentUser.customer.is_approved):
+                    return redirect("dashboard:customer")
+                    # return render(request,'dashboard/customer-dashboard.html')
+                else:
+                    return redirect("login_register:approval")
         else:
-            return render(request,'login_register/login.html')
+            return render(request, 'login_register/login.html')
+
     def post(self, request):
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = auth.authenticate(username = username, password = password)
-        is_approved = False
         if user is not None:
             auth.login(request, user)
-            if user.is_staff:
+            currentUser = user
+            if currentUser.is_staff:
                 return redirect("/admin")
-            # elif hasattr(user,'farmer'):
-            #     is_approved = user.farmer.is_approved
-            # elif hasattr(user,'customer'):
-            #     is_approved = user.customer.is_approved
-            # if not is_approved:
-            #     return render(request,'login_register/needs-approval.html',{'user': request.user})
-            else:
-                # return render(request,'login_register/needs-approval.html',{'user': request.user}) 
-                return redirect("login_register:approval")
+            elif hasattr(currentUser, 'farmer'):
+                if(currentUser.farmer.is_approved):
+                    return redirect("dashboard:farmer")
+                    # return render(request,'dashboard/farmer-dashboard.html')
+                else:
+                    return redirect("login_register:approval")
+            elif hasattr(currentUser, 'customer'):
+                if(currentUser.customer.is_approved):
+                    return redirect("dashboard:customer")
+                    # return render(request,'dashboard/customer-dashboard.html')
+                else:
+                    return redirect("login_register:approval")
         else:
-            return redirect("login_register:login") # for testing
-
+            return render(request, 'login_register/login.html')
 
 class RegistrationView(View):
     def get(self,request):
         if request.user.is_authenticated:
-            return redirect("login_register:approval") #For testing purposes. In the future, redirect to Customer/Farmer Dashboard
+            currentUser = request.user
+            if currentUser.is_staff:
+                return redirect("/admin")
+            elif hasattr(currentUser, 'farmer'):
+                if(currentUser.farmer.is_approved):
+                    return redirect("dashboard:farmer")
+                else:
+                    return redirect("login_register:approval")
+            elif hasattr(currentUser, 'customer'):
+                if(currentUser.customer.is_approved):
+                    return redirect("dashboard:customer")
+                else:
+                    return redirect("login_register:approval")
         else:
             return render(request,'login_register/registration.html')
-
     def post(self,request):
         if request.is_ajax():
             if request.POST.get('input') == 'contact_number':
@@ -97,11 +127,21 @@ class RegistrationView(View):
 class ApprovalView(View):
     def get(self,request):
         if request.user.is_authenticated:
-            print("AUTHENTICATED")
-            print(request.user)
-            return render(request,'login_register/needs-approval.html',{'user': request.user})
+            currentUser = request.user
+            if currentUser.is_staff:
+                return redirect("/admin")
+            elif hasattr(currentUser, 'farmer'):
+                if(currentUser.farmer.is_approved):
+                    return redirect("dashboard:farmer")
+                else:
+                    return render(request, "login_register/needs-approval.html")
+            elif hasattr(currentUser, 'customer'):
+                if(currentUser.customer.is_approved):
+                    return redirect("dashboard:customer")
+                else:
+                    return render(request, "login_register/needs-approval.html")
         else:
-            return render(request,'login_register/needs-approval.html',{'user': request.user})
+            return redirect("login_register:login")
 
 class LogoutView(View):
     def get(self,request):
