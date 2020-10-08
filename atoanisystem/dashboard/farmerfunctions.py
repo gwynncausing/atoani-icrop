@@ -32,7 +32,7 @@ def get_reserved_orders(farmer):
     ]
     return dummy
 
-def get_finished_orders():
+def get_finished_orders(farmer):
     #get order_pairing related to farmer instance where is_canceled is False and is_completed is True
     dummy = [
         {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
@@ -57,10 +57,14 @@ def reserve_to(farmer,order):
     #success/true
     pass
 
-def cancel_order(order_pair):
+def view_order(order_id):
+    #return order details
+    pass
+
+def cancel_reservation(order_pair):
     #get order instance, set order.is_reserved = False
     #set order_pair.is_canceled = True
-    #
+    #delete from db?
     pass
 
 def complete_order(order_pair):

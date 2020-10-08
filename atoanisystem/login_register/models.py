@@ -133,7 +133,8 @@ class Order(models.Model):
     order_date = models.DateTimeField(default=tz.now, verbose_name="Order date", help_text = "Date in which the order was done")
     weight = models.FloatField()
     is_done = models.BooleanField(help_text="Is the order finished?")
-    is_cancelled = models.BooleanField(help_text="Is the order cancelled?")
+    is_reserved = models.BooleanField(help_text="Is the order reserved?",default=False)
+    is_approved = models.BooleanField(help_text="Is the order approved by AtoANI?",default=False)
     message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")
 
     def is_eligible(self):
@@ -208,6 +209,8 @@ class Order_Pairing(models.Model):
             return getattr(self,attr)
         except:
             return None
+
+    #Add get_status(self) after boss martin pushes his changes to order_pair model
 
     class Meta:
         ordering = ['-expected_time']
