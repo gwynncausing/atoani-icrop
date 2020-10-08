@@ -132,7 +132,7 @@ class Order(models.Model):
     crop = models.ForeignKey(Crop, on_delete=models.CASCADE)
     order_date = models.DateTimeField(default=tz.now, verbose_name="Order date", help_text = "Date in which the order was done")
     weight = models.FloatField()
-    is_done = models.BooleanField(help_text="Is the order finished?")
+    is_done = models.BooleanField(help_text="Is the order finished?",default=False)
     is_reserved = models.BooleanField(help_text="Is the order reserved?",default=False)
     is_approved = models.BooleanField(help_text="Is the order approved by AtoANI?",default=False)
     message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")

@@ -48,9 +48,8 @@ def get_finished_orders(customer):
 
 #https://docs.djangoproject.com/en/3.1/topics/db/transactions/
 #since django works in autocommit mode by default (see in Autocommit section), i assume that there will be no concurrent problems
-def create_order(order_dict):
-    #create forms.py for validating the order
-    #create the order
+def create_order(customer,crop,weight):
+    #Order.objects.create(customer=customer, crop=crop, weight=weight)
     #return true if success else false
     pass
 
