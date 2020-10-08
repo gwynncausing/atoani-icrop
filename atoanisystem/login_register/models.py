@@ -144,6 +144,7 @@ class Order(models.Model):
     crop = models.ForeignKey(Crop, on_delete=models.CASCADE)
     order_date = models.DateTimeField(default=tz.now, verbose_name="Order date", help_text = "Date in which the order was done")
     weight = models.FloatField()
+    land_area_needed = models.FloatField(null=True)
     is_done = models.BooleanField(help_text="Is the order finished?",default=False)
     is_reserved = models.BooleanField(help_text="Is the order reserved?",default=False)
     is_approved = models.BooleanField(help_text="Is the order approved by AtoANI?",default=False)
