@@ -1,7 +1,7 @@
 //ajax urls
-const getIncomingOrdersUrl = '/dashboard/get-farmer-incoming-orders';
-const getReservedOrdersUrl = '/dashboard/get-farmer-reserved-orders';
-const getFinishedOrdersUrl = '/dashboard/get-farmer-finished-orders';
+const getTotalOrdersUrl = '/dashboard/get-customer-total-orders';
+const getReservedOrdersUrl = '/dashboard/get-customer-reserved-orders';
+const getFinishedOrdersUrl = '/dashboard/get-customer-finished-orders';
 
 //data table settings
 const domPlacements = `<
@@ -16,7 +16,7 @@ const domPlacements = `<
                             >   
                         >
                       >`;
-const farmerIncomingTableConfig = {
+const customerTotalTableConfig = {
   paging: false,
   dom: domPlacements,
   columnDefs: [
@@ -25,18 +25,15 @@ const farmerIncomingTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-primary mx-1 btnreserve" onclick="">
-                                Reserve
-                            </button>
                             <button type="button" class="btn-secondary mx-1 opbtn" onclick="">
-                                View
+                                View Order
                             </button>
                             </div>`
     }
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
   ajax: {
-    url: getIncomingOrdersUrl,
+    url: getTotalOrdersUrl,
     dataSrc: "data"
   },
   //matches the data to appropriate column
@@ -52,7 +49,7 @@ const farmerIncomingTableConfig = {
   // },
 };
 
-const farmerFinishedTableConfig = {
+const customerFinishedTableConfig = {
   paging: false,
   dom: domPlacements,
   columnDefs: [
@@ -85,7 +82,7 @@ const farmerFinishedTableConfig = {
   // },
 };
 
-const farmerReservedTableConfig = {
+const customerReservedTableConfig = {
   paging: false,
   dom: domPlacements,
   columnDefs: [
@@ -118,34 +115,33 @@ const farmerReservedTableConfig = {
   // },
 };
 
-
 //Reserve button
-function reserveOrder(orderId) {
-  //Make sure to enclose this to a form where a csrftoken is present
-  //document.getElementById("form-id")
-  const form = null;
-  let formData = new FormData(form);//.append('action','add');
-  formData.append('order_id', orderId);
-  $.ajax({
-    url: '',
-    type: 'post',
-    //data to be passed to django view
-    data: formData,
-    contentType: false,
-    processData: false,
-    //when successful, change the data in table with new data from server
-    success: function (response) {
-      console.log('success');
-    },
-    error: function (response) {
-      console.log('fail');
-    }
-  });
-}
+// function reserveOrder(orderId) {
+//   //Make sure to enclose this to a form where a csrftoken is present
+//   //document.getElementById("form-id")
+//   const form = null;
+//   let formData = new FormData(form);//.append('action','add');
+//   formData.append('order_id', orderId);
+//   $.ajax({
+//     url: '',
+//     type: 'post',
+//     //data to be passed to django view
+//     data: formData,
+//     contentType: false,
+//     processData: false,
+//     //when successful, change the data in table with new data from server
+//     success: function (response) {
+//       console.log('success');
+//     },
+//     error: function (response) {
+//       console.log('fail');
+//     }
+//   });
+// }
 
 //Executing it all
 $(document).ready(function () {
-  $('.farmer-incoming-table').DataTable(farmerIncomingTableConfig);
-  $('.farmer-finished-table').DataTable(farmerFinishedTableConfig);
-  $('.farmer-reserved-table').DataTable(farmerReservedTableConfig);
+  $('.customer-total-table').DataTable(customerTotalTableConfig);
+  $('.customer-finished-table').DataTable(customerFinishedTableConfig);
+  $('.customer-reserved-table').DataTable(customerReservedTableConfig);
 });
