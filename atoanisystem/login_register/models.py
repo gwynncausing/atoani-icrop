@@ -32,6 +32,18 @@ class Months(Enum):
         print((i.name,i.value) for i in cls)
         return((i.name,i.value) for i in cls)
 
+class Status(Enum):
+    Pending = "Pending"
+    Posted = "Posted"
+    Ongoing = "Ongoing"
+    Harvested= "Harvested"
+    Collected = "Collected"
+
+    @classmethod
+    def choices(cls):
+        print((i.name,i.value) for i in cls)
+        return((i.name,i.value) for i in cls)
+
 class Crop(models.Model):
     name = models.CharField(max_length=220)
     is_seasonal = models.BooleanField()
@@ -132,6 +144,8 @@ class Order(models.Model):
     crop = models.ForeignKey(Crop, on_delete=models.CASCADE)
     order_date = models.DateTimeField(default=tz.now, verbose_name="Order date", help_text = "Date in which the order was done")
     weight = models.FloatField()
+    land_area_needed = models.FloatField(null=True)
+    status = models.CharField(max_length=20, choices=Status.choices(), null=True, default="Pending")
     is_done = models.BooleanField(help_text="Is the order finished?")
     is_cancelled = models.BooleanField(help_text="Is the order cancelled?")
     message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")

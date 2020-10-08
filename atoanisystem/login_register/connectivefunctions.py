@@ -17,12 +17,30 @@ def get_order_pairing_farmer(id):
     return df
 
 def get_complete_order_pair_farmer(id):
-    df = get_order_pairing(id)
+    df = get_order_pairing_farmer(id)
     order_ids = [item[1] for item in df.values]
     orders = pd.DataFrame(Order.objects.filter(order_id__in=order_ids).values())
     crops = pd.DataFrame(Crop.objects.filter(id__in=[item[2] for item in orders.values]).values('id','name'))
     final_order = orders.merge(crops, left_on="crop_id",right_on="id").drop(columns=["crop_id","id"])
     return df.merge(final_order, left_on="order_id_id", right_on="order_id").drop(columns=["order_id_id","order_id"])
+
+def get_order_customer(id):
+    df = pd.DataFrame(Order.objects.filter(customer=id).values())
+    df['order_date'] = df['order_date'].apply(convert)
+    return df
+
+def get_complete_order_customer(id):
+    df = get_order_customer(id)
+    crops = pd.DataFrame(Crop.objects.filter(id__in=[item[2] for item in df.values]).values('id','name'))
+    return df.merge(crops, left_on="crop_id", right_on="id").drop(columns=["crop_id","id"])
+
+# general history
+def display_customer_table(id):
+    df = get_complete_order_customer(id).sort_values('order_date',ascending=False).reset_index(drop=True)
+    return df[['order_date','name','weight','land_area_needed','status']].to_dict('records')
+
+# another for w/ location daw??? as 2nd element in display_customer_table
+# another for order_pair for reservation date and status  
 
 def search_pairing(predate,postdate,df):
     return df[(df['accepted_date'] >= predate) & (df['accepted_date'] <= postdate)]
@@ -35,6 +53,21 @@ def count_status(df):
     collected = (df['collected_date'].notna()).sum()
 
     return [accepted, harvested, collected]
+
+# create change status for orders
+# check months for farmers ????
+
+
+
+
+# order related functions
+def calculate_land_area(order):
+    order_crop = Crop.objects.filter(id=order['crop_id']).values('harvest_weight_per_land_area','productivity')[0]
+    land_area = ((order['weight'] * 0.001)/order_crop['harvest_weight_per_land_area']) * 10000
+    land_area = land_area + (land_area * (1-(order_crop['productivity']/100)))
+    Order.objects.get(order_id=order['order_id']).set_value([['land_area_needed',land_area]])
+    # return order_crop
+
 
 def check_obsolete_orders():
     order = pd.DataFrame(Order.objects.all().values())
