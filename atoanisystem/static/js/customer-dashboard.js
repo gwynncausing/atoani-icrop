@@ -25,7 +25,7 @@ const customerTotalTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="">
+                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
                                 View Order
                             </button>
                             </div>`
@@ -58,7 +58,7 @@ const customerFinishedTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="">
+                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
                                 View Order
                             </button>
                       </div>`
@@ -91,7 +91,7 @@ const customerReservedTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="">
+                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
                                 View Order
                             </button>
                             </div>`
@@ -114,6 +114,11 @@ const customerReservedTableConfig = {
   //     $(row).attr('data-id', data.id);
   // },
 };
+
+function openModal(){
+  $("#modal-customer").modal("show")
+}
+
 
 //Reserve button
 // function reserveOrder(orderId) {

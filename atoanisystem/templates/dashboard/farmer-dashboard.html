@@ -86,7 +86,7 @@
                     </a>
                 </li>
                 <li class="nav-item  active pl-0 pr-0 pt-0 orders col-md-4 col-sm-6 col-12">
-                    <a class="nav-link h-100" id="nav-finished-tab"  data-toggle="tab" href="#finished-table" role="tab" aria-controls="finished-table" aria-selected="false">
+                    <a class="nav-link h-100" id="nav-finished-tab" data-toggle="tab" href="#finished-table" role="tab" aria-controls="finished-table" aria-selected="false">
                         <div class="box col-12 pl-0 pr-0 h-100">
                             <div class="finished-orders pl-3 pt-2 pb-2" >
                                 <i>Finished Orders</i>
@@ -115,7 +115,7 @@
         <div class="tab-content col-12 mt-3 pb-3 ml-auto mr-auto" id="nav-tabContent">
 
             <!-- Reserved Table -->
-            <div id="reserved-table" class="order-table row mt-2 mb-5 tab-pane active fade w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-reserved-tab">
+            <div id="reserved-table" class="order-table row mt-2 mb-5 tab-pane fade w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-reserved-tab">
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
                     <i>Reserved Orders</i>  
                 </div>
@@ -147,7 +147,7 @@
             <!-- End Reserved Table -->
 
             <!-- Finished Table -->
-            <div id="finished-table" class="order-table row mt-2 mb-5 tab-pane fade active w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-finished-tab">
+            <div id="finished-table" class="order-table row mt-2 mb-5 tab-pane fade w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-finished-tab">
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
                     <i>Finished Orders</i>  
                 </div>
@@ -183,7 +183,7 @@
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
                     <i>Incoming Orders</i>  
                 </div>
-                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2 pb-5">
+                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2 pb-5" style="width: 95%">
                     <!-- Template Table Note: add these classes to other table -> mr-auto ml-auto table-->
                     <table class="farmer-incoming-table mr-auto ml-auto table">
                         <thead>
@@ -212,14 +212,6 @@
     </div>
 </div>
 
-
-<!-- Button trigger modal -->
-<div>
-    <!--Sample Button-->
-    <!-- Remove lang ni master.. for testing ra ni if work siya-->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-farmer">
-        Launch Farmer's View
-    </button>
 
     <!-- Modal Order -->
     <div class="modal-farmer modal fade" id="modal-farmer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -273,7 +265,6 @@
             </div>
         </div>
     </div>    
-</div>
         
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

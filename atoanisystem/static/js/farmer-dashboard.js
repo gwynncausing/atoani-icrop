@@ -16,6 +16,7 @@ const domPlacements = `<
                             >   
                         >
                       >`;
+
 const farmerIncomingTableConfig = {
   paging: false,
   dom: domPlacements,
@@ -28,7 +29,7 @@ const farmerIncomingTableConfig = {
                             <button type="button" class="btn-primary mx-1 btnreserve" onclick="">
                                 Reserve
                             </button>
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="">
+                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
                                 View
                             </button>
                             </div>`
@@ -61,7 +62,7 @@ const farmerFinishedTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="">
+                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
                                 View Order
                             </button>
                       </div>`
@@ -94,7 +95,7 @@ const farmerReservedTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="">
+                            <button type="button" id=modal-farmer-btn class="btn-secondary mx-1 opbtn" onclick="openModal()">
                                 View Order
                             </button>
                             </div>`
@@ -119,6 +120,10 @@ const farmerReservedTableConfig = {
 };
 
 
+function openModal(){
+  $("#modal-farmer").modal("show")
+}
+
 //Reserve button
 function reserveOrder(orderId) {
   //Make sure to enclose this to a form where a csrftoken is present
@@ -142,6 +147,8 @@ function reserveOrder(orderId) {
     }
   });
 }
+
+
 
 //Executing it all
 $(document).ready(function () {
