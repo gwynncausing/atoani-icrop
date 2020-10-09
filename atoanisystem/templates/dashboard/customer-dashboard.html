@@ -79,7 +79,7 @@
                     <a class="nav-link h-100"  id="nav-reserved-tab" data-toggle="tab" href="#reserved-table" role="tab" aria-controls="reserved-table" aria-selected="false">
                         <div class="box col-12 pl-0 pr-0 h-100">
                             <div class="reserved-orders pl-3 pt-2 pb-2">
-                                <i>Pending Orders</i>
+                                <i>Reserved Orders</i>
                             </div>
                             <div id="reserved-orders" class="order-type d-flex justify-content-center align-items-center">
                                 8
@@ -120,17 +120,18 @@
             <!-- Reserved Table -->
             <div id="reserved-table" class="order-table row mt-2 mb-5 tab-pane fade  w-90 mr-auto ml-auto">
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
-                    <i>Pending Orders</i>  
+                    <i>Reserved Orders</i>  
                 </div>
                 <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2"   role="tabpanel" aria-labelledby="nav-reserved-tab">
                     <!-- Insert here the Reserved Table -->
                     <table class="customer-reserved-table mr-auto ml-auto table">
                         <thead>
                             <tr>
-                                <th>Crop Type</th>
+                                <th>Date Ordered</th>
+                                <th>Location</th>
+                                <th>Name</th>
                                 <th>Demand</th>
-                                <th>Land Area Needed</th>
-                                <th>Order Location</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -160,10 +161,11 @@
                     <table class="customer-finished-table mr-auto ml-auto table">
                         <thead>
                             <tr>
-                                <th>Crop Type</th>
+                                <th>Date Ordered</th>
+                                <th>Location</th>
+                                <th>Name</th>
                                 <th>Demand</th>
-                                <th>Land Area Needed</th>
-                                <th>Order Location</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -195,10 +197,10 @@
                     <table class="customer-total-table mr-auto ml-auto table">
                         <thead>
                             <tr>
-                                <th>Crop Type</th>
+                                <th>Date Ordered</th>
+                                <th>Crop Name</th>
                                 <th>Demand</th>
-                                <th>Land Area Needed</th>
-                                <th>Order Location</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>

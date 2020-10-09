@@ -41,10 +41,10 @@ const farmerIncomingTableConfig = {
   },
   //matches the data to appropriate column
   columns: [
-    { "data": 'crop_type' },
-    { "data": 'demand' },
-    { "data": 'land_area' },
-    { "data": 'order_location' },
+    { "data": 'name' },
+    { "data": 'weight' },
+    { "data": 'land_area_needed' },
+    { "data": 'location_id' },
   ],
   //Adds data-id attribute to each row
   // createdRow: function(row, data, dataIndex) {
@@ -74,10 +74,10 @@ const farmerFinishedTableConfig = {
   },
   //matches the data to appropriate column
   columns: [
-    { "data": 'crop_type' },
-    { "data": 'demand' },
-    { "data": 'land_area' },
-    { "data": 'order_location' },
+    { "data": 'accepted_date' },
+    { "data": 'name' },
+    { "data": 'weight' },
+    { "data": 'harvested_date' },
   ],
   //Adds data-id attribute to each row
   // createdRow: function(row, data, dataIndex) {
@@ -107,10 +107,10 @@ const farmerReservedTableConfig = {
   },
   //matches the data to appropriate column
   columns: [
-    { "data": 'crop_type' },
-    { "data": 'demand' },
-    { "data": 'land_area' },
-    { "data": 'order_location' },
+    { "data": 'accepted_date' },
+    { "data": 'name' },
+    { "data": 'weight' },
+    { "data": 'status' },
   ],
   //Adds data-id attribute to each row
   // createdRow: function(row, data, dataIndex) {

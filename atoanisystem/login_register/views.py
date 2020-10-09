@@ -114,8 +114,11 @@ class RegistrationView(View):
         if account_type == 'Customer':
             form = CustomerForm(request.POST)
         if form.is_valid() and location_form.is_valid():
+            #check if location exists
             location = location_form.save(commit=False)
-            location.name = str(location.province)+','+str(location.city)+','+str(location.brgy)+','+str(location.street)
+            location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
+            if location.street:
+                location.name=str(location.street)+', '+location.name
             location.save()
             new_user = form.save(commit=False)
             new_user.name = user

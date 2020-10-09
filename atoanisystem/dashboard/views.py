@@ -35,7 +35,7 @@ class FarmerIncomingOrdersView(View):
     def get(self,request):
         if request.is_ajax():
             #does not include deleted customer
-            arr = ff.get_incoming_orders()
+            arr = ff.get_incoming_orders(request.user)
             json = {'data':arr}
             return JsonResponse(json)
         return render(request,'dashboard/farmer-dashboard.html')

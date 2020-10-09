@@ -1,50 +1,41 @@
-#get the list of orders
-def get_total_orders(customer):
-    dummy = [
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-    ]
-    return dummy
+from login_register.models import *
+from login_register import connectivefunctions as dashboard_utility
 
-def get_reserved_orders(customer):
-    #get order_pairing related to customer instance
-    dummy = [
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-    ]
-    return dummy
+#constants
 
-def get_finished_orders(customer):
-    #get order_pairing related to customer instance
-    dummy = [
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'rice','demand':'123 kg','land_area':'5112 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'lalala','demand':'516 kg','land_area':'55 sqm','order_location':'Argao,Cebu'},
-        {'crop_type':'corn','demand':'45 kg','land_area':'123 sqm','order_location':'Argao,Cebu'},
-    ]
-    return dummy
+
+#helper functions
+def get_location_str(location_id):
+    location = Location.objects.get(id=location_id)
+    return str(location)
+
+def format_location(orders):
+    for order in orders:
+        order['location_id'] = get_location_str(order['location_id'])
+
+def get_total_orders(user):
+    df = dashboard_utility.datatable_customer(user.customer)
+    print("LENGTH OF DF ",len(df))
+    orders = dashboard_utility.display_customer_table(df)
+    return orders
+
+def get_reserved_orders(user):
+    orders = get_total_orders(user)
+    reserved_orders = []
+    for order in orders:
+        if order['status'] == 'Ongoing':
+            reserved_orders.append(order)
+    format_location(reserved_orders)
+    return reserved_orders
+
+def get_finished_orders(user):
+    orders = get_total_orders(user)
+    finished_orders = []
+    for order in orders:
+        if order['status'] == 'Collected':
+            finished_orders.append(order)
+    format_location(finished_orders)
+    return finished_orders
 
 #https://docs.djangoproject.com/en/3.1/topics/db/transactions/
 #since django works in autocommit mode by default (see in Autocommit section), i assume that there will be no concurrent problems
