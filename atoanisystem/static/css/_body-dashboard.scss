@@ -17,6 +17,16 @@ body{
         font-weight: bold;
     }
 
+    .order-btn{
+        position: absolute;
+        right: 2rem;
+        top: -1.4rem;
+        background: $secondary-color;
+        font-weight: bold;  
+        width: 8rem;     
+        color: $white-color;
+    }
+
     .orders{
         height: 280px;
         font-weight: bold;

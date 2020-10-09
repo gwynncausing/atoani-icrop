@@ -13,10 +13,7 @@
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- Customized CSS -->
-    <link rel="stylesheet" href="{% static 'css/approval.css' %}">
-
-    <link rel="stylesheet" href="{% static 'css/customer-dashboard.css' %}">
+    <link rel="stylesheet" href="{% static '/css/customer-dashboard.css' %}">
 
 
      <!-- Datatables CSS -->
@@ -71,9 +68,10 @@
     </nav>
 
     <div class="body-dashoard container-fluid mt-5 mb-3" style="">
-        <span class="pr-3 pl-3 title">Dashboard</span>
+        <span class="pr-1 pl-1 title">Dashboard</span>
+        <button class="btn pr-3 pl-3 order-btn">Add Order</button>
 
-        <div class="upper container-fluid mt-3 mb-4">
+        <div class="upper container-fluid mt-5 mb-4">
             <ul class="nav nav-pills nav-tabs row pl-0 pr-0" id="nav-tab" role="tablist">
                 <li class="nav-item active pl-0 pr-0 pt-0 orders col-md-4 col-sm-6 col-12">
                     <a class="nav-link h-100"  id="nav-reserved-tab" data-toggle="tab" href="#reserved-table" role="tab" aria-controls="reserved-table" aria-selected="false">
@@ -124,7 +122,7 @@
                 </div>
                 <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2"   role="tabpanel" aria-labelledby="nav-reserved-tab">
                     <!-- Insert here the Reserved Table -->
-                    <table class="customer-reserved-table mr-auto ml-auto table">
+                    <table class="table customer-reserved-table mr-auto ml-auto"  style="width: 95%">
                         <thead>
                             <tr>
                                 <th>Crop Type</th>
@@ -151,13 +149,13 @@
 
 
             <!-- Finished Table -->
-            <div id="finished-table" class="order-table row mt-2 mb-5 tab-pane fade  w-90 mr-auto ml-auto">
+            <div id="finished-table" class="order-table row mt-2 mb-5 tab-pane fade  w-90 mr-auto ml-auto"  >
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
                     <i>Finished Orders</i>  
                 </div>
-                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2"   role="tabpanel" aria-labelledby="nav-reserved-tab">
+                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2" role="tabpanel" aria-labelledby="nav-reserved-tab">
                     <!-- Insert here the Reserved Table -->
-                    <table class="customer-finished-table mr-auto ml-auto table">
+                    <table class="table customer-finished-table mr-auto ml-auto"  style="width: 95%">
                         <thead>
                             <tr>
                                 <th>Crop Type</th>
@@ -188,11 +186,11 @@
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
                     <i>Total Orders</i>  
                 </div>
-                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2 pb-5">
+                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2 pb-5" style="width: 95%">
                     <!-- Template Table 
                         Note: add these classes to other table -> mr-auto ml-auto table
                     -->
-                    <table class="customer-total-table mr-auto ml-auto table">
+                    <table class="table customer-total-table mr-auto ml-auto">
                         <thead>
                             <tr>
                                 <th>Crop Type</th>
@@ -219,9 +217,86 @@
         </div>
     </div>
 </div>
+
+<!-- Button trigger modal -->
+<div>
+    <!--Sample Button-->
+    <!-- Remove lang ni master.. for testing ra ni if work siya-->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-customer">
+        Launch Customer's View
+    </button>
+
+    <!-- Modal Order -->
+    <div class="modal-customer modal fade" id="modal-customer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document"    >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row d-flex justify-content-center mt-3 pl-5 pr-5" style="font-size: 16px">
+                        <div class="col-md-6 col-12 row">
+                            <div class="label col-6 text-right pt-1 pb-1">Date Ordered:</div>
+                            <div class="col-6 pt-1 pb-1">January 1, 2021</div>
+                            <div class="label col-6 text-right pt-1 pb-1">Date Approved:</div>
+                            <div class="col-6 pt-1 pb-1">January 1, 2021</div>
+                            <div class="label col-6 text-right pt-1 pb-1">Date Reserved:</div>
+                            <div class="col-6 pt-1 pb-1">-</div>
+                        </div>
+                        <div class="col-md-6 col-12 row mt-md-0 mt-3">
+                            <div class="label col-6 text-right">Status:</div>
+                            <div class="col-6">Waiting</div>
+                            <div class="label col-6  text-right">Order Number:</div>
+                            <div class="col-6">222</div>
+                            <div class="col-6 "></div>
+                            <div class="col-6">-</div>
+                        </div>
+                        <div class="col-md-6 col-12 row mt-4">
+                            <div class="label col-6 text-right pt-1">Crop Name:</div>
+                            <div class="col-6 pt-1">Potato</div>
+                            <div class="label col-6  text-right pt-1 pb-1">Demand:</div>
+                            <div class="col-6 pt-1 pb-1">45 kg</div>
+                            <div class="label col-6  text-right pt-1 pb-1">Location:</div>
+                            <div class="col-6 pt-1 pb-1">Argao, Cebu</div>
+                        </div>
+                        <div class="col-md-6 col-12 row mt-4">
+                        </div>
+                    </div>
+                    <div class="row pt-2 pb-2 mt-3 report-form" style="display: none;">
+                        <form id="form-order-details-report" class="col-11 ml-auto mr-auto bg-white" method="POST" novalidate autocomplete="off">
+                            {% csrf_token %}
+
+                            <div class="input-group pt-3">
+                                <input class="form-control" type="text" name="subject"  maxlength="16" required placeholder="What is your problem?">
+                                <div class="invalid-feedback">
+                                    Please state your problem.
+                                </div>
+                            </div>
+                        
+                            <div class="input-groupmt pt-3">
+                                <textarea class="form-control " rows="5" placeholder="Description*" maxlength="150" required></textarea>
+                                <div class="invalid-feedback">
+                                    Please state the description of the problem.
+                                </div>
+                            </div>                                
+
+                            <input type="submit" class="btn btn-danger mt-3 mb-3 float-right report-submit-btn">
+                        </form>
+                    </div>
+                </div>
+                <div class="pt-3 pb-3 pl-5 pr-5 d-flex justify-content-between">
+                    <input type="button" class="btn btn-danger report-btn" value="Report Problem">
+                    <button type="button" class="btn ok-btn" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
     
             
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -234,6 +309,9 @@
     <!-- Datatables JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
     <script src="{% static '/js/customer-dashboard.js' %}"></script>
+    
+    <!-- For modal transition and validate form report -->
+    <script src="{% static '/js/form-customer-report.js' %}"></script>
    
 </body>
 

@@ -121,7 +121,7 @@
                 </div>
                 <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2 pb-5">
                     <!-- Insert here the Reserved Table -->
-                    <table class="farmer-reserved-table mr-auto ml-auto table">
+                    <table class="farmer-reserved-table mr-auto ml-auto table" style="width: 95%">
                         <thead>
                             <tr>
                                 <th>Crop Type</th>
@@ -153,7 +153,7 @@
                 </div>
                 <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2 pb-5">
                     <!-- Insert here the Finished Table -->
-                    <table class="farmer-finished-table mr-auto ml-auto table">
+                    <table class="farmer-finished-table mr-auto ml-auto table" style="width: 95%">
                         <thead>
                             <tr>
                                 <th>Crop Type</th>
@@ -211,7 +211,69 @@
         </div>
     </div>
 </div>
-    
+
+
+<!-- Button trigger modal -->
+<div>
+    <!--Sample Button-->
+    <!-- Remove lang ni master.. for testing ra ni if work siya-->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-farmer">
+        Launch Farmer's View
+    </button>
+
+    <!-- Modal Order -->
+    <div class="modal-farmer modal fade" id="modal-farmer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document"    >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body pb-2">
+                    <div class="row d-flex justify-content-center mt-3 pb-2" style="font-size: 16px">
+                        <div class="col-md-6 col-12 row">
+                            <div class="label col-6 text-right pt-1 pb-1">Date Ordered:</div>
+                            <div class="col-6 pt-1 pb-1">January 1, 2021</div>
+                            <div class="label col-6 text-right pt-1 pb-1">Date Approved:</div>
+                            <div class="col-6 pt-1 pb-1">January 1, 2021</div>
+                            <div class="label col-6 text-right pt-1 pb-1">Date Reserved:</div>
+                            <div class="col-6 pt-1 pb-1">-</div>
+                        </div>
+                        <div class="col-md-6 col-12 row mt-md-0 mt-3">
+                            <div class="label col-6 text-right">Status:</div>
+                            <div class="col-6">Waiting</div>
+                            <div class="label col-6  text-right">Order Number:</div>
+                            <div class="col-6">222</div>
+                            <div class="col-6 "></div>
+                            <div class="col-6">-</div>
+                        </div>
+                        <div class="col-md-6 col-12 row mt-4">
+                            <div class="label col-6 text-right pt-1">Crop Name:</div>
+                            <div class="col-6 pt-1">Potato</div>
+                            <div class="label col-6  text-right pt-1 pb-1">Demand:</div>
+                            <div class="col-6 pt-1 pb-1">45 kg</div>
+                            <div class="label col-6  text-right pt-1 pb-1">Location:</div>
+                            <div class="col-6 pt-1 pb-1">Argao, Cebu</div>
+                        </div>
+                        <div class="col-md-6 col-12 row mt-4">
+                            <div class="label col-6  text-right">Land Area Needed:</div>
+                            <div class="col-6">53.33 sqm</div>
+                            <div class="label col-6  text-right" >Estimated Days to Finish:</div>
+                            <div class="col-6">45-120 days</div>
+                            <div class="col-6 "></div>
+                            <div class="col-6">-</div>
+                    </div>
+                </div>
+                <div class="modal-footer  pt-2 pb-2">
+                    <button type="button" class="btn reserved-btn">Reserve</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
         
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
