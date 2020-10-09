@@ -12,7 +12,7 @@ from . import customerfunctions as cf
 #               Farmer related views                    #
 #########################################################
 class FarmerDashboardView(View):
-    def get(self,request):
+    def get(self,request):  
         if request.user.is_authenticated:
             currentUser = request.user
             if currentUser.is_staff:
@@ -107,15 +107,6 @@ class CustomerFinishedOrdersView(View):
             json = {'data':arr}
             return JsonResponse(json)
         return render(request,'dashboard/customer-dashboard.html')
-
-
-
-
-
-
-
-
-
 
 class TestView(View):
     def get(self,request):
