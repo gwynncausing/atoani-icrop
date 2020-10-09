@@ -38,10 +38,10 @@ const customerTotalTableConfig = {
   },
   //matches the data to appropriate column
   columns: [
-    { "data": 'crop_type' },
-    { "data": 'demand' },
-    { "data": 'land_area' },
-    { "data": 'order_location' },
+    { "data": 'order_date' },
+    { "data": 'name' },
+    { "data": 'weight' },
+    { "data": 'status' },
   ],
   //Adds data-id attribute to each row
   // createdRow: function(row, data, dataIndex) {
@@ -54,8 +54,9 @@ const customerFinishedTableConfig = {
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
+    { orderable: false, "targets": 5 },
     {
-      targets: 4,
+      targets: 5,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
                             <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
@@ -71,10 +72,11 @@ const customerFinishedTableConfig = {
   },
   //matches the data to appropriate column
   columns: [
-    { "data": 'crop_type' },
-    { "data": 'demand' },
-    { "data": 'land_area' },
-    { "data": 'order_location' },
+    { "data": 'order_date' },
+    { "data": 'location_id'},
+    { "data": 'name' },
+    { "data": 'weight' },
+    { "data": 'status' },
   ],
   //Adds data-id attribute to each row
   // createdRow: function(row, data, dataIndex) {
@@ -87,8 +89,9 @@ const customerReservedTableConfig = {
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
+    { orderable: false, "targets": 5 },
     {
-      targets: 4,
+      targets: 5,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
                             <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
@@ -104,10 +107,11 @@ const customerReservedTableConfig = {
   },
   //matches the data to appropriate column
   columns: [
-    { "data": 'crop_type' },
-    { "data": 'demand' },
-    { "data": 'land_area' },
-    { "data": 'order_location' },
+    { "data": 'order_date' },
+    { "data": 'location_id'},
+    { "data": 'name' },
+    { "data": 'weight' },
+    { "data": 'status' },
   ],
   //Adds data-id attribute to each row
   // createdRow: function(row, data, dataIndex) {
