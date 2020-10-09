@@ -176,32 +176,67 @@
             </ul>
         </div>
 
-        <div class="tab-content col-12 mt-3 pb-3 ml-auto mr-auto" id="nav-tabContent">
+        <div class="tab-content col-12 mt-3 pb-3 ml-auto mr-auto" id="nav-tabContent" role="tabpanel" aria-labelledby="nav-reserved-tab">
 
             <!-- Reserved Table -->
             <div id="reserved-table" class="order-table row mt-2 mb-5 tab-pane fade  w-90 mr-auto ml-auto">
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
                     <i>Reserved Orders</i>  
                 </div>
-                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2"   role="tabpanel" aria-labelledby="nav-reserved-tab">
+                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2">
                     <!-- Insert here the Reserved Table -->
-                    Reserved Table Here
-
+                    <table class="farmer-reserved-table mr-auto ml-auto table">
+                        <thead>
+                            <tr>
+                                <th>Crop Type</th>
+                                <th>Demand</th>
+                                <th>Land Area Needed</th>
+                                <th>Order Location</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <!-- <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>    
+                        </tfoot> -->
+                    </table>
                     <!-- End Here -->
                 </div>
             </div>
             <!-- End Reserved Table -->
 
-
             <!-- Finished Table -->
-            <div id="finished-table" class="order-table row mt-2 mb-5 tab-pane fade  w-90 mr-auto ml-auto">
+            <div id="finished-table" class="order-table row mt-2 mb-5 tab-pane fade  w-90 mr-auto ml-auto"  role="tabpanel" aria-labelledby="nav-finished-tab">
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
-                    <i>Incoming Orders</i>  
+                    <i>Finished Orders</i>  
                 </div>
-                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2"   role="tabpanel" aria-labelledby="nav-reserved-tab">
-                    <!-- Insert here the Reserved Table -->
-                    Incoming Table Here
-
+                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2">
+                    <!-- Insert here the Finished Table -->
+                    <table class="farmer-finished-table mr-auto ml-auto table">
+                        <thead>
+                            <tr>
+                                <th>Crop Type</th>
+                                <th>Demand</th>
+                                <th>Land Area Needed</th>
+                                <th>Order Location</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <!-- <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>    
+                        </tfoot> -->
+                    </table>
                     <!-- End Here -->
                 </div>
             </div>
@@ -216,7 +251,7 @@
                     <!-- Template Table 
                         Note: add these classes to other table -> mr-auto ml-auto table
                     -->
-                    <table class="farmer-table mr-auto ml-auto table">
+                    <table class="farmer-incoming-table mr-auto ml-auto table">
                         <thead>
                             <tr>
                                 <th>Crop Type</th>
@@ -226,7 +261,7 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tfoot>
+                        <!-- <tfoot>
                             <tr>
                                 <th></th>
                                 <th></th>
@@ -234,20 +269,17 @@
                                 <th></th>
                                 <th></th>
                             </tr>    
-                        </tfoot>
-                    </div>
+                        </tfoot> -->
+                    </table>
                 </div>
             </div>
             <!-- End Incoming Table -->
-
         </div>
     </div>
 </div>
 
     
-            
-
-
+        
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">

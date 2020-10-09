@@ -171,11 +171,32 @@ body {
   border: 0;
 }
 
+.body-dashoard .opbtn {
+  background-color: Transparent !important;
+  background-repeat: no-repeat;
+  border: none !important;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: #23A517;
+}
+
+.body-dashoard .btnreserve {
+  background-color: Transparent !important;
+  background-repeat: no-repeat;
+  border: none !important;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: #001AFF;
+}
+
 .body-dashoard table {
   width: 95%;
   border-radius: 0.5rem;
   color: #0b3531;
   background-color: #fff;
+  border-bottom: 1px solid #0b3531;
 }
 
 .body-dashoard table thead {
@@ -196,6 +217,12 @@ body {
 
 .body-dashoard table thead th:last-child {
   border-top-right-radius: 0.5rem;
+}
+
+.body-dashoard table tbody td {
+  border-left: 1px solid #0b3531;
+  border-right: 1px solid #0b3531;
+  border-top: none !important;
 }
 
 .body-dashoard table tfoot td:not(:last-child), .body-dashoard table tfoot th:not(:last-child) {

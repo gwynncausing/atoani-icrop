@@ -89,7 +89,6 @@ body{
         background: black;
     }
 
-
     .incoming-orders{
         background-color: #D2467B;
         color: #fff;
@@ -123,19 +122,41 @@ body{
     }
 
     .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active{
-       padding: 1rem;
-       
+       padding: 1rem;  
     }
 
     .nav-tabs{
         border: 0;
     }
 
+    .opbtn{
+        background-color: Transparent!important;
+        background-repeat:no-repeat;
+        border: none!important;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;  
+        color: #23A517;
+    }
+
+    .btnreserve{
+        background-color: Transparent!important;
+        background-repeat:no-repeat;
+        border: none!important;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;  
+        color: #001AFF;
+    }
+
+
     table {
         width: 95%; 
         border-radius: 0.5rem;
         color: $tertiary-color;
         background-color: #fff;
+        border-bottom: 1px solid $tertiary-color;
+
 
         thead{
             color: $white-color;   
@@ -157,6 +178,12 @@ body{
             border-top-right-radius: 0.5rem;
         }
 
+        tbody td {
+            border-left: 1px solid $tertiary-color;
+            border-right: 1px solid $tertiary-color;
+            border-top: none!important;
+        }
+
 
         tfoot td:not(:last-child), tfoot th:not(:last-child) {
             border-right: 1px solid $tertiary-color
@@ -167,6 +194,7 @@ body{
             text-align: center;
             font-weight: normal;
         }
+        
     }
 
 

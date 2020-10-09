@@ -1,7 +1,7 @@
 # step 2: creating classes
 
 #migrate every time you change something
-
+# create mutations for status
 # change name in katong users py
 import uuid
 from django.db import models
@@ -11,6 +11,8 @@ from enum import Enum
 from django.utils import timezone as tz
 from datetime import datetime as dt
 # Create your models here
+
+
 
 # https://stackoverflow.com/questions/54802616/how-to-use-enums-as-a-choice-field-in-django-model
 class Months(Enum):
@@ -144,6 +146,7 @@ class Order(models.Model):
     crop = models.ForeignKey(Crop, on_delete=models.CASCADE)
     order_date = models.DateTimeField(default=tz.now, verbose_name="Order date", help_text = "Date in which the order was done")
     weight = models.FloatField()
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
     land_area_needed = models.FloatField(null=True)
     is_done = models.BooleanField(help_text="Is the order finished?",default=False)
     is_reserved = models.BooleanField(help_text="Is the order reserved?",default=False)
@@ -210,7 +213,7 @@ class Order_Pairing(models.Model):
     order_id = models.OneToOneField(Order, on_delete=models.CASCADE)
     farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE)
     expected_time = models.DateTimeField(blank=True,null=True)
-    accepted_date = models.DateTimeField(blank=True,null=True)
+    accepted_date = models.DateTimeField(blank=True,null=True, default=tz.now)
     harvested_date = models.DateTimeField(blank=True,null=True)
     collected_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
 
