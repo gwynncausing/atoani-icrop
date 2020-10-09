@@ -114,18 +114,31 @@
                             <div class="col-md-6 col-12 row mt-4">
                             </div>
                         </div>
-                        <div class="row pt-2 pb-2 mt-3">
-                            <form class="col-11 ml-auto mr-auto bg-white">
+                        <div class="row pt-2 pb-2 mt-3 report-form" style="display: none;">
+                            <form id="form-order-details-report" class="col-11 ml-auto mr-auto bg-white " novalidate autocomplete="off">
                                 {% csrf_token %}
-                                <input class="form-control mt-3" type="text" name="username" id="username" placeholder="What's the problem?*" maxlength="16" required>
-                                <textarea class="form-control  mt-3" rows="5" placeholder="Description*" required></textarea>
-                                <button type="button" class="btn btn-danger report-btn mt-3 mb-3 float-right submit-btn">Submit</button>
+
+                                <div class="input-group pt-3">
+                                    <input class="form-control" type="text" name="subject"  maxlength="16" required placeholder="What is your problem?">
+                                    <div class="invalid-feedback">
+                                        Please state your problem.
+                                    </div>
+                                </div>
+                            
+                                <div class="input-groupmt pt-3">
+                                    <textarea class="form-control " rows="5" placeholder="Description*" maxlength="150" required></textarea>
+                                    <div class="invalid-feedback">
+                                        Please state the description of the problem.
+                                    </div>
+                                </div>                                
+
+                                <input type="submit" class="btn btn-danger mt-3 mb-3 float-right report-submit-btn">
                             </form>
                         </div>
                     </div>
                     <div class="pt-3 pb-3 pl-5 pr-5 d-flex justify-content-between">
-                        <button type="button" class="btn btn-danger report-btn">Report Problem</button>
-                        <button type="button" class="btn ok-btn">OK</button>
+                        <input type="button" class="btn btn-danger report-btn" value="Report Problem">
+                        <button type="button" class="btn ok-btn" data-dismiss="modal">OK</button>
                     </div>
                 </div>
             </div>
@@ -298,7 +311,11 @@
     <!-- Datatables JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
     
+    <script type="text/javascript" src="{% static '/js/form-customer-report.js' %}"></script>
     <script>
+
+
+
         $(document).ready( function () {
             const farmerTableConfig = {
                 paging: false,
@@ -347,7 +364,10 @@
                 // },
             }
             $('.farmer-table').DataTable(farmerTableConfig);
+
         }); 
+
+
     </script>
 
 

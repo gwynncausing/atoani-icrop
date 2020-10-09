@@ -27,6 +27,8 @@ def checkLogin(self, request, currentUser):
 
 class CustomerDashboardView(View):
     def get(self,request):
+        return render(request,'dashboard/customer-dashboard.html')
+        
         if request.user.is_authenticated:
             currentUser = request.user
             if currentUser.is_staff:
