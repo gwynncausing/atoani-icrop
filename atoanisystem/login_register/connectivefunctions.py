@@ -10,6 +10,11 @@ datatable = datatable_farmer(<farmer id>) or datatable_customer(<customer id>)
 
 to generate datatable dictionary for dashboard datatables
 datatable_dictionary = display_farmer_table(datatable) or display_customer_table(datatable)
+
+ALGORITHM FUNCTION (NOT FINAL)
+
+to generate a list of top 10 (or sa pilay maabot) recommendations
+matching_algorithm(<farmer land_area>)
 '''
 
 # insert part of the algorithm here involving land_area calculation
@@ -46,7 +51,7 @@ def display_farmer_table(df):
         return df
     else:
         df = df.sort_values('accepted_date',ascending=False).reset_index(drop=True)
-        return df[['order_pair_id','accepted_date','name','weight','land_area_needed','location_id','harvested_date','status']].to_dict('records')
+        return df[['order_id','order_pair_id','accepted_date','name','weight','land_area_needed','location_id','harvested_date','status']].to_dict('records')
 
 # get customer's orders
 def get_order_customer(id):
@@ -88,7 +93,7 @@ def display_customer_table(df):
         return None
     else:
         df = df.sort_values('order_date',ascending=False).reset_index(drop=True)
-        return df[['order_pair_id','order_date','location_id','name','weight','status']].to_dict('records')
+        return df[['order_id','order_pair_id','order_date','location_id','name','weight','status']].to_dict('records')
 
 # search a database based on date
 def search_pairing(predate,postdate,df):
@@ -108,6 +113,19 @@ def count_status(df):
 # create change status for orders
 # check months for farmers ????
 # order related functions
+
+def update_land_area():
+    for x in Order.objects.all().values():
+        calculate_land_area(x)
+
+
+# still a pseudo-algorithm
+def matching_algorithm(land_size):
+    pairs = Order_Pairing.objects.all().values('order_id_id')
+    available_order = pd.DataFrame(Order.objects.exclude(order_id__in = [val['order_id_id'] for val in pairs]).values())
+    available_order = available_order[available_order['land_area_needed'] <= land_size].sort_values('land_area_needed',ascending=False)
+    return available_order[:10].to_dict('records')
+
 
 def calculate_land_area(order):
     order_crop = Crop.objects.filter(id=order['crop_id']).values('harvest_weight_per_land_area','productivity')[0]
