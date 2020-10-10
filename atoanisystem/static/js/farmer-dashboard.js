@@ -3,6 +3,9 @@ const getIncomingOrdersUrl = '/dashboard/get-farmer-incoming-orders';
 const getReservedOrdersUrl = '/dashboard/get-farmer-reserved-orders';
 const getFinishedOrdersUrl = '/dashboard/get-farmer-finished-orders';
 
+let data = null;
+
+
 //data table settings
 const domPlacements = `<
                         <"d-flex float-left ml-5 mb-3 mt-4"
@@ -17,6 +20,78 @@ const domPlacements = `<
                         >
                       >`;
 
+const farmerFinishedTableConfig = {
+  paging: false,
+  dom: domPlacements,
+  columnDefs: [
+    { orderable: false, "targets": 4 },
+    {
+      targets: 4,
+      data: null,
+      defaultContent: `<div class="button-container d-flex justify-content-center">
+                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="viewOrders(this)">
+                                View Order
+                            </button>
+                      </div>`
+    }
+  ],
+  //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
+  ajax: {
+    url: getFinishedOrdersUrl,
+    data: "data",
+  },
+  //matches the data to appropriate column
+  columns: [
+    { "data": 'accepted_date' },
+    { "data": 'name' },
+    { "data": 'weight' },
+    { "data": 'harvested_date' },
+  ],
+  createdRow: function(row, data, dataIndex) {
+    $(row).attr('order-id', data.order_id);
+  },
+
+  initComplete: function(){
+    data = incomingTable.ajax.json().data;
+  }
+};
+
+const farmerReservedTableConfig = {
+  paging: false,
+  dom: domPlacements,
+  columnDefs: [
+    { orderable: false, "targets": 4 },
+    {
+      targets: 4,
+      data: null,
+      defaultContent: `<div class="button-container d-flex justify-content-center">
+                            <button type="button" id=modal-farmer-btn class="btn-secondary mx-1 opbtn" onclick="viewOrders(this)">
+                                View Order
+                            </button>
+                            </div>`
+    }
+  ],
+  //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
+  ajax: {
+    url: getReservedOrdersUrl,
+    data: "data",
+  },
+  //matches the data to appropriate column
+  columns: [
+    { "data": 'accepted_date' },
+    { "data": 'name' },
+    { "data": 'weight' },
+    { "data": 'status' },
+  ],
+  createdRow: function(row, data, dataIndex) {
+    $(row).attr('order-id', data.order_id);
+  },
+
+  initComplete: function(){
+    data = incomingTable.ajax.json().data;
+  }
+};
+
 const farmerIncomingTableConfig = {
   paging: false,
   dom: domPlacements,
@@ -29,7 +104,7 @@ const farmerIncomingTableConfig = {
                             <button type="button" class="btn-primary mx-1 btnreserve" onclick="">
                                 Reserve
                             </button>
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
+                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="viewOrders(this)">
                                 View
                             </button>
                             </div>`
@@ -38,7 +113,7 @@ const farmerIncomingTableConfig = {
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
   ajax: {
     url: getIncomingOrdersUrl,
-    dataSrc: "data"
+    data: "data",
   },
   //matches the data to appropriate column
   columns: [
@@ -47,81 +122,38 @@ const farmerIncomingTableConfig = {
     { "data": 'land_area_needed' },
     { "data": 'location_id' },
   ],
-  //Adds data-id attribute to each row
-  // createdRow: function(row, data, dataIndex) {
-  //     $(row).attr('data-id', data.id);
-  // },
-};
-
-const farmerFinishedTableConfig = {
-  paging: false,
-  dom: domPlacements,
-  columnDefs: [
-    { orderable: false, "targets": 4 },
-    {
-      targets: 4,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
-                                View Order
-                            </button>
-                      </div>`
-    }
-  ],
-  //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
-  ajax: {
-    url: getFinishedOrdersUrl,
-    dataSrc: "data"
+  createdRow: function(row, data, dataIndex) {
+    $(row).attr('order-id', data.order_id);
   },
-  //matches the data to appropriate column
-  columns: [
-    { "data": 'accepted_date' },
-    { "data": 'name' },
-    { "data": 'weight' },
-    { "data": 'harvested_date' },
-  ],
-  //Adds data-id attribute to each row
-  // createdRow: function(row, data, dataIndex) {
-  //     $(row).attr('data-id', data.id);
-  // },
+
+  initComplete: function(){
+    data = incomingTable.ajax.json().data;
+  }
 };
 
-const farmerReservedTableConfig = {
-  paging: false,
-  dom: domPlacements,
-  columnDefs: [
-    { orderable: false, "targets": 4 },
-    {
-      targets: 4,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" id=modal-farmer-btn class="btn-secondary mx-1 opbtn" onclick="openModal()">
-                                View Order
-                            </button>
-                            </div>`
+function viewOrders(button){
+  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
+  let order = null;
+  for(let i = 0; i < data.length; i++){
+    if(data[i].order_id == selectedOrderID){
+      order = data[i];
+      break;
     }
-  ],
-  //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
-  ajax: {
-    url: getReservedOrdersUrl,
-    dataSrc: "data"
-  },
-  //matches the data to appropriate column
-  columns: [
-    { "data": 'accepted_date' },
-    { "data": 'name' },
-    { "data": 'weight' },
-    { "data": 'status' },
-  ],
-  //Adds data-id attribute to each row
-  // createdRow: function(row, data, dataIndex) {
-  //     $(row).attr('data-id', data.id);
-  // },
-};
+  }
 
+  console.log(order);
+  document.getElementById('date-ordered').innerHTML = String(order.order_id);
+  document.getElementById('date-approved').innerHTML = String(order.date_approved);
+  document.getElementById('date-reserved').innerHTML = String(order.date_reserved);
+  document.getElementById('status').innerHTML = String(order.status);
+  document.getElementById('date-ordered').innerHTML = String(order.order_id);
+  document.getElementById('crop-name').innerHTML = String(order.name);
+  document.getElementById('demand').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('location').innerHTML = String(order.location_id);
+  document.getElementById('area-needed').innerHTML = String(order.land_area_needed);
+  document.getElementById('days').innerHTML = String(order.weight);
+  $("#modal-farmer").modal("show");
 
-function openModal(){
-  $("#modal-farmer").modal("show")
 }
 
 //Reserve button
@@ -148,11 +180,13 @@ function reserveOrder(orderId) {
   });
 }
 
-
+var incomingTable = null;
+var finishedTable = null;
+var reservedTable = null;
 
 //Executing it all
 $(document).ready(function () {
-  $('.farmer-incoming-table').DataTable(farmerIncomingTableConfig);
-  $('.farmer-finished-table').DataTable(farmerFinishedTableConfig);
-  $('.farmer-reserved-table').DataTable(farmerReservedTableConfig);
+  incomingTable = $('.farmer-incoming-table').DataTable(farmerIncomingTableConfig);
+  finishTable = $('.farmer-finished-table').DataTable(farmerFinishedTableConfig);
+  reservedTable = $('.farmer-reserved-table').DataTable(farmerReservedTableConfig);
 });

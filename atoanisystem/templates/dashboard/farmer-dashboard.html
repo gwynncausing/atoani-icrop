@@ -71,6 +71,7 @@
 
     <div class="body-dashoard container-fluid mt-5 mb-3">
         <span class="pr-3 pl-3 title">Dashboard</span>
+
         <div class="upper container-fluid mt-3 mb-4">
             <ul class="nav nav-pills nav-tabs row pl-0 pr-0" id="nav-tab" role="tablist">
                 <li class="nav-item active pl-0 pr-0 pt-0 orders col-md-4 col-sm-6 col-12">
@@ -144,7 +145,6 @@
                     <!-- End Here -->
                 </div>
             </div>
-            <!-- End Reserved Table -->
 
             <!-- Finished Table -->
             <div id="finished-table" class="order-table row mt-2 mb-5 tab-pane fade w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-finished-tab">
@@ -176,9 +176,9 @@
                     <!-- End Here -->
                 </div>
             </div>
-            <!-- End Finished Table -->
 
-            <!-- Incoming Table -->
+            <!-- Incoming Table --> 
+            <!-- Using this for all tables -->
             <div id="incoming-table" class="order-table row mt-2 mb-5 tab-pane fade show active w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-incoming-tab">
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
                     <i>Incoming Orders</i>  
@@ -207,7 +207,7 @@
                     </table>
                 </div>
             </div>
-            <!-- End Incoming Table -->
+
         </div>
     </div>
 </div>
@@ -227,35 +227,32 @@
                     <div class="row d-flex justify-content-center mt-3 pb-2" style="font-size: 16px">
                         <div class="col-md-6 col-12 row">
                             <div class="label col-6 text-right pt-1 pb-1">Date Ordered:</div>
-                            <div class="col-6 pt-1 pb-1">January 1, 2021</div>
+                            <div class="col-6 pt-1 pb-1" id="date-ordered">-</div>
                             <div class="label col-6 text-right pt-1 pb-1">Date Approved:</div>
-                            <div class="col-6 pt-1 pb-1">January 1, 2021</div>
+                            <div class="col-6 pt-1 pb-1" id="date-approved">-</div>
                             <div class="label col-6 text-right pt-1 pb-1">Date Reserved:</div>
-                            <div class="col-6 pt-1 pb-1">-</div>
+                            <div class="col-6 pt-1 pb-1" id="date-reserved">-</div>
                         </div>
                         <div class="col-md-6 col-12 row mt-md-0 mt-3">
                             <div class="label col-6 text-right">Status:</div>
-                            <div class="col-6">Waiting</div>
-                            <div class="label col-6  text-right">Order Number:</div>
-                            <div class="col-6">222</div>
+                            <div class="col-6" id="status">-</div>
+                            <div class="label col-6 text-right">Order Number:</div>
+                            <div class="col-6" id="order-id">-</div>
                             <div class="col-6 "></div>
-                            <div class="col-6">-</div>
                         </div>
                         <div class="col-md-6 col-12 row mt-4">
                             <div class="label col-6 text-right pt-1">Crop Name:</div>
-                            <div class="col-6 pt-1">Potato</div>
-                            <div class="label col-6  text-right pt-1 pb-1">Demand:</div>
-                            <div class="col-6 pt-1 pb-1">45 kg</div>
-                            <div class="label col-6  text-right pt-1 pb-1">Location:</div>
-                            <div class="col-6 pt-1 pb-1">Argao, Cebu</div>
+                            <div class="col-6 pt-1" id="crop-name">-</div>
+                            <div class="label col-6 text-right pt-1 pb-1">Demand:</div>
+                            <div class="col-6 pt-1 pb-1" id="demand">-</div>
+                            <div class="label col-6 text-right pt-1 pb-1">Location:</div>
+                            <div class="col-6 pt-1 pb-1" id="location">-</div>
                         </div>
                         <div class="col-md-6 col-12 row mt-4">
                             <div class="label col-6  text-right">Land Area Needed:</div>
-                            <div class="col-6">53.33 sqm</div>
-                            <div class="label col-6  text-right" >Estimated Days to Finish:</div>
-                            <div class="col-6">45-120 days</div>
-                            <div class="col-6 "></div>
-                            <div class="col-6">-</div>
+                            <div class="col-6" id="area-needed">-</div>
+                            <div class="label col-6 text-right" >Estimated Days to Finish:</div>
+                            <div class="col-6" id="days">-</div>
                     </div>
                 </div>
                 <div class="modal-footer  pt-2 pb-2">

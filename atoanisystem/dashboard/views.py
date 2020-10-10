@@ -5,8 +5,7 @@ from django.views.generic import View
 from login_register.models import Order
 from . import farmerfunctions as ff
 from . import customerfunctions as cf
-
-
+from login_register.models import Order
 
 #########################################################
 #               Farmer related views                    #
@@ -123,9 +122,7 @@ class CustomerFinishedOrdersViewModal(View):
         return JsonResponse(data)
 
 
-
 # 'order_id','order_pair_id','order_date','location_id','name','weight','status'
-
 class TestView(View):
     def get(self,request):
         if request.is_ajax():

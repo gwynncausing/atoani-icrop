@@ -1,3 +1,7 @@
+
+
+let data = null;
+
 //ajax urls
 const getTotalOrdersUrl = '/dashboard/get-customer-total-orders';
 const getReservedOrdersUrl = '/dashboard/get-customer-reserved-orders';
@@ -27,7 +31,7 @@ const customerReservedTableConfig = {
       targets: 5,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
+                            <button type="button" class="btn-secondary mx-1 opbtn" data-target="#modal-customer-reserved" onclick="viewReservedOrders(this)">
                                 View Order
                             </button>
                             </div>`
@@ -36,7 +40,7 @@ const customerReservedTableConfig = {
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
   ajax: {
     url: getReservedOrdersUrl,
-    dataSrc: "data"
+    data: "data",
   },
   //matches the data to appropriate column
   columns: [
@@ -44,12 +48,15 @@ const customerReservedTableConfig = {
     { "data": 'location_id'},
     { "data": 'name' },
     { "data": 'weight' },
-    { "data": 'status' },
+    { "data": 'status' }
   ],
-  //Adds data-id attribute to each row
-  // createdRow: function(row, data, dataIndex) {
-  //     $(row).attr('data-id', data.id);
-  // },
+  createdRow: function(row, data, dataIndex) {
+    $(row).attr('order-id', data.order_id);
+  },
+
+  initComplete: function(){
+    data = totalTable.ajax.json().data;
+  }
 };
 
 const customerFinishedTableConfig = {
@@ -62,7 +69,7 @@ const customerFinishedTableConfig = {
       targets: 5,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
+                            <button type="button" class="btn-secondary mx-1 opbtn" data-target="#modal-customer-finished" onclick="viewFinishedOrders(this)">
                                 View Order
                             </button>
                       </div>`
@@ -71,7 +78,7 @@ const customerFinishedTableConfig = {
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
   ajax: {
     url: getFinishedOrdersUrl,
-    dataSrc: "data"
+    data: "data",
   },
   //matches the data to appropriate column
   columns: [
@@ -79,12 +86,16 @@ const customerFinishedTableConfig = {
     { "data": 'location_id'},
     { "data": 'name' },
     { "data": 'weight' },
-    { "data": 'status' },
+    { "data": 'status' }
   ],
-  //Adds data-id attribute to each row
-  // createdRow: function(row, data, dataIndex) {
-  //     $(row).attr('data-id', data.id);
-  // },
+
+  createdRow: function(row, data, dataIndex) {
+    $(row).attr('order-id', data.order_id);
+  },
+
+  initComplete: function(){
+    data = totalTable.ajax.json().data;
+  }
 };
 
 const customerTotalTableConfig = {
@@ -96,7 +107,7 @@ const customerTotalTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
+                            <button type="button" class="btn-secondary mx-1 opbtn" data-target="#modal-customer-total" onclick="viewTotalOrders(this)">
                                 View Order
                             </button>
                             </div>`
@@ -105,70 +116,92 @@ const customerTotalTableConfig = {
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
   ajax: {
     url: getTotalOrdersUrl,
-    dataSrc: "data"
+    data: "data",
   },
   //matches the data to appropriate column
   columns: [
-    { "data": 'order_date' },
+    { "data": 'order_date'},
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'status' },
-    { "render": function(row) 
-      {return '<button class="btn-secondary mx-1 opbtn" data-toggle="modal" data-id="'+row.order_pair_id+'" data-name="'+row.name+'" data-demand="'+row.weight+'" data-location="'+row.location+'" data-date-ordered="'+row.order_date+'" data-status="'+row.status+'" data-date-approved="'+row.date_approved+'" data-date-reserved="'+row.date_reserved+'" data-order-id="'+row.order_id+'" data-target="#modal-customer" onClick="'+showObjects()+'">'+"View Order"+'</button>'} }
-      // {return '<button class="btn-secondary mx-1 opbtn" data-toggle="modal" data-target="#modal-customer" onClick="'+showObjects()+'">'+"View Order"+'</button>'} }
   ],
+
   //Adds data-id attribute to each row
-  // createdRow: function(row, data, dataIndex) {
-  //     $(row).attr('data-id', data.id);
-  // },
+  createdRow: function(row, data, dataIndex) {
+    $(row).attr('order-id', data.order_id);
+  },
+
+  initComplete: function(){
+    data = totalTable.ajax.json().data;
+  }
 };
 
-// $("#modal-customer").on('show.bs.modal', function () {
-//   var id = $('#modal-customer').data('id');
-//   console.log(id);
-//   data-myjson="{'foo':false,'baz':'hello'}"
-// });
-
-$("#modal-customer").on('show.bs.modal', function (e) {
-  var triggerLink = $(e.relatedTarget);
-  $(this).find('.modal-body #date-ordered').text(triggerLink.data("date-ordered"));
-  $(this).find('.modal-body #status').text(triggerLink.data("status"));
-  $(this).find('.modal-body #order-number').text(triggerLink.data("order-num"));
-  $(this).find('.modal-body #date-approved').text(triggerLink.data("date-approved"));
-  $(this).find('.modal-body #date-reserved').text(triggerLink.data("date-reserved"));
-  $(this).find('.modal-body #crop-name').text(triggerLink.data("name"));
-  $(this).find('.modal-body #demand').text(triggerLink.data("demand") + " kg");
-  $(this).find('.modal-body #location').text(triggerLink.data("location"));
-  $(this).find('.modal-body #order-id').text(triggerLink.data("order-id"));
-});
-
-function showObjects(){
-  $.ajax({
-    type: "GET",
-    url: getTotalOrdersUrl,
-    dataType: "json",
-    data: "data",
-    success: function (data) {
-        console.log(data)
+function viewReservedOrders(button){
+  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
+  let order = null;
+  for(let i = 0; i < data.length; i++){
+    if(data[i].order_id == selectedOrderID){
+      order = data[i];
+      break;
     }
-  });
+  }
+
+  document.getElementById('date-ordered-reserved').innerHTML = String(order.order_id);
+  document.getElementById('date-approved-reserved').innerHTML = String(order.date_approved);
+  document.getElementById('date-reserved-reserved').innerHTML = String(order.date_reserved);
+  document.getElementById('status-reserved').innerHTML = String(order.status);
+  document.getElementById('date-ordered-reserved').innerHTML = String(order.order_id);
+  document.getElementById('crop-name-reserved').innerHTML = String(order.name);
+  document.getElementById('demand-reserved').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('location-reserved').innerHTML = String(order.location_id);
+  $("#modal-customer-reserved").modal("show")
 }
 
-// function openModal(){
-//   $.ajax({
-//     type: "GET",
-//     url: getTotalOrdersUrl,
-//     dataType: "json",
-//     data: "data",
-//     success: function (data) {
-//         console.log(data)
-//         // $("#modal-customer").modal("show")
-//     }
-//   });
-// }
+function viewFinishedOrders(button){
+  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
+  let order = null;
+  for(let i = 0; i < data.length; i++){
+    if(data[i].order_id == selectedOrderID){
+      order = data[i];
+      break;
+    }
+  }
+  console.log(order);
+  document.getElementById('date-ordered-finished').innerHTML = String(order.order_id);
+  document.getElementById('date-approved-finished').innerHTML = String(order.date_approved);
+  document.getElementById('date-reserved-finished').innerHTML = String(order.date_reserved);
+  document.getElementById('status-finished').innerHTML = String(order.status);
+  document.getElementById('date-ordered-finished').innerHTML = String(order.order_id);
+  document.getElementById('crop-name-finished').innerHTML = String(order.name);
+  document.getElementById('demand-finished').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('location-finished').innerHTML = String(order.location_id);
+  $("#modal-customer-finished").modal("show");
+}
+
+function viewTotalOrders(button){
+  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
+  let order = null;
+  for(let i = 0; i < data.length; i++){
+    if(data[i].order_id == selectedOrderID){
+      order = data[i];
+      break;
+    }
+  }
+
+  document.getElementById('date-ordered').innerHTML = String(order.order_id);
+  document.getElementById('date-approved').innerHTML = String(order.date_approved);
+  document.getElementById('date-reserved').innerHTML = String(order.date_reserved);
+  document.getElementById('status').innerHTML = String(order.status);
+  document.getElementById('date-ordered').innerHTML = String(order.order_id);
+  document.getElementById('crop-name').innerHTML = String(order.name);
+  document.getElementById('demand').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('location').innerHTML = String(order.location_id);
+  $("#modal-customer-total").modal("show");
+
+}
 
 
-//Reserve button
+// Reserve button
 // function reserveOrder(orderId) {
 //   //Make sure to enclose this to a form where a csrftoken is present
 //   //document.getElementById("form-id")
@@ -191,10 +224,12 @@ function showObjects(){
 //     }
 //   });
 // }
-
+var totalTable = null;
+var finishedTable = null;
+var reservedTable = null;
 //Executing it all
 $(document).ready(function () {
-  $('.customer-total-table').DataTable(customerTotalTableConfig);
-  $('.customer-finished-table').DataTable(customerFinishedTableConfig);
-  $('.customer-reserved-table').DataTable(customerReservedTableConfig);
+  totalTable = $('.customer-total-table').DataTable(customerTotalTableConfig);
+  finishedTable = $('.customer-finished-table').DataTable(customerFinishedTableConfig);
+  reservedTable = $('.customer-reserved-table').DataTable(customerReservedTableConfig);
 });
