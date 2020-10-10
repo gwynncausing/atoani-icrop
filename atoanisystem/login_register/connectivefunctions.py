@@ -71,10 +71,14 @@ def datatable_customer(id):
     order= get_complete_order_customer(id)
     if len(order) !=0:
         df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values())
-        df = order.merge(df, left_on="order_id", right_on="order_id_id")
-        if len(df) != 0:
-            df['accepted_date'] = df['accepted_date'].apply(convert)
-            return df.rename(columns={'id':'order_pair_id'})
+        if len(df) == 0:
+            order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date']] = "N/A"
+            return order
+        else:
+            df = order.merge(df, how="left", left_on="order_id", right_on="order_id_id").fillna("N/A").drop(columns=["order_id_id"])
+            if len(df) != 0:
+                df['accepted_date'] = df['accepted_date'].apply(convert)
+                return df.rename(columns={'id':'order_pair_id'})
     return order
 
 # to be called after datatable_customer to generate datatable dictionary
