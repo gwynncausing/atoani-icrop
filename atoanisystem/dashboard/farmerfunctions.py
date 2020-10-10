@@ -14,32 +14,38 @@ def format_location(orders):
         order['location_id'] = get_location_str(order['location_id'])
 
 def get_incoming_orders(user):
-    df = dashboard_utility.datatable_farmer(user.farmer)
-    orders = dashboard_utility.display_farmer_table(df)
-    format_location(orders)
-    print(orders)
-    return orders
+    print("INCOMINGGG")
+    incoming_orders = dashboard_utility.matching_algorithm(user.farmer.land_area)
+    print(incoming_orders)
+    # df = dashboard_utility.datatable_farmer(user.farmer)
+    # orders = dashboard_utility.display_farmer_table(df)
+    # format_location(orders)
+    # print(orders)
+    # return orders
+    return incoming_orders
 
 #TO BE IMPLEMENTED
 def get_reserved_orders(user):
-    df = dashboard_utility.datatable_farmer(user.farmer)
-    orders = dashboard_utility.display_farmer_table(df)
-    format_location(orders)
-    reserved_orders = []
-    for order in orders:
-        if order['status'] == 'Ongoing':
-            reserved_orders.append(order)
-    return reserved_orders
+    # df = dashboard_utility.datatable_farmer(user.farmer)
+    # orders = dashboard_utility.display_farmer_table(df)
+    # format_location(orders)
+    # reserved_orders = []
+    # for order in orders:
+    #     if order['status'] == 'Ongoing':
+    #         reserved_orders.append(order)
+    # return reserved_orders
+    return []
 
 def get_finished_orders(user):
-    df = dashboard_utility.datatable_farmer(user.farmer)
-    orders = dashboard_utility.display_farmer_table(df)
-    format_location(orders)
-    finished_orders = []
-    for order in orders:
-        if order['status'] == 'Collected':
-            finished_orders.append(order)
-    return finished_orders
+    # df = dashboard_utility.datatable_farmer(user.farmer)
+    # orders = dashboard_utility.display_farmer_table(df)
+    # format_location(orders)
+    # finished_orders = []
+    # for order in orders:
+    #     if order['status'] == 'Collected':
+    #         finished_orders.append(order)
+    # return finished_orders
+    return []
 
 #https://docs.djangoproject.com/en/3.1/topics/db/transactions/
 #since django works in autocommit mode by default (see in Autocommit section), i assume that there will be no concurrent problems
