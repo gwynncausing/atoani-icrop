@@ -1,9 +1,13 @@
 from login_register.models import *
 from login_register import connectivefunctions as dashboard_utility
+import math
 
 def get_location_str(location_id):
-    location = Location.objects.get(id=location_id)
-    return str(location)
+    if not math.isnan(location_id):
+        location = Location.objects.get(id=location_id)
+        return str(location)
+    else:
+        return 'N/A'
 
 def format_location(orders):
     for order in orders:
