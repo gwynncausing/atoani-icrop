@@ -16,13 +16,15 @@ const domPlacements = `<
                             >   
                         >
                       >`;
-const customerTotalTableConfig = {
+
+const customerReservedTableConfig = {
   paging: false,
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
+    { orderable: false, "targets": 5 },
     {
-      targets: 4,
+      targets: 5,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
                             <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
@@ -33,12 +35,13 @@ const customerTotalTableConfig = {
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
   ajax: {
-    url: getTotalOrdersUrl,
+    url: getReservedOrdersUrl,
     dataSrc: "data"
   },
   //matches the data to appropriate column
   columns: [
     { "data": 'order_date' },
+    { "data": 'location_id'},
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'status' },
@@ -84,14 +87,13 @@ const customerFinishedTableConfig = {
   // },
 };
 
-const customerReservedTableConfig = {
+const customerTotalTableConfig = {
   paging: false,
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
-    { orderable: false, "targets": 5 },
     {
-      targets: 5,
+      targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
                             <button type="button" class="btn-secondary mx-1 opbtn" onclick="openModal()">
@@ -102,16 +104,18 @@ const customerReservedTableConfig = {
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
   ajax: {
-    url: getReservedOrdersUrl,
+    url: getTotalOrdersUrl,
     dataSrc: "data"
   },
   //matches the data to appropriate column
   columns: [
     { "data": 'order_date' },
-    { "data": 'location_id'},
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'status' },
+    { "render": function(row) 
+      {return '<button class="btn-secondary mx-1 opbtn" data-toggle="modal" data-id="'+row.order_pair_id+'" data-name="'+row.name+'" data-demand="'+row.weight+'" data-location="'+row.location+'" data-date-ordered="'+row.order_date+'" data-status="'+row.status+'" data-date-approved="'+row.date_approved+'" data-date-reserved="'+row.date_reserved+'" data-order-id="'+row.order_id+'" data-target="#modal-customer" onClick="'+showObjects()+'">'+"View Order"+'</button>'} }
+      // {return '<button class="btn-secondary mx-1 opbtn" data-toggle="modal" data-target="#modal-customer" onClick="'+showObjects()+'">'+"View Order"+'</button>'} }
   ],
   //Adds data-id attribute to each row
   // createdRow: function(row, data, dataIndex) {
@@ -119,9 +123,49 @@ const customerReservedTableConfig = {
   // },
 };
 
-function openModal(){
-  $("#modal-customer").modal("show")
+// $("#modal-customer").on('show.bs.modal', function () {
+//   var id = $('#modal-customer').data('id');
+//   console.log(id);
+//   data-myjson="{'foo':false,'baz':'hello'}"
+// });
+
+$("#modal-customer").on('show.bs.modal', function (e) {
+  var triggerLink = $(e.relatedTarget);
+  $(this).find('.modal-body #date-ordered').text(triggerLink.data("date-ordered"));
+  $(this).find('.modal-body #status').text(triggerLink.data("status"));
+  $(this).find('.modal-body #order-number').text(triggerLink.data("order-num"));
+  $(this).find('.modal-body #date-approved').text(triggerLink.data("date-approved"));
+  $(this).find('.modal-body #date-reserved').text(triggerLink.data("date-reserved"));
+  $(this).find('.modal-body #crop-name').text(triggerLink.data("name"));
+  $(this).find('.modal-body #demand').text(triggerLink.data("demand") + " kg");
+  $(this).find('.modal-body #location').text(triggerLink.data("location"));
+  $(this).find('.modal-body #order-id').text(triggerLink.data("order-id"));
+});
+
+function showObjects(){
+  $.ajax({
+    type: "GET",
+    url: getTotalOrdersUrl,
+    dataType: "json",
+    data: "data",
+    success: function (data) {
+        console.log(data)
+    }
+  });
 }
+
+// function openModal(){
+//   $.ajax({
+//     type: "GET",
+//     url: getTotalOrdersUrl,
+//     dataType: "json",
+//     data: "data",
+//     success: function (data) {
+//         console.log(data)
+//         // $("#modal-customer").modal("show")
+//     }
+//   });
+// }
 
 
 //Reserve button

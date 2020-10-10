@@ -108,6 +108,24 @@ class CustomerFinishedOrdersView(View):
             return JsonResponse(json)
         return render(request,'dashboard/customer-dashboard.html')
 
+class CustomerFinishedOrdersViewModal(View):
+    def  get(self, request):
+        order_id = request.GET.get('id', None)
+        name1 = request.GET.get('name', None)
+        address1 = request.GET.get('address', None)
+        age1 = request.GET.get('age', None)
+
+        user = {'id':obj.id,'name':obj.name,'address':obj.address,'age':obj.age}
+
+        data = {
+            'user': user
+        }
+        return JsonResponse(data)
+
+
+
+# 'order_id','order_pair_id','order_date','location_id','name','weight','status'
+
 class TestView(View):
     def get(self,request):
         if request.is_ajax():
