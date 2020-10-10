@@ -51,7 +51,7 @@ def display_farmer_table(df):
         return df
     else:
         df = df.sort_values('accepted_date',ascending=False).reset_index(drop=True)
-        return df[['order_id','order_pair_id','accepted_date','name','weight','land_area_needed','location_id','harvested_date','status']].to_dict('records')
+        return df[['order_pair_id','accepted_date','name','weight','land_area_needed','location_id','harvested_date','status']].to_dict('records')
 
 # get customer's orders
 def get_order_customer(id):
