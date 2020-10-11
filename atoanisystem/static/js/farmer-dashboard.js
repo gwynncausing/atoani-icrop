@@ -142,11 +142,10 @@ function viewOrders(button){
   }
 
   console.log(order);
-  document.getElementById('date-ordered').innerHTML = String(order.order_id);
+  document.getElementById('date-ordered').innerHTML = String(order.order_date);
   document.getElementById('date-approved').innerHTML = String(order.date_approved);
   document.getElementById('date-reserved').innerHTML = String(order.date_reserved);
   document.getElementById('status').innerHTML = String(order.status);
-  document.getElementById('date-ordered').innerHTML = String(order.order_id);
   document.getElementById('crop-name').innerHTML = String(order.name);
   document.getElementById('demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('location').innerHTML = String(order.location_id);

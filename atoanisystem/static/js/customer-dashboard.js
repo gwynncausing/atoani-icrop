@@ -146,11 +146,10 @@ function viewReservedOrders(button){
     }
   }
 
-  document.getElementById('date-ordered-reserved').innerHTML = String(order.order_id);
+  document.getElementById('date-ordered-reserved').innerHTML = String(order.order_date);
   document.getElementById('date-approved-reserved').innerHTML = String(order.date_approved);
   document.getElementById('date-reserved-reserved').innerHTML = String(order.date_reserved);
   document.getElementById('status-reserved').innerHTML = String(order.status);
-  document.getElementById('date-ordered-reserved').innerHTML = String(order.order_id);
   document.getElementById('crop-name-reserved').innerHTML = String(order.name);
   document.getElementById('demand-reserved').innerHTML = String(order.weight) + " kilos";
   document.getElementById('location-reserved').innerHTML = String(order.location_id);
@@ -167,11 +166,10 @@ function viewFinishedOrders(button){
     }
   }
   console.log(order);
-  document.getElementById('date-ordered-finished').innerHTML = String(order.order_id);
+  document.getElementById('date-ordered-finished').innerHTML = String(order.order_date);
   document.getElementById('date-approved-finished').innerHTML = String(order.date_approved);
   document.getElementById('date-reserved-finished').innerHTML = String(order.date_reserved);
   document.getElementById('status-finished').innerHTML = String(order.status);
-  document.getElementById('date-ordered-finished').innerHTML = String(order.order_id);
   document.getElementById('crop-name-finished').innerHTML = String(order.name);
   document.getElementById('demand-finished').innerHTML = String(order.weight) + " kilos";
   document.getElementById('location-finished').innerHTML = String(order.location_id);
@@ -188,11 +186,12 @@ function viewTotalOrders(button){
     }
   }
 
-  document.getElementById('date-ordered').innerHTML = String(order.order_id);
+  console.log(order.order_date);
+
+  document.getElementById('date-ordered').innerHTML = order.order_date;
   document.getElementById('date-approved').innerHTML = String(order.date_approved);
   document.getElementById('date-reserved').innerHTML = String(order.date_reserved);
   document.getElementById('status').innerHTML = String(order.status);
-  document.getElementById('date-ordered').innerHTML = String(order.order_id);
   document.getElementById('crop-name').innerHTML = String(order.name);
   document.getElementById('demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('location').innerHTML = String(order.location_id);
