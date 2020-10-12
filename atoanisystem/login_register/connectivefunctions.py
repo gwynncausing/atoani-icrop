@@ -15,6 +15,23 @@ ALGORITHM FUNCTION (NOT FINAL)
 
 to generate a list of top 10 (or sa pilay maabot) recommendations
 matching_algorithm(<farmer land_area>)
+
+TO COLLECTIVELY CHANGE FARMER DETAILS CALL
+change_farmer_details(<farmer id>, <details>*)
+
+TO COLLECTIVELY CHANGE CUSTOMER DETAILS CALL
+change_customer_details(<customer id>, <details>*)
+
+*details must be a 2D list whose list components follow the format
+['name of the attribute', 'value']
+
+e.g.
+details = [['is_cancelled',True]['message','Overdue order']]
+
+
+TO RESERVE ORDER
+reserve_order(<order id>, <farmer id>)
+(make sure that order_id is UUID, you can use Order['order_id'])
 '''
 
 # insert part of the algorithm here involving land_area calculation
@@ -110,14 +127,21 @@ def count_status(df):
 
 # BACKEND FUNCTIONS
 
-# create change status for orders
+def change_farmer_details(id,details):
+    Farmer.objects.get(id=id).set_value(details)
+
+def change_customer_details(id,details):
+    Customer.objects.get(id=id).set_value(details)
+
+def reserve_order(order_id,farmer_id):
+    d = Order_Pairing(order_id_id=order_id,farmer_id=farmer_id)
+    d.save()
 # check months for farmers ????
 # order related functions
 
 def update_land_area():
     for x in Order.objects.all().values():
         calculate_land_area(x)
-
 
 # still a pseudo-algorithm
 def matching_algorithm(land_size):
