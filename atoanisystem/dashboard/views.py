@@ -80,6 +80,12 @@ class CustomerDashboardView(View):
         else:
             return redirect('login_register:login')
 
+    def post(self,request):
+        if request.is_ajax():
+            print("request was ajax")
+            
+        return redirect('login_register:login')
+
 class CustomerTotalOrdersView(View):
     def get(self,request):
         if request.is_ajax():
