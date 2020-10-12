@@ -15,6 +15,10 @@ urlpatterns = [
     path('get-customer-total-orders', views.CustomerTotalOrdersView.as_view(), name="get_customer_total_orders"),
     path('get-customer-reserved-orders', views.CustomerReservedOrdersView.as_view(), name="get_customer_reserved_orders"),
     path('get-customer-finished-orders', views.CustomerFinishedOrdersView.as_view(), name="get_customer_finished_orders"),
+    #modals
+    path('get-customer-finished-orders-modal', views.CustomerFinishedOrdersViewModal.as_view(), name="get_customer_finished_orders_modal"),
+
+
 
     path('test/', views.TestView.as_view(), name="test"),
 ]
