@@ -1,0 +1,26 @@
+.modal-customer{
+    padding: 0;
+
+    .modal-content{
+        background: #EBF2F2;
+        padding: 0;
+
+        .modal-header, span{
+            background: #628474;
+            color: $white-color;
+        }
+
+        .label{
+            font-weight: bold;
+        }
+
+        .ok-btn{
+            background: #628474;
+            outline: none;
+            border: 0;
+            width: 7rem;
+            color: $white-color;
+        }
+
+    }
+}

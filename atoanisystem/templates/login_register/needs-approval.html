@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tags %}
+    <!-- Customized CSS -->
+    <link rel="stylesheet" href="{% static 'css/login_register/approval.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container-fluid d-flex justify-content-center fill-height">
+            <div id="row" class="row d-flex justify-content-center align-items-center w-100">
+                <div class="col-10 d-flex flex-column text-center">
+                    <h3>Hello, {{user.username}}</h3>
+                    <h4>Your registration is waiting for approval by AtoANI.</h4>
+                    <span><br>AtoANI will approve your account after verifying your identity. <br> <i>Thank you for your patience.</i></span>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container-fluid d-flex justify-content-center fill-height">
+            <div id="row" class="row d-flex justify-content-center align-items-center w-100">
+                <div class="col-10 d-flex flex-column text-center">
+                    <h3>Hello</h3>
+                    <h4>Please Login to AtoANI.</h4>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Sriracha&display=swap");
+body {
+  background-color: #114a44;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Sriracha", cursive;
+}
+
+.navbar {
+  background: #0b3531;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.navbar a {
+  color: #fafafa;
+}
+
+.navbar a.dropdown-item {
+  color: #0a0a0a;
+}
+
+.navbar a.dropdown-item:hover {
+  background: #0b3531;
+  color: #fafafa;
+}
+
+.navbar .navbar-toggler-icon {
+  color: #fafafa;
+}
+
+.form-login {
+  color: #fafafa;
+  background-color: #0b3531;
+  width: 100%;
+  border-radius: 0.5rem;
+  margin-top: 30%;
+}
+
+.form-login a {
+  color: #fafafa;
+}
+
+.form-login .form-header {
+  background-color: #628474;
+  height: 2.75rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.form-login .form-body {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.form-login .form-body #number-prep {
+  border: 0;
+  background: none;
+  color: #fafafa;
+}
+
+.form-login .form-body .btnSignIn {
+  background-color: #628474;
+  color: #fafafa;
+}
+/*# sourceMappingURL=login.css.map */
