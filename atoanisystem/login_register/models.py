@@ -117,9 +117,10 @@ class Customer(models.Model):
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
     is_approved = models.BooleanField(default=False)
 
-    def set_value(self, attr:str, new_value):
+    def set_value(self, attr:[]):
         try:
-            setattr(self,attr,new_value)
+            for att in attr:
+                setattr(self,att[0],att[1])
             self.save()
         except:
             pass
@@ -187,9 +188,10 @@ class Farmer(models.Model):
     land_area = models.FloatField(help_text="Farmer's land area in square meters", null=True)
     is_available = models.BooleanField(help_text="Is the farmer able to take up orders?", null=True)
 
-    def set_value(self, attr:str, new_value):
+    def set_value(self, attr:[]):
         try:
-            setattr(self,attr,new_value)
+            for att in attr:
+                setattr(self,att[0],att[1])
             self.save()
         except:
             pass
