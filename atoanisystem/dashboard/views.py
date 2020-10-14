@@ -131,7 +131,7 @@ class CustomerFinishedOrdersView(View):
         return render(request,'dashboard/customer-dashboard.html')
 
 class CustomerFinishedOrdersViewModal(View):
-    def  get(self, request):
+    def get(self, request):
         order_id = request.GET.get('id', None)
         name1 = request.GET.get('name', None)
         address1 = request.GET.get('address', None)
@@ -144,14 +144,59 @@ class CustomerFinishedOrdersViewModal(View):
         }
         return JsonResponse(data)
 
-
-# 'order_id','order_pair_id','order_date','location_id','name','weight','status'
-class TestView(View):
-    def get(self,request):
+class AccountView(View):
+    def post(self, request):
         if request.is_ajax():
-            #does not include deleted customer
-            arr = get_incoming_orders()
-            json = {'data':arr}
-            return JsonResponse(json)
-        return render(request,'dashboard/test-datatables.html')
+            if request.POST.get('input') == 'contact_number':
+                # check contact number if it already exists
+                if Customer.objects.filter(contact_number=request.POST.get('contact_number')).exists() or Farmer.objects.filter(contact_number=request.POST.get('contact_number')).exists():
+                    return JsonResponse({'result':'not ok'},status=500)
+                else:
+                    return JsonResponse({'result':'ok'},status=200)
+            elif request.POST.get('input') == 'username':
+                # check username if it already exists
+                if User.objects.filter(username=request.POST.get('username')).exists():
+                    return JsonResponse({'result':'not ok'},status=500)
+                else:
+                    return JsonResponse({'result':'ok'},status=200)
+            elif request.POST.get('input') == 'email':
+                # check username if it already exists
+                if User.objects.filter(email=request.POST.get('email')).exists():
+                    return JsonResponse({'result':'not ok'},status=500)
+                else:
+                    return JsonResponse({'result':'ok'},status=200)
+            elif request.POST.get('input') == 'password':
+                # check username if it already exists
+                if User.objects.filter(email=request.POST.get('email')).exists():
+                    return JsonResponse({'result':'not ok'},status=500)
+                else:
+                    return JsonResponse({'result':'ok'},status=200)
+            else:
+                pass
+        firstname = request.POST.get('first-name')
+        lastname = request.POST.get('last-name')
+        #replace by username field 
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password1')
+        user = User.objects.create_user(first_name=firstname,last_name=lastname,username=username,email=email,password=password)
+        location_form = LocationForm(request.POST)
+        account_type = request.POST.get('account-type')
+        Group.objects.get(name=account_type).user_set.add(user)
+        if account_type == 'Farmer':
+            form = FarmerForm(request.POST)
+        if account_type == 'Customer':
+            form = CustomerForm(request.POST)
+        if form.is_valid() and location_form.is_valid():
+            #check if location exists
+            location = location_form.save(commit=False)
+            location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
+            if location.street:
+                location.name=str(location.street)+', '+location.name
+            location.save()
+            new_user = form.save(commit=False)
+            new_user.name = user
+            new_user.location = location
+            new_user.save()
+        return render(request,'dashboard/customer-dashboard.html')
 
