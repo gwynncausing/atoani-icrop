@@ -13,10 +13,8 @@
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="{% static 'css/login_register/approval.css' %}">
-    
-    {% block tags %}
-        <!-- Additional css tags -->
+    <link rel="stylesheet" href="{% static 'css/login_register/approval.css' %}"> {% block tags %}
+    <!-- Additional css tags -->
 
     {% endblock %}
 
@@ -25,59 +23,69 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <!--<a class="navbar-brand" href="#" src="{% static 'images/logo.png' %}">AtoANI iCROP</a>-->
-            <img src="{% static 'images/logo2.png' %}" height="8%" width="8%">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Language
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Bisaya</a>
-                            <a class="dropdown-item" href="#">English</a>
-                            <a class="dropdown-item" href="#">Tagalog</a>
+    <div class="header">
+        <nav class="navbar navbar-expand-lg p-0">
+            <div class="container p-0">
+                <div class="wraper">
+                    <div class="div-1">
+                        <div class="logo d-flex justify-content-center">
+                            <a href="{% url 'login_register:login' %}"><img class="imgLogo" src="/static/images/AtoANI-iCROP-Horizontal-white.png" alt="AtoANI Logo"></a>
                         </div>
-                    </li>
-                </ul>
-                <div class="my-lg-0">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            {% if not user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'login_register:register' %}">Register</a>
-                            {% endif %}
-                        </li>
-                        <li class="nav-item">
-                            {% if user.is_authenticated %}
-                            <a class="nav-link" href="{% url 'login_register:logout' %}">Logout</a>
-                            {% else %}
-                            <a class="nav-link" href="{% url 'login_register:login' %}">Login</a>
-                            {% endif %}
-                        </li>
-                    </ul>
+                    </div>
+                    <div class="div-2">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon bg-light"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Contact Us</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Language
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Bisaya</a>
+                                        <a class="dropdown-item" href="#">English</a>
+                                        <a class="dropdown-item" href="#">Tagalog</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="my-lg-0">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item">
+                                        {% if not user.is_authenticated %}
+                                        <a class="nav-link" href="{% url 'login_register:register' %}">Register</a> {% endif %}
+                                    </li>
+                                    <li class="nav-item">
+                                        {% if user.is_authenticated %}
+                                        <a class="nav-link" href="{% url 'login_register:logout' %}">Logout</a> {% else %}
+                                        <a class="nav-link" href="{% url 'login_register:login' %}">Login</a> {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </nav>
+    </div>
+
+    {% block content %} {% endblock %}
+
+    <div class="footer mt-5">
+        <div class="container p-2">
+            <span class="pr-3"><i class="fa fa-facebook icon pr-1"></i>/atoaniph</span>
+            <span><i class="fa fa-instagram icon pr-1"></i>@atoani.ph</span>
         </div>
-    </nav>
-
-    {% block content %}
-
-    {% endblock %}
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -86,10 +94,10 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    
-    
+
+
     {% block scripts %}
-        <!-- Additional scripts tags -->
+    <!-- Additional scripts tags -->
     {% endblock %}
 
 </body>

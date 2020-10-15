@@ -101,7 +101,7 @@ class RegistrationView(View):
                 pass
         firstname = request.POST.get('first-name')
         lastname = request.POST.get('last-name')
-        #replace by username field 
+        #replace by username field
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password1')
@@ -114,12 +114,17 @@ class RegistrationView(View):
         if account_type == 'Customer':
             form = CustomerForm(request.POST)
         if form.is_valid() and location_form.is_valid():
-            #check if location exists
             location = location_form.save(commit=False)
             location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
             if location.street:
                 location.name=str(location.street)+', '+location.name
             location.save()
+            duplicate_list = Location.objects.filter(name=location.name)
+            #check if location exists
+            if len(duplicate_list) > 1:
+                # deletes if data exists
+                Location.objects.filter(id = location.id).delete()
+                location = duplicate_list[0]
             new_user = form.save(commit=False)
             new_user.name = user
             new_user.location = location
@@ -153,8 +158,7 @@ class LogoutView(View):
     def post(self,request):
         logout(request)
         return  redirect("/login")
-    
+
 class SettingsView(View):
     def get(self, request):
         return render(request, "login_register/settings.html")
-
