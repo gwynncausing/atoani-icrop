@@ -214,4 +214,5 @@ def get_order_location(id,loc):
         return customer_location
     else:
         newloc = Location(street=loc['street'], brgy = loc['brgy'], city = loc['city'], province= loc['province'] )
+        newloc.save()
         return Location.objects.latest('id').id
