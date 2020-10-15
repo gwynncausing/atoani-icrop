@@ -356,4 +356,16 @@ body {
   width: 7rem;
   color: #fafafa;
 }
+
+#customer-order-form #kg-indicator {
+  position: absolute;
+  right: 35px;
+  top: 6px;
+  background: none;
+  color: #4C6659;
+}
+
+#customer-order-form button {
+  width: 8rem;
+}
 /*# sourceMappingURL=customer-dashboard.css.map */
