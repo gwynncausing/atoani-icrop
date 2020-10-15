@@ -37,8 +37,8 @@ class CustomerForm(forms.ModelForm):
                     'location'
                     )
 class LocationForm(forms.ModelForm):
-    street = forms.CharField(required=False)
-    name = forms.CharField(required=False)
+    street = forms.CharField(max_length=220, required=False)
+    name = forms.CharField(max_length=220, required=False)
     # use the class Meta to specify the model for the customer form
     class Meta:
         model = Location
