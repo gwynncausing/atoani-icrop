@@ -60,15 +60,21 @@
                             </ul>
                             <div class="my-lg-0">
                                 <ul class="navbar-nav mr-auto">
+                                    {% if not user.is_authenticated %}
                                     <li class="nav-item">
-                                        {% if not user.is_authenticated %}
-                                        <a class="nav-link" href="{% url 'login_register:register' %}">Register</a> {% endif %}
+                                        <a class="nav-link" href="{% url 'login_register:register' %}">Register</a> 
                                     </li>
                                     <li class="nav-item">
-                                        {% if user.is_authenticated %}
-                                        <a class="nav-link" href="{% url 'login_register:logout' %}">Logout</a> {% else %}
-                                        <a class="nav-link" href="{% url 'login_register:login' %}">Login</a> {% endif %}
+                                        <a class="nav-link" href="{% url 'login_register:login' %}">Login</a> 
                                     </li>
+                                    {% else %}
+                                    <li class="nav-item"></li>
+                                        <a class="nav-link" href="{% url 'login_register:settings' %}">Settings</a> 
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'login_register:logout' %}">Logout</a> 
+                                    </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
@@ -80,7 +86,7 @@
 
     {% block content %} {% endblock %}
 
-    <div class="footer mt-5">
+    <div class="footer mt-5 py-3">
         <div class="container p-2">
             <span class="pr-3"><i class="fa fa-facebook icon pr-1"></i>/atoaniph</span>
             <span><i class="fa fa-instagram icon pr-1"></i>@atoani.ph</span>
