@@ -111,7 +111,7 @@ class Crop_Soil(models.Model):
 
 class Customer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
-    location = models.ForeignKey(Location,on_delete=models.CASCADE)
+    location = models.ManyToManyField(Location)
     contact_number = models.CharField(max_length=14)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
@@ -136,6 +136,12 @@ class Customer(models.Model):
 
     def get_customer_name(self):
         return get_name(self.contact_number)
+
+    def get_locations(self):
+        return self.location.all().values('name','id')
+
+    def add_location(self,location_id):
+        self.location.add(location_id)
 
     class Meta:
         ordering = ['name']

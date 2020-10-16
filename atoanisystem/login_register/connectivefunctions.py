@@ -43,6 +43,7 @@ reserve_order(<order id>, <farmer id>)
 (make sure that order_id is UUID, you can use Order['order_id'])
 
 TO CHECK IF LOCATION EXISTS GIVEN A LOCATION AND RETURN THE APPROPRIATE LOCATION ID
+USED TO GET LOCATION ID FOR CREATE ORDER
 get_order_location(<customer id>,<candidate location dictionary>)
 
 *note:  candidate location must be of the form {'street': , 'brgy', 'city', 'provice'}
@@ -59,6 +60,19 @@ check_obsolete_orders()
 
 *note: Automatically adds an "Overdue" message
 
+----------------------------
+CUSTOMER RELATED FUNCTIONS
+----------------------------
+
+TO GET ALL OF CUSTOMER'S LOCATIONS
+get_customer_location(<customer id>)
+
+-----------------
+GETTER FUNCTIONS
+-----------------
+
+TO GET A DICTIONARY LIST OF ALL CROPS
+get_crop_list()
 '''
 
 def convert(time):
@@ -165,6 +179,10 @@ def reserve_order(order_id,farmer_id):
 # check months for farmers ????
 # order related functions
 
+def add_order(customer_id, crop_id, demand, location_id):
+    new_order = Order(customer_id=customer_id, crop_id=crop_id, weight=demand, location_id=location_id)
+    new_order.save()
+
 def update_land_area():
     for x in Order.objects.all().values():
         calculate_land_area(x)
@@ -206,13 +224,16 @@ def check_obsolete_orders():
 def get_crop_list():
     return Crop.objects.all().values('id','name')
 
-
+# used for adding order
 def get_order_location(id,loc):
-    customer_location = Customer.objects.get(id=id).location_id
-    location_record = Location.objects.get(id=customer_location)
-    if loc['street'] == location_record.street and loc['brgy'] == location_record.brgy and loc['city'] == location_record.city and loc['province'] == location_record.province:
-        return customer_location
-    else:
-        newloc = Location(street=loc['street'], brgy = loc['brgy'], city = loc['city'], province = loc['province'] )
-        newloc.save()
-        return Location.objects.latest('id').id
+    # checks for loc similar toexisting addresses in customer
+    for location_record in Customer.objects.get(id=id).location.all():
+        if loc['street'] == location_record.street and loc['brgy'] == location_record.brgy and loc['city'] == location_record.city and loc['province'] == location_record.province:
+            return customer_location
+    # no match, create new location
+    newloc = Location(street=loc['street'], brgy = loc['brgy'], city = loc['city'], province = loc['province'] )
+    newloc.save()
+    return Location.objects.latest('id').id
+
+def get_customer_location(id):
+    return Customer.objects.get(id=id).get_locations()
