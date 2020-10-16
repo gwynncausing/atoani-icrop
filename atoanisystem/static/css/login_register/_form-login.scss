@@ -1,17 +1,12 @@
 .form-login {
-    color: $white-color;
-    background-color: $tertiary-color;
+    color: $text-color2;
+    background-color: $light-green;
     width: 100%;
     border-radius: 0.5rem;
-    margin-top: 30%;
+    margin-top: 20%;
+    margin-bottom: 20%;
     a {
         color: $white-color;
-    }
-    .form-header {
-        background-color: $secondary-color;
-        height: 2.75rem;
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
     }
     .form-body {
         padding-left: 10%;

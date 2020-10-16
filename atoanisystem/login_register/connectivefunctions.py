@@ -3,19 +3,25 @@ import pandas as pd
 from datetime import date
 
 '''
+----------------------------
 FOR DATATABLE FUNCTIONS:
-
+----------------------------
 to generate datatable for both datatable views and view order
 datatable = datatable_farmer(<farmer id>) or datatable_customer(<customer id>)
 
 to generate datatable dictionary for dashboard datatables
 datatable_dictionary = display_farmer_table(datatable) or display_customer_table(datatable)
 
+-------------------------------
 ALGORITHM FUNCTION (NOT FINAL)
+-------------------------------
 
 to generate a list of top 10 (or sa pilay maabot) recommendations
 matching_algorithm(<farmer land_area>)
 
+----------------------------
+ACCOUNT CHANGE FUNCTIONS
+----------------------------
 TO COLLECTIVELY CHANGE FARMER DETAILS CALL
 change_farmer_details(<farmer id>, <details>*)
 
@@ -28,13 +34,33 @@ change_customer_details(<customer id>, <details>*)
 e.g.
 details = [['is_cancelled',True]['message','Overdue order']]
 
+--------------------------
+DATABASE ADDING FUNCTIONS
+--------------------------
 
 TO RESERVE ORDER
 reserve_order(<order id>, <farmer id>)
 (make sure that order_id is UUID, you can use Order['order_id'])
+
+TO CHECK IF LOCATION EXISTS GIVEN A LOCATION AND RETURN THE APPROPRIATE LOCATION ID
+get_order_location(<customer id>,<candidate location dictionary>)
+
+*note:  candidate location must be of the form {'street': , 'brgy', 'city', 'provice'}
+
+---------------------------------------------------------
+STARTUP FUNCTIONS / RUN EVERYTIME SOMETHING GETS UPDATED
+---------------------------------------------------------
+
+TO COLLECTIVELY CALCULATE LAND AREA
+calculate_land_area()
+
+TO COLLECTIVELY CHECK OBSOLETE (1-Month Old) ORDERS
+check_obsolete_orders()
+
+*note: Automatically adds an "Overdue" message
+
 '''
 
-# insert part of the algorithm here involving land_area calculation
 def convert(time):
     try:
         return dt(time.year,time.month,time.day)
@@ -151,12 +177,15 @@ def matching_algorithm(land_size):
     return available_order[:10].to_dict('records')
 
 
-def calculate_land_area(order):
+def calculate_land_area_single(order):
     order_crop = Crop.objects.filter(id=order['crop_id']).values('harvest_weight_per_land_area','productivity')[0]
     land_area = ((order['weight'] * 0.001)/order_crop['harvest_weight_per_land_area']) * 10000
     land_area = land_area + (land_area * (1-(order_crop['productivity']/100)))
     Order.objects.get(order_id=order['order_id']).set_value([['land_area_needed',land_area]])
     # return order_crop
+
+def calculate_land_area():
+    [calculate_land_area_single(order) for order in Order.objects.filter(land_area_needed__isnull=True).values()]
 
 def check_obsolete_orders():
     order = pd.DataFrame(Order.objects.all().values())
@@ -171,4 +200,19 @@ def check_obsolete_orders():
         val = merged_df.iloc[i]
         #if a month has passed and order is not cancelled
         if (date_now - val['order_date']).days > 29 and not val['is_cancelled']:
-            Order.objects.filter(order_id = merged_df.iloc[i]['order_id'])[0].set_value([["is_cancelled",True],["message","1 month overdue"]])
+            Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])
+
+
+def get_crop_list():
+    return Crop.objects.all().values('id','name')
+
+
+def get_order_location(id,loc):
+    customer_location = Customer.objects.get(id=id).location_id
+    location_record = Location.objects.get(id=customer_location)
+    if loc['street'] == location_record.street and loc['brgy'] == location_record.brgy and loc['city'] = location_record.city and loc['province'] = location_record.province:
+        return customer_location
+    else:
+        newloc = Location(street=loc['street'], brgy = loc['brgy'], city = loc['city'], province= loc['province'] )
+        newloc.save()
+        return Location.objects.latest('id').id
