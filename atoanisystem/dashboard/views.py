@@ -144,6 +144,11 @@ class CustomerFinishedOrdersViewModal(View):
         }
         return JsonResponse(data)
 
+#Create Order View
+class CustomerCreateOrderView(View):
+    def post(self, request):
+        return "hello"
+
 
 # 'order_id','order_pair_id','order_date','location_id','name','weight','status'
 class TestView(View):

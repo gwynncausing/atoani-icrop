@@ -1,4 +1,6 @@
 (() =>{
+   const urlCreateOrder = "";
+
    const orderForm = $("#customer-order-form");
    const demand = $("input[name=demand]");
    const customAddress = $("#custom-address");
@@ -37,5 +39,22 @@
             isCustomAddressClicked = true;
         }
    })
+
+   const createOrder = () => {
+        let formData = new FormData(orderForm);
+        $.ajax({
+            url: '',
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response){
+                input.classList.add('is-valid');
+            },
+            error: function(response){
+                input.classList.add('is-invalid');
+            }
+        });
+    }
 
 })()
