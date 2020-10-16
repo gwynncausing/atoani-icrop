@@ -106,7 +106,7 @@ class RegistrationView(View):
         email = request.POST.get('email')
         password = request.POST.get('password1')
         user = User.objects.create_user(first_name=firstname,last_name=lastname,username=username,email=email,password=password)
-        location_form = LocationForm(request.POST)
+        location_form = LocationForm(   )
         account_type = request.POST.get('account-type')
         Group.objects.get(name=account_type).user_set.add(user)
         if account_type == 'Farmer':
