@@ -196,9 +196,28 @@
                             <div class="col-6" id="days">-</div>
                     </div>
                 </div>
-                <div class="modal-footer  pt-2 pb-2">
-                    <button type="button" class="btn reserved-btn">Reserve</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <div class="modal-footer pt-2 pb-2">
+                    <div class="row w-100">
+                        <!-- Available for reservation, and needs to confirm -->
+                        <div id="confirmReserveMsg" class="col-12 rounded text-center text-light bg-success border-info px-1 py-2">
+                            The order is available for reservation. Are you sure you want to reserve this order?
+                        </div>
+                        <!-- Failed Reservaton -->
+                        <div id="failedReserveMsg" class="col-12 rounded text-center text-light bg-danger border-info px-1 py-2">
+                            Sorry but the order is already taken. Please try with other orders.
+                        </div>
+                        <!-- Successfulyl Reserved -->
+                        <div id="successReserveMsg" class="col-12 rounded text-center text-light bg-info border-info px-1 py-2">
+                            The order has been reserved for you. You can check it in your reserved orders section.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button id="reserveBtn" type="button" class="btn reserved-btn">Reserve</button>
+                            <button id="cancelBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -207,9 +226,14 @@
 
 
 {% block scripts %}
+    
     <!-- Datatables JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
     <!-- dashboard js -->
     <script src="{% static '/js/farmer-dashboard.js' %}"></script>
+    <script>
+        const csrftoken = '{{ csrf_token }}';
+        setCSRF(csrftoken)
+    </script>
 {% endblock %}
 

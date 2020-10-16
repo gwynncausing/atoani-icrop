@@ -210,9 +210,11 @@ def get_crop_list():
 def get_order_location(id,loc):
     customer_location = Customer.objects.get(id=id).location_id
     location_record = Location.objects.get(id=customer_location)
-    if loc['street'] == location_record.street and loc['brgy'] == location_record.brgy and loc['city'] = location_record.city and loc['province'] = location_record.province:
+    if loc['street'] == location_record.street and loc['brgy'] == location_record.brgy and loc['city'] == location_record.city and loc['province'] == location_record.province:
         return customer_location
     else:
         newloc = Location(street=loc['street'], brgy = loc['brgy'], city = loc['city'], province= loc['province'] )
         newloc.save()
-        return Location.objects.latest('id').id
+        return Location.objects.latest('id').id 
+        #boss martin pwede ni ilisan og newloc.id instead of kuhaon ang latest entry sa Location table?
+        #basin ba nay mag simultaneous add pud og address
