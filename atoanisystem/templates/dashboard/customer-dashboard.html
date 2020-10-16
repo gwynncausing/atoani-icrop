@@ -369,8 +369,8 @@
     </div>
 
     <!-- Modal Order CREATE-->
-    <div class="modal-customer modal fade" id="modal-create-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered " role="document">
+    <div class="modal-customer modal fade modal-order" id="modal-create-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content pb-4">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Order Form</h5>
@@ -390,14 +390,14 @@
 
                                 <div class="col-md-9 col-12 row pl-4 pt-2">
                                     <div class="form-check col-12 col-md-9 mt-2">
-                                        <input class="form-check-input address-on-file" type="radio" name="address"  id="address1" value="option1" checked>
+                                        <input class="form-check-input address-on-file" type="radio" name="address"  id="default-address" value="{{user.location.id}}" checked>
                                         <label class="form-check-label" for="address1">
                                             Default Address
                                         </label>
                                     </div>
 
                                     <div class="form-check col-12 col-md-9 mt-2">
-                                        <input class="form-check-input" type="radio" name="address" id="custom-address" value="option2">
+                                        <input class="form-check-input" type="radio" name="address" id="custom-address" value="custom-address">
                                         <label class="form-check-label" for="custom-address">
                                             Custom Address
                                         </label>
@@ -430,7 +430,11 @@
                                 </div>
                                 <div class="form-group col-12 col-md-9 row pr-0">
                                     <div class="col-12 pl-4 pr-0">
-                                        <input class="form-control" type="text" name="crop-name" id="crop-name" placeholder="Crop Name" maxlength="30" required>
+                                        <select class="form-control" name="crop-name" id="crop-name">
+                                            {% for crop in crops %}
+                                                <option value="{{crop.id}}">{{crop.name}}</option>
+                                            {% endfor %}
+                                        </select>
                                         <div id="crop-name-invalid" class="invalid-feedback">
                                             Please enter the name of the crop.
                                         </div>

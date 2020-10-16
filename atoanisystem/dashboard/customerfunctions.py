@@ -56,16 +56,33 @@ def get_finished_orders(user):
 
 #returns the created object
 def create_order(customer,crop_instance,weight,location_instance,land_area_needed):
-    return Order.objects.create(
+
+    #create order
+    order = Order.objects.create(
         customer=customer,
         crop=crop_instance,
         weight=weight,
         location=location_instance,
         land_area_needed=land_area_needed
     )
+    
+    #calculate the land area needed based on the order
+    dashboard_utility.calculate_land_area_single({
+        "order_id": order.order_id,
+        "crop_id": order.crop_id,
+        "harvest_weight_per_land_area": order.crop.harvest_weight_per_land_area,
+        "productivity": order.crop.productivity,
+        "weight": float(order.weight)
+    })    
+    
+    return order;
 
 def cancel_order(order_pair):
     #get order instance, set order.is_reserved = False
     #set order_pair.is_canceled = True
     #delete from db?
     pass
+
+#return all crops
+def get_all_crops():
+    return Crop.objects.all().values('id', 'name')

@@ -2,10 +2,14 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, redirect, render
 from django.views.generic import View
-from login_register.models import Order
+from login_register.models import Order 
 from . import farmerfunctions as ff
 from . import customerfunctions as cf
 from login_register.models import *
+
+from login_register.forms import *
+
+from login_register.connectivefunctions import calculate_land_area_single
 
 #########################################################
 #               Farmer related views                    #
@@ -73,8 +77,17 @@ class CustomerDashboardView(View):
                 else:
                     return redirect("login_register:approval")
             elif hasattr(currentUser, 'customer'):
+                #Crop Context
                 if(currentUser.customer.is_approved):
-                    return render(request,'dashboard/customer-dashboard.html')
+                    #get all crops
+                    crops = cf.get_all_crops()
+                    context = {
+                        'crops': crops
+                    }
+                    
+                    print(crops)
+                    
+                    return render(request,'dashboard/customer-dashboard.html', context)
                 else:
                     return redirect("login_register:approval")
         else:
@@ -199,4 +212,44 @@ class AccountView(View):
             new_user.location = location
             new_user.save()
         return render(request,'dashboard/customer-dashboard.html')
+    
+#Create Order
+class CreateOrderView(View):
+    def post(self, request):
+        if request.is_ajax():
+            
+            #get address
+            location_id = request.POST.get('address')
+            
+            #check if address is custom
+            if location_id == 'custom-address':
+                location_form = LocationForm(request.POST)
+                if location_form.is_valid():
+                    location = location_form.save(commit=False)
+                    location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
+                    if location.street:
+                        location.name=str(location.street)+', '+location.name
+                    location.save()
+                    location_id = location.id;
+                else:
+                    return JsonResponse({'result':'not-ok'},status=500)
+            
+            #get crop_id
+            crop_id = request.POST.get('crop-name')
+            #get demand (weight)
+            demand = request.POST.get('demand')
+            
+            #get customer instance
+            customer = Customer.objects.get(name_id=request.user.id)
+            #get crop instance
+            crop = Crop.objects.get(id=crop_id)
+            #get location instance
+            location = Location.objects.get(id=location_id)
+            
+            #create customer order
+            order = cf.create_order(customer,crop,demand,location,0)
+
+            
+            return JsonResponse({'result':'ok'},status=200)
+       
 

@@ -1,21 +1,27 @@
 (() =>{
-   const urlCreateOrder = "";
+   const urlCreateOrder = "/dashboard/create-order-customer";
 
    const orderForm = $("#customer-order-form");
    const demand = $("input[name=demand]");
    const customAddress = $("#custom-address");
    const customAddressHolder = $("#custom-address-holder");
    const addressesOnFile = $(".address-on-file");
+   const modalOrder = $(".modal-order");
+   const inputTexts = $("input[type=text]");
+   const defaultAddress = $("#default-address");
 
    let isCustomAddressClicked = false
    
    orderForm.on("submit", e => {
-       if(orderForm[0].checkValidity() === false){
-           e.preventDefault();
-           e.stopPropagation();
-       }
+        e.preventDefault();
+        e.stopPropagation();
 
-       orderForm.addClass("was-validated");
+        if(orderForm[0].checkValidity() === false)
+            orderForm.addClass("was-validated");
+        else     
+            createOrder();
+    
+
    })
 
    //make the demand input accept only numbers
@@ -40,19 +46,31 @@
         }
    })
 
-   const createOrder = () => {
-        let formData = new FormData(orderForm);
+    modalOrder.on('hidden.bs.modal', e => {
+        demand.val("");
+        inputTexts.val("");
+        defaultAddress.prop("checked", true);
+
+        if(isCustomAddressClicked == true){
+            customAddressHolder.slideToggle( 280, () => {});
+            isCustomAddressClicked = false;
+        }
+    })
+
+    const createOrder = () => {
+        let formData = new FormData(document.querySelector("#customer-order-form"));
         $.ajax({
-            url: '',
+            url: urlCreateOrder,
             type: 'post',
             data: formData,
             contentType: false,
             processData: false,
             success: function(response){
-                input.classList.add('is-valid');
+                modalOrder.modal('hide');
+                console.log("success")
             },
             error: function(response){
-                input.classList.add('is-invalid');
+                console.log("fail")
             }
         });
     }
