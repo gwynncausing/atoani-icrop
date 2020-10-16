@@ -23,13 +23,11 @@ class LoginView(View):
             elif hasattr(currentUser, 'farmer'):
                 if(currentUser.farmer.is_approved):
                     return redirect("dashboard:farmer")
-                    # return render(request,'dashboard/farmer-dashboard.html')
                 else:
                     return redirect("login_register:approval")
             elif hasattr(currentUser, 'customer'):
                 if(currentUser.customer.is_approved):
                     return redirect("dashboard:customer")
-                    # return render(request,'dashboard/customer-dashboard.html')
                 else:
                     return redirect("login_register:approval")
         else:
@@ -47,13 +45,11 @@ class LoginView(View):
             elif hasattr(currentUser, 'farmer'):
                 if(currentUser.farmer.is_approved):
                     return redirect("dashboard:farmer")
-                    # return render(request,'dashboard/farmer-dashboard.html')
                 else:
                     return redirect("login_register:approval")
             elif hasattr(currentUser, 'customer'):
                 if(currentUser.customer.is_approved):
                     return redirect("dashboard:customer")
-                    # return render(request,'dashboard/customer-dashboard.html')
                 else:
                     return redirect("login_register:approval")
         else:
@@ -77,6 +73,7 @@ class RegistrationView(View):
                     return redirect("login_register:approval")
         else:
             return render(request,'login_register/registration.html')
+
     def post(self,request):
         if request.is_ajax():
             if request.POST.get('input') == 'contact_number':
@@ -127,10 +124,15 @@ class RegistrationView(View):
                 location = duplicate_list[0]
             new_user = form.save(commit=False)
             new_user.name = user
-            new_user.location = location
+            if account_type == "Farmer":
+                new_user.location = location
             new_user.save()
+            # to cater the ManyToManyField of customer.location
+            if account_type == "Customer":
+                new_user.location.add(location)
         #return HttpResponse(location_form.errors)
         return redirect('login_register:login')
+
 
 class ApprovalView(View):
     def get(self,request):
@@ -161,4 +163,7 @@ class LogoutView(View):
 
 class SettingsView(View):
     def get(self, request):
-        return render(request, "login_register/settings.html")
+        if request.user.is_authenticated and not request.user.is_staff:
+            return render(request, "login_register/settings.html")
+        else:
+            return redirect("login_register:login")
