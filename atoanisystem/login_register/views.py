@@ -124,8 +124,12 @@ class RegistrationView(View):
                 location = duplicate_list[0]
             new_user = form.save(commit=False)
             new_user.name = user
-            new_user.location = location
+            if account_type == "Farmer":
+                new_user.location = location
             new_user.save()
+            # to cater the ManyToManyField of customer.location
+            if account_type == "Customer":
+                new_user.location.add(location)
         #return HttpResponse(location_form.errors)
         return redirect('login_register:login')
 
