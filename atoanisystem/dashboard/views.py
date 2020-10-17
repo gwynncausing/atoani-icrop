@@ -33,6 +33,33 @@ class FarmerDashboardView(View):
         else:
             return redirect('login_register:login')
         return render(request,'dashboard/farmer-dashboard.html')
+    def post(self,request):
+        if request.is_ajax():
+            #checks order availability and if it is, temporarily reserves it
+            if request.POST.get('operation') == 'check-order':
+                status = 500
+                order = Order.objects.get(order_id=request.POST.get('order-id'))
+                if not order.is_reserved:
+                    status = 200
+                    order.is_reserved = True
+                    order.save()
+                json = {'data': ''}
+                return JsonResponse(data=json,status=status)
+            #this is to handle the case that the farmer does not want to reserve the order and cancels while the order is reserved
+            elif request.POST.get('operation') == 'cancel-reserve':
+                order = Order.objects.get(order_id=request.POST.get('order-id'))
+                order.is_reserved = False
+                order.save()
+                json = {'data': ''}
+                return JsonResponse(data=json,status=200)
+            #binds the order and farmer in an order_pair instance
+            elif request.POST.get('operation') == 'confirm-reserve':
+                order = Order.objects.get(order_id=request.POST.get('order-id'))
+                order.status = "Ongoing"
+                order.save()
+                order_pair = ff.reserve_to(request.user.farmer,order)
+                json = {'data': ''}
+                return JsonResponse(data=json,status=200)
 
 class FarmerIncomingOrdersView(View):
     def get(self,request):
