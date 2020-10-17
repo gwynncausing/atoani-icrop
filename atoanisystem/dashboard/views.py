@@ -82,10 +82,8 @@ class CustomerDashboardView(View):
                     #get all crops
                     crops = cf.get_all_crops()
                     context = {
-                        'crops': crops
+                        'crops': crops,
                     }
-                    
-                    print(crops)
                     
                     return render(request,'dashboard/customer-dashboard.html', context)
                 else:
@@ -97,23 +95,34 @@ class CustomerDashboardView(View):
         if request.is_ajax():
             print("request was ajax")
             if request.POST.get('operation') == 'create-order':
-                customer = request.user
+                
                 crop_id = request.POST.get('crop-id')
-                crop = Crop.objects.get(id=crop_id)
-                weight = request.POST.get('weight')
-                land_area_needed = request.POST.get('land-area-needed')
-                location = request.user.customer.location
-                street = request.POST.get('street')
-                brgy = request.POST.get('barangay')
-                city = request.POST.get('city')
-                province = request.POST.get('province')
-                if location.province != province or location.city != city or location.brgy != brgy or location.street != street:
+                demand = request.POST.get('weight')
+                location_id = request.POST.get('address')
+                
+                crop = Crop.objects.get(id=crop_id)  
+                customer = request.user.customer     
+                         
+                #check if address is custom
+                if location_id == 'custom-address':
+                    street = request.POST.get('street')
+                    brgy = request.POST.get('barangay')
+                    city = request.POST.get('city')
+                    province = request.POST.get('province')
                     location = Location.objects.create(street=street,brgy=brgy,city=city,province=province)
                     location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
-                order = cf.create_order(customer,crop,weight,location,land_area_needed)
+                    location.save();
+                    location_id = location.id;
+                
+                location = Location.objects.get(id=location_id)
+                
+                order = cf.create_order(customer,crop,demand,location,0)
+
                 arr = cf.get_total_orders(request.user)
                 json = {'data':arr}
                 return JsonResponse(json)
+                
+                
         return redirect('login_register:login')
 
 class CustomerTotalOrdersView(View):
@@ -213,43 +222,4 @@ class AccountView(View):
             new_user.save()
         return render(request,'dashboard/customer-dashboard.html')
     
-#Create Order
-class CreateOrderView(View):
-    def post(self, request):
-        if request.is_ajax():
-            
-            #get address
-            location_id = request.POST.get('address')
-            
-            #check if address is custom
-            if location_id == 'custom-address':
-                location_form = LocationForm(request.POST)
-                if location_form.is_valid():
-                    location = location_form.save(commit=False)
-                    location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
-                    if location.street:
-                        location.name=str(location.street)+', '+location.name
-                    location.save()
-                    location_id = location.id;
-                else:
-                    return JsonResponse({'result':'not-ok'},status=500)
-            
-            #get crop_id
-            crop_id = request.POST.get('crop-name')
-            #get demand (weight)
-            demand = request.POST.get('demand')
-            
-            #get customer instance
-            customer = Customer.objects.get(name_id=request.user.id)
-            #get crop instance
-            crop = Crop.objects.get(id=crop_id)
-            #get location instance
-            location = Location.objects.get(id=location_id)
-            
-            #create customer order
-            order = cf.create_order(customer,crop,demand,location,0)
-
-            
-            return JsonResponse({'result':'ok'},status=200)
-       
 

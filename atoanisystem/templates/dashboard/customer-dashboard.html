@@ -390,9 +390,9 @@
 
                                 <div class="col-md-9 col-12 row pl-4 pt-2">
                                     <div class="form-check col-12 col-md-9 mt-2">
-                                        <input class="form-check-input address-on-file" type="radio" name="address"  id="default-address" value="{{user.location.id}}" checked>
+                                        <input class="form-check-input address-on-file" type="radio" name="address"  id="default-address" value="{{user.customer.location.id}}" checked>
                                         <label class="form-check-label" for="address1">
-                                            Default Address
+                                            {{user.customer.location.name}}
                                         </label>
                                     </div>
 
@@ -414,7 +414,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-12 col-md-12">
-                                        <select class="form-control" name="brgy" id="barangay">
+                                        <select class="form-control" name="barangay" id="barangay">
                                         </select>
                                     </div>
                                     <div class="form-group col-12 col-md-12">
@@ -430,7 +430,7 @@
                                 </div>
                                 <div class="form-group col-12 col-md-9 row pr-0">
                                     <div class="col-12 pl-4 pr-0">
-                                        <select class="form-control" name="crop-name" id="crop-name">
+                                        <select class="form-control" name="crop-id" id="crop-name">
                                             {% for crop in crops %}
                                                 <option value="{{crop.id}}">{{crop.name}}</option>
                                             {% endfor %}
@@ -445,7 +445,7 @@
                                 </div>
                                 <div class="form-groupcol-12 col-md-9 row pr-0">
                                     <div class="col-12 pl-4 pr-0">
-                                        <input class="form-control" type="text" name="demand" id="demand" placeholder="Demand" maxlength="5" required>
+                                        <input class="form-control" type="text" name="weight" id="demand" placeholder="Demand" maxlength="5" required>
                                         <span id="kg-indicator">kg.</span>
                                         <div id="demand-invalid" class="invalid-feedback">
                                             Please enter your target demand.

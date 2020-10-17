@@ -1,5 +1,5 @@
 (() =>{
-   const urlCreateOrder = "/dashboard/create-order-customer";
+   const urlCreateOrder = "/dashboard/customer/";
 
    const orderForm = $("#customer-order-form");
    const demand = $("input[name=demand]");
@@ -59,6 +59,8 @@
 
     const createOrder = () => {
         let formData = new FormData(document.querySelector("#customer-order-form"));
+        formData.append("operation", "create-order");
+
         $.ajax({
             url: urlCreateOrder,
             type: 'post',
@@ -67,7 +69,10 @@
             processData: false,
             success: function(response){
                 modalOrder.modal('hide');
-                console.log("success")
+                
+                //this total table came from customer dashboard
+                totalTable.ajax.reload();
+
             },
             error: function(response){
                 console.log("fail")
