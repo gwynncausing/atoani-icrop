@@ -2,10 +2,14 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, redirect, render
 from django.views.generic import View
-from login_register.models import Order
+from login_register.models import Order 
 from . import farmerfunctions as ff
 from . import customerfunctions as cf
 from login_register.models import *
+
+from login_register.forms import *
+
+from login_register.connectivefunctions import calculate_land_area_single
 
 #########################################################
 #               Farmer related views                    #
@@ -100,8 +104,20 @@ class CustomerDashboardView(View):
                 else:
                     return redirect("login_register:approval")
             elif hasattr(currentUser, 'customer'):
+                #Crop Context
                 if(currentUser.customer.is_approved):
-                    return render(request,'dashboard/customer-dashboard.html')
+                    
+                    #get all crops
+                    crops = cf.get_all_crops()
+                    context = {
+                        'crops': crops,
+                    }
+                    
+                    #print(request.user.id)
+                    #print(request.user.customer.id)
+                    #print(request.user.customer.location.all())
+                    
+                    return render(request,'dashboard/customer-dashboard.html', context)
                 else:
                     return redirect("login_register:approval")
         else:
@@ -111,23 +127,36 @@ class CustomerDashboardView(View):
         if request.is_ajax():
             print("request was ajax")
             if request.POST.get('operation') == 'create-order':
-                customer = request.user
+                
+                print(request.POST)
+                
+                demand = request.POST.get('weight')
+                location_id = request.POST.get('address')
                 crop_id = request.POST.get('crop-id')
-                crop = Crop.objects.get(id=crop_id)
-                weight = request.POST.get('weight')
-                land_area_needed = request.POST.get('land-area-needed')
-                location = request.user.customer.location
-                street = request.POST.get('street')
-                brgy = request.POST.get('barangay')
-                city = request.POST.get('city')
-                province = request.POST.get('province')
-                if location.province != province or location.city != city or location.brgy != brgy or location.street != street:
+                
+                #print("Crop: " + crop_id)                
+                crop = Crop.objects.get(id=crop_id)  
+                customer = request.user.customer     
+                         
+                #check if address is custom
+                if location_id == 'custom-address':
+                    street = request.POST.get('street')
+                    brgy = request.POST.get('barangay')
+                    city = request.POST.get('city')
+                    province = request.POST.get('province')
                     location = Location.objects.create(street=street,brgy=brgy,city=city,province=province)
                     location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
-                order = cf.create_order(customer,crop,weight,location,land_area_needed)
+                    location.save();
+                    location_id = location.id;
+                
+                location = Location.objects.get(id=location_id)
+                
+                order = cf.create_order(customer,crop,demand,location,0)
+
                 arr = cf.get_total_orders(request.user)
                 json = {'data':arr}
                 return JsonResponse(json)
+         
         return redirect('login_register:login')
 
 class CustomerTotalOrdersView(View):
@@ -171,15 +200,8 @@ class CustomerFinishedOrdersViewModal(View):
         }
         return JsonResponse(data)
 
-#Create Order View
-class CustomerCreateOrderView(View):
+class AccountView(View):
     def post(self, request):
-        return "hello"
-
-
-# 'order_id','order_pair_id','order_date','location_id','name','weight','status'
-class TestView(View):
-    def get(self,request):
         if request.is_ajax():
             if request.POST.get('input') == 'contact_number':
                 # check contact number if it already exists
@@ -233,4 +255,5 @@ class TestView(View):
             new_user.location = location
             new_user.save()
         return render(request,'dashboard/customer-dashboard.html')
+    
 

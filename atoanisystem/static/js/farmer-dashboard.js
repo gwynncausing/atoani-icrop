@@ -268,7 +268,7 @@ function cancelReservation() {
 
 var incomingTable = null;
 var finishedTable = null;
-var reservedTable = null;
+var reservedTable = null; 
 
 //Executing it all
 $(document).ready(function () {
