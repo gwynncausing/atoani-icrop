@@ -391,7 +391,7 @@
                                 <div class="col-md-9 col-12 row pl-4 pt-2">
                                     <div class="form-check col-12 col-md-9 mt-2">
                                         <input class="form-check-input address-on-file" type="radio" name="address"  id="default-address" value="{{user.customer.location.id}}" checked>
-                                        <label class="form-check-label" for="address1">
+                                        <label class="form-check-label text-truncate d-inline-block" for="address1" style="max-width: 18rem;">
                                             {{user.customer.location.name}}
                                         </label>
                                     </div>
@@ -455,14 +455,19 @@
                             </div>
 
                         </div>
- 
+
+                        
                         <div class="mt-5 pt-5 pr-3 text-right">
                             <button type="submit" class="btn ok-btn mr-2">Order</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         </div>
-
                     </form>                    
                 </div>
+
+                <div id="error-connection-tag" class="modal-footer text-center pl-3 pr-3 pt-3 d-none">
+                    <!-- Show the error message -->
+                </div>
+
             </div>
         </div>
     </div>      

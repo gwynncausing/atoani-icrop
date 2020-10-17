@@ -1,6 +1,8 @@
 (() =>{
    const urlCreateOrder = "/dashboard/customer/";
 
+   const errorConnection = "There is a problem in the connection. Please try again or refresh the browser.";
+
    const orderForm = $("#customer-order-form");
    const demand = $("input[name=demand]");
    const customAddress = $("#custom-address");
@@ -9,6 +11,7 @@
    const modalOrder = $(".modal-order");
    const inputTexts = $("input[type=text]");
    const defaultAddress = $("#default-address");
+   const errorTag = $("#error-connection-tag");
 
    let isCustomAddressClicked = false
    
@@ -20,8 +23,6 @@
             orderForm.addClass("was-validated");
         else     
             createOrder();
-    
-
    })
 
    //make the demand input accept only numbers
@@ -55,6 +56,8 @@
             customAddressHolder.slideToggle( 280, () => {});
             isCustomAddressClicked = false;
         }
+
+        errorTag.addClass("d-none");
     })
 
     const createOrder = () => {
@@ -69,13 +72,13 @@
             processData: false,
             success: function(response){
                 modalOrder.modal('hide');
-                
                 //this total table came from customer dashboard
                 totalTable.ajax.reload();
 
             },
             error: function(response){
-                console.log("fail")
+                errorTag.innerHTML = errorConnection;
+                errorTag.removeClass("d-none");
             }
         });
     }
