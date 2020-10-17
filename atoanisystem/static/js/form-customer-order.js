@@ -27,6 +27,10 @@ function setCSRF(value){
 
     let isCustomAddressClicked = false
 
+    //when the order button is clicked
+    //check first the validity of the form
+    //if valid, show confirmation tag
+    //else, show validation guide
     orderBtn.on("click", e => {
         if(orderForm[0].checkValidity() === false)
             orderForm.addClass("was-validated");
@@ -45,12 +49,13 @@ function setCSRF(value){
         }
     })
 
+    //when the user click yes to confirm 
+    //this submit the form
     orderForm.on("submit", e => {
         yesBtn.prop("disabled", true);
         if(orderForm[0].checkValidity())
             createOrder();
         e.preventDefault();
-        
     });
 
 
@@ -91,11 +96,13 @@ function setCSRF(value){
         yesBtn.prop("disabled", false);
     });
 
+    //resets the modal when close
     modalOrder.on('hidden.bs.modal', e => {
         resetModal();
         setInputDisabled(false);
     })
 
+    //resets the modal order form
     const resetModal = () => {
         inputTexts.val("");
         defaultAddress.prop("checked", true);
@@ -119,6 +126,7 @@ function setCSRF(value){
         }
     }
 
+    //set the disability of the inputs
     const setInputDisabled = boolean => {
         inputs.prop('disabled', boolean)
     }

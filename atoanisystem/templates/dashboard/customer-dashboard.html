@@ -325,7 +325,7 @@
 
                                 <div class="col-md-9 col-12 row pl-4 pt-2">
                                     <!--
-                                    {% for location in user.customer.location_set.all %}
+                                    {% for location in user.customer.location.all %}
                                         <div class="form-check col-12 col-md-9 mt-2">
                                             <input class="form-check-input address-on-file" type="radio" name="address"  id="default-address" value="{{location.id}}" checked>
                                             <label class="form-check-label text-truncate d-inline-block" for="address1" style="max-width: 18rem;">
@@ -334,7 +334,6 @@
                                         </div>
                                     {% endfor %}
                                     -->
-
                                     <div class="form-check col-12 col-md-9 mt-2">
                                         <input class="form-check-input" type="radio" name="address" id="custom-address" value="custom-address">
                                         <label class="form-check-label" for="custom-address">
