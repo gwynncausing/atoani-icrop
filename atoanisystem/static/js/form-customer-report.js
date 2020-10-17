@@ -1,4 +1,5 @@
 (() =>{
+    /*
     const reportForm = document.querySelector("#form-order-details-report");
     const reportBtn = $(".report-btn");
 
@@ -16,5 +17,6 @@
         reportBtn.val($(".report-btn").val() == 'Close Report' ? "Report Problem" : "Close Report");
         $( ".report-form" ).slideToggle( 280, () => {});  
     });
+    */
 
 })()

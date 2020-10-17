@@ -106,11 +106,16 @@ class CustomerDashboardView(View):
             elif hasattr(currentUser, 'customer'):
                 #Crop Context
                 if(currentUser.customer.is_approved):
+                    
                     #get all crops
                     crops = cf.get_all_crops()
                     context = {
                         'crops': crops,
                     }
+                    
+                    print(request.user.id)
+                    print(request.user.customer.id)
+                    print(request.user.customer.location.all())
                     
                     return render(request,'dashboard/customer-dashboard.html', context)
                 else:
@@ -123,9 +128,14 @@ class CustomerDashboardView(View):
             print("request was ajax")
             if request.POST.get('operation') == 'create-order':
                 
-                crop_id = request.POST.get('crop-id')
+                print(request.POST)
                 demand = request.POST.get('weight')
+                print(demand)
                 location_id = request.POST.get('address')
+                print(location_id)
+                crop_id = request.POST.get('crop-id')
+                
+                #print("Crop: " + crop_id)
                 
                 crop = Crop.objects.get(id=crop_id)  
                 customer = request.user.customer     
@@ -148,6 +158,8 @@ class CustomerDashboardView(View):
                 arr = cf.get_total_orders(request.user)
                 json = {'data':arr}
                 return JsonResponse(json)
+            
+
                 
                 
         return redirect('login_register:login')

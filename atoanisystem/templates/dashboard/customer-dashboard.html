@@ -202,27 +202,6 @@
                         <div class="col-md-6 col-12 row mt-4">
                         </div>
                     </div>
-                    <div class="row pt-2 pb-2 mt-3 report-form" style="display: none;">
-                        <form id="form-order-details-report" class="col-11 ml-auto mr-auto bg-white" method="POST" novalidate autocomplete="off">
-                            {% csrf_token %}
-
-                            <div class="input-group pt-3">
-                                <input class="form-control" type="text" name="subject"  maxlength="16" required placeholder="What is your problem?">
-                                <div class="invalid-feedback">
-                                    Please state your problem.
-                                </div>
-                            </div>
-                        
-                            <div class="input-groupmt pt-3">
-                                <textarea class="form-control " rows="5" placeholder="Description*" maxlength="150" required></textarea>
-                                <div class="invalid-feedback">
-                                    Please state the description of the problem.
-                                </div>
-                            </div>                                
-
-                            <input type="submit" class="btn btn-danger mt-3 mb-3 float-right report-submit-btn">
-                        </form>
-                    </div>
                 </div>
                 <div class="pt-3 pb-3 pl-5 pr-5 d-flex justify-content-between">
                     <input type="button" class="btn btn-danger report-btn" value="Report Problem">
@@ -270,30 +249,8 @@
                         <div class="col-md-6 col-12 row mt-4">
                         </div>
                     </div>
-                    <div class="row pt-2 pb-2 mt-3 report-form" style="display: none;">
-                        <form id="form-order-details-report" class="col-11 ml-auto mr-auto bg-white" method="POST" novalidate autocomplete="off">
-                            {% csrf_token %}
-
-                            <div class="input-group pt-3">
-                                <input class="form-control" type="text" name="subject"  maxlength="16" required placeholder="What is your problem?">
-                                <div class="invalid-feedback">
-                                    Please state your problem.
-                                </div>
-                            </div>
-                        
-                            <div class="input-groupmt pt-3">
-                                <textarea class="form-control " rows="5" placeholder="Description*" maxlength="150" required></textarea>
-                                <div class="invalid-feedback">
-                                    Please state the description of the problem.
-                                </div>
-                            </div>                                
-
-                            <input type="submit" class="btn btn-danger mt-3 mb-3 float-right report-submit-btn">
-                        </form>
-                    </div>
                 </div>
                 <div class="pt-3 pb-3 pl-5 pr-5 d-flex justify-content-between">
-                    <input type="button" class="btn btn-danger report-btn" value="Report Problem">
                     <button type="button" class="btn ok-btn" data-dismiss="modal">OK</button>
                 </div>
             </div>
@@ -338,30 +295,8 @@
                         <div class="col-md-6 col-12 row mt-4">
                         </div>
                     </div>
-                    <div class="row pt-2 pb-2 mt-3 report-form" style="display: none;">
-                        <form id="form-order-details-report" class="col-11 ml-auto mr-auto bg-white" method="POST" novalidate autocomplete="off">
-                            {% csrf_token %}
-
-                            <div class="input-group pt-3">
-                                <input class="form-control" type="text" name="subject"  maxlength="16" required placeholder="What is your problem?">
-                                <div class="invalid-feedback">
-                                    Please state your problem.
-                                </div>
-                            </div>
-                        
-                            <div class="input-groupmt pt-3">
-                                <textarea class="form-control " rows="5" placeholder="Description*" maxlength="150" required></textarea>
-                                <div class="invalid-feedback">
-                                    Please state the description of the problem.
-                                </div>
-                            </div>                                
-
-                            <input type="submit" class="btn btn-danger mt-3 mb-3 float-right report-submit-btn">
-                        </form>
-                    </div>
                 </div>
                 <div class="pt-3 pb-3 pl-5 pr-5 d-flex justify-content-between">
-                    <input type="button" class="btn btn-danger report-btn" value="Report Problem">
                     <button type="button" class="btn ok-btn" data-dismiss="modal">OK</button>
                 </div>
             </div>
@@ -379,7 +314,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="customer-order-form" novalidate autocomplete="off" method="POST">
+                    <form id="customer-order-form" class="customer-order-form" novalidate autocomplete="off">
                         {% csrf_token %}
 
                         <div class="container pl-4 pr-5 mt-5 group-inputs">
@@ -389,12 +324,16 @@
                                 </div>
 
                                 <div class="col-md-9 col-12 row pl-4 pt-2">
-                                    <div class="form-check col-12 col-md-9 mt-2">
-                                        <input class="form-check-input address-on-file" type="radio" name="address"  id="default-address" value="{{user.customer.location.id}}" checked>
-                                        <label class="form-check-label text-truncate d-inline-block" for="address1" style="max-width: 18rem;">
-                                            {{user.customer.location.name}}
-                                        </label>
-                                    </div>
+                                    <!--
+                                    {% for location in user.customer.location_set.all %}
+                                        <div class="form-check col-12 col-md-9 mt-2">
+                                            <input class="form-check-input address-on-file" type="radio" name="address"  id="default-address" value="{{location.id}}" checked>
+                                            <label class="form-check-label text-truncate d-inline-block" for="address1" style="max-width: 18rem;">
+                                                {{location.name}}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                    -->
 
                                     <div class="form-check col-12 col-md-9 mt-2">
                                         <input class="form-check-input" type="radio" name="address" id="custom-address" value="custom-address">
@@ -430,7 +369,7 @@
                                 </div>
                                 <div class="form-group col-12 col-md-9 row pr-0">
                                     <div class="col-12 pl-4 pr-0">
-                                        <select class="form-control" name="crop-id" id="crop-name">
+                                        <select class="form-control" name="crop-id" id="crop-selector">
                                             {% for crop in crops %}
                                                 <option value="{{crop.id}}">{{crop.name}}</option>
                                             {% endfor %}
@@ -455,23 +394,59 @@
                             </div>
 
                         </div>
-
-                        
+                        <!--
                         <div class="mt-5 pt-5 pr-3 text-right">
-                            <button type="submit" class="btn ok-btn mr-2">Order</button>
+                            <button type="submit" id="order-btn" class="btn ok-btn mr-2">Order</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         </div>
+                        -->
+                        <div class="modal-footer mt-5 pt-2 pb-2">
+                            <div class="row w-100">
+                                <!-- Available for reservation, and needs to confirm -->
+                                <div id="confirmOrderMsg" class="d-none col-12 rounded text-center text-light bg-success border-info px-1 py-2">
+                                    Are you sure you want to send this order?
+                                </div>
+                                <!-- Failed Reservaton -->
+                                <div id="failedOrderMsg" class="d-none col-12 rounded text-center text-light bg-danger border-info px-1 py-2">
+                                    Sorry but the order is already taken. Please try with other orders.
+                                </div>
+                                <!-- Successfulyl Reserved -->
+                                <div id="successOrderMsg" class="d-none col-12 rounded text-center text-light bg-info border-info px-1 py-2">
+                                    The order has been sent and waiting to be reserved. You can check newly created order in the total orders table.
+                                </div>
+                            </div>
+                            <!--
+                            <div class="row">
+                                <div class="col-12">
+                                    <button id="reserveBtn" type="button" class="btn reserved-btn">Reserve</button>
+                                    <button id="cancelBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                            -->
+                            <div class="pr-2 pt-2 text-right">
+                                <button type="button" id="order-btn" class="btn ok-btn mr-2">Order</button>
+                                <button type="submit" id="yes-btn" class="d-none btn ok-btn mr-2">Yes</button>
+                                <button type="button" id="no-btn" class="d-none btn btn-outline-secondary mr-2" style="width: 5rem;">No</button>
+                                <button type="button" id="cancel-btn" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </div>
+                            
+                        </div>
+
                     </form>                    
                 </div>
 
+                
+
+                <!--
                 <div id="" class="modal-footer text-center pl-3 pr-3 pt-3">
-                    <div id="error-connection-tag" class="col-12 rounded text-center text-light bg-info px-1 py-2">
+                    <div id="error-connection-tag" class="col-12 d-none rounded text-center text-light bg-info px-1 py-2">
                         The order has been reserved for you. You can check it in your reserved orders section.
                     </div>
-                    <div id="success-create-order" class="col-12 rounded text-center text-light bg-info px-1 py-2">
+                    <div id="success-order-tag" class="col-12 d-none rounded text-center text-light bg-info px-1 py-2">
                         The order has been reserved for you. You can check it in your reserved orders section.
                     </div>
                 </div>
+                -->
 
             </div>
         </div>
@@ -484,7 +459,15 @@
     <script src="{% static '/js/customer-dashboard.js' %}"></script>
     <!-- For modal transition and validate form report -->
     <script src="{% static '/js/form-customer-report.js' %}"></script>
+    
+
+
     <script src="{% static '/js/form-customer-order.js' %}"></script>
+
+    <script>
+        const csrftoken = '{{ csrf_token }}';
+        setCSRF(csrftoken)
+    </script>
 
     <script src="{% static '/js/load-address.js' %}"></script>
     <script>
@@ -492,6 +475,9 @@
             loadAddresses("{% static '/js/philippine_address_2019v2.json' %}");
         });
     </script>   
+
+
+
 {% endblock %}
 
 
