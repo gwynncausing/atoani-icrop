@@ -15,6 +15,7 @@
 
 .settings-container .card #name,
 .settings-container .card #account,
+.settings-container .card #others,
 .settings-container .card #contact {
   background: #D4E4DB;
 }
@@ -28,6 +29,10 @@
 .settings-container .card .cancel-btn {
   color: #FFFFFF;
   background-color: #ABABAB;
+}
+
+.settings-container .card #contact .card-body .add-btn {
+  color: #0677E0;
 }
 
 .settings-container .btn-header {

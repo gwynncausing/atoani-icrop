@@ -240,3 +240,4 @@ class Order_Pairing(models.Model):
     class Meta:
         ordering = ['-expected_time']
         verbose_name_plural = "Order Pairings"
+

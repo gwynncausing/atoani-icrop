@@ -15,6 +15,7 @@
 
         #name,
         #account,
+        #others,
         #contact{
             background: #D4E4DB;
         }
@@ -29,6 +30,15 @@
             color: #FFFFFF;
             background-color: #ABABAB;
         }
+
+        #contact{
+            .card-body{
+                .add-btn{
+                    color: #0677E0;
+                }
+            }
+        }
+
     }
 
     .btn-header{
