@@ -31,6 +31,9 @@ function setCSRF(value){
     //check first the validity of the form
     //if valid, show confirmation tag
     //else, show validation guide
+    // orderForm.change(function(){
+    //     console.log(orderForm.serialize());
+    // });
     orderBtn.on("click", e => {
         if(orderForm[0].checkValidity() === false)
             orderForm.addClass("was-validated");
@@ -52,10 +55,11 @@ function setCSRF(value){
     //when the user click yes to confirm 
     //this submit the form
     orderForm.on("submit", e => {
+        //console.log(orderForm.serialize());
         yesBtn.prop("disabled", true);
+        e.preventDefault();
         if(orderForm[0].checkValidity())
             createOrder();
-        e.preventDefault();
     });
 
 
@@ -132,21 +136,14 @@ function setCSRF(value){
     }
 
     const createOrder = () => {
-        const form = document.querySelector(".customer-order-form")
-        let formData = new FormData(form);
+        const formData = new FormData();
+        //workaround for form data not capturing values of the orderForm when passed to its constructor
+        const elements = orderForm[0].elements;
+        for(i=0;i < elements.length; i++){
+            formData.append(elements[i].name,elements[i].value)
+        }
         formData.append("operation", "create-order");
-        
-        //temporary
-        formData.append("weight", $("[name=weight]").val());
-        formData.append("address", $("[name=address]").val());
-        formData.append("crop-id", $("[name=crop-id]").val());
-        formData.append("street", $("[name=street]").val());
-        formData.append("barangay", $("[name=barangay]").val());
-        formData.append("city", $("[name=city]").val());
-        formData.append("province", $("[name=province]").val());
-        
-        formData.append('csrfmiddlewaretoken',csrf_token);
-        
+
         $.ajax({
             url: urlCreateOrder,
             type: 'post',
