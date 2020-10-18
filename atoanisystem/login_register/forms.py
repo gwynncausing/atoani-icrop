@@ -7,13 +7,12 @@ class FarmerForm(forms.ModelForm):
     middlename = forms.CharField(required=False)
     company = forms.CharField(required=False)
     location = forms.ModelChoiceField(queryset=Location.objects.all(),required=False)
+    contact_number = forms.CharField(required=False)
     # use the class Meta to specify the model for the customer form
     class Meta:
         model = Farmer
         # fields to check for is_valid() method
         fields = (  'name','middlename',
-                    #contact
-                    'contact_number',
                     #company
                     'company',
                     #location
@@ -24,13 +23,12 @@ class CustomerForm(forms.ModelForm):
     middlename = forms.CharField(required=False)
     company = forms.CharField(required=False)
     location = forms.ModelChoiceField(queryset=Location.objects.all(),required=False)
+    contact_number = forms.CharField(required=False)
     # use the class Meta to specify the model for the customer form
     class Meta:
         model = Customer
         # fields to check for is_valid() method
         fields = (  'name','middlename',
-                    #contact
-                    'contact_number',
                     #company
                     'company',
                     #location

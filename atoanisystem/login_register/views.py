@@ -103,7 +103,7 @@ class RegistrationView(View):
         email = request.POST.get('email')
         password = request.POST.get('password1')
         user = User.objects.create_user(first_name=firstname,last_name=lastname,username=username,email=email,password=password)
-        location_form = LocationForm(   )
+        location_form = LocationForm(request.POST)
         account_type = request.POST.get('account-type')
         Group.objects.get(name=account_type).user_set.add(user)
         if account_type == 'Farmer':
@@ -130,8 +130,10 @@ class RegistrationView(View):
             # to cater the ManyToManyField of customer.location
             if account_type == "Customer":
                 new_user.location.add(location)
-        #return HttpResponse(location_form.errors)
-        return redirect('login_register:login')
+            return redirect('login_register:login')
+        else:
+            return HttpResponse(form.errors)
+        
 
 
 class ApprovalView(View):
