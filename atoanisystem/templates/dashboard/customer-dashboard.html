@@ -4,13 +4,13 @@
 {% block tags %}
     <!-- Customized CSS -->
     <link rel="stylesheet" href="{% static '/css/dashboard/customer-dashboard.css' %}">
-     <!-- Datatables CSS -->
+    <!-- Datatables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
 {% endblock %}
 
 
 {% block content %}
-    <div class="body-dashoard container-fluid mt-5 mb-3" style="">
+    <div class="body-dashoard container-fluid mt-5 mb-3">
         <span class="pr-1 pl-1 title">Dashboard</span>
         <button class="btn pr-3 pl-3 order-btn" data-toggle="modal" data-target="#modal-create-order">Add Order</button>
 
@@ -314,15 +314,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="customer-order-form" class="customer-order-form" novalidate autocomplete="off">
+                    <form id="customer-order-form" method="POST" class="customer-order-form" novalidate autocomplete="off">
                         {% csrf_token %}
-
+                        <input type="text" name="SAMPLE-TEXT" value="SAMPLETEXTBYCARY">
                         <div class="container pl-4 pr-5 mt-5 group-inputs">
                             <div class="form-row row-12 mt-2">
                                 <div class="form-group col-12 col-md-3 pt-2 d-flex justify-content-md-end align-items-center font-weight-bold">
                                     <label for="province">Address:</label>
                                 </div>
-
+                                
                                 <div class="col-md-9 col-12 row pl-4 pt-2">
                                     <!--
                                     {% for location in user.customer.location.all %}
@@ -471,6 +471,7 @@
     <script src="{% static '/js/load-address.js' %}"></script>
     <script>
         $(document).ready(function() {
+            
             loadAddresses("{% static '/js/philippine_address_2019v2.json' %}");
         });
     </script>   
