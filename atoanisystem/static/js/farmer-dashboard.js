@@ -31,7 +31,7 @@ const farmerFinishedTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="viewOrders(this)">
+                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="viewFinishedOrders(this)">
                                 View Order
                             </button>
                       </div>`
@@ -50,11 +50,11 @@ const farmerFinishedTableConfig = {
     { "data": 'harvested_date' },
   ],
   createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-id', data.order_id);
+    $(row).attr('order-pair-id', data.order_pair_id);
   },
 
   initComplete: function(){
-    data = incomingTable.ajax.json().data;
+    finished_data = finishTable.ajax.json().data;
   }
 };
 
@@ -67,7 +67,7 @@ const farmerReservedTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" id=modal-farmer-btn class="btn-secondary mx-1 opbtn" onclick="viewOrders(this)">
+                            <button type="button" id=modal-farmer-btn class="btn-secondary mx-1 opbtn" onclick="viewReservedOrders(this)">
                                 View Order
                             </button>
                             </div>`
@@ -86,11 +86,11 @@ const farmerReservedTableConfig = {
     { "data": 'status' },
   ],
   createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-id', data.order_id);
+    $(row).attr('order-pair-id', data.order_pair_id);
   },
 
   initComplete: function(){
-    data = incomingTable.ajax.json().data;
+    reserved_data = reservedTable.ajax.json().data;
   }
 };
 
@@ -103,18 +103,16 @@ const farmerIncomingTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="viewOrders(this)">
+                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="viewIncomingOrders(this)">
                                 View
                             </button>
                             </div>`
     }
   ],
-  //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
   ajax: {
     url: getIncomingOrdersUrl,
     data: "data",
   },
-  //matches the data to appropriate column
   columns: [
     { "data": 'name' },
     { "data": 'weight' },
@@ -126,7 +124,7 @@ const farmerIncomingTableConfig = {
   },
 
   initComplete: function(){
-    data = incomingTable.ajax.json().data;
+    incoming_data = incomingTable.ajax.json().data;
   }
 };
 
@@ -141,13 +139,62 @@ const successMsg = document.getElementById("successReserveMsg");
 const reserveButton = document.getElementById('reserveBtn');
 const cancelButton = document.getElementById('cancelBtn');
 
-//Made by master Rafale Bacalla
-function viewOrders(button){
+function viewFinishedOrders(button){
+  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-pair-id");
+  let order = null;
+
+  for(let i = 0; i < finished_data.length; i++){
+    if(finished_data[i].order_pair_id == selectedOrderID){
+      order = finished_data[i];
+      break;
+    }
+  }
+  console.log(JSON.stringify(order));
+  // document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
+  // document.getElementById('reserved-date-approved').innerHTML = String(order.date_approved);
+  document.getElementById('finished-date-reserved').innerHTML = String(order.accepted_date);
+  document.getElementById('finished-date-harvested').innerHTML = String(order.harvested_date);
+  document.getElementById('finished-status').innerHTML = String(order.status);
+  document.getElementById('finished-crop-name').innerHTML = String(order.name);
+  document.getElementById('finished-demand').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('finished-location').innerHTML = String(order.location_id);
+  document.getElementById('finished-order-number').innerHTML = String(order.order_pair_id);
+  document.getElementById('finished-area-needed').innerHTML = String(order.land_area_needed);
+  
+  // document.getElementById('reserved-days').innerHTML = String(order.weight);
+  $("#finished-modal-farmer").modal("show");
+}
+
+function viewReservedOrders(button){
+  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-pair-id");
+  let order = null;
+  for(let i = 0; i < reserved_data.length; i++){
+    if(reserved_data[i].order_pair_id == selectedOrderID){
+      order = reserved_data[i];
+      break;
+    }
+  }
+  // document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
+  // document.getElementById('reserved-date-approved').innerHTML = String(order.date_approved);
+  document.getElementById('reserved-date-reserved').innerHTML = String(order.accepted_date);
+  document.getElementById('reserved-status').innerHTML = String(order.status);
+  document.getElementById('reserved-crop-name').innerHTML = String(order.name);
+  document.getElementById('reserved-demand').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('reserved-location').innerHTML = String(order.location_id);
+  document.getElementById('reserved-order-number').innerHTML = String(order.order_pair_id);
+  document.getElementById('reserved-area-needed').innerHTML = String(order.land_area_needed);
+  
+
+  // document.getElementById('reserved-days').innerHTML = String(order.weight);
+  $("#reserved-modal-farmer").modal("show");
+}
+
+function viewIncomingOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
   let order = null;
-  for(let i = 0; i < data.length; i++){
-    if(data[i].order_id == selectedOrderID){
-      order = data[i];
+  for(let i = 0; i < incoming_data.length; i++){
+    if(incoming_data[i].order_id == selectedOrderID){
+      order = incoming_data[i];
       break;
     }
   }
@@ -163,20 +210,18 @@ function viewOrders(button){
   reserveButton.removeEventListener('click',checkOrder);
   reserveButton.addEventListener('click',checkOrder);
   //Assigning values
-  document.getElementById('date-ordered').innerHTML = String(order.order_date);
-  document.getElementById('date-approved').innerHTML = String(order.date_approved);
-  document.getElementById('date-reserved').innerHTML = String(order.date_reserved);
-  document.getElementById('status').innerHTML = String(order.status);
-  document.getElementById('crop-name').innerHTML = String(order.name);
-  document.getElementById('demand').innerHTML = String(order.weight) + " kilos";
-  document.getElementById('location').innerHTML = String(order.location_id);
-  document.getElementById('area-needed').innerHTML = String(order.land_area_needed);
-  document.getElementById('days').innerHTML = String(order.weight);
-  $("#modal-farmer").modal("show");
-
+  document.getElementById('incoming-date-ordered').innerHTML = String(order.order_date);
+  document.getElementById('incoming-date-approved').innerHTML = "Not Yet Approved";
+  document.getElementById('incoming-status').innerHTML = String(order.status);
+  document.getElementById('incoming-crop-name').innerHTML = String(order.name);
+  document.getElementById('incoming-demand').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('incoming-location').innerHTML = String(order.location_id);
+  document.getElementById('incoming-area-needed').innerHTML = String(order.land_area_needed);
+  document.getElementById('incoming-days').innerHTML = String(order.weight);
+  $("#incoming-modal-farmer").modal("show");
 }
 
-//Checks if order is available
+// Checks if order is available
 let checkOrder = function() {
   //Disables the button so that while it is fetching  data from server it wont duplicate the request, and because there is no loading indicator yet
   reserveButton.disabled = true;

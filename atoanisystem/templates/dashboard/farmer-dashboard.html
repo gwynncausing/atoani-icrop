@@ -154,74 +154,185 @@
 </div>
 
 
-    <!-- Modal Order -->
-    <div class="modal-farmer modal fade" id="modal-farmer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document"    >
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pb-2">
-                    <div class="row d-flex justify-content-center mt-3 pb-2" style="font-size: 16px">
-                        <div class="col-md-6 col-12 row">
-                            <div class="label col-6 text-right pt-1 pb-1">Date Ordered:</div>
-                            <div class="col-6 pt-1 pb-1" id="date-ordered">-</div>
-                            <div class="label col-6 text-right pt-1 pb-1">Date Approved:</div>
-                            <div class="col-6 pt-1 pb-1" id="date-approved">-</div>
-                            <div class="label col-6 text-right pt-1 pb-1">Date Reserved:</div>
-                            <div class="col-6 pt-1 pb-1" id="date-reserved">-</div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-md-0 mt-3">
-                            <div class="label col-6 text-right">Status:</div>
-                            <div class="col-6" id="status">-</div>
-                            <div class="label col-6 text-right">Order Number:</div>
-                            <div class="col-6" id="order-id">-</div>
-                            <div class="col-6 "></div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-4">
-                            <div class="label col-6 text-right pt-1">Crop Name:</div>
-                            <div class="col-6 pt-1" id="crop-name">-</div>
-                            <div class="label col-6 text-right pt-1 pb-1">Demand:</div>
-                            <div class="col-6 pt-1 pb-1" id="demand">-</div>
-                            <div class="label col-6 text-right pt-1 pb-1">Location:</div>
-                            <div class="col-6 pt-1 pb-1" id="location">-</div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-4">
-                            <div class="label col-6  text-right">Land Area Needed:</div>
-                            <div class="col-6" id="area-needed">-</div>
-                            <div class="label col-6 text-right" >Estimated Days to Finish:</div>
-                            <div class="col-6" id="days">-</div>
+<!-- Modal Reserved Order -->
+<div class="modal-farmer modal fade" id="reserved-modal-farmer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document"    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pb-2">
+                <div class="row d-flex justify-content-center mt-3 pb-2" style="font-size: 16px">
+                    <div class="col-md-6 col-12 row">
+                        <!-- <div class="label col-6 text-right pt-1 pb-1">Date Ordered:</div>
+                        <div class="col-6 pt-1 pb-1" id="reserved-date-ordered">wa sa json</div>
+                        <div class="label col-6 text-right pt-1 pb-1">Date Approved:</div>
+                        <div class="col-6 pt-1 pb-1" id="reserved-date-approved">wa sa json</div> -->
+                        <div class="label col-6 text-right pt-1 pb-1">Date Reserved:</div>
+                        <div class="col-6 pt-1 pb-1" id="reserved-date-reserved">-</div>
                     </div>
-                </div>
-                <div class="modal-footer pt-2 pb-2">
-                    <div class="row w-100">
-                        <!-- Available for reservation, and needs to confirm -->
-                        <div id="confirmReserveMsg" class="col-12 rounded text-center text-light bg-success border-info px-1 py-2">
-                            The order is available for reservation. Are you sure you want to reserve this order?
-                        </div>
-                        <!-- Failed Reservaton -->
-                        <div id="failedReserveMsg" class="col-12 rounded text-center text-light bg-danger border-info px-1 py-2">
-                            Sorry but the order is already taken. Please try with other orders.
-                        </div>
-                        <!-- Successfulyl Reserved -->
-                        <div id="successReserveMsg" class="col-12 rounded text-center text-light bg-info border-info px-1 py-2">
-                            The order has been reserved for you. You can check it in your reserved orders section.
-                        </div>
+                    <div class="col-md-6 col-12 row mt-md-0 mt-3">
+                        <div class="label col-6 text-right">Status:</div>
+                        <div class="col-6" id="reserved-status">-</div>
+                        <div class="label col-6 text-right">Order Number:</div>
+                        <div class="col-6" id="reserved-order-number">-</div>
+                        <div class="col-6 "></div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <button id="reserveBtn" type="button" class="btn reserved-btn">Reserve</button>
-                            <button id="cancelBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        </div>
+                    <div class="col-md-6 col-12 row mt-4">
+                        <div class="label col-6 text-right pt-1">Crop Name:</div>
+                        <div class="col-6 pt-1" id="reserved-crop-name">-</div>
+                        <div class="label col-6 text-right pt-1 pb-1">Demand:</div>
+                        <div class="col-6 pt-1 pb-1" id="reserved-demand">-</div>
+                        <div class="label col-6 text-right pt-1 pb-1">Location:</div>
+                        <div class="col-6 pt-1 pb-1" id="reserved-location">-</div>
                     </div>
-                    
+                    <div class="col-md-6 col-12 row mt-4">
+                        <div class="label col-6  text-right">Land Area Needed:</div>
+                        <div class="col-6" id="reserved-area-needed">-</div>
+                        <!-- <div class="label col-6 text-right" >Estimated Days to Finish:</div>
+                        <div class="col-6" id="reserved-days">wa sa json</div> -->
+                    </div>
                 </div>
             </div>
+            <div class="modal-footer pt-2 pb-2">
+                <div class="row">
+                    <div class="col-12">
+                        <button id="cancelBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div> 
+            </div>
         </div>
-    </div>    
+    </div>
+</div>    
+
+<!-- Modal Finished Order -->
+<div class="modal-farmer modal fade" id="finished-modal-farmer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document"    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pb-2">
+                <div class="row d-flex justify-content-center mt-3 pb-2" style="font-size: 16px">
+                    <div class="col-md-6 col-12 row">
+                        <!-- <div class="label col-6 text-right pt-1 pb-1">Date Ordered:</div>
+                        <div class="col-6 pt-1 pb-1" id="finished-date-ordered">wa sa json</div>
+                        <div class="label col-6 text-right pt-1 pb-1">Date Approved:</div>
+                        <div class="col-6 pt-1 pb-1" id="finished-date-approved">wa sa json</div> -->
+                        <div class="label col-6 text-right pt-1 pb-1">Date Reserved:</div>
+                        <div class="col-6 pt-1 pb-1" id="finished-date-reserved">-</div>
+                        <div class="label col-6 text-right pt-1 pb-1">Date Harvested:</div>
+                        <div class="col-6 pt-1 pb-1" id="finished-date-harvested">-</div>
+                    </div>
+                    <div class="col-md-6 col-12 row mt-md-0 mt-3">
+                        <div class="label col-6 text-right">Status:</div>
+                        <div class="col-6" id="finished-status">-</div>
+                        <div class="label col-6 text-right">Order Number:</div>
+                        <div class="col-6" id="finished-order-number">-</div>
+                        <div class="col-6 "></div>
+                    </div>
+                    <div class="col-md-6 col-12 row mt-4">
+                        <div class="label col-6 text-right pt-1">Crop Name:</div>
+                        <div class="col-6 pt-1" id="finished-crop-name">-</div>
+                        <div class="label col-6 text-right pt-1 pb-1">Demand:</div>
+                        <div class="col-6 pt-1 pb-1" id="finished-demand">-</div>
+                        <div class="label col-6 text-right pt-1 pb-1">Location:</div>
+                        <div class="col-6 pt-1 pb-1" id="finished-location">-</div>
+                    </div>
+                    <div class="col-md-6 col-12 row mt-4">
+                        <div class="label col-6  text-right">Land Area Needed:</div>
+                        <div class="col-6" id="finished-area-needed">-</div>
+                        <!-- <div class="label col-6 text-right" >Estimated Days to Finish:</div>
+                        <div class="col-6" id="finished-days">-</div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer pt-2 pb-2">
+                <div class="row">
+                    <div class="col-12">
+                        <button id="cancelBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>    
+
+<!-- Modal Incoming Order -->
+<div class="modal-farmer modal fade" id="incoming-modal-farmer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document"    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body pb-2">
+                <div class="row d-flex justify-content-center mt-3 pb-2" style="font-size: 16px">
+                    <div class="col-md-6 col-12 row">
+                        <div class="label col-6 text-right pt-1 pb-1">Date Ordered:</div>
+                        <div class="col-6 pt-1 pb-1" id="incoming-date-ordered"></div>
+                        <div class="label col-6 text-right pt-1 pb-1">Date Approved:</div>
+                        <div class="col-6 pt-1 pb-1" id="incoming-date-approved">-</div>
+                    </div>
+                    <div class="col-md-6 col-12 row mt-md-0 mt-3">
+                        <div class="label col-6 text-right">Status:</div>
+                        <div class="col-6" id="incoming-status">-</div>
+                        <!-- <div class="label col-6 text-right">Order Number:</div>
+                        <div class="col-6" id="incoming-order-id">-</div> -->
+                        <div class="col-6 "></div>
+                    </div>
+                    <div class="col-md-6 col-12 row mt-4">
+                        <div class="label col-6 text-right pt-1">Crop Name:</div>
+                        <div class="col-6 pt-1" id="incoming-crop-name">-</div>
+                        <div class="label col-6 text-right pt-1 pb-1">Demand:</div>
+                        <div class="col-6 pt-1 pb-1" id="incoming-demand">-</div>
+                        <div class="label col-6 text-right pt-1 pb-1">Location:</div>
+                        <div class="col-6 pt-1 pb-1" id="incoming-location">-</div>
+                    </div>
+                    <div class="col-md-6 col-12 row mt-4">
+                        <div class="label col-6  text-right">Land Area Needed:</div>
+                        <div class="col-6" id="incoming-area-needed">-</div>
+                        <div class="label col-6 text-right" >Estimated Days to Finish:</div>
+                        <div class="col-6" id="incoming-days">-</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer pt-2 pb-2">
+                <div class="row w-100">
+                    <!-- Available for reservation, and needs to confirm -->
+                    <div id="confirmReserveMsg" class="col-12 rounded text-center text-light bg-success border-info px-1 py-2">
+                        The order is available for reservation. Are you sure you want to reserve this order?
+                    </div>
+                    <!-- Failed Reservaton -->
+                    <div id="failedReserveMsg" class="col-12 rounded text-center text-light bg-danger border-info px-1 py-2">
+                        Sorry but the order is already taken. Please try with other orders.
+                    </div>
+                    <!-- Successfulyl Reserved -->
+                    <div id="successReserveMsg" class="col-12 rounded text-center text-light bg-info border-info px-1 py-2">
+                        The order has been reserved for you. You can check it in your reserved orders section.
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button id="reserveBtn" type="button" class="btn reserved-btn">Reserve</button>
+                        <button id="cancelBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>    
+
+
+
 {% endblock %}
 
 

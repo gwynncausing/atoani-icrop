@@ -12,8 +12,6 @@ from django.utils import timezone as tz
 from datetime import datetime as dt
 # Create your models here
 
-
-
 # https://stackoverflow.com/questions/54802616/how-to-use-enums-as-a-choice-field-in-django-model
 class Months(Enum):
     January = 1

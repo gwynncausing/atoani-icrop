@@ -53,7 +53,7 @@ const customerReservedTableConfig = {
   },
 
   initComplete: function(){
-    data = totalTable.ajax.json().data;
+    resevered_data = reservedTable.ajax.json().data;
   }
 };
 
@@ -92,7 +92,7 @@ const customerFinishedTableConfig = {
   },
 
   initComplete: function(){
-    data = totalTable.ajax.json().data;
+    finished_data = finishedTable.ajax.json().data;
   }
 };
 
@@ -130,69 +130,75 @@ const customerTotalTableConfig = {
   },
 
   initComplete: function(){
-    data = totalTable.ajax.json().data;
+    total_data = totalTable.ajax.json().data;
   }
 };
 
 function viewReservedOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
   let order = null;
-  for(let i = 0; i < data.length; i++){
-    if(data[i].order_id == selectedOrderID){
-      order = data[i];
+  for(let i = 0; i < resevered_data.length; i++){
+    if(resevered_data[i].order_id == selectedOrderID){
+      order = resevered_data[i];
       break;
     }
   }
-
-  document.getElementById('date-ordered-reserved').innerHTML = String(order.order_date);
-  document.getElementById('date-approved-reserved').innerHTML = String(order.date_approved);
-  document.getElementById('date-reserved-reserved').innerHTML = String(order.date_reserved);
-  document.getElementById('status-reserved').innerHTML = String(order.status);
-  document.getElementById('crop-name-reserved').innerHTML = String(order.name);
-  document.getElementById('demand-reserved').innerHTML = String(order.weight) + " kilos";
-  document.getElementById('location-reserved').innerHTML = String(order.location_id);
+  document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
+  document.getElementById('reserved-date-approved').innerHTML = String("wala sa JSON");
+  document.getElementById('reserved-date-reserved').innerHTML = String("wala sa JSON");
+  document.getElementById('reserved-status').innerHTML = String(order.status);
+  document.getElementById('reserved-crop-name').innerHTML = String(order.name);
+  document.getElementById('reserved-demand').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('reserved-location').innerHTML = String(order.location_id);
+  document.getElementById('reserved-order-number').innerHTML = String(order.order_pair_id);
   $("#modal-customer-reserved").modal("show")
 }
 
 function viewFinishedOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
   let order = null;
-  for(let i = 0; i < data.length; i++){
-    if(data[i].order_id == selectedOrderID){
-      order = data[i];
+  console.log(selectedOrderID);
+  for(let i = 0; i < finished_data.length; i++){
+    if(finished_data[i].order_id == selectedOrderID){
+      order = finished_data[i];
       break;
     }
   }
-  console.log(order);
-  document.getElementById('date-ordered-finished').innerHTML = String(order.order_date);
-  document.getElementById('date-approved-finished').innerHTML = String(order.date_approved);
-  document.getElementById('date-reserved-finished').innerHTML = String(order.date_reserved);
-  document.getElementById('status-finished').innerHTML = String(order.status);
-  document.getElementById('crop-name-finished').innerHTML = String(order.name);
-  document.getElementById('demand-finished').innerHTML = String(order.weight) + " kilos";
-  document.getElementById('location-finished').innerHTML = String(order.location_id);
+  console.log(JSON.stringify(order));
+  document.getElementById('finished-date-ordered').innerHTML = String(order.order_date);
+  document.getElementById('finished-date-approved').innerHTML = String("wala sa JSON");
+  document.getElementById('finished-date-reserved').innerHTML = String("wala sa JSON");
+  document.getElementById('finished-date-finished').innerHTML = String("wala sa JSON");
+  document.getElementById('finished-status').innerHTML = String(order.status);
+  document.getElementById('finished-crop-name').innerHTML = String(order.name);
+  document.getElementById('finished-demand').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('finished-location').innerHTML = String(order.location_id);
+  document.getElementById('finished-order-number').innerHTML = String(order.order_pair_id);
   $("#modal-customer-finished").modal("show");
 }
 
 function viewTotalOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
   let order = null;
-  for(let i = 0; i < data.length; i++){
-    if(data[i].order_id == selectedOrderID){
-      order = data[i];
+  for(let i = 0; i < total_data.length; i++){
+    if(total_data[i].order_id == selectedOrderID){
+      order = total_data[i];
       break;
     }
   }
 
-  console.log(order.order_date);
+  console.log(JSON.stringify(order));
 
-  document.getElementById('date-ordered').innerHTML = order.order_date;
-  document.getElementById('date-approved').innerHTML = String(order.date_approved);
-  document.getElementById('date-reserved').innerHTML = String(order.date_reserved);
-  document.getElementById('status').innerHTML = String(order.status);
-  document.getElementById('crop-name').innerHTML = String(order.name);
-  document.getElementById('demand').innerHTML = String(order.weight) + " kilos";
-  document.getElementById('location').innerHTML = String(order.location_id);
+  document.getElementById('total-date-ordered').innerHTML = order.order_date;
+  document.getElementById('total-date-approved').innerHTML = String("wala sa JSON");
+  document.getElementById('total-date-reserved').innerHTML = String("wala sa JSON");
+  document.getElementById('total-date-finished').innerHTML = String("wala sa JSON");
+  document.getElementById('total-status').innerHTML = String(order.status);
+  document.getElementById('total-crop-name').innerHTML = String(order.name);
+  document.getElementById('total-demand').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('total-location').innerHTML = String(order.location_id);
+  document.getElementById('total-order-number').innerHTML = String(order.order_pair_id);
+
   $("#modal-customer-total").modal("show");
 
 }
