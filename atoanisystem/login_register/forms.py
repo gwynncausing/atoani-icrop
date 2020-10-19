@@ -15,6 +15,7 @@ class FarmerForm(forms.ModelForm):
         fields = (  'name','middlename',
                     #company
                     'company',
+                    'land_area',
                     #location
                     'location'
                     )
@@ -22,7 +23,7 @@ class CustomerForm(forms.ModelForm):
     name = forms.ModelChoiceField(queryset=User.objects.all(),required=False)
     middlename = forms.CharField(required=False)
     company = forms.CharField(required=False)
-    location = forms.ModelChoiceField(queryset=Location.objects.all(),required=False)
+    location = forms.ModelMultipleChoiceField(queryset=Location.objects.all(),required=False)
     contact_number = forms.CharField(required=False)
     # use the class Meta to specify the model for the customer form
     class Meta:
