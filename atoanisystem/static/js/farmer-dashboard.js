@@ -4,8 +4,10 @@ const getReservedOrdersUrl = '/dashboard/get-farmer-reserved-orders';
 const getFinishedOrdersUrl = '/dashboard/get-farmer-finished-orders';
 
 let data = null;
-
-
+let csrf_token = null;
+function setCSRF(value){
+  csrf_token = value;
+}
 //data table settings
 const domPlacements = `<
                         <"d-flex float-left ml-5 mb-3 mt-4"
@@ -101,9 +103,6 @@ const farmerIncomingTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-primary mx-1 btnreserve" onclick="">
-                                Reserve
-                            </button>
                             <button type="button" class="btn-secondary mx-1 opbtn" onclick="viewOrders(this)">
                                 View
                             </button>
@@ -131,6 +130,18 @@ const farmerIncomingTableConfig = {
   }
 };
 
+//Used to identify the viewed order
+let selectedOrderID = 1;
+//indicator if the order was reserved temporarily
+let isOrderReserved = false;
+//Messages and buttons for reservation
+const confirmMsg = document.getElementById("confirmReserveMsg");
+const failedMsg = document.getElementById("failedReserveMsg");
+const successMsg = document.getElementById("successReserveMsg");
+const reserveButton = document.getElementById('reserveBtn');
+const cancelButton = document.getElementById('cancelBtn');
+
+//Made by master Rafale Bacalla
 function viewOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
   let order = null;
@@ -140,8 +151,18 @@ function viewOrders(button){
       break;
     }
   }
-
-  console.log(order);
+  //Initializing displays
+  confirmMsg.style.display = "none";
+  failedMsg.style.display = "none";
+  successMsg.style.display = "none";
+  //Initializing buttons
+  reserveButton.disabled = false;
+  reserveButton.innerHTML = "Reserve"
+  cancelButton.innerHTML = "Cancel"
+  reserveButton.removeEventListener("click", confirmReservation);
+  reserveButton.removeEventListener('click',checkOrder);
+  reserveButton.addEventListener('click',checkOrder);
+  //Assigning values
   document.getElementById('date-ordered').innerHTML = String(order.order_date);
   document.getElementById('date-approved').innerHTML = String(order.date_approved);
   document.getElementById('date-reserved').innerHTML = String(order.date_reserved);
@@ -155,13 +176,14 @@ function viewOrders(button){
 
 }
 
-//Reserve button
-function reserveOrder(orderId) {
-  //Make sure to enclose this to a form where a csrftoken is present
-  //document.getElementById("form-id")
-  const form = null;
-  let formData = new FormData(form);//.append('action','add');
-  formData.append('order_id', orderId);
+//Checks if order is available
+let checkOrder = function() {
+  //Disables the button so that while it is fetching  data from server it wont duplicate the request, and because there is no loading indicator yet
+  reserveButton.disabled = true;
+  let formData = new FormData();//.append('action','add');
+  formData.append('order-id', selectedOrderID);
+  formData.append('operation', 'check-order');
+  formData.append('csrfmiddlewaretoken',csrf_token);
   $.ajax({
     url: '',
     type: 'post',
@@ -171,21 +193,99 @@ function reserveOrder(orderId) {
     processData: false,
     //when successful, change the data in table with new data from server
     success: function (response) {
-      console.log('success');
+      //Enables the button back
+      reserveButton.disabled = false;
+      //Displays message
+      if (confirmMsg.style.display === "none")
+        confirmMsg.style.display = "block";
+      reserveButton.innerHTML = "Yes";
+      isOrderReserved = true;
+      //Replaces event listener
+      reserveButton.removeEventListener('click',checkOrder);
+      reserveButton.addEventListener('click',confirmReservation);
     },
     error: function (response) {
-      console.log('fail');
+      if (failedMsg.style.display === "none")
+        failedMsg.style.display = "block";
+      reserveButton.disabled = true;
+    }
+  });
+}
+
+//When farmer presses Yes button as confirmation
+let confirmReservation = function() {
+  let formData = new FormData();
+  formData.append('order-id', selectedOrderID);
+  formData.append('operation', 'confirm-reserve');
+  formData.append('csrfmiddlewaretoken',csrf_token);
+  $.ajax({
+    url: '',
+    type: 'post',
+    //data to be passed to django view
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function (response) {
+      //Display message
+      if (successMsg.style.display === "none"){
+        confirmMsg.style.display = "none";
+        successMsg.style.display = "block";
+      }
+      reserveButton.innerHTML = "Reserved";
+      reserveButton.disabled = true;
+      cancelButton.innerHTML = "OK"
+      isOrderReserved = false;
+      //reserveButton.removeEventListener()
+    },
+    error: function (response) {
+      //
+    }
+  });
+}
+
+//To handle the case in which the farmer changes his/her mind while the order is temporarily reserved to him/her
+function cancelReservation() {
+  let formData = new FormData();//.append('action','add');
+  formData.append('order-id', selectedOrderID);
+  formData.append('operation', 'cancel-reserve');
+  formData.append('csrfmiddlewaretoken',csrf_token);
+  $.ajax({
+    url: '',
+    type: 'post',
+    //data to be passed to django view
+    data: formData,
+    contentType: false,
+    processData: false,
+
+    success: function (response) {
+      console.log("reservation cancelled");
+    },
+    error: function (response) {
+
     }
   });
 }
 
 var incomingTable = null;
 var finishedTable = null;
-var reservedTable = null;
+var reservedTable = null; 
 
 //Executing it all
 $(document).ready(function () {
+  //Detects if the modal is closed
+  $("#modal-farmer").on("hidden.bs.modal", function () {
+    //isOrderReserved only becomes false during initialization or if the farmer confirms the reservation
+    //if this is true this means that the farmer checked for its availability (it is temporarily reserved) and that we should cancel the reservation or else it would remain reserved
+    if(isOrderReserved){
+      cancelReservation();
+    }
+    //refresh/reload the tables
+    incomingTable.ajax.reload();
+    finishTable.ajax.reload();
+    reservedTable.ajax.reload();
+  });
   incomingTable = $('.farmer-incoming-table').DataTable(farmerIncomingTableConfig);
   finishTable = $('.farmer-finished-table').DataTable(farmerFinishedTableConfig);
   reservedTable = $('.farmer-reserved-table').DataTable(farmerReservedTableConfig);
+  
 });

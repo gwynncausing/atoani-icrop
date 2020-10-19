@@ -1,0 +1,51 @@
+
+
+.settings-container{
+    width: 85%;
+    background: #EBF2F2;
+    min-height: 400px;
+
+    .setting-header{
+        color: black; 
+        background: #628474;
+    }
+
+    .card{
+        background: #B2D1C0;
+
+        #name,
+        #account,
+        #others,
+        #contact{
+            background: #D4E4DB;
+        }
+
+        .save-btn{
+            color: #FFFFFF;
+            background-color: #628474;
+            margin-left: 5% ;
+        }
+
+        .cancel-btn{
+            color: #FFFFFF;
+            background-color: #ABABAB;
+        }
+
+        #contact{
+            .card-body{
+                .add-btn{
+                    color: #0677E0;
+                }
+            }
+        }
+
+    }
+
+    .btn-header{
+        color: #010101;
+    }
+
+    
+
+
+}

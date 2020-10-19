@@ -1,5 +1,3 @@
-
-
 let data = null;
 
 //ajax urls

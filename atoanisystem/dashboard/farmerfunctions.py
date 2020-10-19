@@ -48,8 +48,9 @@ def get_reserved_orders(user):
     print(orders)
     reserved_orders = []
     for order in orders:
-        if order['accepted_date'] and order['status'] != 'Collected':
+        if order['status'] == 'Ongoing' and order['accepted_date'] != None:
             reserved_orders.append(order)
+    #print(reserved_orders)
     return reserved_orders
 
 #returns the finished orders of the farmer
@@ -78,11 +79,8 @@ def get_finished_orders(user):
 #returns order_pair instance if successful, else None
 def reserve_to(farmer,order):
     order_pair = None
-    #check if order is not reserved
-    if not order.is_reserved:
-        order.is_reserved = True
-        #harvest-date
-        order_pair = Order_Pairing.objects.create(order_id = order, farmer = farmer)
+    #assumes that order is already reserved for farmer
+    order_pair = Order_Pairing.objects.create(order_id = order, farmer = farmer)
     return order_pair
 
 def cancel_reservation(order_pair):
