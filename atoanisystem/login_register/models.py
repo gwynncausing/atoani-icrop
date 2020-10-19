@@ -10,6 +10,7 @@ from login_register.auxfunctions import *
 from enum import Enum
 from django.utils import timezone as tz
 from datetime import datetime as dt
+import copy
 # Create your models here
 
 # https://stackoverflow.com/questions/54802616/how-to-use-enums-as-a-choice-field-in-django-model
@@ -110,7 +111,7 @@ class Crop_Soil(models.Model):
 class Customer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ManyToManyField(Location)
-    contact_number = models.CharField(max_length=14)
+    contact_number = models.CharField(max_length=14,null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
     is_approved = models.BooleanField(default=False)
@@ -182,15 +183,22 @@ class Order(models.Model):
     class Meta:
         ordering = ["-order_date"]
 
+# re:available_land_area, raise this concern
 class Farmer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    contact_number = models.CharField(max_length=14, verbose_name=True)
+    contact_number = models.CharField(max_length=14, verbose_name=True, null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=True)
     is_approved = models.BooleanField(default=False)
     land_area = models.FloatField(help_text="Farmer's land area in square meters", null=True)
     is_available = models.BooleanField(help_text="Is the farmer able to take up orders?", null=True)
+    available_land_area = models.FloatField(blank=True, null=True, help_text="Available planting land of farmer")
+
+    def save(self, *args, **kwargs):
+        if self.available_land_area == None or (self.available_land_area > self.land_area):
+            self.available_land_area = self.land_area
+        super().save(*args, **kwargs)
 
     def set_value(self, attr:[]):
         try:
@@ -238,4 +246,3 @@ class Order_Pairing(models.Model):
     class Meta:
         ordering = ['-expected_time']
         verbose_name_plural = "Order Pairings"
-

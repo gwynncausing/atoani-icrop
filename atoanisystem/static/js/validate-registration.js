@@ -61,6 +61,10 @@ const passwordConfirm = document.querySelector("#password-confirm");
 
     const username = document.getElementById('username');
 
+    const landarea = document.getElementById('landarea');
+
+    const farmerRadio = document.getElementById('farmer');
+    const customerRadio = document.getElementById('customer');
     //ERROR MESSAGES:
 
     const usernameBlank  = "Please enter a username. It must not contain a space.";
@@ -105,7 +109,10 @@ const passwordConfirm = document.querySelector("#password-confirm");
     })
 
     /*start - Important Listeners*/
-    
+
+    farmerRadio.addEventListener('click',e => {landarea.setAttribute("type", "number");});
+    customerRadio.addEventListener('click',e => {landarea.setAttribute("type", "hidden");});
+
     //required field event input listeners
     textFields.forEach(field => {
         field.addEventListener("input", e => {
@@ -239,6 +246,8 @@ const passwordConfirm = document.querySelector("#password-confirm");
     //check if password and confirm password are same
     const isPasswordsSame = (p1, p2) => p1 === p2;
 
+    
+    
     /*end - Helper Functions*/
 
 })()

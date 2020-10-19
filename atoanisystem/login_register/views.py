@@ -115,21 +115,24 @@ class RegistrationView(View):
             location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
             if location.street:
                 location.name=str(location.street)+', '+location.name
-            location.save()
             duplicate_list = Location.objects.filter(name=location.name)
             #check if location exists
             if len(duplicate_list) > 1:
-                # deletes if data exists
-                Location.objects.filter(id = location.id).delete()
-                location = duplicate_list[0]
+                #replace location with the existing location
+                location = duplicate_list.first()
+            else:
+                #save location if it has no duplicates
+                location.save()
             new_user = form.save(commit=False)
             new_user.name = user
+            new_user.save()
             if account_type == "Farmer":
                 new_user.location = location
-            new_user.save()
             # to cater the ManyToManyField of customer.location
             if account_type == "Customer":
                 new_user.location.add(location)
+            #causes ValueError, needs ID before adding many to many field
+            
             return redirect('login_register:login')
         else:
             return HttpResponse(form.errors)

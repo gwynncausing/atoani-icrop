@@ -1,6 +1,6 @@
 from login_register.models import *
 import pandas as pd
-from datetime import date
+from datetime import date, timedelta
 
 '''
 ----------------------------
@@ -59,6 +59,11 @@ TO COLLECTIVELY CHECK OBSOLETE (1-Month Old) ORDERS
 check_obsolete_orders()
 
 *note: Automatically adds an "Overdue" message
+
+RELATED TO RESERVE_ORDER, UPDATES TIME ESTIMATE DURING RESERVATION
+update_time_single(<order pair>)
+
+*note: function is included in reserve_order, so no need to call for upcoming order_pairing
 
 ----------------------------
 CUSTOMER RELATED FUNCTIONS
@@ -176,11 +181,20 @@ def change_customer_details(id,details):
 def reserve_order(order_id,farmer_id):
     d = Order_Pairing(order_id_id=order_id,farmer_id=farmer_id)
     d.save()
+    update_time_single(d)
 # check months for farmers ????
 # order related functions
 
+def update_time_single(order_pair):
+    order = Order.objects.all().filter(order_id=order_pair.order_id_id).values('crop_id')[0]
+    crop_time = Crop.objects.all().filter(id=order['crop_id']).values('harvest_time')[0]['harvest_time']
+    order_pair.expected_time = convert(order_pair.accepted_date) + timedelta(days=crop_time)
+    order_pair.save()
+
 def add_order(customer_id, crop_id, demand, location_id):
     new_order = Order(customer_id=customer_id, crop_id=crop_id, weight=demand, location_id=location_id)
+    new_order.save()
+    calculate_land_area_single(new_order)
     new_order.save()
 
 def update_land_area():
