@@ -113,7 +113,7 @@ class Crop_Soil(models.Model):
 class Customer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ManyToManyField(Location)
-    contact_number = models.CharField(max_length=14)
+    contact_number = models.CharField(max_length=14,null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
     is_approved = models.BooleanField(default=False)
@@ -189,7 +189,7 @@ class Order(models.Model):
 class Farmer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    contact_number = models.CharField(max_length=14, verbose_name=True)
+    contact_number = models.CharField(max_length=14, verbose_name=True, null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=True)
     is_approved = models.BooleanField(default=False)

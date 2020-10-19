@@ -112,7 +112,7 @@ const passwordConfirm = document.querySelector("#password-confirm");
 
     farmerRadio.addEventListener('click',e => {landarea.setAttribute("type", "number");});
     customerRadio.addEventListener('click',e => {landarea.setAttribute("type", "hidden");});
-    
+
     //required field event input listeners
     textFields.forEach(field => {
         field.addEventListener("input", e => {
