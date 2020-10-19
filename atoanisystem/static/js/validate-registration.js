@@ -63,7 +63,7 @@ const passwordConfirm = document.querySelector("#password-confirm");
 
     //ERROR MESSAGES:
 
-    const usernameBlank  = "Please enter a username";
+    const usernameBlank  = "Please enter a username. It must not contain a space.";
     const usernameExists = "The username is already in use";
 
     const contactInvalidFormat = "Phone number must be in one of these formats: 9xxxxxxxxx or 09xxxxxxxxx";
@@ -168,6 +168,9 @@ const passwordConfirm = document.querySelector("#password-confirm");
     });
 
     username.addEventListener('input',(e) => {
+        //if value is space, make it not show on the input
+        e.target.value = e.target.value.replace(/[ ]/g, '').replace(/(\..*)\./g, '$1');
+
         if(e.target.value.toString().length === 0){
             document.getElementById("username-invalid").innerHTML = usernameBlank;
             displayValidity(username);

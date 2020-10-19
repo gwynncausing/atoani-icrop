@@ -122,8 +122,8 @@ h6 {
 }
 
 .form-registration {
-  color: #fafafa;
-  background-color: #0b3531;
+  color: #114a44;
+  background-color: #EBF2F2;
   width: 100%;
   border-radius: 0.5rem;
 }
@@ -132,8 +132,11 @@ h6 {
   color: #114a44;
 }
 
+.form-registration #account-type-tag {
+  font-size: 18px;
+}
+
 .form-registration .group-inputs {
-  background-color: #fafafa;
   color: #114a44;
   border-radius: 0.5rem;
 }
@@ -158,9 +161,7 @@ h6 {
 }
 
 .form-registration .form-body .account-type {
-  background: #114a44;
-  color: #fafafa;
-  width: 7.5rem;
+  width: 5rem;
   height: 3.2rem;
   border-radius: 0.5rem;
 }
@@ -178,16 +179,27 @@ h6 {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  cursor: pointer;
 }
 
-.form-registration .form-body #prep {
-  cursor: pointer;
+.form-registration .form-body .view-password, .form-registration .form-body .view-password-confirm {
+  background: #165a53;
+  color: #fafafa;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .form-registration .form-body #submit {
   background-color: #114a44;
   color: #fafafa;
-  width: 7rem;
+  width: 8rem;
 }
 
 /* Chrome, Safari, Edge, Opera */
