@@ -1,6 +1,6 @@
 .form-registration {
-    color: $white-color;
-    background-color: $tertiary-color;
+    color: $main-color;
+    background-color: $light-green;
     width: 100%;
     border-radius: 0.5rem;
 
@@ -8,9 +8,11 @@
         color: $main-color;
     }
 
-    .group-inputs{
+    #account-type-tag{
+        font-size: 18px;
+    }
 
-        background-color: $white-color;
+    .group-inputs{
         color: $main-color;
         border-radius: 0.5rem;
         .group-title{
@@ -32,9 +34,7 @@
         width: 91%;
 
         .account-type{
-            background: $main-color;
-            color: $white-color;
-            width: 7.5rem;
+            width: 5rem;
             height: 3.2rem;
             border-radius: 0.5rem;
         }
@@ -46,17 +46,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;  
         }
- 
 
-        #prep{
-          cursor: pointer;  
+        .view-password, .view-password-confirm{
+            background: #165a53;          
+            color: $white-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #submit {
             background-color: $main-color;
             color: $white-color;
-            width: 7rem;
+            width: 8rem;
         }
     }
 }
