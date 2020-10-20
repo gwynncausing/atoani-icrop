@@ -55,11 +55,6 @@ STARTUP FUNCTIONS / RUN EVERYTIME SOMETHING GETS UPDATED
 TO COLLECTIVELY CALCULATE LAND AREA
 calculate_land_area()
 
-TO COLLECTIVELY CHECK OBSOLETE (1-Month Old) ORDERS
-check_obsolete_orders()
-
-*note: Automatically adds an "Overdue" message
-
 RELATED TO RESERVE_ORDER, UPDATES TIME ESTIMATE DURING RESERVATION
 update_time_single(<order pair>)
 
@@ -78,6 +73,17 @@ GETTER FUNCTIONS
 
 TO GET A DICTIONARY LIST OF ALL CROPS
 get_crop_list()
+
+--------------------------------------------------
+SCHEDULED FUNCTIONS (SEE login_register/scheduler)
+--------------------------------------------------
+
+TO COLLECTIVELY CHECK OBSOLETE (1-Month Old) ORDERS
+check_obsolete_orders()
+
+*note: Automatically adds an "Overdue" message
+
+
 '''
 
 def convert(time):
