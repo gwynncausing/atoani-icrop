@@ -11,7 +11,7 @@
     .form-body {
         padding-left: 10%;
         padding-right: 10%;
-        span#error{
+        span#error {
             color: red;
         }
         #number-prep {
@@ -22,6 +22,26 @@
         .btnSignIn {
             background-color: $secondary-color;
             color: $white-color;
+        }
+    }
+}
+
+#accountInReviewModal {
+    .modal-content {
+        background: $light-green;
+        .modal-header,
+        .modal-title,
+        .modal-body span {
+            color: $text-color2;
+            border: none;
+        }
+        .modal-footer {
+            border: none;
+            button {
+                color: white;
+                background: $secondary-color;
+                border: none;
+            }
         }
     }
 }

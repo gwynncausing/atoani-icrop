@@ -153,4 +153,25 @@ h6 {
   background-color: #628474;
   color: #fafafa;
 }
+
+#accountInReviewModal .modal-content {
+  background: #EBF2F2;
+}
+
+#accountInReviewModal .modal-content .modal-header,
+#accountInReviewModal .modal-content .modal-title,
+#accountInReviewModal .modal-content .modal-body span {
+  color: #4C6659;
+  border: none;
+}
+
+#accountInReviewModal .modal-content .modal-footer {
+  border: none;
+}
+
+#accountInReviewModal .modal-content .modal-footer button {
+  color: white;
+  background: #628474;
+  border: none;
+}
 /*# sourceMappingURL=login.css.map */

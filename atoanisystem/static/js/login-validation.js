@@ -16,16 +16,19 @@ window.onload=function(){
 		});
 			
 		usernameInput.oninput = function() {
-    	hideMessage();
+    	hideErrorMessage();
 		};
 		
 		passwordInput.oninput = function() {
-    	hideMessage();
+    	hideErrorMessage();
 		};
 
-		function hideMessage(){
+		function hideErrorMessage(){
 			errorMessage.style.display = "none";
 		}
+		$('#modalOK').click(function(){
+			setTimeout("location.reload(true);",100);
+		});
 		
 		$('#signin').click(function(e){
 			// e.preventDefault();
@@ -39,45 +42,33 @@ window.onload=function(){
 				contentType: false,
 				processData: false,
 				success: function(response){
-						console.log("success");
-						console.log(response.result);
-						
 						if (response.result == "farmer ok"){
-							// TODO: Redirect to farmer dashboard
-							console.log("farmer ok");
-							// window.location = "{% url 'dashboard:farmer' %}";
+							// Redirect to farmer dashboard
+							window.location = response.url;
 						}
 						else if (response.result == "customer ok"){
-							// TODO: Redirect to Customer Dashboard
-							console.log("customer ok");
-							// window.location = "{% url 'dashboard:customer' %}";
+							// Redirect to Customer Dashboard
+							window.location = response.url;
 						}
-						
+						else if (response.result == "approval"){
+							// Open Modal Approval
+							$('#accountInReviewModal').modal('toggle');
+						}
 						else if(response.result == "admin") {
-							// TODO: Redirect to Admin Page
-							console.log("admin");
-							window.location = 'http://127.0.0.1:8000/admin/';
+							// Redirect to Admin Page
+							window.location = response.url;
 						}
 				},
 				error: function(response){
-						console.log("error here");
-						console.log(response);
-						console.log(response.responseJSON.result);
-						if(response.responseJSON.result == "not ok"){
+						if(response.responseJSON.result === "not ok"){
 							if (errorMessage.style.display === "none") {
 								errorMessage.style.display = "block";
 								errorMessage.innerHTML = "Username or Password is incorrect"
 							}
 						}
-						else if (response.result == "approval"){
-							// TODO: Open Modal Approval
-							// e.preventDefault();
-							console.log("approval");
-							$('#accountInReviewModal').modal('show');
-						}
+						
 				}
 			});
 		});
-
 	});
 }

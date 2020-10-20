@@ -23,6 +23,7 @@ def format_location(orders):
 def get_total_orders(user):
     df = dashboard_utility.datatable_customer(user.customer)
     orders = dashboard_utility.display_customer_table(df)
+    format_location(orders)
     return orders
 
 #returns the reserved order, which is filtered using the status field
@@ -32,7 +33,6 @@ def get_reserved_orders(user):
     for order in orders:
         if order['status'] == 'Ongoing':
             reserved_orders.append(order)
-    format_location(reserved_orders)
     return reserved_orders
 
 #returns the finished order, which is filtered using the status field
@@ -42,7 +42,6 @@ def get_finished_orders(user):
     for order in orders:
         if order['status'] == 'Collected':
             finished_orders.append(order)
-    format_location(finished_orders)
     return finished_orders
 
 ########################

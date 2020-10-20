@@ -48,14 +48,15 @@ class LoginView(View):
                     if(currentUser.farmer.is_approved):
                         print("farmer ok")
                         # return redirect("dashboard:farmer")
-                        return JsonResponse({'result':'farmer ok'},status=200)
+                        return JsonResponse({'result':'farmer ok', 'url':'http://127.0.0.1:8000/dashboard/farmer/'},status=200)
                     else:
-                        return JsonResponse({'result':'approval'},status=500)
+                        logout(request)
+                        return JsonResponse({'result':'approval'},status=200)
                 elif hasattr(currentUser, 'customer'):
                     if(currentUser.customer.is_approved):
-                        return JsonResponse({'result':'customer ok'},status=200)
+                        return JsonResponse({'result':'customer ok', 'url':'http://127.0.0.1:8000/dashboard/customer/'},status=200)
                     else:
-                        return JsonResponse({'result':'approval'},status=500)
+                        return JsonResponse({'result':'approval'},status=200)
             else:
                 return JsonResponse({'result':'not ok'},status=500)
                 # return render(request, 'login_register/login.html')
@@ -132,13 +133,13 @@ class RegistrationView(View):
                 location.save()
             new_user = form.save(commit=False)
             new_user.name = user
-            new_user.save()
             if account_type == "Farmer":
                 new_user.location = location
+                new_user.save()
             # to cater the ManyToManyField of customer.location
             if account_type == "Customer":
+                new_user.save()
                 new_user.location.add(location)
-            #causes ValueError, needs ID before adding many to many field
             
             return redirect('login_register:login')
         else:
