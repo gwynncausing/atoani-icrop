@@ -139,6 +139,10 @@ h6 {
   padding-right: 10%;
 }
 
+.form-login .form-body span#error {
+  color: red;
+}
+
 .form-login .form-body #number-prep {
   border: 0;
   background: none;

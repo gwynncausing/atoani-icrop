@@ -11,6 +11,9 @@
     .form-body {
         padding-left: 10%;
         padding-right: 10%;
+        span#error{
+            color: red;
+        }
         #number-prep {
             border: 0;
             background: none;
