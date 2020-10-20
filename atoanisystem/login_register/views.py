@@ -125,13 +125,13 @@ class RegistrationView(View):
                 location.save()
             new_user = form.save(commit=False)
             new_user.name = user
-            new_user.save()
             if account_type == "Farmer":
                 new_user.location = location
+                new_user.save()
             # to cater the ManyToManyField of customer.location
             if account_type == "Customer":
+                new_user.save()
                 new_user.location.add(location)
-            #causes ValueError, needs ID before adding many to many field
             
             return redirect('login_register:login')
         else:
