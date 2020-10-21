@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tags %}
+    <!-- Customized CSS -->
+    <link rel="stylesheet" href="{% static '/css/custom_admin/custom-admin.css' %}">
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
+{% endblock tags %}
+{% block content %}
+<h1>USERS</h1>
+{% endblock content %}
+{% block scripts %}
+{% endblock scripts %}
