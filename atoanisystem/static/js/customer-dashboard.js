@@ -43,11 +43,16 @@ const customerReservedTableConfig = {
   //matches the data to appropriate column
   columns: [
     { "data": 'order_date' },
-    { "data": 'location_id'},
     { "data": 'name' },
+    { "data": 'location_id'},
     { "data": 'weight' },
     { "data": 'status' }
   ],
+
+  order: [
+    [ 1, 'asc' ]
+  ],
+
   createdRow: function(row, data, dataIndex) {
     $(row).attr('order-id', data.order_id);
   },
@@ -81,10 +86,14 @@ const customerFinishedTableConfig = {
   //matches the data to appropriate column
   columns: [
     { "data": 'order_date' },
-    { "data": 'location_id'},
     { "data": 'name' },
+    { "data": 'location_id'},
     { "data": 'weight' },
     { "data": 'status' }
+  ],
+
+  order: [
+    [ 1, 'asc' ]
   ],
 
   createdRow: function(row, data, dataIndex) {
@@ -122,6 +131,10 @@ const customerTotalTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'status' },
+  ],
+
+  order: [
+    [ 1, 'asc' ]
   ],
 
   //Adds data-id attribute to each row
@@ -235,4 +248,5 @@ $(document).ready(function () {
   totalTable = $('.customer-total-table').DataTable(customerTotalTableConfig);
   finishedTable = $('.customer-finished-table').DataTable(customerFinishedTableConfig);
   reservedTable = $('.customer-reserved-table').DataTable(customerReservedTableConfig);
+  
 });
