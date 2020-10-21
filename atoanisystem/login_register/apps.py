@@ -4,5 +4,6 @@ from django.apps import AppConfig
 class LoginRegisterConfig(AppConfig):
     name = 'login_register'
     def ready(self):
-        from scheduler import scheduler
+        print("IN READY!")
+        from login_register.scheduler import scheduler
         scheduler.start()

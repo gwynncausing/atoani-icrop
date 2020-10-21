@@ -226,7 +226,8 @@ def calculate_land_area():
     [calculate_land_area_single(order) for order in Order.objects.filter(land_area_needed__isnull=True).values()]
 
 def check_obsolete_orders():
-    order = pd.DataFrame(Order.objects.all().values())
+    print("HERE IN OBSOLETE ORDERS")
+    order = pd.DataFrame(Order.objects.all().filter(message__isnull=True).values())
     pairs = pd.DataFrame(Order_Pairing.objects.all().values())
     merged_df = order.merge(pairs, how="left",left_on="order_id", right_on="order_id_id").drop(columns='order_id_id')
     merged_df['order_date'] = merged_df['order_date'].apply(convert)
@@ -238,8 +239,9 @@ def check_obsolete_orders():
         val = merged_df.iloc[i]
         #if a month has passed and order is not cancelled
         if (date_now - val['order_date']).days > 29 and not val['is_cancelled']:
+            print(val)
             Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])
-
+    print("DONE!")
 
 def get_crop_list():
     return Crop.objects.all().values('id','name')

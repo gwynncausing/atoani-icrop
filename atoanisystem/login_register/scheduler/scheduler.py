@@ -12,7 +12,7 @@ def start():
     scheduler = BackgroundScheduler()
     scheduler.add_jobstore(DjangoJobStore(), "default")
     # run this job every 24 hours
-    scheduler.add_job(check_obsolete_orders, 'interval', hours=24, name='clean_orders', jobstore='default')
+    scheduler.add_job(check_obsolete_orders, 'interval', hours=0, seconds=3, name='clean_orders', jobstore='default', id="check_obsolete_orders", replace_existing=True)
     register_events(scheduler)
     scheduler.start()
     print("Scheduler started...", file=sys.stdout)
