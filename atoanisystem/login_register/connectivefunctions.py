@@ -16,9 +16,13 @@ datatable_dictionary = display_farmer_table(datatable) or display_customer_table
 to generate datatable for all order pairs or all orders
 datatable = datatable_orders() or datatable_order_pairs()
 
+ADMIN RELATED
+
 to generate datatable dictionary for admin datatables
 datatable_dictionary = display_all_orders(datatable) or display_all_order_pairs(datatable)
 
+to generate datatable dictionary for all users
+display_all_users()
 
 -------------------------------
 ALGORITHM FUNCTION (NOT FINAL)
@@ -320,3 +324,17 @@ def display_all_order_pairs(df):
     else:
         df = df.sort_values('order_date',ascending=False).reset_index(drop=True)
         return df[['customer_id','customer_names','farmer_id','farmer_names','order_id','order_date','location','crop_name','weight','status']].to_dict('records')
+
+def display_all_users():
+    users = pd.DataFrame(User.objects.all().values("id","email","first_name","last_name")).rename(columns={'id':'user_id'})
+    customers = Customer.objects.all()
+    customers_df = pd.DataFrame(customers.values('contact_number','name','is_approved')).rename(columns={'name':'customer_name'})
+    customers_df['location'] = [cust.get_locations() for cust in customers]
+    customers_df['location'] = [[w[0] for w in x] for x in customers_df['location']]
+    customers_df = customers_df.merge(users, left_on="customer_name", right_on="user_id").drop(columns=["customer_name"])
+
+    farmers = pd.DataFrame(Farmer.objects.all().values('contact_number','location','name','is_approved','land_area')).rename(columns={'name':'farmer_name'})
+    f_unique_locs = farmers['location'].unique()
+    farmers = farmers.merge(pd.DataFrame(Location.objects.filter(id__in=f_unique_locs).values('name','id')), left_on="location", right_on="id").drop(columns=["location","id"]).rename(columns={'name':'location'})
+    farmers = farmers.merge(users, left_on="farmer_name", right_on="user_id").drop(columns="farmer_name")
+    return {'customer':customers_df.to_dict('records'), 'farmer':farmers.to_dict('records')}
