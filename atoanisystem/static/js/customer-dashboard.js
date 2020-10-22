@@ -243,6 +243,12 @@ function viewTotalOrders(button){
 var totalTable = null;
 var finishedTable = null;
 var reservedTable = null;
+
+
+var totalCount = null;
+var finsihedCount = null;
+var totalCount = null;
+
 //Executing it all
 $(document).ready(function () {
   totalTable = $('.customer-total-table').DataTable(customerTotalTableConfig);
