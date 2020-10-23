@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tags %}
+    <!-- Customized CSS -->
+    <link rel="stylesheet" href="{% static '/css/custom_admin/custom-admin.css' %}">
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
+{% endblock tags %}
+{% block content %}
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div class="col-2 sidebar d-flex column-vertical py-3 p-0">
+      <h4 class="orders-title float-left pl-5">Orders</h4>
+      <button id="allBtn" type="button" class="sidebar-nav border-0"><h5 class="tab mt-2 float-left">All</h5></button>
+      <button id="waitlistBtn" type="button" class="sidebar-nav border-0"><h5 class="tab mt-2 float-left">Waitlist</h5></button>
+      <button id="ongoingBtn" type="button" class="sidebar-nav border-0"><h5 class="tab mt-2 float-left">Ongoing</h5></button>
+      <button id="harvestedBtn" type="button" class="sidebar-nav border-0"><h5 class="tab mt-2 float-left">Harvested</h5></button>
+      <button id="collectedBtn" type="button" class="sidebar-nav border-0"><h5 class="tab mt-2 float-left">Collected</h5></button>
+      <a href="#"><h4 class="mt-2 float-left pl-5">Users</h4></a>
+      <!-- <h4 class="orders-title float-left pl-5">Admin</h4> -->
+    </div>
+    <div class="col-10 p-5">
+      <h3 id="order-header">List of All Orders</h3>
+      <table class="table orders-table mx-auto">
+        <thead>
+          <tr>
+            <th>sample</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>sample entry</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<!-- Datatables JS -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
+<!-- Admin JS -->
+<script src="{% static '/js/custom-admin.js' %}"></script>
+<script>
+
+</script>
+{% endblock scripts %}

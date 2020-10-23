@@ -125,7 +125,7 @@ class Customer(models.Model):
         return get_name(self.contact_number)
 
     def get_locations(self):
-        return self.location.all().values('name','id')
+        return self.location.all().values_list('name','id')
 
     def add_location(self,location_id):
         self.location.add(location_id)

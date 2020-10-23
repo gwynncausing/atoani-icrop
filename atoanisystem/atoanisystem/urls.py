@@ -19,9 +19,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('django-admin/', admin.site.urls),
     path('', include('login_register.urls',namespace = 'login_register')),
     path('dashboard/', include('dashboard.urls',namespace = 'dashboard')),
+    #admin custom page
+    path('admin/', include('custom_admin.urls',namespace = 'custom_admin')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
