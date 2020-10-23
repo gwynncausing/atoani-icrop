@@ -293,7 +293,10 @@ let confirmReservation = function() {
       //reserveButton.removeEventListener()
     },
     error: function (response) {
-      //
+      //remove loading 
+      $(".loading").addClass("d-none");
+      //to nofity error
+      notify('error','Reserved Failed!','Sorry but the order is already taken. Please try with other orders.')
     }
   });
 }
