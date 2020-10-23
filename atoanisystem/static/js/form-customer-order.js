@@ -7,7 +7,7 @@ function setCSRF(value){
 (() =>{
     const urlCreateOrder = "/dashboard/customer/";
 
-    const inputs = $("input");
+    const inputs = $("input, select");
     const orderForm = $("#customer-order-form");
     const demand = $("input[name=demand]");
     const customAddress = $("#custom-address");
