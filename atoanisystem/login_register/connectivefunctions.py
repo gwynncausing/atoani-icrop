@@ -127,6 +127,7 @@ def datatable_farmer(id):
         orders = pd.DataFrame(Order.objects.filter(order_id__in=order_ids).values())
         crops = pd.DataFrame(Crop.objects.filter(id__in=[item[2] for item in orders.values]).values('id','name'))
         final_order = orders.merge(crops, left_on="crop_id",right_on="id").drop(columns=["crop_id","id"])
+        
         return df.merge(final_order, left_on="order_id_id", right_on="order_id").drop(columns=["order_id_id","order_id"])
 
 # to be called after datatable_farmer to generate datatable dictionary
@@ -135,7 +136,8 @@ def display_farmer_table(df):
     if len(df) == 0:
         return df
     else:
-        df = df.sort_values('accepted_date',ascending=False).reset_index(drop=True)
+        df = df.sort_values('accepted_date',ascending=False).reset_index(drop=True).rename(columns={'status_y':'status'})
+        print(df)
         return df[['order_pair_id','accepted_date','name','weight','land_area_needed','location_id','harvested_date','status']].to_dict('records')
 
 # get customer's orders

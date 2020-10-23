@@ -318,7 +318,7 @@ var reservedTable = null;
 //Executing it all
 $(document).ready(function () {
   //Detects if the modal is closed
-  $("#modal-farmer").on("hidden.bs.modal", function () {
+  $(".modal-farmer").on("hidden.bs.modal", function () {
     //isOrderReserved only becomes false during initialization or if the farmer confirms the reservation
     //if this is true this means that the farmer checked for its availability (it is temporarily reserved) and that we should cancel the reservation or else it would remain reserved
     if(isOrderReserved){
