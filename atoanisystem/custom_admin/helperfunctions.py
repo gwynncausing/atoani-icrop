@@ -23,10 +23,12 @@ def get_unapproved_users():
 
 def approve_user(id,account_type):
     user = User.objects.get(id=id)
-    if account_type == 'customer':
+    if hasattr(user,'customer'):
         user.customer.is_approved = True
-    elif account_type == 'farmer':
+    elif hasattr(user,'farmer'):
         user.farmer.is_approved = True
-    else
+    else:
         pass
     user.save()
+
+
