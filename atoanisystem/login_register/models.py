@@ -33,18 +33,6 @@ class Months(Enum):
         print((i.name,i.value) for i in cls)
         return((i.name,i.value) for i in cls)
 
-class Status(Enum):
-    Pending = "Pending"
-    Posted = "Posted"
-    Ongoing = "Ongoing"
-    Harvested= "Harvested"
-    Collected = "Collected"
-
-    @classmethod
-    def choices(cls):
-        print((i.name,i.value) for i in cls)
-        return((i.name,i.value) for i in cls)
-
 class Crop(models.Model):
     name = models.CharField(max_length=220)
     is_seasonal = models.BooleanField()
@@ -137,7 +125,7 @@ class Customer(models.Model):
         return get_name(self.contact_number)
 
     def get_locations(self):
-        return self.location.all().values('name','id')
+        return self.location.all().values_list('name','id')
 
     def add_location(self,location_id):
         self.location.add(location_id)
@@ -157,19 +145,30 @@ class Order(models.Model):
     is_done = models.BooleanField(help_text="Is the order finished?",default=False)
     is_reserved = models.BooleanField(help_text="Is  the order reserved?",default=False)
     is_approved = models.BooleanField(help_text="Is the order approved by AtoANI?",default=False)
-    status = models.CharField(max_length=20, choices=Status.choices(), null=True, default="Pending")
+    # status = models.CharField(max_length=20, choices=Status.choices(),null=True, default="Pending")
+    status = models.CharField(max_length=20, null=True, default="Pending")
     message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")
 
     def is_eligible(self):
         pass
 
     def set_value(self, attr:[]):
+        print("in set_valueeeeeee")
         try:
+            print("i tried")
             for att in attr:
                 setattr(self,att[0],att[1])
+                print("done " + str(att))
             self.save()
+            print(self.status)
         except:
             pass
+
+
+    def save(self, *args, **kwargs):
+        if self.is_approved and self.status == "Pending":
+            self.status = "Posted"
+        super().save(*args, **kwargs)
 
     def get_value(self, attr:str):
         try:
@@ -203,7 +202,9 @@ class Farmer(models.Model):
     def set_value(self, attr:[]):
         try:
             for att in attr:
+                print("ngari")
                 setattr(self,att[0],att[1])
+                print("sucess " + str(att))
             self.save()
         except:
             pass
@@ -230,7 +231,7 @@ class Order_Pairing(models.Model):
     accepted_date = models.DateTimeField(blank=True,null=True, default=tz.now)
     harvested_date = models.DateTimeField(blank=True,null=True)
     collected_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
-
+    status = models.CharField(max_length=100, default="Ongoing")
 
     def __str__(self):
         return "{} - {}".format(self.order_id,self.farmer)
@@ -241,6 +242,11 @@ class Order_Pairing(models.Model):
         except:
             return None
 
+    def save(self, *args, **kwargs):
+        status = "Ongoing" if self.harvested_date == None else "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None else ""
+        self.status = status
+        super().save(*args, **kwargs)
+        Order.objects.get(order_id=self.order_id_id).set_value([['status',status]])
     #Add get_status(self) after boss martin pushes his changes to order_pair model
 
     class Meta:

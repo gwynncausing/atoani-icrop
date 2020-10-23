@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_apscheduler',
     'login_register.apps.LoginRegisterConfig',
+    'custom_admin.apps.CustomAdminConfig',
 ]
 
 MIDDLEWARE = [

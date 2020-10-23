@@ -33,19 +33,48 @@
 
         #contact{
             .card-body{
-                .add-btn{
+                .edit-address-btn{
+                    margin-left: 5% ;
+                }
+
+                .add-address-btn{
                     color: #0677E0;
                 }
             }
         }
-
     }
 
     .btn-header{
         color: #010101;
     }
+}
 
+.modal-edit{
+    justify-content: center;
+    .modal-content{
+        .modal-header{
+            background-color: #6ba389;
+        }
     
+        .h5{
+            font-weight: bold;
+        }
+    
+        .edit-btn{
+            outline: none;
+            border: 0;
+            width: 7rem;
+            color: #FFFFFF;
+            background-color: #628474;
+        }
 
+        .cancel-btn{
+            outline: none;
+            border: 0;
+            width: 7rem;
+            color: #FFFFFF;
+            background-color: #ABABAB;
+        }
+    }
 
 }
