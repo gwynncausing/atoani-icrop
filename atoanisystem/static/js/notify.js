@@ -53,7 +53,6 @@ function notify(type, title, message){
         default:           toast_icon = '<i style="width:35px;height:35px" class="fas fa-'+ toast_type +'"></i>';
     }
     
-    
     //CREATE NOTIFICATION
     $('<div>',{
             'class':         'toast',

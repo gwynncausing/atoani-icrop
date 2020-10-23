@@ -263,8 +263,7 @@ const passwordConfirm = document.querySelector("#password-confirm");
     //check if password and confirm password are same
     const isPasswordsSame = (p1, p2) => p1 === p2;
 
-    
-    
+
     /*end - Helper Functions*/
 
 })()

@@ -263,6 +263,12 @@ let confirmReservation = function() {
   formData.append('order-id', selectedOrderID);
   formData.append('operation', 'confirm-reserve');
   formData.append('csrfmiddlewaretoken',csrf_token);
+  //show the loading ui
+  $(".loading").removeClass("d-none");
+  //close the current modal open
+  $("#incoming-modal-farmer").modal("hide");
+  $("#reserved-modal-farmer").modal("hide");
+  $("#finished-modal-farmer").modal("hide");
   $.ajax({
     url: '',
     type: 'post',
@@ -272,14 +278,18 @@ let confirmReservation = function() {
     processData: false,
     success: function (response) {
       //Display message
-      if (successMsg.style.display === "none"){
-        confirmMsg.style.display = "none";
-        successMsg.style.display = "block";
-      }
-      reserveButton.innerHTML = "Reserved";
-      reserveButton.disabled = true;
-      cancelButton.innerHTML = "OK"
-      isOrderReserved = false;
+      //remove loading 
+      $(".loading").addClass("d-none"); 
+      //when modal closes, and a succss notification will display
+      notify('success','Reserved Success!','You have successfully reserved an order.')
+      //if (successMsg.style.display === "none"){
+      //  confirmMsg.style.display = "none";
+      //  successMsg.style.display = "block";
+      //}
+      //reserveButton.innerHTML = "Reserved";
+      //reserveButton.disabled = true;
+      //cancelButton.innerHTML = "OK"
+      //isOrderReserved = false;
       //reserveButton.removeEventListener()
     },
     error: function (response) {

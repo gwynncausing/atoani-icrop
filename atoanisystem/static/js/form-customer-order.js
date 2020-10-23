@@ -24,7 +24,7 @@ function setCSRF(value){
     const yesBtn = $("#yes-btn");
     const cancelBtn = $("#cancel-btn");
 
-    const provinceSelector = $("select[name=province]");
+    const provinceSelector = document.querySelector("select[name=province]");
 
     let isCustomAddressClicked = false
 
@@ -33,8 +33,9 @@ function setCSRF(value){
     //if valid, show confirmation tag
     //else, show validation guide
     orderBtn.on("click", e => {
-        if(orderForm[0].checkValidity() === false)
-            orderForm.addClass("was-validated");
+        if(orderForm[0].checkValidity() === false){
+            inputs.$each( input => input[0].checkValidity() );
+        }
         else{
             setInputDisabled(true);
 
@@ -105,7 +106,7 @@ function setCSRF(value){
     })
 
     //detect change in province selector
-    provinceSelector.on("change", e => {
+    provinceSelector.addEventListener("change", e => {
         $('select[name=city]').prop('disabled', false);
         $('select[name=barangay]').prop('disabled', false);
     });
