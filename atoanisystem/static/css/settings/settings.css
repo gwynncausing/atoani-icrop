@@ -31,11 +31,45 @@
   background-color: #ABABAB;
 }
 
-.settings-container .card #contact .card-body .add-btn {
+.settings-container .card #contact .card-body .edit-address-btn {
+  margin-left: 5%;
+}
+
+.settings-container .card #contact .card-body .add-address-btn {
   color: #0677E0;
 }
 
 .settings-container .btn-header {
   color: #010101;
+}
+
+.modal-edit {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modal-edit .modal-content .modal-header {
+  background-color: #6ba389;
+}
+
+.modal-edit .modal-content .h5 {
+  font-weight: bold;
+}
+
+.modal-edit .modal-content .edit-btn {
+  outline: none;
+  border: 0;
+  width: 7rem;
+  color: #FFFFFF;
+  background-color: #628474;
+}
+
+.modal-edit .modal-content .cancel-btn {
+  outline: none;
+  border: 0;
+  width: 7rem;
+  color: #FFFFFF;
+  background-color: #ABABAB;
 }
 /*# sourceMappingURL=settings.css.map */
