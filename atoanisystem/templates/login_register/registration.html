@@ -15,11 +15,11 @@
             <form class="registration-form" novalidate autocomplete="off" method="POST">
                 {% csrf_token %}
                 <div class="container pl-0 pr-0 mt-5 group-inputs">
-                    <div class="group-title row-12 d-flex justify-content-between pr-3 pl-3 pb-2 pt-2">
-                        <span>Account Information</span>
+                    <div class="group-title row-12 d-flex justify-content-between pr-3 pl-3 pb-2 pt-2 font-italic font-weight-bold">
+                        Account Information
                     </div>
 
-                    <div class="form-row row-12 pr-5 pl-5 mt-4">
+                    <div class="form-row row-12 pr-sm-5 pl-sm-5 pr-3 pl-3 mt-4">
                         <div id="account-type-tag" class="form-group d-flex align-items-center col-md-1 col-12">
                             I am a. . .
                         </div>
@@ -29,9 +29,16 @@
                                 <label class="form-check-label" for="farmer" >Farmer</label>
                             </div>
                             <div class="d-flex justify-content-center form-check form-check-inline account-type">
-                                <input name="account-type" class="form-check-input" type="radio" id="customer" value="Customer">
+                                <input name="account-type" class="form-check-input" type="radio" id="customer" value="Customer" checked>
                                 <label class="form-check-label" for="customer">Customer</label>
                             </div>
+                            <div class="d-flex justify-content-center form-check text-center form-check-inline account-type">
+                                <input name="account-type" class="form-check-input" type="radio" id="farmer" value="Farmer">
+                                <label class="form-check-label" for="farmer" >Farmer</label>
+                            </div>  
+                        </div>
+                        <div class="form-group col-md-4 col-12 d-flex align-items-center">
+                            <input class="form-control" type="hidden" id="landarea" name="land_area" placeholder="Land Area (sqm) *"required>
                         </div>
                         <div class="form-group col-md-4 col-12 d-flex align-items-center">
                             <input class="form-control" type="number" id="landarea" name="land_area" placeholder="Land Area (sqm) *" required>
@@ -39,7 +46,7 @@
                     </div>
 
 
-                    <div class="form-row row-12 mt-1 pb-4 pr-5 pl-5">
+                    <div class="form-row row-12 mt-1 pb-4 pr-sm-5 pl-sm-5 pr-3 pl-3">
                         <div  class="form-group col-12 col-md-4">
                             <input class="form-control" type="text" name="username" id="username" placeholder="Username *" maxlength="16" required>
                             <div id="username-invalid" class="invalid-feedback">
@@ -51,7 +58,7 @@
                             <div class="input-group pr-password">
                                 <input class="form-control" type="password" name="password1" id="pr-password" placeholder="Password *" maxlength="16" autocomplete="new-password" required >
                                 <div class="input-group-append">
-                                    <span class="input-group-text view-password fa fa-eye"></span>
+                                    <span class="input-group-text view-password fa fa-eye" style="border-top-right-radius: 0.4rem; border-bottom-right-radius: 0.4rem;"></span>
                                 </div>
                                 <div class="invalid-feedback">
                                     You must have a strong password.
@@ -66,7 +73,7 @@
                             <div class="input-group">
                                 <input class="form-control" type="password" name="password2" id="password-confirm" placeholder="Confirm Password *" maxlength="16" required>
                                 <div class="input-group-append">
-                                    <span class="input-group-text view-password-confirm fa fa-eye"></span>
+                                    <span class="input-group-text view-password-confirm fa fa-eye" style="border-top-right-radius: 0.4rem; border-bottom-right-radius: 0.4rem;"></span>
                                 </div>
                                 <div class="invalid-feedback">
                                     Password don't match.
@@ -81,11 +88,11 @@
                 </div>
 
                 <div class="container pl-0 pr-0 mt-5 p group-inputs">
-                    <div class="group-title row-12 d-flex pr-3 pl-3 pb-2 pt-2 mb-5">
+                    <div class="group-title row-12 d-flex pr-3 pl-3 pb-2 pt-2 mb-5 font-italic font-weight-bold">
                         Personal Information
                     </div>
 
-                    <div class="form-row row-12 mt-4 pr-5 pl-5">
+                    <div class="form-row row-12 mt-4  pr-sm-5 pl-sm-5 pr-3 pl-3">
                         <div class="form-group col-md-4">
                             <input class="form-control" type="text" name="first-name" id="first-name" placeholder="First Name *" required maxlength="30">
                             <div class="invalid-feedback">
@@ -100,29 +107,31 @@
                         </div>
                     </div>
 
-                    <div class="form-row row-12 mt-2 pr-5 pl-5">
+                    <div class="form-row row-12 mt-4 pr-sm-5 pl-sm-5 pr-3 pl-3">
                         <div class="form-group col-12 col-md-3 col-sm-6">
-                            <label for="province">Province *</label>
-                            <select class="form-control" name="province" id="province">
+                            <select class="form-control" name="province" id="province" required>
+                                <option value="-1" disabled selected hidden>Province *</option>
+                            </select>
+                            <div id="province-invalid" class="invalid-feedback">
+                                Please choose your province.
+                            </div>
+                        </div>
+                        <div class="form-group col-12 col-md-3 col-sm-6">
+                            <select class="form-control" name="city" id="city" disabled>
+                                <option value="" disabled selected hidden>City *</option>
                             </select>
                         </div>
                         <div class="form-group col-12 col-md-3 col-sm-6">
-                            <label for="city">City *</label>
-                            <select class="form-control" name="city" id="city">
+                            <select class="form-control" name="brgy" id="barangay" disabled>
+                                <option value="" disabled selected hidden>Barangay *</option>
                             </select>
                         </div>
-                        <div class="form-group col-12 col-md-3 col-sm-6">
-                            <label for="last-name">Barangay *</label>
-                            <select class="form-control" name="brgy" id="barangay">
-                            </select>
-                        </div>
-                        <div class="form-group col-12 col-md-3 col-sm-6">
-                            <label for="last-name">Street / House No. </label>
+                        <div class="form-group col-12 col-md-3 col-sm-6" >
                             <input class="form-control" type="text" name="street" id="street" placeholder="Street" maxlength="30">
                         </div>
                     </div>
 
-                    <div class="form-row row-12 mt-3 pr-5 pl-5">
+                    <div class="form-row row-12 mt-4 pr-sm-5 pl-sm-5 pr-3 pl-3">
                         <small>You may put your contact number or email or both. *</small>
                         <input name="contact-info" id="contact-info" hidden  required/>
                         <div class="invalid-feedback">
@@ -130,7 +139,7 @@
                         </div>
                     </div>
                     
-                    <div class="form-row row-12 mt-2 pr-5 pl-5">
+                    <div class="form-row row-12 mt-2 pr-sm-5 pl-sm-5 pr-3 pl-3">
                         <div class="form-group col-12 col-md-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -189,5 +198,3 @@
 
 
 
-
-</html>

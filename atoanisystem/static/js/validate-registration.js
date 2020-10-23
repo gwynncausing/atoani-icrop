@@ -65,6 +65,8 @@ const passwordConfirm = document.querySelector("#password-confirm");
 
     const farmerRadio = document.getElementById('farmer');
     const customerRadio = document.getElementById('customer');
+
+    const provinceSelector = document.getElementById("province");
     //ERROR MESSAGES:
 
     const usernameBlank  = "Please enter a username. It must not contain a space.";
@@ -97,6 +99,13 @@ const passwordConfirm = document.querySelector("#password-confirm");
             }
         });
 
+
+        //check the validity of the province
+        if(provinceSelector.options[provinceSelector.selectedIndex].value === "-1"){
+            provinceSelector.classList.add("is-invalid")
+            provinceSelector.classList.remove("is-valid");
+        }
+
         //check if both passwords are the same
         if(!isPasswordsSame(password.value, passwordConfirm.value)){
             passwordConfirm.classList.remove("is-valid");
@@ -119,6 +128,11 @@ const passwordConfirm = document.querySelector("#password-confirm");
             if(e.target.id !== "pr-password" && e.target.name !== "contact_number")
                 displayValidity(e.target)
         })
+    })
+
+    provinceSelector.addEventListener("change", e => {
+        provinceSelector.classList.remove("is-invalid")
+        provinceSelector.classList.add("is-valid");
     })
 
     //email input listener
