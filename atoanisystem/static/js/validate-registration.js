@@ -133,6 +133,9 @@ const passwordConfirm = document.querySelector("#password-confirm");
     provinceSelector.addEventListener("change", e => {
         provinceSelector.classList.remove("is-invalid")
         provinceSelector.classList.add("is-valid");
+
+        $("#barangay").prop("disabled", false);
+        $("#city").prop("disabled", false);
     })
 
     //email input listener
