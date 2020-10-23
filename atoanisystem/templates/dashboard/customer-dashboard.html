@@ -7,7 +7,6 @@
     <!-- Datatables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
 
-
 {% endblock %}
 
 
@@ -81,7 +80,7 @@
                 </div>
                 <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2"   role="tabpanel" aria-labelledby="nav-reserved-tab">
                     <!-- Insert here the Reserved Table -->
-                    <table class="table customer-reserved-table mr-auto ml-auto"  style="width: 95%">
+                    <table class="display nowrap table customer-reserved-table mr-auto ml-auto"  style="width: 95%">
                         <thead>
                             <tr>
                                 <th>Date Ordered</th>
@@ -448,7 +447,7 @@
 {% block scripts %}
     <!-- Datatables JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
-  
+
     <script src="{% static '/js/customer-dashboard.js' %}"></script>
     <!-- For modal transition and validate form report -->
     <script src="{% static '/js/form-customer-report.js' %}"></script>
@@ -468,12 +467,6 @@
     </script>   
 
     <script src="{% static '/js/notify.js' %}"></script>
-
-    <script>
-        notify('success','Order Success!','Your order is being reviewed.')
-    </script>
-
-
 
 
 {% endblock %}

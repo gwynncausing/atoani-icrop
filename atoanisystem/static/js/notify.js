@@ -64,7 +64,7 @@ function notify(type, title, message){
             'aria-live':     'assertive',
             'aria-atomic':   'true',
         })
-        .html('<div class="toast-content"><div class="toast-icon">'+ toast_icon +'</div><div class="toast-body"><strong><em>'+ toast_title +'<em></strong><div>'+ toast_message +'</div></div></div><button class="close" type="button" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">'+ toast_btn_close_svg +'</span></button>')
+        .html('<div class="toast-content"><div class="toast-icon">'+ toast_icon +'</div><div class="toast-body"><strong><em>'+ toast_title +'</em></strong><div>'+ toast_message +'</div></div></div><button class="close" type="button" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">'+ toast_btn_close_svg +'</span></button>')
         .appendTo(toast_container)
         .toast('show');
         
