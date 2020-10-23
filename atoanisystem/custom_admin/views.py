@@ -7,7 +7,7 @@ class AdminOrdersView(View):
         if request.user.is_authenticated:
             currentUser = request.user
             print('awfwafawfwaf')
-            print(hf.get_unapproved_users())
+            print(hf.get_all_order_pairs())
             if currentUser.is_staff:
                 return render(request, 'custom_admin/admin-orders.html')
             else:
