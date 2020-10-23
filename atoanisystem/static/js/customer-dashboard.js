@@ -54,7 +54,8 @@ const customerReservedTableConfig = {
 
   initComplete: function(){
     data = totalTable.ajax.json().data;
-  }
+  },
+
 };
 
 const customerFinishedTableConfig = {
@@ -93,7 +94,7 @@ const customerFinishedTableConfig = {
 
   initComplete: function(){
     data = totalTable.ajax.json().data;
-  }
+  },
 };
 
 const customerTotalTableConfig = {
@@ -131,7 +132,8 @@ const customerTotalTableConfig = {
 
   initComplete: function(){
     data = totalTable.ajax.json().data;
-  }
+  },
+
 };
 
 function viewReservedOrders(button){
