@@ -181,9 +181,17 @@ class SettingsView(View):
         else:
             return redirect("login_register:login")
 
+    def post(self, request):
+        if request.method == 'POST':
+            if 'btn-save-name' in request.POST:
+                firstname = request.POST.get("first-name")
+                lastname = request.POST.get("last-name")
+                user = User.objects.filter(id = request.user.id).update(first_name = firstname, last_name = lastname)
+                return redirect("login_register:settings")
 
-def handler404(request, *args, **argv):
-    response = render_to_response("404.html", {}, context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
+
+# def handler404(request, *args, **argv):
+#     response = render_to_response("404.html", {}, context_instance=RequestContext(request))
+#     response.status_code = 404
+#     return response
 

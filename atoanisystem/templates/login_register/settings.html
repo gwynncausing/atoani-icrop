@@ -29,7 +29,8 @@
                       <div id="name" class="collapse show" aria-labelledby="name-card" data-parent="#userEditAccordion">
                         <div class="card-body">
                          
-                            <form class="pt-3">
+                            <form class="pt-3" method="POST"> 
+                                {% csrf_token %}
                                 <div class="form-row row pr-2 pl-2">
                                     <div class="form-group col-lg-12 col-12 row">
                                         <label class="col-lg-3 col-12" for="first-name">First Name *</label>
@@ -40,8 +41,8 @@
                                         <input class="col-lg-6 col-12 form-control" type="text" name="last-name" id="last-name" placeholder="Last Name" maxlength="30" required maxlength="30" value="{{user.last_name}}">
                                     </div>
                                     <div class="form-group col-12">
-                                        <button type="button" class="btn float-right save-btn">Save Changes</button>
-                                        <button type="button" class="btn float-right cancel-btn" data-toggle="collapse" data-target="#name">Cancel</button>
+                                        <button type="submit" class="btn float-right save-btn" name="btn-save-name" id="btn-save-name">Save Changes</button>
+                                        <button class="btn float-right cancel-btn" data-toggle="collapse" data-target="#name">Cancel</button>
                                     </div>
                                 </div>
                             </form>
@@ -80,8 +81,8 @@
                                             <input class="col-lg-6 col-12 form-control" type="password" name="retype-password" id="retype-password" placeholder="Retype New Password" required maxlength="30">
                                         </div>
                                         <div class="form-group col-12">
-                                            <button type="button" class="btn float-right save-btn">Save Changes</button>
-                                            <button type="button" class="btn float-right cancel-btn" data-toggle="collapse" data-target="#account">Cancel</button>
+                                            <button type="submit" class="btn float-right save-btn">Save Changes</button>
+                                            <button class="btn float-right cancel-btn" data-toggle="collapse" data-target="#account">Cancel</button>
                                         </div>
                                     </div>
                                 </form>
