@@ -76,12 +76,6 @@ def create_order(customer,crop_instance,weight,location_instance,land_area_neede
     
     return order;
 
-def cancel_order(order_pair):
-    #get order instance, set order.is_reserved = False
-    #set order_pair.is_canceled = True
-    #delete from db?
-    pass
-
 #return all crops
 def get_all_crops():
     return Crop.objects.all().values('id', 'name')
