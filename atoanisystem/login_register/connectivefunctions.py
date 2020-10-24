@@ -179,7 +179,7 @@ def display_customer_table(df):
     if len(df) == 0:
         return None
     else:
-        df = df.sort_values('order_date',ascending=False).reset_index(drop=True)
+        df = df.sort_values('order_date',ascending=False).reset_index(drop=True).rename(columns={'status_y':'status'})
         return df[['order_id','order_pair_id','order_date','location_id','name','weight','status']].to_dict('records')
 
 # search a database based on date
@@ -307,7 +307,8 @@ def display_all_orders(df):
         return None
     else:
         df = df.sort_values('order_date',ascending=False).reset_index(drop=True)
-        return df[['customer_id','names','order_id','order_date','location','crop_name','weight','status']].to_dict('records')
+        print(df)
+        return df[['customer_id','customer_names','order_id','order_date','location','crop_name','weight','status']].to_dict('records')
 
 def datatable_order_pairs():
     # try:

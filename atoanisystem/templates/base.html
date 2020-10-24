@@ -32,14 +32,19 @@
                             <a href="{% url 'login_register:login' %}"><img class="imgLogo" src="/static/images/AtoANI-iCROP-Horizontal-white.png" alt="AtoANI Logo"></a>
                         </div>
                     </div>
-                    <div class="div-2">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon bg-light"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mr-auto">
+                    <div class="div-2" style="z-index: 2000;">
+                        <div class="d-block d-lg-none ml-lg-0 py-3" style="text-align: right;">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <!-- <span class="navbar-toggler-icon bg-light"></span> -->
+                                <i class="fa fa-bars" style="font-size: 2rem; color: white;"></i>
+                            </button>
+                        </div>
+                        <div class="collapse navbar-collapse py-3" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="{% url 'login_register:login' %}">Home<span
+                                            class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">About Us</a>
@@ -48,7 +53,8 @@
                                     <a class="nav-link" href="#">Contact Us</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
                                         Language
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -58,25 +64,20 @@
                                     </div>
                                 </li>
                             </ul>
-                            <div class="my-lg-0">
-                                <ul class="navbar-nav mr-auto">
-                                    {% if not user.is_authenticated %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'login_register:register' %}">Register</a> 
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'login_register:login' %}">Login</a> 
-                                    </li>
-                                    {% else %}
-                                    <li class="nav-item"></li>
-                                        <a class="nav-link" href="{% url 'login_register:settings' %}">Settings</a> 
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'login_register:logout' %}">Logout</a> 
-                                    </li>
-                                    {% endif %}
-                                </ul>
-                            </div>
+                            <ul class="navbar-nav ml-auto">
+                                {% if not user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'login_register:register' %}">Register</a>
+                                </li>
+                                {% else %}
+                                <li class="nav-item"></li>
+                                <a class="nav-link" href="{% url 'login_register:settings' %}">Settings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'login_register:logout' %}">Logout</a>
+                                </li>
+                                {% endif %}
+                            </ul>
                         </div>
                     </div>
                 </div>

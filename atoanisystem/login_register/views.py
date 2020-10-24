@@ -45,11 +45,8 @@ class LoginView(View):
                 currentUser = user
                 if currentUser.is_staff:
                     return JsonResponse({'result':'admin', 'url':'http://127.0.0.1:8000/admin/'},status=200)
-                    # return redirect("/admin")
                 elif hasattr(currentUser, 'farmer'):
                     if(currentUser.farmer.is_approved):
-                        print("farmer ok")
-                        # return redirect("dashboard:farmer")
                         return JsonResponse({'result':'farmer ok', 'url':'http://127.0.0.1:8000/dashboard/farmer/'},status=200)
                     else:
                         logout(request)
@@ -61,7 +58,6 @@ class LoginView(View):
                         return JsonResponse({'result':'approval'},status=200)
             else:
                 return JsonResponse({'result':'not ok'},status=500)
-                # return render(request, 'login_register/login.html')
         else:
             return render(request, 'login_register/login.html')
 
