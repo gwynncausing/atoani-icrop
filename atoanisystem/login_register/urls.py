@@ -11,5 +11,5 @@ urlpatterns = [
     path('approval/', views.ApprovalView.as_view(), name="approval"),
     path('logout/', views.LogoutView.as_view(), name="logout"),
     path('settings/', views.SettingsView.as_view(), name="settings"),
-    path('password/', auth_views.PasswordChangeView.as_view(template_name="settings.html"), name="password")
+    path('password/', auth_views.PasswordChangeView.as_view(template_name='login_register/settings.html'), name="password")
 ]

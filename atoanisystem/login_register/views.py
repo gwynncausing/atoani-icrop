@@ -5,6 +5,8 @@ from django.contrib.auth.models import Group, User, auth
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, redirect, render
 from django.views.generic import View
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.forms import PasswordChangeForm
 
 from .forms import *
 from .models import Customer, Farmer, Location
@@ -165,6 +167,12 @@ class ApprovalView(View):
                     return render(request, "login_register/needs-approval.html")
         else:
             return redirect("login_register:login")
+
+
+# class ChangePasswordView(PasswordChangeView):
+#     form_class = PasswordChangeForm
+
+    
 
 class LogoutView(View):
     def get(self,request):
