@@ -8,4 +8,8 @@ urlpatterns = [
     path('', views.AdminOrdersView.as_view(), name="orders"),
     path('orders/', views.AdminOrdersView.as_view(), name="orders"),
     path('users/', views.AdminUsersView.as_view(), name="users"),
+    path('get-all-orders/', views.GetAllOrdersView.as_view(), name="get-all-orders"),
+    path('get-unapproved-orders/', views.GetWaitlistOrdersView.as_view(), name="get-unapproved-orders"),
+    path('get-ongoing-orders/', views.GetOngoingOrdersView.as_view(), name="get-ongoing-orders"),
+    path('get-collected-orders/', views.GetCollectedOrders.as_view(), name="get-collected-orders"),
 ]
