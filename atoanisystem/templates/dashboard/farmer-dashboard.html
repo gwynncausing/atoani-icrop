@@ -10,6 +10,19 @@
 {% endblock %}
 
 {% block content %}
+
+    <div class="loading d-none">
+        <div class="overlay"></div>
+        <div class="loader">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+        </div>
+    </div>
+
     <div class="body-dashoard container-fluid mt-5 mb-3">
         <span class="pr-3 pl-3 title">Dashboard</span>
 
@@ -346,5 +359,8 @@
         const csrftoken = '{{ csrf_token }}';
         setCSRF(csrftoken)
     </script>
+
+    <!-- shows the notification success or error when reserved -->
+    <script src="{% static '/js/notify.js' %}"></script>
 {% endblock %}
 

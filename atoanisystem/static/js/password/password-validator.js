@@ -147,10 +147,6 @@ let isPasswordValid = false;
 		var thisVal = $(this).val();  
 
 		//console.log("Change")
-		
-
-
-
 		// Check # of characters
 		if ( thisVal.length >= o.numCharacters ) {
 			// console.log("good numCharacters");

@@ -12,18 +12,19 @@ function setCSRF(value){
     const demand = $("input[name=demand]");
     const customAddress = $("#custom-address");
     const customAddressHolder = $("#custom-address-holder");    
-    const addressesOnFile = $(".address-on-file");    
+    const addressesOnFile = $(".addresses-on-file");    
     const modalOrder = $(".modal-order");    
     const inputTexts = $("input[type=text]");    
-    const defaultAddress = $("#default-address");    
-    const errorTag = $("#failedOrderMsg");
-    const successTag = $("#successOrderMsg");
-    const confirmTag = $("#confirmOrderMsg");
+    const defaultAddress = $(".default-address"); 
+    
+    //located on the modal footer
+    const confirmTag = $("#confirmOrderMsg");   
     const orderBtn = $("#order-btn");
     const noBtn = $("#no-btn");
     const yesBtn = $("#yes-btn");
     const cancelBtn = $("#cancel-btn");
 
+    const provinceSelector = document.querySelector("select[name=province]");
 
     let isCustomAddressClicked = false
 
@@ -31,21 +32,19 @@ function setCSRF(value){
     //check first the validity of the form
     //if valid, show confirmation tag
     //else, show validation guide
-    // orderForm.change(function(){
-    //     console.log(orderForm.serialize());
-    // });
     orderBtn.on("click", e => {
-        if(orderForm[0].checkValidity() === false)
+        if(orderForm[0].checkValidity() === false){
             orderForm.addClass("was-validated");
+        }
         else{
             setInputDisabled(true);
 
             //show yes, no, and confirm tag
             yesBtn.removeClass("d-none");
             noBtn.removeClass("d-none");
+
             confirmTag.removeClass("d-none");
             
-
             //hide the order button
             orderBtn.addClass("d-none");
             cancelBtn.addClass("d-none");
@@ -57,9 +56,11 @@ function setCSRF(value){
     orderForm.on("submit", e => {
         //console.log(orderForm.serialize());
         yesBtn.prop("disabled", true);
+        $('#modal-create-order').modal('hide');
         e.preventDefault();
         if(orderForm[0].checkValidity())
             createOrder();
+        
     });
 
 
@@ -89,13 +90,12 @@ function setCSRF(value){
     //when no button is clicked => inputs are enabled and hide confirm tag
     noBtn.on("click", e => {
         setInputDisabled(false);
-        confirmTag.addClass("d-none");
-        errorTag.addClass("d-none");
         noBtn.addClass("d-none");
 
         orderBtn.removeClass("d-none");
         cancelBtn.removeClass("d-none");
-
+        
+        confirmTag.addClass("d-none");
         yesBtn.addClass("d-none");
         yesBtn.prop("disabled", false);
     });
@@ -103,26 +103,33 @@ function setCSRF(value){
     //resets the modal when close
     modalOrder.on('hidden.bs.modal', e => {
         resetModal();
-        setInputDisabled(false);
     })
+
+    //detect change in province selector
+    provinceSelector.addEventListener("change", e => {
+        $('select[name=city]').prop('disabled', false);
+        $('select[name=barangay]').prop('disabled', false);
+    });
 
     //resets the modal order form
     const resetModal = () => {
         inputTexts.val("");
+
         defaultAddress.prop("checked", true);
+
         orderForm.removeClass("was-validated");
 
-        errorTag.addClass("d-none");
-        successTag.addClass("d-none");
-        confirmTag.addClass("d-none");
         noBtn.addClass("d-none");
-
-
         orderBtn.removeClass("d-none");
         orderBtn.prop("disabled", false);
 
+        confirmTag.addClass("d-none");
+
         yesBtn.addClass("d-none");
         yesBtn.prop("disabled", false);
+        cancelBtn.removeClass("d-none");
+
+        setInputDisabled(false);
 
         if(isCustomAddressClicked == true){
             customAddressHolder.slideToggle( 280, () => {});
@@ -136,6 +143,9 @@ function setCSRF(value){
     }
 
     const createOrder = () => {
+        //show the loading ui
+        $(".loading").removeClass("d-none");
+
         const formData = new FormData();
         //workaround for form data not capturing values of the orderForm when passed to its constructor
         const elements = orderForm[0].elements;
@@ -154,18 +164,24 @@ function setCSRF(value){
                 //this total table came from customer dashboard
                 totalTable.ajax.reload();
 
+                //remove loading 
+                $(".loading").addClass("d-none");
+
                 //reset Modal
                 resetModal();
-                setInputDisabled(true);
-
-                orderBtn.prop("disabled", true);
-                confirmTag.addClass("d-none");
-                successTag.removeClass("d-none");
-                cancelBtn.removeClass("d-none");
-
+                
+                //to nofity sucess
+                notify('success','Order Success!','Your order is being reviewed.')
             },
             error: function(response){
-                errorTag.removeClass("d-none");
+                //remove loading 
+                $(".loading").addClass("d-none");
+
+                //to nofity error
+                notify('error','Order Failed!','Please refresh the browser.')
+
+                //reset Modal
+                resetModal();
             }
         });
     }

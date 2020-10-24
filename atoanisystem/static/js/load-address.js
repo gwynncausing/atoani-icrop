@@ -42,6 +42,7 @@ function loadCity() {
   }
   //resets the select tag or else it will just be added to existing options
   $('#city').empty();
+
   //loads the municipality_list which is an array of keys (refer to json file)
   loadSelectData('city', Object.keys(municipalities.municipality_list));
 }
@@ -54,6 +55,7 @@ function loadBarangay() {
       }
   }
   $('#barangay').empty();
+
   loadSelectData('barangay', barangays.barangay_list);
 }
 
@@ -68,8 +70,11 @@ $('#province').change(function () {
           }
       }
   }
+
   $('#city').empty();
   $('#barangay').empty();
+
+ 
   loadSelectData('city', Object.keys(municipalities.municipality_list));
   loadCity();
   loadBarangay();
@@ -105,7 +110,11 @@ function loadAddresses(address_url){
       var sortedOptions = $("#province option").sort(function (a,b) { return a.value.toUpperCase().localeCompare(b.value.toUpperCase()) });
       $("#province").empty();
       $("#province").append(sortedOptions);
-      loadCity();
-      loadBarangay();
+
+      //add default selected option in the address
+      $("#province").append($("<option value='-1' disabled selected hidden>Province *</option>"));
+
+      //loadCity();
+      //loadBarangay();
   });
 }
