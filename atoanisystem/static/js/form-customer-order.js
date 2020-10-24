@@ -34,7 +34,7 @@ function setCSRF(value){
     //else, show validation guide
     orderBtn.on("click", e => {
         if(orderForm[0].checkValidity() === false){
-            inputs.$each( input => input[0].checkValidity() );
+            orderForm.addClass("was-validated");
         }
         else{
             setInputDisabled(true);
