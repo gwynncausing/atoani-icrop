@@ -55,6 +55,8 @@ const farmerFinishedTableConfig = {
 
   initComplete: function(){
     finished_data = finishTable.ajax.json().data;
+    //show the total count of finished orders
+    $("#finished-orders-counter").html(finished_data.length);
   }
 };
 
@@ -91,6 +93,9 @@ const farmerReservedTableConfig = {
 
   initComplete: function(){
     reserved_data = reservedTable.ajax.json().data;
+    //show the total count of reserved orders
+    console.log(reserved_data);
+    $("#reserved-orders-counter").html(reserved_data.length);
   }
 };
 
@@ -125,6 +130,8 @@ const farmerIncomingTableConfig = {
 
   initComplete: function(){
     incoming_data = incomingTable.ajax.json().data;
+    //show the total incoming of orders
+    $("#incoming-orders").html(incoming_data.length);
   }
 };
 
@@ -282,6 +289,12 @@ let confirmReservation = function() {
       $(".loading").addClass("d-none"); 
       //when modal closes, and a succss notification will display
       notify('success','Reserved Success!','You have successfully reserved an order.')
+
+      //refresh/reload the tables
+      incomingTable.ajax.reload( json => $("#incoming-orders").html(incomingTable.ajax.json().data.length) );
+      finishTable.ajax.reload( json => $("#finished-orders-counter").html(finishTable.ajax.json().data.length) );
+      reservedTable.ajax.reload( json => $("#reserved-orders-counter").html(reservedTable.ajax.json().data.length) );
+
       //if (successMsg.style.display === "none"){
       //  confirmMsg.style.display = "none";
       //  successMsg.style.display = "block";
@@ -336,11 +349,7 @@ $(document).ready(function () {
     //if this is true this means that the farmer checked for its availability (it is temporarily reserved) and that we should cancel the reservation or else it would remain reserved
     if(isOrderReserved){
       cancelReservation();
-    }
-    //refresh/reload the tables
-    incomingTable.ajax.reload();
-    finishTable.ajax.reload();
-    reservedTable.ajax.reload();
+    } 
   });
   incomingTable = $('.farmer-incoming-table').DataTable(farmerIncomingTableConfig);
   finishTable = $('.farmer-finished-table').DataTable(farmerFinishedTableConfig);

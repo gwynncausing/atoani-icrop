@@ -162,7 +162,10 @@ function setCSRF(value){
             processData: false,
             success: function(response){
                 //this total table came from customer dashboard
-                totalTable.ajax.reload();
+                //update the all the table
+                totalTable.ajax.reload(json => $("#total-orders-counter").html(totalTable.ajax.json().data.length) );
+                reservedTable.ajax.reload(json => $("#reserved-orders-counter").html(reservedTable.ajax.json().data.length) );
+                finishedTable.ajax.reload(json => $("#finished-orders-counter").html(finishedTable.ajax.json().data.length) );
 
                 //remove loading 
                 $(".loading").addClass("d-none");

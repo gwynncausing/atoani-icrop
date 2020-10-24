@@ -59,6 +59,8 @@ const customerReservedTableConfig = {
 
   initComplete: function(){
     resevered_data = reservedTable.ajax.json().data;
+    //show the total count of reserved orders
+    $("#reserved-orders-counter").html(resevered_data.length);
   }
 };
 
@@ -102,6 +104,8 @@ const customerFinishedTableConfig = {
 
   initComplete: function(){
     finished_data = finishedTable.ajax.json().data;
+    //show the total count of finished orders
+    $("#finished-orders-counter").html(finished_data.length);
   }
 };
 
@@ -144,6 +148,8 @@ const customerTotalTableConfig = {
 
   initComplete: function(){
     total_data = totalTable.ajax.json().data;
+    //show the total count of orders
+    $("#total-orders-counter").html(total_data.length);
   }
 };
 
@@ -245,7 +251,7 @@ var finishedTable = null;
 var reservedTable = null;
 
 
-var totalCount = null;
+var reservedCount = null;
 var finsihedCount = null;
 var totalCount = null;
 
