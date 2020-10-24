@@ -127,7 +127,7 @@ def datatable_farmer(id):
         orders = pd.DataFrame(Order.objects.filter(order_id__in=order_ids).values())
         crops = pd.DataFrame(Crop.objects.filter(id__in=[item[2] for item in orders.values]).values('id','name'))
         final_order = orders.merge(crops, left_on="crop_id",right_on="id").drop(columns=["crop_id","id"])
-        
+
         return df.merge(final_order, left_on="order_id_id", right_on="order_id").drop(columns=["order_id_id","order_id"])
 
 # to be called after datatable_farmer to generate datatable dictionary
@@ -207,7 +207,6 @@ def reserve_order(order_id,farmer_id):
     d = Order_Pairing(order_id_id=order_id,farmer_id=farmer_id)
     d.save()
     update_time_single(d)
-# check months for farmers ????
 # order related functions
 
 def update_time_single(order_pair):
@@ -233,19 +232,17 @@ def matching_algorithm(land_size):
     available_order = available_order[available_order['land_area_needed'] <= land_size].sort_values('land_area_needed',ascending=False)
     return available_order[:10].to_dict('records')
 
-
+# added 25 as a contingency measure
 def calculate_land_area_single(order):
     order_crop = Crop.objects.filter(id=order['crop_id']).values('harvest_weight_per_land_area','productivity')[0]
     land_area = ((order['weight'] * 0.001)/order_crop['harvest_weight_per_land_area']) * 10000
-    land_area = land_area + (land_area * (1-(order_crop['productivity']/100)))
+    land_area = land_area + (land_area * (1-(order_crop['productivity']/100))) + 25
     Order.objects.get(order_id=order['order_id']).set_value([['land_area_needed',land_area]])
-    # return order_crop
 
 def calculate_land_area():
     [calculate_land_area_single(order) for order in Order.objects.filter(land_area_needed__isnull=True).values()]
 
 def check_obsolete_orders():
-    print("HERE IN OBSOLETE ORDERS")
     order = pd.DataFrame(Order.objects.all().filter(message__isnull=True).values())
     pairs = pd.DataFrame(Order_Pairing.objects.all().values())
     merged_df = order.merge(pairs, how="left",left_on="order_id", right_on="order_id_id").drop(columns='order_id_id')
@@ -260,7 +257,6 @@ def check_obsolete_orders():
         if (date_now - val['order_date']).days > 29 and not val['is_cancelled']:
             print(val)
             Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])
-    print("")
 
 def get_crop_list():
     return Crop.objects.all().values('id','name')
@@ -283,10 +279,6 @@ def get_customer_location(id):
 def get_name(name_id):
     user = User.objects.get(id=name_id)
     return user.first_name,user.last_name
-
-# new get_order customer id + customer name
-# new order_pair customer name, customer id, farmer name, farmer id w/ order_pair, status
-
 
 def all_orders_datatable():
     return datatable_orders(pd.DataFrame(Order.objects.all().values()))
@@ -311,15 +303,15 @@ def display_all_orders(df):
         return df[['customer_id','customer_names','order_id','order_date','location','crop_name','weight','status']].to_dict('records')
 
 def datatable_order_pairs():
-    # try:
-    pairs = pd.DataFrame(Order_Pairing.objects.all().values())
-    orders = datatable_orders(pd.DataFrame(Order.objects.filter(order_id__in=pairs['order_id_id']).values())).drop(columns="status")
-    farmers = pd.DataFrame(Farmer.objects.all().values()).rename(columns={'id':'farm_id'})
-    farmers['farmer_names'] = farmers['name_id'].apply(get_name)
-    farmers = farmers[['farm_id','farmer_names']]
-    return pairs.merge(orders, left_on="order_id_id", right_on="order_id").drop(columns="order_id_id").merge(farmers, left_on="farmer_id", right_on="farm_id").drop(columns="farm_id")
-    # except:
-    #     return []
+    try:
+        pairs = pd.DataFrame(Order_Pairing.objects.all().values())
+        orders = datatable_orders(pd.DataFrame(Order.objects.filter(order_id__in=pairs['order_id_id']).values())).drop(columns="status")
+        farmers = pd.DataFrame(Farmer.objects.all().values()).rename(columns={'id':'farm_id'})
+        farmers['farmer_names'] = farmers['name_id'].apply(get_name)
+        farmers = farmers[['farm_id','farmer_names']]
+        return pairs.merge(orders, left_on="order_id_id", right_on="order_id").drop(columns="order_id_id").merge(farmers, left_on="farmer_id", right_on="farm_id").drop(columns="farm_id")
+    except:
+        return []
 
 def display_all_order_pairs(df):
     if len(df) == 0:
@@ -329,15 +321,18 @@ def display_all_order_pairs(df):
         return df[['customer_id','customer_names','farmer_id','farmer_names','order_id','order_date','location','crop_name','weight','status']].to_dict('records')
 
 def display_all_users():
-    users = pd.DataFrame(User.objects.all().values("id","email","first_name","last_name")).rename(columns={'id':'user_id'})
-    customers = Customer.objects.all()
-    customers_df = pd.DataFrame(customers.values('contact_number','name','is_approved')).rename(columns={'name':'customer_name'})
-    customers_df['location'] = [cust.get_locations() for cust in customers]
-    customers_df['location'] = [[w[0] for w in x] for x in customers_df['location']]
-    customers_df = customers_df.merge(users, left_on="customer_name", right_on="user_id").drop(columns=["customer_name"])
+    try:
+        users = pd.DataFrame(User.objects.all().values("id","email","first_name","last_name")).rename(columns={'id':'user_id'})
+        customers = Customer.objects.all()
+        customers_df = pd.DataFrame(customers.values('contact_number','name','is_approved')).rename(columns={'name':'customer_name'})
+        customers_df['location'] = [cust.get_locations() for cust in customers]
+        customers_df['location'] = [[w[0] for w in x] for x in customers_df['location']]
+        customers_df = customers_df.merge(users, left_on="customer_name", right_on="user_id").drop(columns=["customer_name"])
 
-    farmers = pd.DataFrame(Farmer.objects.all().values('contact_number','location','name','is_approved','land_area')).rename(columns={'name':'farmer_name'})
-    f_unique_locs = farmers['location'].unique()
-    farmers = farmers.merge(pd.DataFrame(Location.objects.filter(id__in=f_unique_locs).values('name','id')), left_on="location", right_on="id").drop(columns=["location","id"]).rename(columns={'name':'location'})
-    farmers = farmers.merge(users, left_on="farmer_name", right_on="user_id").drop(columns="farmer_name")
-    return {'customer':customers_df.to_dict('records'), 'farmer':farmers.to_dict('records')}
+        farmers = pd.DataFrame(Farmer.objects.all().values('contact_number','location','name','is_approved','land_area')).rename(columns={'name':'farmer_name'})
+        f_unique_locs = farmers['location'].unique()
+        farmers = farmers.merge(pd.DataFrame(Location.objects.filter(id__in=f_unique_locs).values('name','id')), left_on="location", right_on="id").drop(columns=["location","id"]).rename(columns={'name':'location'})
+        farmers = farmers.merge(users, left_on="farmer_name", right_on="user_id").drop(columns="farmer_name")
+        return {'customer':customers_df.to_dict('records'), 'farmer':farmers.to_dict('records')}
+    except:
+        return []
