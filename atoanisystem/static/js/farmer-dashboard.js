@@ -287,10 +287,11 @@ let confirmReservation = function() {
       //Display message
       //remove loading 
       $(".loading").addClass("d-none"); 
-      //when modal closes, and a succss notification will display
+      //when modal closes, and a success notification will display
       notify('success','Reserved Success!','You have successfully reserved an order.')
 
       //refresh/reload the tables
+      //and update the current counter in ui
       incomingTable.ajax.reload( json => $("#incoming-orders").html(incomingTable.ajax.json().data.length) );
       finishTable.ajax.reload( json => $("#finished-orders-counter").html(finishTable.ajax.json().data.length) );
       reservedTable.ajax.reload( json => $("#reserved-orders-counter").html(reservedTable.ajax.json().data.length) );
