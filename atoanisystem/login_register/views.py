@@ -184,6 +184,14 @@ class SettingsView(View):
         else:
             return redirect("login_register:login")
 
+class AboutUsView(View):
+    def get(self,request):
+        return render(request, "login_register/about-us.html")
+
+class ContactUsView(View):
+    def get(self,request):
+        return render(request, "login_register/contact-us.html")
+
 
 def handler404(request, *args, **argv):
     response = render_to_response("404.html", {}, context_instance=RequestContext(request))
