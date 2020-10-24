@@ -58,9 +58,8 @@ const customerReservedTableConfig = {
   },
 
   initComplete: function(){
-    data = totalTable.ajax.json().data;
-  },
-
+    resevered_data = reservedTable.ajax.json().data;
+  }
 };
 
 const customerFinishedTableConfig = {
@@ -102,8 +101,8 @@ const customerFinishedTableConfig = {
   },
 
   initComplete: function(){
-    data = totalTable.ajax.json().data;
-  },
+    finished_data = finishedTable.ajax.json().data;
+  }
 };
 
 const customerTotalTableConfig = {
@@ -144,9 +143,8 @@ const customerTotalTableConfig = {
   },
 
   initComplete: function(){
-    data = totalTable.ajax.json().data;
-  },
-
+    total_data = totalTable.ajax.json().data;
+  }
 };
 
 function viewReservedOrders(button){
