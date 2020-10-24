@@ -7,7 +7,7 @@ const getFinishedOrdersUrl = '/dashboard/get-customer-finished-orders';
 
 //data table settings
 const domPlacements = `<
-                        <"d-flex float-left ml-5 mb-3 mt-4"
+                        <"d-flex float-left ml-md-5 ml-sm-2 ml-1 mb-3 mt-4"
                             <"mr-3 ml-1"f>
                         >
                         <"d-flex float-right ">
@@ -58,9 +58,9 @@ const customerReservedTableConfig = {
   },
 
   initComplete: function(){
-    data = totalTable.ajax.json().data;
+    resevered_data = totalTable.ajax.json().data;
   },
-
+  responsive: true
 };
 
 const customerFinishedTableConfig = {
@@ -102,8 +102,9 @@ const customerFinishedTableConfig = {
   },
 
   initComplete: function(){
-    data = totalTable.ajax.json().data;
+    finished_data = totalTable.ajax.json().data;
   },
+  responsive: true
 };
 
 const customerTotalTableConfig = {
@@ -144,9 +145,9 @@ const customerTotalTableConfig = {
   },
 
   initComplete: function(){
-    data = totalTable.ajax.json().data;
+    total_data = totalTable.ajax.json().data;
   },
-
+  responsive: true
 };
 
 function viewReservedOrders(button){
@@ -257,4 +258,12 @@ $(document).ready(function () {
   finishedTable = $('.customer-finished-table').DataTable(customerFinishedTableConfig);
   reservedTable = $('.customer-reserved-table').DataTable(customerReservedTableConfig);
   
+});
+
+//https://www.gyrocode.com/articles/jquery-datatables-column-width-issues-with-bootstrap-tabs/#example2
+//code below to recalculate column widths of all visible tables once a tab becomes active by using a combination of columns.adjust() and responsive.recalc() API methods
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+  $($.fn.dataTable.tables(true)).DataTable()
+     .columns.adjust()
+     .responsive.recalc();
 });
