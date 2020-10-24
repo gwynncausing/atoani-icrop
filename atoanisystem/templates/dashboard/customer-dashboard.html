@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="{% static '/css/dashboard/customer-dashboard.css' %}">
     <!-- Datatables CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css"/>
+
 
 {% endblock %}
 
@@ -74,13 +77,13 @@
         <div class="tab-content col-12 mt-3 pb-3 ml-auto mr-auto" id="nav-tabContent">
 
             <!-- Reserved Table -->
-            <div id="reserved-table" class="order-table row mt-2 mb-5 tab-pane fade  w-90 mr-auto ml-auto">
+            <div id="reserved-table" class="order-table row mt-2 mb-5 tab-pane fade  w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-reserved-tab">
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
                     <i>Reserved Orders</i>  
                 </div>
-                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2"   role="tabpanel" aria-labelledby="nav-reserved-tab">
+                <div class="order-table-holder col-12 container pb-2 pr-md-2 pl-md-2 pr-0 pl-0 pb-5" style="width: 95%">
                     <!-- Insert here the Reserved Table -->
-                    <table class="display nowrap table customer-reserved-table mr-auto ml-auto"  style="width: 95%">
+                    <table class="table dt-responsive nowrap customer-reserved-table ml-auto mr-auto" style="width: 95%">
                         <thead>
                             <tr>
                                 <th>Date Ordered</th>
@@ -107,13 +110,13 @@
             <!-- End Reserved Table -->
 
             <!-- Finished Table -->
-            <div id="finished-table" class="order-table row mt-2 mb-5 tab-pane fade w-90 mr-auto ml-auto"  >
+            <div id="finished-table" class="order-table row mt-2 mb-5 tab-pane fade w-90 mr-auto ml-auto"  role="tabpanel" aria-labelledby="nav-reserved-tab">
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
                     <i>Finished Orders</i>  
                 </div>
-                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2" role="tabpanel" aria-labelledby="nav-reserved-tab">
+                <div class="order-table-holder col-12 container pb-2 pr-md-2 pl-md-2 pr-0 pl-0 pb-5"  style="width: 95%">
                     <!-- Insert here the Reserved Table -->
-                    <table class="table customer-finished-table mr-auto ml-auto"  style="width: 95%">
+                    <table class="table dt-responsive nowrap customer-finished-table ml-auto mr-auto" style="width: 95%">
                         <thead>
                             <tr>
                                 <th>Date Ordered</th>
@@ -145,11 +148,11 @@
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
                     <i>Total Orders</i>  
                 </div>
-                <div class="order-table-holder col-12 container-fluid pb-2 pr-2 pl-2 pb-5" style="width: 95%">
+                <div class="order-table-holder col-12 container pb-2 pr-md-2 pl-md-2 pr-0 pl-0 pb-5" style="width: 95%">
                     <!-- Template Table 
                         Note: add these classes to other table -> mr-auto ml-auto table
                     -->
-                    <table class="table customer-total-table mr-auto ml-auto" style="width: 95%">
+                    <table class="table dt-responsive nowrap customer-total-table ml-auto mr-auto" style="width: 95%;">
                         <thead>
                             <tr>
                                 <th>Date Ordered</th>
@@ -204,7 +207,7 @@
                             <div class="col-6" id="reserved-status">-</div>
                             <div class="label col-6 text-right">Order Number:</div>
                             <div class="col-6" id="reserved-order-number">-</div>
-                            <div class="col-6 "></div>
+                            <div class= "col-6"></div>
                         </div>
                         <div class="col-md-6 col-12 row mt-4">
                             <div class="label col-6 text-right pt-1">Crop Name:</div>
@@ -451,6 +454,9 @@
 {% block scripts %}
     <!-- Datatables JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
 
     <script src="{% static '/js/customer-dashboard.js' %}"></script>
     <!-- For modal transition and validate form report -->
