@@ -181,6 +181,11 @@ h6 {
   color: #fafafa;
 }
 
+.form-login .form-body .forgotpassword {
+  color: #628474;
+  margin-top: -20px;
+}
+
 #accountInReviewModal .modal-content {
   background: #EBF2F2;
 }

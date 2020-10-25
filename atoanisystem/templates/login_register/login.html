@@ -6,7 +6,7 @@
 {% endblock %} 
 
 {% block content %}
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5 h-100">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-5">
             <form class="form-login" id="form-login" method="POST" enctype="multipart/form-data">
@@ -21,21 +21,24 @@
                         <span id="error" style="display: none;"></span>
                     </div>
                     <div>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Phone Number">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username">
                     </div>
                     <div class="form-group mt-3">
                         <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                     </div>
-                    <div class="row">
+                    <div class="row mb-4">
                         <div class="col">
-                            <div class="form-group pl-4 mt-1 mb-5">
+                            <div class="form-group pl-4 mt-1">
                                 <input class="form-check-input" type="checkbox" value="" id="rememberCheckbox">
                                 <label class="form-check-label" for="rememberCheckbox">Remember me</label>
                             </div>
                         </div>
-                        <div class="col mb-5">
+                        <div class="col">
                             <button id="signin" type="submit" class="btn btn-block btnSignIn">Sign in</button>
                         </div>
+                    </div>
+                    <div class="row pb-4">
+                        <a class="forgotpassword mx-auto my-auto" href="#">Forgot Username or Password</a>
                     </div>
                 </div>
             </form>
