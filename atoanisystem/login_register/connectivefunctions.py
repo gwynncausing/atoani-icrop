@@ -137,7 +137,6 @@ def display_farmer_table(df):
         return df
     else:
         df = df.sort_values('accepted_date',ascending=False).reset_index(drop=True).rename(columns={'status_y':'status'})
-        print(df)
         return df[['order_pair_id','accepted_date','name','weight','land_area_needed','location_id','harvested_date','status']].to_dict('records')
 
 # get customer's orders
@@ -299,7 +298,6 @@ def display_all_orders(df):
         return None
     else:
         df = df.sort_values('order_date',ascending=False).reset_index(drop=True)
-        print(df)
         return df[['customer_id','customer_names','order_id','order_date','location','crop_name','weight','status']].to_dict('records')
 
 def datatable_order_pairs():

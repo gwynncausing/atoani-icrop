@@ -185,6 +185,30 @@ body {
   margin-top: 7.5rem;
 }
 
+.orders .view-order {
+  background: #EBF2F2;
+}
+
+.orders .view-order .order-id {
+  color: black;
+}
+
+.orders .view-order-btn {
+  background: none;
+  color: #114a44;
+  font-weight: bold;
+}
+
+.orders .view-order-btn:hover {
+  background-color: none;
+}
+
+.orders .view-order-btn:focus {
+  color: lightgreen;
+  background-color: none;
+  outline: none;
+}
+
 .body-dashoard {
   position: relative;
   width: 90%;
