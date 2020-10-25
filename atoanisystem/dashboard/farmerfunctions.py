@@ -45,12 +45,12 @@ def get_reserved_orders(user):
     orders = dashboard_utility.display_farmer_table(df)
     format_location(orders)
     format_nan_values(orders,'land_area_needed')
-    print(orders)
+    #print(orders)
     reserved_orders = []
     for order in orders:
         if order['status'] == 'Ongoing' and order['accepted_date'] != None:
             reserved_orders.append(order)
-    #print(reserved_orders)
+    print(reserved_orders)
     return reserved_orders
 
 #returns the finished orders of the farmer
@@ -81,6 +81,8 @@ def reserve_to(farmer,order):
     order_pair = None
     #assumes that order is already reserved for farmer
     order_pair = Order_Pairing.objects.create(order_id = order, farmer = farmer)
+    print("RESEEEERRRRVEEE")
+    print(order_pair.accepted_date)
     return order_pair
 
 def cancel_reservation(order_pair):
