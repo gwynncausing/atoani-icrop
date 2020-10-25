@@ -2,15 +2,30 @@
 
 {% block tags %}
 <!-- Customized CSS -->
-<!-- <link rel="stylesheet" href="{% static 'css/login_register/login.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/login_register/terms-and-conditions.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5 mb-5 h-100">
-	<h3 style="color:#0b3531;">Terms and Conditions of use</h3>
-	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, dolorem quos. Accusamus quia ratione tenetur reiciendis
-	provident magni quos iste nesciunt molestiae minima unde, alias a necessitatibus consequatur possimus earum.
+<div class="container mt-5 mb-5 h-100 p-0">
+	<div class="body-content ">
+		<span class="pr-1 pl-1 title">Terms and Conditions of Use</span>
 
+		<div class="row content">
+			<div class="subtitle">Subtitle</div>
+			<div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+				excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.</div>
+		</div>
+
+		<div class="row content">
+			<div class="subtitle">Subtitle</div>
+			<div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+				excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.</div>
+		</div>
+
+		<div class="row content">
+				<span class="print mx-auto mt-3"><i class="fa fa-print"></i> Print this page</span>
+		</div>
+	</div>
 </div>
 
 {% endblock %}
