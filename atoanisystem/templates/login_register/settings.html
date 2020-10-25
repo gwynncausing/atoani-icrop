@@ -18,6 +18,7 @@
             <div class="col col-12 mt-4 mb-5">
                 <div class="accordion" id="userEditAccordion">
 
+                    <!-- Name card -->
                     <div class="card">
                       <div class="card-header" id="name-card">
                         <h5 class="mb-0">
@@ -28,8 +29,7 @@
                       </div>
                       <div id="name" class="collapse show" aria-labelledby="name-card" data-parent="#userEditAccordion">
                         <div class="card-body">
-                         
-                            <form class="pt-3" method="POST"> 
+                            <form class="pt-3" method="POST" id="form-name"> 
                                 {% csrf_token %}
                                 <div class="form-row row pr-2 pl-2">
                                     <div class="form-group col-lg-12 col-12 row">
@@ -46,11 +46,10 @@
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                       </div>
                     </div>
-        
+
                     <!-- Account Card -->
                     <div class="card">
                         <div class="card-header" id="headingTwo">
@@ -62,7 +61,7 @@
                         </div>
                         <div id="account" class="collapse" aria-labelledby="headingTwo" data-parent="#userEditAccordion">
                             <div class="card-body">
-                                <form class="pt-3" method="POST">
+                                <form class="pt-3" method="POST" id="form-account">
                                     {% csrf_token %}
                                     <div class="form-row row pr-2 pl-2">
                                         <div class="form-group col-lg-12 col-12 row">
@@ -91,7 +90,7 @@
                         </div>
                     </div>
                     
-                    <!-- Contact Card -->   
+                    <!-- Old Contact Card -->   
                     <!-- <div class="card">
                         <div class="card-header" id="headingThree">
                             <h5 class="mb-0">
@@ -178,12 +177,14 @@
                         </div>
                         <div id="contact" class="collapse" aria-labelledby="headingThree" data-parent="#userEditAccordion">
                             <div class="card-body">
-                                <form class="pt-3">
+                                <form class="pt-3" method="POST" id="form-contact">
+                                    {% csrf_token %}
                                     <div class="form-row row pr-2 pl-2">
                                         {% if user.customer %}
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12 float-right">Address *</label>
-                                            <input class="col-lg-6 form-control" type="text" name="address" id="address" placeholder="Address" required value="{{user.farmer.location}}" readonly>
+                                            <input class="col-lg-6 form-control" type="text" name="address" id="address" placeholder="Address" required value="{{user.customer.location}}" readonly>
+                                            <button type="button" class="col btn float-right edit-address-btn form-control" data-toggle="modal" data-target="#modal-edit">Edit Address</button>
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12" for="middle-name">Contact Number</label>
@@ -206,8 +207,8 @@
                                             <input class="col-lg-6 col-12 form-control" type="text" name="email" id="email" placeholder="Email Address" maxlength="30" required value="{{user.email}}">
                                         </div>
                                         <div class="form-group col-12">
-                                            <button type="button" class="btn float-right save-btn">Save Changes</button>
-                                            <button type="button" class="btn float-right cancel-btn" data-toggle="collapse" data-target="#others">Cancel</button>
+                                            <button type="submit" class="btn float-right save-btn" id="btn-save-contact" name="btn-save-contact">Save Changes</button>
+                                            <button class="btn float-right cancel-btn" data-toggle="collapse" data-target="#others">Cancel</button>
                                         </div>
                                     </div>
                                 </form>
@@ -227,19 +228,20 @@
                         </div>
                         <div id="others" class="collapse" aria-labelledby="headingFour" data-parent="#userEditAccordion">
                             <div class="card-body">
-                                <form class="pt-3">
+                                <form class="pt-3" method="POST" id="form-others">
+                                    {% csrf_token %}
                                     <div class="form-row row pr-2 pl-2">
                                         <div class="form-group col-lg-12 col-12 row">
-                                            <label class="col-lg-3 col-12"  for="last-name">Land Area (sqm)*</label>
+                                            <label class="col-lg-3 col-12"  for="land-area">Land Area (sqm)*</label>
                                             <input class="col-lg-6 col-12 form-control" type="number" name="land-area" id="land-area" placeholder="0 sqm"  required value="{{user.farmer.land_area}}">
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
-                                        <label class="col-lg-3 col-12"  for="last-name">Company *</label>
-                                        <input class="col-lg-6 col-12 form-control" type="email" name="company" id="company" placeholder="" maxlength="30" required value="{{user.farmer.company}}">
+                                        <label class="col-lg-3 col-12"  for="company">Company *</label>
+                                        <input class="col-lg-6 col-12 form-control" type="text" name="company" id="company" placeholder="" maxlength="30" required value="{{user.farmer.company}}">
                                     </div>
                                         <div class="form-group col-12">
-                                            <button type="button" class="btn float-right save-btn">Save Changes</button>
-                                            <button type="button" class="btn float-right cancel-btn" data-toggle="collapse" data-target="#others">Cancel</button>
+                                            <button type="submit" class="btn float-right save-btn" name="btn-save-others" id="btn-save-others">Save Changes</button>
+                                            <button class="btn float-right cancel-btn" data-toggle="collapse" data-target="#others">Cancel</button>
                                         </div>
                                     </div>
                                 </form>
@@ -249,7 +251,6 @@
                     {% endif %}
                 </div>
             </div>
-
 
             <!-- <div class="col-md-3 col-12" style="background: blue; min-height: 30px;">
             </div> -->
@@ -300,17 +301,36 @@
                     </div>
                 </div>
             </div>
+        </div>  
+
+        <div class="modal-edit modal fade" id="modal-message" tabindex="-1" role="dialog" aria-labelledby="modalEditAddress" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Edited Successfully</h5>
+                    </div>
+                    <div class="pt-3 pb-3 pl-5 pr-5 d-flex justify-content-between">
+                        <button type="button" class="btn cancel-btn" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>   
 
-    
+
     </div>
 
 {% endblock %}
 
 
 {% block scripts %}
-    <script src="{% static '/js/password/password-validator.js' %}" type="text/javascript"></script>
     <script src="{% static '/js/load-address.js' %}"></script>
+    <!-- <script src="{% static '/js/settings.js' %}"></script> -->
     <script>
         $(document).ready(function() {
             loadAddresses("{% static '/js/philippine_address_2019v2.json' %}");

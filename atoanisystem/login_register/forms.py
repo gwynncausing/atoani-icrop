@@ -43,3 +43,4 @@ class LocationForm(forms.ModelForm):
         model = Location
         # fields to check for is_valid() method
         fields = ('street', 'brgy', 'city', 'province',)
+

@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import HttpResponse, redirect, render
 from django.views.generic import View
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
 from .forms import *
@@ -143,8 +144,6 @@ class RegistrationView(View):
         else:
             return HttpResponse(form.errors)
         
-
-
 class ApprovalView(View):
     def get(self,request):
         if request.user.is_authenticated:
@@ -164,11 +163,8 @@ class ApprovalView(View):
         else:
             return redirect("login_register:login")
 
-
 # class ChangePasswordView(PasswordChangeView):
 #     form_class = PasswordChangeForm
-
-    
 
 class LogoutView(View):
     def get(self,request):
@@ -180,6 +176,18 @@ class LogoutView(View):
 
 class SettingsView(View):
     def get(self, request):
+        if(hasattr(request.user, 'customer')):
+            customer = Customer.objects.get(id=request.user.customer.id)
+            locations = customer.location.all()
+            
+        # objects = cart.cart_item.all()
+
+
+        # locations = Location.related.all()
+        # print(customer)
+        # context = {
+        #     "locations" : locations
+        # }
         if request.user.is_authenticated and not request.user.is_staff:
             return render(request, "login_register/settings.html")
         else:
@@ -190,8 +198,43 @@ class SettingsView(View):
             if 'btn-save-name' in request.POST:
                 firstname = request.POST.get("first-name")
                 lastname = request.POST.get("last-name")
-                user = User.objects.filter(id = request.user.id).update(first_name = firstname, last_name = lastname)
-                return redirect("login_register:settings")
+                User.objects.filter(id = request.user.id).update(first_name = firstname, last_name = lastname)
+            elif 'btn-save-others' in request.POST:
+                land_area = request.POST.get("land-area")
+                company = request.POST.get("company")
+                Farmer.objects.filter(id = request.user.farmer.id).update(land_area = land_area, company = company)
+            elif 'btn-save-contact' in request.POST:
+                contact_number = request.POST.get("contact-num")
+                email = request.POST.get("email")
+                User.objects.filter(id = request.user.id).update(email=email)
+                if(hasattr(request.user, 'farmer')):
+                    Farmer.objects.filter(id = request.user.farmer.id).update(contact_number = contact_number)
+                elif(hasattr(request.user, 'customer')):
+                    Customer.objects.filter(id = request.user.customer.id).update(contact_number = contact_number)
+            # elif 'btn-save-address' in request.POST:
+            #     if(hasattr(request.user, 'farmer')):
+            #         Farmer.objects.filter(id = request.user.farmer.id).update(contact_number = contact_number)
+            #     elif(hasattr(request.user, 'customer')):
+            #         Customer.objects.filter(id = request.user.customer.id).update(contact_number = contact_number)
+            
+            return redirect("login_register:settings")
+
+# def change_password(request):
+#     if request.method == 'POST':
+#         form = PasswordChangeForm(request.user, request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             update_session_auth_hash(request, user)  # Important!
+#             messages.success(request, 'Your password was successfully updated!')
+#             return redirect('change_password')
+#         else:
+#             messages.error(request, 'Please correct the error below.')
+#     else:
+#         form = PasswordChangeForm(request.user)
+#     return render(request, 'login_register/settings.html', {
+#         'form': form
+#     })
+
 
 
 # def handler404(request, *args, **argv):
