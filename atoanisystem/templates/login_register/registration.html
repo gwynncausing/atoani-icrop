@@ -7,7 +7,7 @@
 
 
 {% block content %}
-    <div class="container pr-0 pl-0 pb-4 mt-5 form-registration">
+    <div class="container pr-0 pl-0 pb-4 mt-5 form-registration mb-5">
         <div class="form-header d-flex justify-content-between align-items-center pl-3 pr-3">
             <span>Registration</span><span>Fields with * are required</span>
         </div>
@@ -154,14 +154,16 @@
                             <input class="form-control" type="text" name="company" id="company-name" placeholder="Company Name" maxlength="100">
                         </div>
                     </div>
-
+                    <div class="col-12 mt-3 text-center">
+                        <input type="checkbox" class="form-check-input" id="termsAndConditions">
+                        <label class="form-check-label" for="exampleCheck1">I Agree to the <a href="{% url 'login_register:terms-and-conditions-of-use' %}" id="termsAndConditionsLink" target="_blank">terms and conditions</a></label>
+                    </div>
                     <div class="col-12 mt-3 text-center">
                         <input id="submit" class="btn order-sm-1 order-1 " type="submit" value="Sign Up">
                     </div>
-                    <div class="col-12 mt-3 text-center">
+                    <div class="col-12 mt-5 text-center">
                         <a href="#" class="order-sm-1 order-2 mt-xs-0 mt-2">I already have an account</a>
                     </div>
-
                 </div>
 
             </form>

@@ -229,6 +229,10 @@ h6 {
   width: 8rem;
 }
 
+.form-registration .form-body #termsAndConditionsLink {
+  text-decoration: underline;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
