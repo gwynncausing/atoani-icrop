@@ -8,6 +8,11 @@ let csrf_token = null;
 function setCSRF(value){
   csrf_token = value;
 }
+
+let reserved_data = null;
+let incoming_data = null;
+let finished_data = null;
+
 //data table settings
 const domPlacements = `<
                         <"d-flex float-left ml-5 mb-3 mt-4"
@@ -137,7 +142,7 @@ const confirmMsg = document.getElementById("confirmReserveMsg");
 const failedMsg = document.getElementById("failedReserveMsg");
 const successMsg = document.getElementById("successReserveMsg");
 const reserveButton = document.getElementById('reserveBtn');
-const cancelButton = document.getElementById('cancelBtn');
+const cancelButton = document.getElementById('cancelReserveBtn');
 
 function viewFinishedOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-pair-id");
@@ -167,6 +172,7 @@ function viewFinishedOrders(button){
 
 function viewReservedOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-pair-id");
+  console.log(reserved_data);
   let order = null;
   for(let i = 0; i < reserved_data.length; i++){
     if(reserved_data[i].order_pair_id == selectedOrderID){
@@ -224,6 +230,7 @@ function viewIncomingOrders(button){
 // Checks if order is available
 let checkOrder = function() {
   //Disables the button so that while it is fetching  data from server it wont duplicate the request, and because there is no loading indicator yet
+  console.log("AWFWAFWAFAWF")
   reserveButton.disabled = true;
   let formData = new FormData();//.append('action','add');
   formData.append('order-id', selectedOrderID);
@@ -259,6 +266,7 @@ let checkOrder = function() {
 
 //When farmer presses Yes button as confirmation
 let confirmReservation = function() {
+  cancelButton.disabled = true;
   let formData = new FormData();
   formData.append('order-id', selectedOrderID);
   formData.append('operation', 'confirm-reserve');
@@ -282,15 +290,12 @@ let confirmReservation = function() {
       $(".loading").addClass("d-none"); 
       //when modal closes, and a succss notification will display
       notify('success','Reserved Success!','You have successfully reserved an order.')
-      //if (successMsg.style.display === "none"){
-      //  confirmMsg.style.display = "none";
-      //  successMsg.style.display = "block";
-      //}
-      //reserveButton.innerHTML = "Reserved";
-      //reserveButton.disabled = true;
-      //cancelButton.innerHTML = "OK"
-      //isOrderReserved = false;
-      //reserveButton.removeEventListener()
+      isOrderReserved = false;
+      
+      //This will update the data after reloading the ajax call
+      incomingTable.ajax.reload(()=>{incoming_data = incomingTable.ajax.json().data;},true);
+      finishTable.ajax.reload(()=>{reserved_data = reservedTable.ajax.json().data;},true);
+      reservedTable.ajax.reload(()=>{finished_data = finishTable.ajax.json().data;},true);
     },
     error: function (response) {
       //remove loading 
@@ -323,6 +328,16 @@ function cancelReservation() {
     }
   });
 }
+//Customized close modal function, because when the farmer views an incoming order, it is temporarily reserved to him/her, 
+function closeModal(){
+  //isOrderReserved only becomes false during initialization or if the farmer confirms the reservation
+  //if this is true this means that the farmer checked for its availability (it is temporarily reserved) and that we should cancel the reservation or else it would remain reserved
+  if(isOrderReserved){
+    cancelReservation();
+  }
+  else
+    $(".modal-farmer").modal("hide");
+};
 
 var incomingTable = null;
 var finishedTable = null;
@@ -331,16 +346,9 @@ var reservedTable = null;
 //Executing it all
 $(document).ready(function () {
   //Detects if the modal is closed
-  $(".modal-farmer").on("hidden.bs.modal", function () {
-    //isOrderReserved only becomes false during initialization or if the farmer confirms the reservation
-    //if this is true this means that the farmer checked for its availability (it is temporarily reserved) and that we should cancel the reservation or else it would remain reserved
-    if(isOrderReserved){
-      cancelReservation();
-    }
-    //refresh/reload the tables
-    incomingTable.ajax.reload();
-    finishTable.ajax.reload();
-    reservedTable.ajax.reload();
+  $(".modal-farmer").on("hidden.bs.modal", function (e) {
+    e.preventDefault();
+    closeModal();
   });
   incomingTable = $('.farmer-incoming-table').DataTable(farmerIncomingTableConfig);
   finishTable = $('.farmer-finished-table').DataTable(farmerFinishedTableConfig);
