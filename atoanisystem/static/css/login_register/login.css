@@ -115,6 +115,19 @@ h6 {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .navbar .div-1 {
+    width: calc( 60% - 40px);
+  }
+  .navbar .div-1 .imgLogo {
+    margin-top: 13px;
+    height: 35px;
+  }
+  .navbar .div-2 {
+    width: calc( 40% + 40px);
+  }
+}
+
 .footer {
   left: 0;
   bottom: 0;
@@ -166,6 +179,11 @@ h6 {
 .form-login .form-body .btnSignIn {
   background-color: #628474;
   color: #fafafa;
+}
+
+.form-login .form-body .forgotpassword {
+  color: #628474;
+  margin-top: -20px;
 }
 
 #accountInReviewModal .modal-content {

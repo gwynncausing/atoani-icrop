@@ -54,8 +54,13 @@ h6 {
   background: #628474;
 }
 
-.navbar .div-2 div.navbar-collapse {
-  padding-top: 15px;
+.navbar .div-2 div.navbar-collapse ul li:hover {
+  background-color: #114a44;
+  border-radius: 5px;
+}
+
+.navbar .div-2 div.navbar-collapse ul li a.nav-link {
+  text-align: right;
 }
 
 .navbar .div-2 a {
@@ -86,6 +91,15 @@ h6 {
   .navbar .div-2 {
     width: calc( 65% + 40px);
   }
+  .navbar .div-2 div.navbar-collapse {
+    background-color: #628474;
+  }
+  .navbar .div-2 div.navbar-collapse ul li:hover {
+    border-radius: 0px;
+  }
+  .navbar .div-2 div.navbar-collapse ul li a.nav-link {
+    padding-right: 20px;
+  }
 }
 
 @media only screen and (max-width: 770px) {
@@ -98,6 +112,19 @@ h6 {
   }
   .navbar .div-2 {
     width: calc( 60% + 40px);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar .div-1 {
+    width: calc( 60% - 40px);
+  }
+  .navbar .div-1 .imgLogo {
+    margin-top: 13px;
+    height: 35px;
+  }
+  .navbar .div-2 {
+    width: calc( 40% + 40px);
   }
 }
 
@@ -156,6 +183,30 @@ body {
 
 .sidebar .orders-title {
   margin-top: 7.5rem;
+}
+
+.orders .view-order {
+  background: #EBF2F2;
+}
+
+.orders .view-order .order-id {
+  color: black;
+}
+
+.orders .view-order-btn {
+  background: none;
+  color: #114a44;
+  font-weight: bold;
+}
+
+.orders .view-order-btn:hover {
+  background-color: none;
+}
+
+.orders .view-order-btn:focus {
+  color: lightgreen;
+  background-color: none;
+  outline: none;
 }
 
 .body-dashoard {

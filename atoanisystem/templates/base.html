@@ -47,10 +47,10 @@
                                             class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">About Us</a>
+                                    <a class="nav-link" href="{% url 'login_register:about-us' %}">About Us</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Contact Us</a>
+                                    <a class="nav-link" href="{% url 'login_register:contact-us' %}">Contact Us</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -70,8 +70,8 @@
                                     <a class="nav-link" href="{% url 'login_register:register' %}">Register</a>
                                 </li>
                                 {% else %}
-                                <li class="nav-item"></li>
-                                <a class="nav-link" href="{% url 'login_register:settings' %}">Settings</a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'login_register:settings' %}">Settings</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'login_register:logout' %}">Logout</a>

@@ -229,4 +229,5 @@ $(document).ready(function () {
   totalTable = $('.customer-total-table').DataTable(customerTotalTableConfig);
   finishedTable = $('.customer-finished-table').DataTable(customerFinishedTableConfig);
   reservedTable = $('.customer-reserved-table').DataTable(customerReservedTableConfig);
+  
 });
