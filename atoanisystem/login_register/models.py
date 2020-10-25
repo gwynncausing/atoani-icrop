@@ -127,6 +127,9 @@ class Customer(models.Model):
     def get_locations(self):
         return self.location.all().values_list('name','id')
 
+    def get_all_locations(self):
+        return self.location.all()
+
     def add_location(self,location_id):
         self.location.add(location_id)
 

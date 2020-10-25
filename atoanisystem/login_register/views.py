@@ -184,19 +184,12 @@ class LogoutView(View):
 class SettingsView(View):
     def get(self, request):
         if(hasattr(request.user, 'customer')):
-            customer = Customer.objects.get(id=request.user.customer.id)
-            locations = customer.location.all()
-            
-        # objects = cart.cart_item.all()
-
-
-        # locations = Location.related.all()
-        # print(customer)
-        # context = {
-        #     "locations" : locations
-        # }
+            locations = Customer.objects.get(id=request.user.customer.id).get_all_locations()
+        context = {
+            "locations" : locations
+        }
         if request.user.is_authenticated and not request.user.is_staff:
-            return render(request, "login_register/settings.html")
+            return render(request, "login_register/settings.html", context)
         else:
             return redirect("login_register:login")
 
@@ -225,6 +218,7 @@ class SettingsView(View):
             #         Customer.objects.filter(id = request.user.customer.id).update(contact_number = contact_number)
             
             return redirect("login_register:settings")
+            
 
 # def change_password(request):
 #     if request.method == 'POST':

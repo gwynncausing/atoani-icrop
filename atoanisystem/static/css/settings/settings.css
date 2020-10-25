@@ -20,6 +20,7 @@
   background: #D4E4DB;
 }
 
+.settings-container .card .edit-address-btn,
 .settings-container .card .save-btn {
   color: #FFFFFF;
   background-color: #628474;
@@ -43,20 +44,54 @@
   color: #010101;
 }
 
+.modal-delete {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modal-delete .modal-content .modal-header {
+  background-color: #6ba389;
+}
+
+.modal-delete .modal-content .modal-header .h5 {
+  font-weight: bold;
+}
+
+.modal-delete .modal-content .delete-btn {
+  outline: none;
+  border: 0;
+  width: 7rem;
+  color: #FFFFFF;
+  background-color: red;
+}
+
+.modal-delete .modal-content .cancel-btn {
+  outline: none;
+  border: 0;
+  width: 7rem;
+  color: #FFFFFF;
+  background-color: #ABABAB;
+}
+
+.modal-add,
 .modal-edit {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
+.modal-add .modal-content .modal-header,
 .modal-edit .modal-content .modal-header {
   background-color: #6ba389;
 }
 
+.modal-add .modal-content .h5,
 .modal-edit .modal-content .h5 {
   font-weight: bold;
 }
 
+.modal-add .modal-content .edit-btn,
 .modal-edit .modal-content .edit-btn {
   outline: none;
   border: 0;
@@ -65,6 +100,7 @@
   background-color: #628474;
 }
 
+.modal-add .modal-content .cancel-btn,
 .modal-edit .modal-content .cancel-btn {
   outline: none;
   border: 0;

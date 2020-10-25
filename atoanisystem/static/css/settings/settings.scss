@@ -20,6 +20,7 @@
             background: #D4E4DB;
         }
 
+        .edit-address-btn,
         .save-btn{
             color: #FFFFFF;
             background-color: #628474;
@@ -49,6 +50,34 @@
     }
 }
 
+.modal-delete{
+    justify-content: center;
+    .modal-content{
+        .modal-header{
+            background-color: #6ba389;
+            .h5{
+                font-weight: bold;
+            }
+        }
+        .delete-btn{
+            outline: none;
+            border: 0;
+            width: 7rem;
+            color: #FFFFFF;
+            background-color: red;
+        }
+
+        .cancel-btn{
+            outline: none;
+            border: 0;
+            width: 7rem;
+            color: #FFFFFF;
+            background-color: #ABABAB;
+        }
+    }
+}
+
+.modal-add,
 .modal-edit{
     justify-content: center;
     .modal-content{
