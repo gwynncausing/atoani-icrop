@@ -11,6 +11,7 @@ from enum import Enum
 from django.utils import timezone as tz
 from datetime import datetime as dt
 import copy
+from django.db.models import Q
 # Create your models here
 
 # https://stackoverflow.com/questions/54802616/how-to-use-enums-as-a-choice-field-in-django-model
@@ -137,7 +138,8 @@ class Customer(models.Model):
 class Order(models.Model):
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    crop = models.ForeignKey(Crop, on_delete=models.CASCADE)
+    crop = models.ForeignKey(Crop, on_delete=models.CASCADE, null=True)
+    custom_crop = models.CharField(max_length=220, null=True, help_text="Uninitialized crop, after add a crop in db, please select appropriate crop in the selection above")
     order_date = models.DateTimeField(default=tz.now, verbose_name="Order date", help_text = "Date in which the order was done")
     weight = models.FloatField()
     location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
@@ -195,16 +197,20 @@ class Farmer(models.Model):
     available_land_area = models.FloatField(blank=True, null=True, help_text="Available planting land of farmer")
 
     def save(self, *args, **kwargs):
-        if self.available_land_area == None or (self.available_land_area > self.land_area):
+        orig = Farmer.objects.get(name=self.name)
+        # checks if land_area has changed
+        if orig.land_area != self.land_area:
             self.available_land_area = self.land_area
+        # updates available_land_area based on ongoing orders
+        if self.available_land_area == self.land_area:
+            for order in Order_Pairing.objects.filter(Q(farmer_id = self.id) & Q(status = "Ongoing")):
+                self.available_land_area = self.available_land_area - order.order_id.land_area_needed
         super().save(*args, **kwargs)
 
     def set_value(self, attr:[]):
         try:
             for att in attr:
-                print("ngari")
                 setattr(self,att[0],att[1])
-                print("sucess " + str(att))
             self.save()
         except:
             pass
@@ -221,6 +227,14 @@ class Farmer(models.Model):
     def get_farmer_name(self):
         return get_name(self.contact_number)
 
+    def add_land(new_land_area):
+        self.available_land_area = self.available_land_area+new_land_area
+        self.save()
+
+    def subtract_land(new_land_area):
+        self.available_land_area = self.available_land_area-new_land_area
+        self.save()
+
     class Meta:
         ordering = ['location','name','-registration_date']
 
@@ -231,6 +245,7 @@ class Order_Pairing(models.Model):
     accepted_date = models.DateTimeField(blank=True,null=True, default=tz.now)
     harvested_date = models.DateTimeField(blank=True,null=True)
     collected_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
+    delivered_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
     status = models.CharField(max_length=100, default="Ongoing")
 
     def __str__(self):
@@ -242,11 +257,28 @@ class Order_Pairing(models.Model):
         except:
             return None
 
+    def set_value(self, attr:[]):
+        try:
+            for att in attr:
+                setattr(self,att[0],att[1])
+            self.save()
+        except:
+            pass
+
     def save(self, *args, **kwargs):
-        status = "Ongoing" if self.harvested_date == None else "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None else ""
-        self.status = status
-        super().save(*args, **kwargs)
-        Order.objects.get(order_id=self.order_id_id).set_value([['status',status]])
+        status = "Ongoing" if self.harvested_date == None else "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None else "Delivered" if self.delivered_date != None else ""
+        if self.status != status:
+            # status has changed
+            self.status = status
+            super().save(*args, **kwargs)
+            # sets order to the same status as the pairing
+            Order.objects.get(order_id=self.order_id_id).set_value([['status',status]])
+            farmer = Farmer.objects.get(id=self.farmer_id)
+            if status == "Ongoing":
+                farmer.subtract_land(self.order_id.land_area)
+            elif status == "Harvested":
+                # Farmer.objects.get()
+                farmer.add_land(self.order_id.land_area)
     #Add get_status(self) after boss martin pushes his changes to order_pair model
 
     class Meta:

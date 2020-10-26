@@ -99,8 +99,10 @@ check_obsolete_orders()
 EXTRA FUNCTIONS
 ---------------
 
-def get_name(name_id)
+get_name(name_id)
 
+TO GET STATUS COUNTS
+count_status(< farmer/customer  datatable>)
 '''
 
 def convert(time):
@@ -124,7 +126,7 @@ def datatable_farmer(id):
         return df
     else:
         order_ids = [item[1] for item in df.values]
-        orders = pd.DataFrame(Order.objects.filter(order_id__in=order_ids).values())
+        orders = pd.DataFrame(Order.objects.filter(order_id__in=order_ids).values()).drop(columns=["status"])
         crops = pd.DataFrame(Crop.objects.filter(id__in=[item[2] for item in orders.values]).values('id','name'))
         final_order = orders.merge(crops, left_on="crop_id",right_on="id").drop(columns=["crop_id","id"])
 
@@ -161,9 +163,9 @@ def get_complete_order_customer(id):
 def datatable_customer(id):
     order= get_complete_order_customer(id)
     if len(order) !=0:
-        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values())
+        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
         if len(df) == 0:
-            order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date']] = "N/A"
+            order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"
             return order
         else:
             df = order.merge(df, how="left", left_on="order_id", right_on="order_id_id").fillna("N/A").drop(columns=["order_id_id"])
@@ -187,13 +189,7 @@ def search_pairing(predate,postdate,df):
 
 # count order_pair status for farmer
 def count_status(df):
-    # assured that all order pairs have been accepted
-    accepted = (df['harvest_date'].isnull()).sum()
-    harvested = len((df.loc[(df['harvested_date'].notna()) & (df['collected_date'].isnull())]))
-    collected = (df['collected_date'].notna()).sum()
-
-    return [accepted, harvested, collected]
-
+    return df['status'].value_counts().reindex(['Pending','Ongoing','Harvested','Collected','Delivered'], fill_value=0)
 # BACKEND FUNCTIONS
 
 def change_farmer_details(id,details):
@@ -236,11 +232,12 @@ def calculate_land_area_single(order):
     order_crop = Crop.objects.filter(id=order['crop_id']).values('harvest_weight_per_land_area','productivity')[0]
     land_area = ((order['weight'] * 0.001)/order_crop['harvest_weight_per_land_area']) * 10000
     land_area = land_area + (land_area * (1-(order_crop['productivity']/100))) + 25
-    Order.objects.get(order_id=order['order_id']).set_value([['land_area_needed',land_area]])
+    Order.objects.get(order_id=order['order_id']).set_value([['land_area_needed',round(land_area)]])
 
 def calculate_land_area():
-    [calculate_land_area_single(order) for order in Order.objects.filter(land_area_needed__isnull=True).values()]
+    [calculate_land_area_single(order) for order in Order.objects.filter(Q(land_area_needed__isnull=True) & Q(crop_id__isnull=False)).values()]
 
+# CHECK IF IT ALSO WORKS FOR NON ONGOING FUNCTIONS
 def check_obsolete_orders():
     order = pd.DataFrame(Order.objects.all().filter(message__isnull=True).values())
     pairs = pd.DataFrame(Order_Pairing.objects.all().values())
