@@ -157,9 +157,18 @@
             success: function(response){
                 //this total table came from customer dashboard
                 //update the all the table
-                totalTable.ajax.reload(json => $("#total-orders-counter").html(totalTable.ajax.json().data.length) );
-                reservedTable.ajax.reload(json => $("#reserved-orders-counter").html(reservedTable.ajax.json().data.length) );
-                finishedTable.ajax.reload(json => $("#finished-orders-counter").html(finishedTable.ajax.json().data.length) );
+                totalTable.ajax.reload( ()=> {
+                    total_data = totalTable.ajax.json().data;
+                    $("#total-orders-counter").html(total_data.length)
+                },true );
+                reservedTable.ajax.reload( () => {
+                    resevered_data = reservedTable.ajax.json().data;
+                    $("#reserved-orders-counter").html(resevered_data.length)
+                },true );
+                finishedTable.ajax.reload( () => { 
+                    finished_data = finishedTable.ajax.json().data;
+                    $("#finished-orders-counter").html(finished_data.length)
+                },true );
 
                 //remove loading 
                 $(".loading").addClass("d-none");

@@ -10,4 +10,7 @@ urlpatterns = [
     path('approval/', views.ApprovalView.as_view(), name="approval"),
     path('logout/', views.LogoutView.as_view(), name="logout"),
     path('settings/', views.SettingsView.as_view(), name="settings"),
+    path('about-us/', views.AboutUsView.as_view(), name="about-us"),
+    path('contact-us/', views.ContactUsView.as_view(), name="contact-us"),
+    path('terms-and-conditions-of-use/', views.TermsAndConditionsView.as_view(), name="terms-and-conditions-of-use"),
 ]

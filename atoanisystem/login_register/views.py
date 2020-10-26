@@ -24,12 +24,14 @@ class LoginView(View):
                 if(currentUser.farmer.is_approved):
                     return redirect("dashboard:farmer")
                 else:
-                    return redirect("login_register:approval")
+                    logout(request)
+                    return redirect("login_register:login")
             elif hasattr(currentUser, 'customer'):
                 if(currentUser.customer.is_approved):
                     return redirect("dashboard:customer")
                 else:
-                    return redirect("login_register:approval")
+                    logout(request)
+                    return redirect("login_register:login")
         else:
             return render(request, 'login_register/login.html')
 
@@ -47,12 +49,15 @@ class LoginView(View):
                     if(currentUser.farmer.is_approved):
                         return JsonResponse({'result':'farmer ok', 'url':'http://127.0.0.1:8000/dashboard/farmer/'},status=200)
                     else:
+                        print("farmer not approved")
                         logout(request)
                         return JsonResponse({'result':'approval'},status=200)
                 elif hasattr(currentUser, 'customer'):
                     if(currentUser.customer.is_approved):
                         return JsonResponse({'result':'customer ok', 'url':'http://127.0.0.1:8000/dashboard/customer/'},status=200)
                     else:
+                        print("customer not approved")
+                        logout(request)
                         return JsonResponse({'result':'approval'},status=200)
             else:
                 return JsonResponse({'result':'not ok'},status=500)
@@ -69,12 +74,14 @@ class RegistrationView(View):
                 if(currentUser.farmer.is_approved):
                     return redirect("dashboard:farmer")
                 else:
-                    return redirect("login_register:approval")
+                    logout(request)
+                    return redirect("login_register:login")
             elif hasattr(currentUser, 'customer'):
                 if(currentUser.customer.is_approved):
                     return redirect("dashboard:customer")
                 else:
-                    return redirect("login_register:approval")
+                    logout(request)
+                    return redirect("login_register:login")
         else:
             return render(request,'login_register/registration.html')
 
@@ -176,6 +183,18 @@ class SettingsView(View):
             return render(request, "login_register/settings.html")
         else:
             return redirect("login_register:login")
+
+class AboutUsView(View):
+    def get(self,request):
+        return render(request, "login_register/about-us.html")
+
+class ContactUsView(View):
+    def get(self,request):
+        return render(request, "login_register/contact-us.html")
+
+class TermsAndConditionsView(View):
+    def get(self,request):
+        return render(request, "login_register/terms-and-conditions.html")
 
 
 def handler404(request, *args, **argv):

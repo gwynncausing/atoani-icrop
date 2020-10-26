@@ -115,6 +115,19 @@ h6 {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  .navbar .div-1 {
+    width: calc( 60% - 40px);
+  }
+  .navbar .div-1 .imgLogo {
+    margin-top: 13px;
+    height: 35px;
+  }
+  .navbar .div-2 {
+    width: calc( 40% + 40px);
+  }
+}
+
 .footer {
   left: 0;
   bottom: 0;
@@ -214,6 +227,10 @@ h6 {
   background-color: #114a44;
   color: #fafafa;
   width: 8rem;
+}
+
+.form-registration .form-body #termsAndConditionsLink {
+  text-decoration: underline;
 }
 
 /* Chrome, Safari, Edge, Opera */

@@ -60,6 +60,27 @@ def get_all_order_pairs():
     orders = format_name(orders,'farmer_names','farmer_name')
     return orders
 
+def get_unapproved_orders(orders):
+    unapproved_orders = []
+    for order in orders:
+        if order['status'] == "Pending":
+            unapproved_orders.append(order)
+    return unapproved_orders
+
+def get_ongoing_orders(orders):
+    ongoing_orders = []
+    for order in orders:
+        if order['status'] == "Ongoing":
+            ongoing_orders.append(order)
+    return ongoing_orders
+
+def get_collected_orders(orders):
+    collected_orders = []
+    for order in orders:
+        if order['status'] == "Collected":
+            collected_orders.append(order)
+    return collected_orders
+
 def approve_order(order_id):
     order = Order.objects.get(order_id=order_id)
     order.is_approved = True

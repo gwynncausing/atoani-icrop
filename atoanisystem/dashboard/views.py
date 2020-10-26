@@ -66,6 +66,8 @@ class FarmerIncomingOrdersView(View):
         if request.is_ajax():
             #does not include deleted customer
             arr = ff.get_incoming_orders(request.user)
+            print("Incoming")
+            print(arr)
             json = {'data':arr}
             return JsonResponse(json)
         return render(request,'dashboard/farmer-dashboard.html')
@@ -134,7 +136,7 @@ class CustomerDashboardView(View):
                 location_id = request.POST.get('address')
                 crop_id = request.POST.get('crop-id')
                 
-                #print("Crop: " + crop_id)                
+                print("Crop: " + crop_id)                
                 crop = Crop.objects.get(id=crop_id)  
                 customer = request.user.customer     
                          
@@ -150,9 +152,10 @@ class CustomerDashboardView(View):
                     location_id = location.id;
                 
                 location = Location.objects.get(id=location_id)
+                print(location.id)
                 
                 order = cf.create_order(customer,crop,demand,location,0)
-
+                print(order.order_id)
                 arr = cf.get_total_orders(request.user)
                 json = {'data':arr}
                 return JsonResponse(json)

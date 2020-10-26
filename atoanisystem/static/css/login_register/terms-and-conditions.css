@@ -148,62 +148,37 @@ h6 {
   font-size: 1.2rem;
 }
 
-.form-login {
-  color: #4C6659;
-  background-color: #EBF2F2;
-  width: 100%;
+.body-content {
+  position: relative;
+  min-height: 180px;
+  border: 2px #114a44 solid;
   border-radius: 0.5rem;
-  margin-top: 20%;
-  margin-bottom: 20%;
+  color: black;
+  padding: 15px 15px 30px 15px;
 }
 
-.form-login a {
-  color: #fafafa;
+.body-content .title {
+  position: absolute;
+  left: 2rem;
+  top: -1rem;
+  background: #fff;
+  color: #114a44;
+  font-weight: bold;
 }
 
-.form-login .form-body {
-  padding-left: 10%;
-  padding-right: 10%;
+.body-content .content {
+  color: black;
+  padding: 0px 15px 0px 15px;
 }
 
-.form-login .form-body span#error {
-  color: red;
+.body-content .subtitle {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #114a44;
 }
 
-.form-login .form-body #number-prep {
-  border: 0;
-  background: none;
-  color: #fafafa;
+.body-content .print {
+  color: black;
+  font-size: .8rem;
 }
-
-.form-login .form-body .btnSignIn {
-  background-color: #628474;
-  color: #fafafa;
-}
-
-.form-login .form-body .forgotpassword {
-  color: #628474;
-  margin-top: -20px;
-}
-
-#accountInReviewModal .modal-content {
-  background: #EBF2F2;
-}
-
-#accountInReviewModal .modal-content .modal-header,
-#accountInReviewModal .modal-content .modal-title,
-#accountInReviewModal .modal-content .modal-body span {
-  color: #4C6659;
-  border: none;
-}
-
-#accountInReviewModal .modal-content .modal-footer {
-  border: none;
-}
-
-#accountInReviewModal .modal-content .modal-footer button {
-  color: white;
-  background: #628474;
-  border: none;
-}
-/*# sourceMappingURL=login.css.map */
+/*# sourceMappingURL=terms-and-conditions.css.map */

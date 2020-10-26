@@ -23,6 +23,27 @@ body{
         margin-top: 7.5rem;
     }
 }
+.orders{
+    .view-order {
+        background: $light-green;
+        .order-id{
+            color: black;
+        }
+        
+    }
+    .view-order-btn {
+        background: none;
+        color: $main-color;
+        font-weight: bold;
+        &:hover{background-color: none;}
+        &:focus{
+            color: lightgreen;
+            background-color: none;
+            outline: none;
+        }
+    }
+}
+
 
 
 
