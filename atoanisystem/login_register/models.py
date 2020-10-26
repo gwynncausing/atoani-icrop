@@ -245,6 +245,7 @@ class Order_Pairing(models.Model):
     accepted_date = models.DateTimeField(blank=True,null=True, default=tz.now)
     harvested_date = models.DateTimeField(blank=True,null=True)
     collected_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
+    delivered_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
     status = models.CharField(max_length=100, default="Ongoing")
 
     def __str__(self):
@@ -265,7 +266,7 @@ class Order_Pairing(models.Model):
             pass
 
     def save(self, *args, **kwargs):
-        status = "Ongoing" if self.harvested_date == None else "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None else ""
+        status = "Ongoing" if self.harvested_date == None else "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None else "Delivered" if self.delivered_date != None else ""
         if self.status != status:
             # status has changed
             self.status = status
