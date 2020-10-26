@@ -7,10 +7,10 @@ const getFinishedOrdersUrl = '/dashboard/get-customer-finished-orders';
 
 //data table settings
 const domPlacements = `<
-                        <"d-flex float-left ml-md-5 ml-sm-2 ml-1 mb-3 mt-4"
-                            <"mr-3 ml-1"f>
+                        <"search d-block row mt-4 mb-3"
+                            <"col-1"f>
                         >
-                        <"d-flex float-right ">
+                        <"d-flex float-left">
                         <t>
                         <"bottom"
                             <"d-inline"
@@ -28,8 +28,8 @@ const customerReservedTableConfig = {
     {
       targets: 5,
       data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" data-target="#modal-customer-reserved" onclick="viewReservedOrders(this)">
+      defaultContent: `<div class="button-container d-flex justify-content-center p-0 m-0">
+                            <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-reserved" onclick="viewReservedOrders(this)">
                                 View Order
                             </button>
                             </div>`
@@ -46,7 +46,9 @@ const customerReservedTableConfig = {
     { "data": 'name' },
     { "data": 'location_id'},
     { "data": 'weight' },
-    { "data": 'status' }
+    { "data": 'status' },
+    //add this extra column so that it will also collapse in responsive view
+    { "data": ''},
   ],
 
   order: [
@@ -61,7 +63,8 @@ const customerReservedTableConfig = {
     resevered_data = reservedTable.ajax.json().data;
     //show the total count of reserved orders
     $("#reserved-orders-counter").html(resevered_data.length);
-  }
+  },
+  responsive: true
 };
 
 const customerFinishedTableConfig = {
@@ -73,8 +76,8 @@ const customerFinishedTableConfig = {
     {
       targets: 5,
       data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" data-target="#modal-customer-finished" onclick="viewFinishedOrders(this)">
+      defaultContent: `<div class="button-container d-flex justify-content-center p-0 m-0">
+                            <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-finished" onclick="viewFinishedOrders(this)">
                                 View Order
                             </button>
                       </div>`
@@ -91,7 +94,9 @@ const customerFinishedTableConfig = {
     { "data": 'name' },
     { "data": 'location_id'},
     { "data": 'weight' },
-    { "data": 'status' }
+    { "data": 'status' },
+    //add this extra column so that it will also collapse in responsive view
+    { "data": ''},
   ],
 
   order: [
@@ -106,7 +111,8 @@ const customerFinishedTableConfig = {
     finished_data = finishedTable.ajax.json().data;
     //show the total count of finished orders
     $("#finished-orders-counter").html(finished_data.length);
-  }
+  },
+  responsive: true
 };
 
 const customerTotalTableConfig = {
@@ -117,12 +123,12 @@ const customerTotalTableConfig = {
     {
       targets: 4,
       data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" data-target="#modal-customer-total" onclick="viewTotalOrders(this)">
+      defaultContent: `<div class="button-container d-flex justify-content-center p-0 m-0">
+                            <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-total" onclick="viewTotalOrders(this)">
                                 View Order
                             </button>
                             </div>`
-    }
+    },
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
   ajax: {
@@ -135,6 +141,8 @@ const customerTotalTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'status' },
+    //add this extra column so that it will also collapse in responsive view
+    { "data": ''},
   ],
 
   order: [
@@ -150,11 +158,20 @@ const customerTotalTableConfig = {
     total_data = totalTable.ajax.json().data;
     //show the total count of orders
     $("#total-orders-counter").html(total_data.length);
-  }
+  },
+  responsive: true
 };
 
 function viewReservedOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
+  //when mobile view, or a column collapse
+  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
+  //these two rows become siblings
+  //when selectedOrderID is null, it is assumed in mobile view
+  //temporary fix
+  if(selectedOrderID == null)
+    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-id")
+
   let order = null;
   for(let i = 0; i < resevered_data.length; i++){
     if(resevered_data[i].order_id == selectedOrderID){
@@ -175,6 +192,14 @@ function viewReservedOrders(button){
 
 function viewFinishedOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
+  //when mobile view, or a column collapse
+  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
+  //these two rows become siblings
+  //when selectedOrderID is null, it is assumed in mobile view
+  //temporary fix
+  if(selectedOrderID == null)
+    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-id");
+
   let order = null;
   console.log(selectedOrderID);
   for(let i = 0; i < finished_data.length; i++){
@@ -198,6 +223,14 @@ function viewFinishedOrders(button){
 
 function viewTotalOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
+  //when mobile view, or a column collapse
+  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
+  //these two rows become siblings
+  //when selectedOrderID is null, it is assumed in mobile view
+  //temporary fix
+  if(selectedOrderID == null)
+    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-id")
+  
   let order = null;
   for(let i = 0; i < total_data.length; i++){
     if(total_data[i].order_id == selectedOrderID){
@@ -205,7 +238,8 @@ function viewTotalOrders(button){
       break;
     }
   }
-
+  console.log(button)
+  console.log(total_data)
   console.log(JSON.stringify(order));
 
   document.getElementById('total-date-ordered').innerHTML = order.order_date;
@@ -260,13 +294,14 @@ $(document).ready(function () {
   totalTable = $('.customer-total-table').DataTable(customerTotalTableConfig);
   finishedTable = $('.customer-finished-table').DataTable(customerFinishedTableConfig);
   reservedTable = $('.customer-reserved-table').DataTable(customerReservedTableConfig);
-  
 });
 
 //https://www.gyrocode.com/articles/jquery-datatables-column-width-issues-with-bootstrap-tabs/#example2
 //code below to recalculate column widths of all visible tables once a tab becomes active by using a combination of columns.adjust() and responsive.recalc() API methods
+
 $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
   $($.fn.dataTable.tables(true)).DataTable()
      .columns.adjust()
-     .responsive.recalc();
+     //.responsive.recalc();
 });
+

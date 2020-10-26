@@ -1,9 +1,3 @@
-
-let csrf_token = null;
-function setCSRF(value){
-    csrf_token = value;
-}
-
 (() =>{
     const urlCreateOrder = "/dashboard/customer/";
 
