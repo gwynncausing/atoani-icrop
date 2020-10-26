@@ -236,10 +236,10 @@ def calculate_land_area_single(order):
     order_crop = Crop.objects.filter(id=order['crop_id']).values('harvest_weight_per_land_area','productivity')[0]
     land_area = ((order['weight'] * 0.001)/order_crop['harvest_weight_per_land_area']) * 10000
     land_area = land_area + (land_area * (1-(order_crop['productivity']/100))) + 25
-    Order.objects.get(order_id=order['order_id']).set_value([['land_area_needed',land_area]])
+    Order.objects.get(order_id=order['order_id']).set_value([['land_area_needed',round(land_area)]])
 
 def calculate_land_area():
-    [calculate_land_area_single(order) for order in Order.objects.filter(land_area_needed__isnull=True).values()]
+    [calculate_land_area_single(order) for order in Order.objects.all().values()]
 
 def check_obsolete_orders():
     order = pd.DataFrame(Order.objects.all().filter(message__isnull=True).values())
