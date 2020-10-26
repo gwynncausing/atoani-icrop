@@ -17,7 +17,7 @@
       <button id="ongoingBtn" type="button" class="sidebar-nav border-0"><h5 class="tab mt-2 float-left">Ongoing</h5></button>
       <!-- <button id="harvestedBtn" type="button" class="sidebar-nav border-0"><h5 class="tab mt-2 float-left">Harvested</h5></button> -->
       <button id="collectedBtn" type="button" class="sidebar-nav border-0"><h5 class="tab mt-2 float-left">Collected</h5></button>
-      <a href="#"><h4 class="mt-2 float-left pl-5">Users</h4></a>
+      <a href="{% url 'custom_admin:users' %}"><h4 class="mt-2 float-left pl-5">Users</h4></a>
       <!-- <h4 class="orders-title float-left pl-5">Admin</h4> -->
     </div>
     <div class="col-10 p-5 orders">
@@ -93,7 +93,7 @@
 <!-- Datatables JS -->
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
 <!-- Admin JS -->
-<script src="{% static '/js/custom-admin.js' %}"></script>
+<script src="{% static '/js/custom-admin-orders.js' %}"></script>
 <script>
   $(document).ready(function () {
     initialize();

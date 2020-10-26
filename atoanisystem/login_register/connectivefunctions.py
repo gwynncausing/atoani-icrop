@@ -320,7 +320,7 @@ def display_all_order_pairs(df):
 
 def display_all_users():
     try:
-        users = pd.DataFrame(User.objects.all().values("id","email","first_name","last_name")).rename(columns={'id':'user_id'})
+        users = pd.DataFrame(User.objects.all().values("id","username","email","first_name","last_name")).rename(columns={'id':'user_id'})
         customers = Customer.objects.all()
         customers_df = pd.DataFrame(customers.values('contact_number','name','is_approved')).rename(columns={'name':'customer_name'})
         customers_df['location'] = [cust.get_locations() for cust in customers]

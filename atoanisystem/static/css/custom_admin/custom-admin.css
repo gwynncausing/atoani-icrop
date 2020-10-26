@@ -185,6 +185,10 @@ body {
   margin-top: 7.5rem;
 }
 
+.sidebar .users-title {
+  margin-top: 7.5rem;
+}
+
 .orders .view-order {
   background: #EBF2F2;
 }
