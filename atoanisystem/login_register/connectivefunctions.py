@@ -239,7 +239,7 @@ def calculate_land_area_single(order):
     Order.objects.get(order_id=order['order_id']).set_value([['land_area_needed',round(land_area)]])
 
 def calculate_land_area():
-    [calculate_land_area_single(order) for order in Order.objects.all().values()]
+    [calculate_land_area_single(order) for order in Order.objects.filter(Q(land_area_needed__isnull=True) & Q(crop_id__isnull=False)).values()]
 
 def check_obsolete_orders():
     order = pd.DataFrame(Order.objects.all().filter(message__isnull=True).values())
