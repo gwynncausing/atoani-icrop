@@ -220,15 +220,23 @@ def update_land_area():
     for x in Order.objects.all().values():
         calculate_land_area(x)
 
-# still a pseudo-algorithm
+# algorithm, to be launched as part of the
 def matching_algorithm(farmer):
     # based on province
     available_order = pd.DataFrame(Order.objects.filter(Q(status="Posted") & Q(location__province=farmer.location.province)).values())
+    loc_list = available_order['location_id'].unique()
+    available_order = available_order.merge(pd.DataFrame(Location.objects.filter(id__in=loc_list).values('id','name')),  left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
     # based on available_land_area
-    print(available_order)
-    available_order = available_order[available_order['land_area_needed'] <= farmer.available_land_area].sort_values('land_area_needed',ascending=False)
-    available_order['index'] = [i for i in range(1,len(available_order)+1)]
-    return available_order[:10].to_dict('records')
+    if len(available_order) != 0:
+        available_order = available_order[available_order['land_area_needed'] <= farmer.available_land_area].sort_values('land_area_needed',ascending=False)
+        available_order['index'] = [i for i in range(1,len(available_order)+1)]
+        return available_order[:10].to_dict('records')
+    else:
+        return []
+
+# not really effective without the SMS
+def matching_algorithm_all():
+    pass
 
 # added 25 as a contingency measure
 def calculate_land_area_single(order):
