@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import View
 from django.http import JsonResponse
 from . import helperfunctions as hf
+
+##############################
+#       ORDERS SECTION       #
+##############################
 
 class AdminOrdersView(View):
     def get(self,request):  
@@ -9,17 +13,6 @@ class AdminOrdersView(View):
             currentUser = request.user
             if currentUser.is_staff:
                 return render(request, 'custom_admin/admin-orders.html')
-            else:
-                return redirect('login_register:login')
-        else:
-            return redirect('login_register:login')
-
-class AdminUsersView(View):
-    def get(self,request):  
-        if request.user.is_authenticated:
-            currentUser = request.user
-            if currentUser.is_staff:
-                return render(request, 'custom_admin/admin-users.html')
             else:
                 return redirect('login_register:login')
         else:
@@ -83,3 +76,36 @@ class GetCollectedOrders(View):
             json = {'data':arr}
             return JsonResponse(json)
         return render(request, 'custom_admin/admin-orders.html')
+
+##############################
+#       USERS SECTION        #
+##############################
+
+class AdminUsersView(View):
+    def get(self,request):  
+        if request.user.is_authenticated:
+            currentUser = request.user
+            if currentUser.is_staff:
+                return render(request, 'custom_admin/admin-users.html')
+            else:
+                return redirect('login_register:login')
+        else:
+            return redirect('login_register:login')
+
+class GetAllUsersView(View):
+    def get(self,request):
+        if request.is_ajax():
+            users = hf.get_farmers()
+            customers = hf.get_customers()
+            users.extend(customers)
+            hf.format_name_of_users(users)
+            arr = users
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request, 'custom_admin/admin-users.html')
+    
+    def post(self,request):
+        if request.is_ajax():
+            json = {'status':hf.cancel_order(request.POST.get("order-id"))}
+            return JsonResponse(json)
+

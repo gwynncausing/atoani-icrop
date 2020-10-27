@@ -3,6 +3,18 @@ from django.contrib.auth.models import User
 from login_register import connectivefunctions as dashboard_utility
 from login_register.models import *
 from django.utils import timezone as tz
+import math
+
+def format_name_of_users(users):
+    for user in users:
+        #print(user)
+        user['name']=user['last_name']+', '+user['first_name']
+    return users
+
+def format_nan_values(list,column_key):
+    for x in list:
+        if math.isnan(x[column_key]):
+            x[column_key]=None
 
 def get_users():
     users = dashboard_utility.display_all_users()
@@ -10,7 +22,9 @@ def get_users():
 
 def get_farmers():
     users = get_users()
-    return users['farmer']
+    farmers = users['farmer']
+    format_nan_values(farmers,'land_area')
+    return farmers
 
 def get_unapproved_farmers():
     farmers = get_farmers()

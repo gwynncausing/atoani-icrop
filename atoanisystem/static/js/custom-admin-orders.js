@@ -74,6 +74,7 @@ const ordersTableConfig = {
   }
 };
 
+
 function viewOrder(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
   selectedOrderStatus = button.parentNode.parentNode.parentNode.getAttribute("order-status");
@@ -137,7 +138,7 @@ function processOrder(orderID,viewURL){
     processData: false,
     success: function (response) {
       alert("Request processed successfully");
-      ordersTable.ajax.reload();
+      ordersTable.ajax.reload(tableData = ordersTable.ajax.json().data,true);
       resetViewOrder();
       selectedOrderID = -1;
     },

@@ -11,6 +11,7 @@
 <div class="container-fluid">
   <div class="row h-100">
     <div class="col-2 sidebar d-flex column-vertical py-3 p-0">
+
       <button class="orders-title dropdown-btn active">Orders <i class="fa fa-caret-down"></i></button>
       <div class="dropdown-container" style="display: block;">
         <button id="allBtn" type="button" class="sidebar-nav" autofocus>All</button>
@@ -20,7 +21,7 @@
         <!-- <button id="" type="button" class="sidebar-nav border-0">Collected</button> -->
         <!-- <button id="collectedBtn" type="button" class="sidebar-nav border-0">Delivered</button> -->
       </div>
-      <button class="orders-title dropdown-btn">Users <i class="fa fa-caret-down"></i></button>
+      <button class="orders-title dropdown-btn" href="{% url 'custom_admin:users' %}">Users <i class="fa fa-caret-down"></i></button>
       <div class="dropdown-container">
         <button id="" type="button" class="sidebar-nav border-0">All</button>
         <button id="" type="button" class="sidebar-nav border-0">Waitlist</button>
@@ -104,8 +105,12 @@
 <!-- Datatables JS -->
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
 <!-- Admin JS -->
+<<<<<<< HEAD
 <script src="{% static '/js/custom-admin.js' %}"></script>
 <script src="{% static '/js/custom-admin-sidebar.js' %}"></script>
+=======
+<script src="{% static '/js/custom-admin-orders.js' %}"></script>
+>>>>>>> 9f391f2485c5b0b19ac3a1fea27113882ba77344
 <script>
   $(document).ready(function () {
     initialize();

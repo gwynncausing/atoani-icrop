@@ -2,13 +2,118 @@
 {% load static %}
 
 {% block tags %}
-    <!-- Customized CSS -->
-    <link rel="stylesheet" href="{% static '/css/custom_admin/custom-admin.css' %}">
-    <!-- Datatables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
+<!-- Customized CSS -->
+<link rel="stylesheet" href="{% static '/css/custom_admin/custom-admin.css' %}">
+<!-- Datatables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css" />
 {% endblock tags %}
 {% block content %}
-<h1>USERS</h1>
+<div class="container-fluid">
+    <div class="row h-100">
+        <div class="col-2 sidebar d-flex column-vertical py-3 p-0">
+            <a href="{% url 'custom_admin:orders' %}">
+                <h4 class="users-title float-left pl-5">Orders</h4>
+            </a>
+            <h4 class="mt-2 float-left pl-5">Users</h4>
+            <button id="allBtn" type="button" class="sidebar-nav border-0">
+                <h5 class="tab mt-2 float-left">All</h5>
+            </button>
+            <button id="waitlistBtn" type="button" class="sidebar-nav border-0">
+                <h5 class="tab mt-2 float-left">Waitlist</h5>
+            </button>
+            <button id="ongoingBtn" type="button" class="sidebar-nav border-0">
+                <h5 class="tab mt-2 float-left">Ongoing</h5>
+            </button>
+            <!-- <button id="harvestedBtn" type="button" class="sidebar-nav border-0"><h5 class="tab mt-2 float-left">Harvested</h5></button> -->
+            <button id="collectedBtn" type="button" class="sidebar-nav border-0">
+                <h5 class="tab mt-2 float-left">Collected</h5>
+            </button>
+            <!-- <h4 class="orders-title float-left pl-5">Admin</h4> -->
+        </div>
+        <div class="col-10 p-5 orders">
+            <h3 id="order-header">List of All Users</h3>
+            <div class="row">
+                <!-- <div class="view-order ol-12 pt-3 pb-3 rounded ">
+                    <div class="row">
+                        <div class="label col-12 text-center pt-1 pb-1 mb-4"><b class="mr-3">Order ID:</b><span
+                                class="order-id" id="order-id">-</span></div>
+
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Crop Name:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="crop-name">-</div>
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Customer ID:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="customer-id">-</div>
+
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Weight:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="weight">-</div>
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Customer Name:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="customer-name">-</div>
+
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Status:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="status">-</div>
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Farmer ID:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="farmer-id">-</div>
+
+
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Location:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="location">-</div>
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Farmer Name:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="farmer-name">-</div>
+
+                        <div class="label col-3 text-right pt-1 pb-1 mt-4"><b>Date Ordered:</b></div>
+                        <div class="col-3 pt-1 pb-1 mt-4" id="date-ordered">-</div>
+                        <div class="label col-3 text-right pt-1 pb-1"></div>
+                        <div class="col-3 pt-1 pb-1"></div>
+
+                           //<div class="label col-3 text-right pt-1 pb-1"><b>Date Reserved:</b></div>
+                    <div class="col-3 pt-1 pb-1" id="date-reserved">-</div>
+                    <div class="label col-3 text-right pt-1 pb-1"></div>
+                    <div class="col-3 pt-1 pb-1"></div>
+
+                    <div class="label col-3 text-right pt-1 pb-1"><b>Date Collected:</b></div>
+                    <div class="col-3 pt-1 pb-1" id="date-collected">-</div>
+                    <div class="label col-3 text-right pt-1 pb-1"></div>
+                    <div class="col-3 pt-1 pb-1"></div>//
+                        <div class="label col-12 text-center justify-content-center pt-1 pb-1 mb-4">
+                            <button id="cancelBtn" type="button m-0" class="btn btn-danger px-5 mx-auto">Cancel
+                                Order</button>
+                            <button id="approveBtn" type="button m-0" class="btn btn-info px-5 mx-auto">Approve
+                                Order</button>
+                            <button id="collectBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Mark as
+                                Collected</button>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-12">
+                    <table class="table users-table mx-auto">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Address</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
 {% block scripts %}
+<!-- Datatables JS -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
+<!-- Admin JS -->
+<script src="{% static '/js/custom-admin-users.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        initialize();
+        setCSRFToken("{{csrf_token}}")
+    });
+</script>
 {% endblock scripts %}
