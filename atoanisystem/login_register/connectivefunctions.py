@@ -221,10 +221,13 @@ def update_land_area():
         calculate_land_area(x)
 
 # still a pseudo-algorithm
-def matching_algorithm(land_size):
-    pairs = Order_Pairing.objects.all().values('order_id_id')
-    available_order = pd.DataFrame(Order.objects.exclude(order_id__in = [val['order_id_id'] for val in pairs]).values())
-    available_order = available_order[available_order['land_area_needed'] <= land_size].sort_values('land_area_needed',ascending=False)
+def matching_algorithm(farmer):
+    # based on province
+    available_order = pd.DataFrame(Order.objects.filter(Q(status="Posted") & Q(location__province=farmer.location.province)).values())
+    # based on available_land_area
+    print(available_order)
+    available_order = available_order[available_order['land_area_needed'] <= farmer.available_land_area].sort_values('land_area_needed',ascending=False)
+    available_order['index'] = [i for i in range(1,len(available_order)+1)]
     return available_order[:10].to_dict('records')
 
 # added 25 as a contingency measure
@@ -241,18 +244,19 @@ def calculate_land_area():
 def check_obsolete_orders():
     order = pd.DataFrame(Order.objects.all().filter(message__isnull=True).values())
     pairs = pd.DataFrame(Order_Pairing.objects.all().values())
-    merged_df = order.merge(pairs, how="left",left_on="order_id", right_on="order_id_id").drop(columns='order_id_id')
-    merged_df['order_date'] = merged_df['order_date'].apply(convert)
-    merged_df = merged_df.loc[merged_df['farmer_id'].isnull()]
-    now = dt.now()
-    date_now = dt(now.year, now.month, now.day)
+    if len(pairs) > 0 and len(order) > 0:
+        merged_df = order.merge(pairs, how="left",left_on="order_id", right_on="order_id_id").drop(columns='order_id_id')
+        merged_df['order_date'] = merged_df['order_date'].apply(convert)
+        merged_df = merged_df.loc[merged_df['farmer_id'].isnull()]
+        now = dt.now()
+        date_now = dt(now.year, now.month, now.day)
 
-    for i in range(len(merged_df)):
-        val = merged_df.iloc[i]
-        #if a month has passed and order is not cancelled
-        if (date_now - val['order_date']).days > 29 and not val['is_cancelled']:
-            print(val)
-            Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])
+        for i in range(len(merged_df)):
+            val = merged_df.iloc[i]
+            #if a month has passed and order is not cancelled
+            if (date_now - val['order_date']).days > 29 and not val['is_cancelled']:
+                print(val)
+                Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])
 
 def get_crop_list():
     return Crop.objects.all().values('id','name')
@@ -279,8 +283,10 @@ def get_name(name_id):
 def all_orders_datatable():
     return datatable_orders(pd.DataFrame(Order.objects.all().values()))
 
-def datatable_orders(orders):
+def datatable_orders(orders=None):
     try:
+        if orders == None:
+            orders = pd.DataFrame(Order.objects.all().values())
         orders = orders.merge(pd.DataFrame(Crop.objects.filter(id__in=orders['crop_id'].unique()).values('name','id')), left_on="crop_id", right_on="id").drop(columns="id").rename(columns={'name':'crop_name'})
         orders = orders.merge(pd.DataFrame(Location.objects.filter(id__in=orders['location_id'].unique()).values('name','id')), left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
         customers = pd.DataFrame(Customer.objects.all().values())

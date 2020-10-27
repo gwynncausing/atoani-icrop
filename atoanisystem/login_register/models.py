@@ -97,14 +97,17 @@ class Crop_Soil(models.Model):
     class Meta:
         verbose_name_plural = "Crop-Soil type Relations"
 
+# to save street in customer?
 class Customer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ManyToManyField(Location)
+    # street = models.CharField(max_length=220)
     contact_number = models.CharField(max_length=14,null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
     is_approved = models.BooleanField(default=False)
-
+    first_question_answers = models.CharField(max_length=220,null=True)
+    second_question_answers = models.CharField(max_length=220,null=True)
     def set_value(self, attr:[]):
         try:
             for att in attr:
@@ -136,10 +139,11 @@ class Customer(models.Model):
 
 
 class Order(models.Model):
+
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     crop = models.ForeignKey(Crop, on_delete=models.CASCADE, null=True)
-    custom_crop = models.CharField(max_length=220, null=True, help_text="Uninitialized crop, after add a crop in db, please select appropriate crop in the selection above")
+    custom_crop = models.CharField(max_length=220, null=True, blank=True, help_text="Uninitialized crop, after add a crop in db, please select appropriate crop in the selection above")
     order_date = models.DateTimeField(default=tz.now, verbose_name="Order date", help_text = "Date in which the order was done")
     weight = models.FloatField()
     location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
@@ -147,20 +151,17 @@ class Order(models.Model):
     is_done = models.BooleanField(help_text="Is the order finished?",default=False)
     is_reserved = models.BooleanField(help_text="Is  the order reserved?",default=False)
     is_approved = models.BooleanField(help_text="Is the order approved by AtoANI?",default=False)
-    # status = models.CharField(max_length=20, choices=Status.choices(),null=True, default="Pending")
     status = models.CharField(max_length=20, null=True, default="Pending")
     message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")
+
 
     def is_eligible(self):
         pass
 
     def set_value(self, attr:[]):
-        print("in set_valueeeeeee")
         try:
-            print("i tried")
             for att in attr:
                 setattr(self,att[0],att[1])
-                print("done " + str(att))
             self.save()
             print(self.status)
         except:
@@ -168,9 +169,15 @@ class Order(models.Model):
 
 
     def save(self, *args, **kwargs):
+        prev = Customer.objects.get(name=self.name)
+
         if self.is_approved and self.status == "Pending":
-            self.status = "Posted"
+        self.status = "Posted"
+
         super().save(*args, **kwargs)
+        
+        if prev.weight != self.weight:
+            calculate_land_area_single(self)
 
     def get_value(self, attr:str):
         try:
@@ -188,14 +195,15 @@ class Order(models.Model):
 class Farmer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    contact_number = models.CharField(max_length=14, verbose_name=True, null=True, blank=True)
+    contact_number = models.CharField(max_length=14, verbose_name="Contact Number", null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=True)
     is_approved = models.BooleanField(default=False)
     land_area = models.FloatField(help_text="Farmer's land area in square meters", null=True)
     is_available = models.BooleanField(help_text="Is the farmer able to take up orders?", null=True)
     available_land_area = models.FloatField(blank=True, null=True, help_text="Available planting land of farmer")
-
+    first_question_answers = models.CharField(max_length=220,null=True)
+    second_question_answers = models.CharField(max_length=220,null=True)
     def save(self, *args, **kwargs):
         orig = Farmer.objects.get(name=self.name)
         # checks if land_area has changed
