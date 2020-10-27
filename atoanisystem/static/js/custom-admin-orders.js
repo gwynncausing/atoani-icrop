@@ -138,7 +138,7 @@ function processOrder(orderID,viewURL){
     processData: false,
     success: function (response) {
       alert("Request processed successfully");
-      ordersTable.ajax.reload(tableData = ordersTable.ajax.json().data,true);
+      ordersTable.ajax.reload(()=>{tableData = ordersTable.ajax.json().data;},true);
       resetViewOrder();
       selectedOrderID = -1;
     },
@@ -181,13 +181,13 @@ function initializeButtons(){
     showElement(collectBtn);
     getDataFromServer(getOngoingOrdersURL);
   });
-  collectedBtn.addEventListener("click",e => {
-    resetViewOrder();
-    hideElement(cancelBtn);
-    hideElement(approveBtn);
-    hideElement(collectBtn);
-    getDataFromServer(getCollectedOrdersURL);
-  });
+  // collectedBtn.addEventListener("click",e => {
+  //   resetViewOrder();
+  //   hideElement(cancelBtn);
+  //   hideElement(approveBtn);
+  //   hideElement(collectBtn);
+  //   getDataFromServer(getCollectedOrdersURL);
+  // });
 
   cancelBtn.addEventListener("click", e => {
     if (selectedOrderID != -1)
@@ -201,12 +201,12 @@ function initializeButtons(){
     else
       alert("Select an order first.");
   });
-  collectBtn.addEventListener("click", e => {
-    if (selectedOrderID != -1)
-      processOrder(selectedOrderID,getOngoingOrdersURL);
-    else
-      alert("Select an order first.");
-  });
+  // collectBtn.addEventListener("click", e => {
+  //   if (selectedOrderID != -1)
+  //     processOrder(selectedOrderID,getOngoingOrdersURL);
+  //   else
+  //     alert("Select an order first.");
+  // });
 }
 
 function initialize(){

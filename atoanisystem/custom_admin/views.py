@@ -106,6 +106,42 @@ class GetAllUsersView(View):
     
     def post(self,request):
         if request.is_ajax():
-            json = {'status':hf.cancel_order(request.POST.get("order-id"))}
+            if request.POST.get('operation') == 'approve':
+                hf.approve_user(request.POST.get("user-id"))
+            else:
+                hf.unapprove_user(request.POST.get("user-id"))
+            json = {'status':'Ok'}
             return JsonResponse(json)
 
+class GetUnapprovedUsersView(View):
+    def get(self,request):
+        if request.is_ajax():
+            farmers = hf.get_unapproved_farmers()
+            customers = hf.get_unapproved_customers()
+            farmers.extend(customers)
+            hf.format_name_of_users(farmers)
+            arr = farmers
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request, 'custom_admin/admin-users.html')
+
+class GetFarmersView(View):
+    def get(self,request):
+        if request.is_ajax():
+            farmers = hf.get_unapproved_farmers()
+            hf.format_name_of_users(farmers)
+            arr = farmers
+            print(arr)
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request, 'custom_admin/admin-users.html')
+
+class GetCustomersView(View):
+    def get(self,request):
+        if request.is_ajax():
+            customers = hf.get_unapproved_customers()
+            hf.format_name_of_users(customers)
+            arr = customers
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request, 'custom_admin/admin-users.html')

@@ -7,7 +7,6 @@ import math
 
 def format_name_of_users(users):
     for user in users:
-        #print(user)
         user['name']=user['last_name']+', '+user['first_name']
     return users
 
@@ -50,10 +49,24 @@ def approve_user(id):
     user = User.objects.get(id=id)
     if hasattr(user,'customer'):
         user.customer.is_approved = True
+        user.customer.save()
     elif hasattr(user,'farmer'):
         user.farmer.is_approved = True
+        user.farmer.save()
     else:
-        pass
+        print("Unable to approve, no customer or farmer attribute")
+    user.save()
+
+def unapprove_user(id):
+    user = User.objects.get(id=id)
+    if hasattr(user,'customer'):
+        user.customer.is_approved = False
+        user.customer.save()
+    elif hasattr(user,'farmer'):
+        user.farmer.is_approved = False
+        user.farmer.save()
+    else:
+        print("Unable to approve, no customer or farmer attribute")
     user.save()
 
 def format_name(orders,key,newkey):

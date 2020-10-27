@@ -17,6 +17,7 @@
         <button id="allBtn" type="button" class="sidebar-nav" autofocus>All</button>
         <button id="waitlistBtn" type="button" class="sidebar-nav">Waitlist</button>
         <button id="ongoingBtn" type="button" class="sidebar-nav">Ongoing</button>
+        <!-- <button id="collectedBtn" type="button" class="sidebar-nav border-0">Collected</button> -->
         <!-- <button id="harvestedBtn" type="button" class="sidebar-nav border-0">Harvested</button> -->
         <!-- <button id="" type="button" class="sidebar-nav border-0">Collected</button> -->
         <!-- <button id="collectedBtn" type="button" class="sidebar-nav border-0">Delivered</button> -->
@@ -27,7 +28,6 @@
         <button id="" type="button" class="sidebar-nav border-0">Waitlist</button>
         <button id="" type="button" class="sidebar-nav border-0">Customers</button>
         <button id="" type="button" class="sidebar-nav border-0">Farmers</button>
-        <button id="" type="button" class="sidebar-nav border-0">Collected</button>
       </div>
       <!-- <a href="#"><h4 class="mt-2 float-left pl-5">Users</h4></a> -->
       <!-- <h4 class="orders-title float-left pl-5">Admin</h4> -->
@@ -105,12 +105,8 @@
 <!-- Datatables JS -->
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
 <!-- Admin JS -->
-<<<<<<< HEAD
-<script src="{% static '/js/custom-admin.js' %}"></script>
 <script src="{% static '/js/custom-admin-sidebar.js' %}"></script>
-=======
 <script src="{% static '/js/custom-admin-orders.js' %}"></script>
->>>>>>> 9f391f2485c5b0b19ac3a1fea27113882ba77344
 <script>
   $(document).ready(function () {
     initialize();
