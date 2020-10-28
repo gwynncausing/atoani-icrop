@@ -42,7 +42,7 @@
                         <div class="col-3 pt-1 pb-1" id="name">-</div>
                         <div class="label col-3 text-right pt-1 pb-1"><b>Username:</b></div>
                         <div class="col-3 pt-1 pb-1" id="username">-</div>
-                        
+
                         <div class="label col-3 text-right pt-1 pb-1"><b>Email:</b></div>
                         <div class="col-3 pt-1 pb-1" id="email">-</div>
                         <div class="label col-3 text-right pt-1 pb-1"><b>Approved:</b></div>
@@ -74,8 +74,38 @@
                     <div class="label col-3 text-right pt-1 pb-1"></div>
                     <div class="col-3 pt-1 pb-1"></div>// -->
                         <div class="label col-12 text-center justify-content-center pt-1 pb-1 mb-4">
-                            <button id="approveBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Approve User</button>
-                            <button id="unapproveBtn" type="button m-0" class="btn btn-danger px-5 mx-auto">Unapprove User</button>
+                            <button id="approveBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Approve
+                                User</button>
+                            <button id="unapproveBtn" type="button m-0" class="btn btn-danger px-5 mx-auto">Unapprove
+                                User</button>
+                            <br>
+                            <button id="resetPasswordBtn" type="button m-0" class="btn btn-info px-5 mx-auto"
+                            data-toggle="modal" data-target="#resetPasswordModal">Reset
+                                Password</button>
+
+                            <div class="modal" id="resetPasswordModal" tabindex="-1" role="dialog"
+                                aria-labelledby="resetPasswordModal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Confirm Reset Password</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            This will reset the user's password to: <br><br>
+                                            <h4>atoani.<span id="username-password-reset"></span></h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button id="confirmResetBtn" type="button" data-dismiss="modal" class="btn btn-primary">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- <button id="collectBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Mark as
                                 Collected</button> -->
                         </div>

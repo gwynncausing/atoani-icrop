@@ -69,6 +69,12 @@ def unapprove_user(id):
         print("Unable to approve, no customer or farmer attribute")
     user.save()
 
+def reset_password(id):
+    user = User.objects.get(id=id)
+    new_password = 'atoani.'+user.username
+    user.set_password(new_password)
+    user.save()
+
 def format_name(orders,key,newkey):
     for order in orders:
         order[newkey]=order[key][1]+', '+order[key][0]
@@ -76,9 +82,13 @@ def format_name(orders,key,newkey):
     return orders
 
 def get_all_orders():
-    df = dashboard_utility.all_orders_datatable()
+    df = dashboard_utility.datatable_orders()
     orders = dashboard_utility.display_all_orders(df)
-    return format_name(orders,'customer_names','customer_name')
+    if orders:
+        format_name(orders,'customer_names','customer_name')
+    else:
+        orders = []
+    return orders
 
 def get_all_order_pairs():
     df = dashboard_utility.datatable_order_pairs()

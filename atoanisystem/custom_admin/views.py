@@ -108,8 +108,12 @@ class GetAllUsersView(View):
         if request.is_ajax():
             if request.POST.get('operation') == 'approve':
                 hf.approve_user(request.POST.get("user-id"))
-            else:
+            elif request.POST.get('operation') == 'unapprove':
                 hf.unapprove_user(request.POST.get("user-id"))
+            elif request.POST.get('operation') == 'reset-password':
+                hf.reset_password(request.POST.get("user-id"))
+            else:
+                pass
             json = {'status':'Ok'}
             return JsonResponse(json)
 

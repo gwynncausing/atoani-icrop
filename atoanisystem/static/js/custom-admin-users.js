@@ -2,7 +2,7 @@ let tableData = null;
 let csrf_token = null;
 let selectedUserID = -1;
 
-function setCSRFToken(csrf){
+function setCSRFToken(csrf) {
   csrf_token = csrf
 }
 
@@ -33,14 +33,14 @@ const usersTableConfig = {
   searching: true,
   //orders the first column as desc by default
   order: [
-      [0, 'desc']
+    [0, 'desc']
   ],
   paging: true,
   pagingType: 'full_numbers',
   //the choices for numbers of entries to be shown
   lengthMenu: [
-      [5, 10, 25, 50, -1],
-      [5, 10, 25, 50, 'All']
+    [5, 10, 25, 50, -1],
+    [5, 10, 25, 50, 'All']
   ],
   dom: domPlacements,
   columnDefs: [
@@ -68,19 +68,19 @@ const usersTableConfig = {
     { "data": 'contact_number', "defaultContent": "<i>Not set</i>" },
     { "data": 'location' },
   ],
-  createdRow: function(row, data, dataIndex) {
+  createdRow: function (row, data, dataIndex) {
     $(row).attr('user-id', data.user_id);
   },
-  initComplete: function(){
+  initComplete: function () {
     tableData = usersTable.ajax.json().data;
   }
 };
 
-function viewUser(button){
+function viewUser(button) {
   selectedUserID = button.parentNode.parentNode.parentNode.getAttribute("user-id");
   let user = null;
-  for(let i = 0; i < tableData.length; i++){
-    if(tableData[i].user_id == selectedUserID){
+  for (let i = 0; i < tableData.length; i++) {
+    if (tableData[i].user_id == selectedUserID) {
       user = tableData[i];
       break;
     }
@@ -93,18 +93,48 @@ function viewUser(button){
   document.getElementById('address').innerHTML = user.location;
   document.getElementById('status').innerHTML = user.is_approved;
   document.getElementById('land-area').innerHTML = user.land_area || "N/A";
-  if(user.is_approved){
+  document.getElementById('username-password-reset').innerHTML = user.username;
+  if (user.is_approved) {
     hideElement(approveBtn);
     showElement(unapproveBtn);
   }
-  else{
+  else {
     showElement(approveBtn);
     hideElement(unapproveBtn);
   }
+  showElement(resetPasswordBtn);
+  scrollToTop();
   // document.getElementById('date-ordered').innerHTML = String(user.order_date) || "N/A";
 }
 
-function resetViewOrder(){
+//https://stackoverflow.com/questions/15935318/smooth-scroll-to-top
+function scrollToTop() {
+  let currentOffset = window.pageYOffset;
+  const arr = [];
+
+  for (let i = 100; i >= 0; i--) {
+    arr.push(new Promise(res => {
+      setTimeout(() => {
+        res(currentOffset * (i / 100));
+      },
+        2 * (100 - i))
+    })
+    );
+  }
+
+  arr.reduce((acc, curr, index, arr) => {
+    return acc.then((res) => {
+      if (typeof res === 'number')
+        window.scrollTo(0, res)
+      return curr
+    })
+  }, Promise.resolve(currentOffset)).then(() => {
+    window.scrollTo(0, 0)
+  })
+}
+
+
+function resetViewOrder() {
   selectedUserID = -1;
   document.getElementById('user-id').innerHTML = "-";
   document.getElementById('name').innerHTML = "-";
@@ -116,11 +146,11 @@ function resetViewOrder(){
   document.getElementById('land-area').innerHTML = "-";
 }
 
-function processOrder(userID,viewURL,operation){
+function processOrder(userID, viewURL, operation) {
   let formData = new FormData();//.append('action','add');
   formData.append('user-id', userID);
-  formData.append('operation',operation);
-  formData.append('csrfmiddlewaretoken',csrf_token);
+  formData.append('operation', operation);
+  formData.append('csrfmiddlewaretoken', csrf_token);
   $.ajax({
     url: viewURL,
     type: 'post',
@@ -130,10 +160,11 @@ function processOrder(userID,viewURL,operation){
     processData: false,
     success: function (response) {
       alert("Request processed successfully");
-      usersTable.ajax.reload(()=>{tableData = usersTable.ajax.json().data;},true);
+      usersTable.ajax.reload(() => { tableData = usersTable.ajax.json().data; }, true);
       resetViewOrder();
       hideElement(approveBtn);
       hideElement(unapproveBtn);
+      hideElement(resetPasswordBtn);
       selectedUserID = -1;
     },
     error: function (response) {
@@ -142,15 +173,15 @@ function processOrder(userID,viewURL,operation){
   });
 }
 
-function showElement(e){
+function showElement(e) {
   e.style.display = "block";
 }
 
-function hideElement(e){
+function hideElement(e) {
   e.style.display = "none";
 }
 
-function getDataFromServer(url){
+function getDataFromServer(url) {
   usersTable.ajax.url(url).load()
 }
 
@@ -163,52 +194,65 @@ const customersBtn = document.getElementById("customersBtn");
 
 const approveBtn = document.getElementById("approveBtn");
 const unapproveBtn = document.getElementById("unapproveBtn");
+const resetPasswordBtn = document.getElementById("resetPasswordBtn");
+const confirmResetBtn = document.getElementById("confirmResetBtn");
 
-function initializeButtons(){
-  allBtn.addEventListener("click",e => {
+function initializeButtons() {
+  allBtn.addEventListener("click", e => {
     resetViewOrder();
     hideElement(approveBtn);
     hideElement(unapproveBtn);
+    hideElement(resetPasswordBtn);
     getDataFromServer(getAllUsersURL);
   });
-  waitlistBtn.addEventListener("click",e => {
+  waitlistBtn.addEventListener("click", e => {
     resetViewOrder();
     hideElement(approveBtn);
     hideElement(unapproveBtn);
+    hideElement(resetPasswordBtn);
     getDataFromServer(getUnapprovedUsersURL);
   });
-  farmersBtn.addEventListener("click",e => {
+  farmersBtn.addEventListener("click", e => {
     resetViewOrder();
     hideElement(approveBtn);
     hideElement(unapproveBtn);
+    hideElement(resetPasswordBtn);
     getDataFromServer(getFarmersURL);
   });
-  customersBtn.addEventListener("click",e => {
+  customersBtn.addEventListener("click", e => {
     resetViewOrder();
     hideElement(approveBtn);
     hideElement(unapproveBtn);
+    hideElement(resetPasswordBtn);
     getDataFromServer(getCustomersURL);
   });
 
   approveBtn.addEventListener("click", e => {
     if (selectedUserID != -1)
-      processOrder(selectedUserID,getAllUsersURL,'approve');
+      processOrder(selectedUserID, getAllUsersURL, 'approve');
     else
       alert("Select an order first.");
   });
   unapproveBtn.addEventListener("click", e => {
     if (selectedUserID != -1)
-      processOrder(selectedUserID,getAllUsersURL,'unapprove');
+      processOrder(selectedUserID, getAllUsersURL, 'unapprove');
+    else
+      alert("Select an order first.");
+  });
+  confirmResetBtn.addEventListener("click", e => {
+    if (selectedUserID != -1)
+      processOrder(selectedUserID, getAllUsersURL, 'reset-password');
     else
       alert("Select an order first.");
   });
 
 }
 
-function initialize(){
+function initialize() {
   usersTable = $('.users-table').DataTable(usersTableConfig);
   hideElement(approveBtn);
   hideElement(unapproveBtn);
+  hideElement(resetPasswordBtn);
   initializeButtons();
 }
 
