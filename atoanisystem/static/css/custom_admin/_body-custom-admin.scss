@@ -19,18 +19,24 @@ body{
         color: black;
         text-align: left;
         border: none;
+        outline: none;
         &:hover{
             background-color: #00CC00;
             color: $tertiary-color;
         }
-        &:focus{
-            background-color: #006600;
-            color: white;
-            outline: none;
-        }
+        // &:focus{
+        //     background-color: #006600;
+        //     color: white;
+        //     outline: none;
+        // }
+    }
+    .focussed{
+        background-color: #006600;
+        color: white;
+        outline: none;
     }
     .dropdown-container {
-        display: none;
+        // display: none;
         background-color: #262626;
     }
     .orders-title{
@@ -42,13 +48,21 @@ body{
         outline: none;
         text-align: left;
         width: 100;
-        &:hover{
-            background-color: #00CC00;
-            color: black;
+        color: $tertiary-color;
+        &.active:hover, &:hover{
+            text-decoration: none;
         }
         &.active {
             background: $tertiary-color;
             color: white;
+            &:hover{
+                background: $tertiary-color;
+                color: white;
+            }
+        }
+        &:hover{
+            background-color: green;
+            color: black;
         }
     }
     .sidebar-nav, .orders-title {

@@ -12,8 +12,8 @@
   <div class="row h-100">
     <div class="col-2 sidebar d-flex column-vertical py-3 p-0">
 
-      <button class="orders-title dropdown-btn active">Orders <i class="fa fa-caret-down"></i></button>
-      <div class="dropdown-container" style="display: block;">
+      <a class="orders-title active" href="{% url 'custom_admin:orders' %}">Orders<i class="fa fa-caret-down"></i></a>
+      <div class="dropdown-container">
         <button id="allBtn" type="button" class="sidebar-nav" autofocus>All</button>
         <button id="waitlistBtn" type="button" class="sidebar-nav">Waitlist</button>
         <button id="ongoingBtn" type="button" class="sidebar-nav">Ongoing</button>
@@ -22,15 +22,13 @@
         <!-- <button id="" type="button" class="sidebar-nav border-0">Collected</button> -->
         <!-- <button id="collectedBtn" type="button" class="sidebar-nav border-0">Delivered</button> -->
       </div>
-      <button class="orders-title dropdown-btn" href="{% url 'custom_admin:users' %}">Users <i class="fa fa-caret-down"></i></button>
-      <div class="dropdown-container">
+      <a class="orders-title" href="{% url 'custom_admin:users' %}">Users <i class="fa fa-caret-down"></i></a>
+      <div class="dropdown-container d-none">
         <button id="" type="button" class="sidebar-nav border-0">All</button>
         <button id="" type="button" class="sidebar-nav border-0">Waitlist</button>
         <button id="" type="button" class="sidebar-nav border-0">Customers</button>
         <button id="" type="button" class="sidebar-nav border-0">Farmers</button>
       </div>
-      <!-- <a href="#"><h4 class="mt-2 float-left pl-5">Users</h4></a> -->
-      <!-- <h4 class="orders-title float-left pl-5">Admin</h4> -->
     </div>
     <div class="col-10 p-5 orders">
       <h3 id="order-header">List of All Orders</h3>
