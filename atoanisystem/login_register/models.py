@@ -167,15 +167,17 @@ class Order(models.Model):
 
 
     def save(self, *args, **kwargs):
-        prev = Order.objects.get(order_id=self.order_id)
+        try:
+            prev = Order.objects.get(order_id=self.order_id)
 
-        if self.is_approved and self.status == "Pending":
-            self.status = "Posted"
+            if self.is_approved and self.status == "Pending":
+                self.status = "Posted"
 
-        if prev.weight != self.weight:
-            self.land_area_needed = ((self.weight * 0.001)/self.crop.harvest_weight_per_land_area) * 10000
-            self.land_area_needed = round(self.land_area_needed + (self.land_area_needed * (1-(self.crop.productivity/100))) + 25)
-
+            if prev.weight != self.weight:
+                self.land_area_needed = ((self.weight * 0.001)/self.crop.harvest_weight_per_land_area) * 10000
+                self.land_area_needed = round(self.land_area_needed + (self.land_area_needed * (1-(self.crop.productivity/100))) + 25)
+        except:
+            pass
         super().save(*args, **kwargs)
 
     def get_value(self, attr:str):

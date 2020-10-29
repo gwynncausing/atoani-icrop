@@ -146,7 +146,7 @@ class CustomerDashboardView(View):
                     brgy = request.POST.get('barangay')
                     city = request.POST.get('city')
                     province = request.POST.get('province')
-                    location = Location.objects.create(street=street,brgy=brgy,city=city,province=province)
+                    location = Location.objects.create(brgy=brgy,city=city,province=province)
                     location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
                     location.save();
                     location_id = location.id;

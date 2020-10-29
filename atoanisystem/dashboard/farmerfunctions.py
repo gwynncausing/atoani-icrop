@@ -34,7 +34,7 @@ def format_crop_name(orders):
 
 #returns incoming orders from the recommendation algorithm
 def get_incoming_orders(user):
-    incoming_orders = dashboard_utility.matching_algorithm(user.farmer.land_area)
+    incoming_orders = dashboard_utility.matching_algorithm(user.farmer)
     format_crop_name(incoming_orders)
     format_location(incoming_orders,user)
     return incoming_orders
