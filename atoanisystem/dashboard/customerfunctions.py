@@ -24,6 +24,8 @@ def format_location(orders,user):
 def get_total_orders(user):
     df = dashboard_utility.datatable_customer(user.customer)
     orders = dashboard_utility.display_customer_table(df)
+    if orders == None:
+        orders = []
     format_location(orders,user)
     return orders
 

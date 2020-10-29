@@ -36,7 +36,7 @@ def format_crop_name(orders):
 def get_incoming_orders(user):
     incoming_orders = dashboard_utility.matching_algorithm(user.farmer.land_area)
     format_crop_name(incoming_orders)
-    format_location(incoming_orders)
+    format_location(incoming_orders,user)
     return incoming_orders
 
 #returns the reserved orders of the farmer
@@ -44,7 +44,7 @@ def get_incoming_orders(user):
 def get_reserved_orders(user):
     df = dashboard_utility.datatable_farmer(user.farmer)
     orders = dashboard_utility.display_farmer_table(df)
-    format_location(orders)
+    format_location(orders,user)
     format_nan_values(orders,'land_area_needed')
     #print(orders)
     reserved_orders = []
@@ -61,7 +61,7 @@ def get_finished_orders(user):
     df = dashboard_utility.datatable_farmer(user.farmer)
     orders = dashboard_utility.display_farmer_table(df)
     format_nan_values(orders,'land_area_needed')
-    format_location(orders)
+    format_location(orders,user)
     finished_orders = []
     for order in orders:
         #CHANGE TO COLLECTED
