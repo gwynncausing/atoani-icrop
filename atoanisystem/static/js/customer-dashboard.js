@@ -9,7 +9,7 @@ const getFinishedOrdersUrl = '/dashboard/get-customer-finished-orders';
 const domPlacements = `<'row'<'col-md-12 d-sm-flex pt-4'f<'ml-3'l>>>
                         <'row'<'col-sm-12'tr>>
                         <'row'<'col-sm-12 mt-2 col-md-5'i>
-                        >`;
+                      >`;
 
 //`<'row'<'col-md-12 d-sm-flex pt-4'f<'ml-3'l>>>
 //<'row'<'col-sm-12'tr>>
@@ -19,7 +19,7 @@ const domPlacements = `<'row'<'col-md-12 d-sm-flex pt-4'f<'ml-3'l>>>
 const customerReservedTableConfig = {
   paging: true,
   searching: true,
-  lengthMenu: [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
+  lengthMenu: [ [-1,5, 10, 25, 50], ["All",5, 10, 25, 50] ],
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
@@ -69,7 +69,7 @@ const customerReservedTableConfig = {
 const customerFinishedTableConfig = {
   paging: true,
   searching: true,
-  lengthMenu: [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
+  lengthMenu: [ [-1,5, 10, 25, 50], ["All",5, 10, 25, 50] ],
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
@@ -119,7 +119,7 @@ const customerFinishedTableConfig = {
 const customerPendingTableConfig = {
   paging: true,
   searching: true,
-  lengthMenu: [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
+  lengthMenu: [ [-1,5, 10, 25, 50, -1], ["All",5, 10, 25, 50] ],
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
