@@ -51,7 +51,6 @@ class Crop(models.Model):
 class Location(models.Model):
     name = models.CharField(max_length=220)
     # to match the html form
-    street = models.CharField(max_length=100,default="")
     brgy = models.CharField(max_length=50,default="")
     city = models.CharField(max_length=50,default="")
     province = models.CharField(max_length=50,default="")
@@ -70,7 +69,6 @@ class Soil_type(models.Model):
 class Location_Soil(models.Model):
     location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     soil_type = models.ManyToManyField(Soil_type)
-
     def __str__(self):
         return "{} - {}".format(self.location, self.soil_type)
 
@@ -101,7 +99,7 @@ class Crop_Soil(models.Model):
 class Customer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ManyToManyField(Location)
-    # street = models.CharField(max_length=220)
+    street = models.CharField(max_length=220, null=True, blank=True)
     contact_number = models.CharField(max_length=14,null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
@@ -196,6 +194,7 @@ class Order(models.Model):
 class Farmer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    street = models.CharField(max_length=220, null=True, blank=True)
     contact_number = models.CharField(max_length=14, verbose_name="Contact Number", null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=True)
