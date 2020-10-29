@@ -7,10 +7,10 @@ import math
 ########################
 
 #returns the [street, barangay, city, province] string format of the location instance
-def get_location_str(location_id):
+def get_location_str(location_id,street):
     if not math.isnan(location_id):
         location = Location.objects.get(id=location_id)
-        return str(location)
+        return str(street)+', '+str(location)
     else:
         return 'N/A'
 
@@ -21,9 +21,10 @@ def format_nan_values(list,column_key):
             x[column_key]=None
 
 #formats the location_id in orders list so that it will return the sting format of the location instance
-def format_location(orders):
+def format_location(orders,user):
+    street = user.farmer.street
     for order in orders:
-        order['location_id'] = get_location_str(order['location_id'])
+        order['location_id'] = get_location_str(order['location_id'],street)
 
 #formats the crop id into the crop name
 #adds an additional field which is name (name of crop) to each dictionary in orders list

@@ -123,7 +123,6 @@ class RegistrationView(View):
             form = CustomerForm(request.POST)
         if form.is_valid() and location_form.is_valid():
             location = location_form.save(commit=False)
-            form = form.save(commit=False)
             location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
             # if form.street:
             #     location.name=str(location.street)+', '+form.name
@@ -135,7 +134,7 @@ class RegistrationView(View):
             else:
                 #save location if it has no duplicates
                 location.save()
-            new_user = form
+            new_user = form.save(commit=False)
             new_user.name = user
             if account_type == "Farmer":
                 new_user.location = location
