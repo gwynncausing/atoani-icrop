@@ -124,8 +124,8 @@ class RegistrationView(View):
         if form.is_valid() and location_form.is_valid():
             location = location_form.save(commit=False)
             location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
-            if location.street:
-                location.name=str(location.street)+', '+location.name
+            # if form.street:
+            #     location.name=str(location.street)+', '+form.name
             duplicate_list = Location.objects.filter(name=location.name)
             #check if location exists
             if len(duplicate_list) > 1:
@@ -143,7 +143,6 @@ class RegistrationView(View):
             if account_type == "Customer":
                 new_user.save()
                 new_user.location.add(location)
-
             return redirect('login_register:login')
         else:
             return HttpResponse(form.errors)

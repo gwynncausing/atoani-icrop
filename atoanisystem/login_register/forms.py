@@ -3,6 +3,7 @@ from .models import Farmer, Customer, Location
 from django.contrib.auth.models import User
 
 class FarmerForm(forms.ModelForm):
+    street = forms.CharField(max_length=220, required=False)
     name = forms.ModelChoiceField(queryset=User.objects.all(),required=False)
     middlename = forms.CharField(required=False)
     company = forms.CharField(required=False)
@@ -17,9 +18,11 @@ class FarmerForm(forms.ModelForm):
                     'company',
                     'land_area',
                     #location
-                    'location'
+                    'location',
+                    'street',
                     )
 class CustomerForm(forms.ModelForm):
+    street = forms.CharField(max_length=220, required=False)
     name = forms.ModelChoiceField(queryset=User.objects.all(),required=False)
     middlename = forms.CharField(required=False)
     company = forms.CharField(required=False)
@@ -33,13 +36,13 @@ class CustomerForm(forms.ModelForm):
                     #company
                     'company',
                     #location
-                    'location'
+                    'location',
+                    'street',
                     )
 class LocationForm(forms.ModelForm):
-    street = forms.CharField(max_length=220, required=False)
     name = forms.CharField(max_length=220, required=False)
     # use the class Meta to specify the model for the customer form
     class Meta:
         model = Location
         # fields to check for is_valid() method
-        fields = ('street', 'brgy', 'city', 'province',)
+        fields = ('brgy', 'city', 'province',)

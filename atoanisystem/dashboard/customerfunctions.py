@@ -7,23 +7,26 @@ import math
 ########################
 
 #returns the [street, barangay, city, province] string format of the location instance
-def get_location_str(location_id):
+def get_location_str(location_id,street):
     if not math.isnan(location_id):
         location = Location.objects.get(id=location_id)
-        return str(location)
+        return str(street)+', '+str(location)
     else:
         return 'N/A'
 
 #formats the location_id in orders list so that it will return the sting format of the location instance
-def format_location(orders):
+def format_location(orders,user):
+    street = user.customer.street
     for order in orders:
-        order['location_id'] = get_location_str(order['location_id'])
+        order['location_id'] = get_location_str(order['location_id'],street)
 
 #returns the total order
 def get_total_orders(user):
     df = dashboard_utility.datatable_customer(user.customer)
     orders = dashboard_utility.display_customer_table(df)
-    format_location(orders)
+    if orders == None:
+        orders = []
+    format_location(orders,user)
     return orders
 
 #returns the reserved order, which is filtered using the status field

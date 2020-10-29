@@ -147,7 +147,7 @@ class CustomerDashboardView(View):
                     brgy = request.POST.get('barangay')
                     city = request.POST.get('city')
                     province = request.POST.get('province')
-                    location = Location.objects.create(street=street,brgy=brgy,city=city,province=province)
+                    location = Location.objects.create(brgy=brgy,city=city,province=province)
                     location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
                     location.save();
                     location_id = location.id;
@@ -248,12 +248,17 @@ class AccountView(View):
         if account_type == 'Customer':
             form = CustomerForm(request.POST)
         if form.is_valid() and location_form.is_valid():
-            #check if location exists
+            #by cary -- changed when I was removing street from location
             location = location_form.save(commit=False)
             location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
-            if location.street:
-                location.name=str(location.street)+', '+location.name
-            location.save()
+            duplicate_list = Location.objects.filter(name=location.name)
+            #check if location exists
+            if len(duplicate_list) > 1:
+                #replace location with the existing location
+                location = duplicate_list.first()
+            else:
+                #save location if it has no duplicates
+                location.save()
             new_user = form.save(commit=False)
             new_user.name = user
             new_user.location = location

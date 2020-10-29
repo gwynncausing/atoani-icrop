@@ -100,6 +100,7 @@ class GetAllUsersView(View):
             users.extend(customers)
             hf.format_name_of_users(users)
             arr = users
+            print(arr)
             json = {'data':arr}
             return JsonResponse(json)
         return render(request, 'custom_admin/admin-users.html')

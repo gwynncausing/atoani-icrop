@@ -51,7 +51,6 @@ class Crop(models.Model):
 class Location(models.Model):
     name = models.CharField(max_length=220)
     # to match the html form
-    street = models.CharField(max_length=100,default="")
     brgy = models.CharField(max_length=50,default="")
     city = models.CharField(max_length=50,default="")
     province = models.CharField(max_length=50,default="")
@@ -70,7 +69,6 @@ class Soil_type(models.Model):
 class Location_Soil(models.Model):
     location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     soil_type = models.ManyToManyField(Soil_type)
-
     def __str__(self):
         return "{} - {}".format(self.location, self.soil_type)
 
@@ -101,7 +99,7 @@ class Crop_Soil(models.Model):
 class Customer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ManyToManyField(Location)
-    # street = models.CharField(max_length=220)
+    street = models.CharField(max_length=220, null=True, blank=True)
     contact_number = models.CharField(max_length=14,null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
@@ -169,15 +167,17 @@ class Order(models.Model):
 
 
     def save(self, *args, **kwargs):
-        prev = Order.objects.get(order_id=self.order_id)
+        try:
+            prev = Order.objects.get(order_id=self.order_id)
 
-        if self.is_approved and self.status == "Pending":
-            self.status = "Posted"
+            if self.is_approved and self.status == "Pending":
+                self.status = "Posted"
 
-        if prev.weight != self.weight:
-            self.land_area_needed = ((self.weight * 0.001)/self.crop.harvest_weight_per_land_area) * 10000
-            self.land_area_needed = round(self.land_area_needed + (self.land_area_needed * (1-(self.crop.productivity/100))) + 25)
-
+            if prev.weight != self.weight:
+                self.land_area_needed = ((self.weight * 0.001)/self.crop.harvest_weight_per_land_area) * 10000
+                self.land_area_needed = round(self.land_area_needed + (self.land_area_needed * (1-(self.crop.productivity/100))) + 25)
+        except:
+            pass
         super().save(*args, **kwargs)
 
     def get_value(self, attr:str):
@@ -196,6 +196,7 @@ class Order(models.Model):
 class Farmer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    street = models.CharField(max_length=220, null=True, blank=True)
     contact_number = models.CharField(max_length=14, verbose_name="Contact Number", null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=True)
@@ -206,14 +207,17 @@ class Farmer(models.Model):
     first_question_answers = models.CharField(max_length=220,null=True)
     second_question_answers = models.CharField(max_length=220,null=True)
     def save(self, *args, **kwargs):
-        orig = Farmer.objects.get(name=self.name)
-        # checks if land_area has changed
-        if orig.land_area != self.land_area:
-            self.available_land_area = self.land_area
-        # updates available_land_area based on ongoing orders
-        if self.available_land_area == self.land_area:
-            for order in Order_Pairing.objects.filter(Q(farmer_id = self.id) & Q(status = "Ongoing")):
-                self.available_land_area = self.available_land_area - order.order_id.land_area_needed
+        try:
+            orig = Farmer.objects.get(name=self.name)
+            # checks if land_area has changed
+            if orig.land_area != self.land_area:
+                self.available_land_area = self.land_area
+            # updates available_land_area based on ongoing orders
+            if self.available_land_area == self.land_area:
+                for order in Order_Pairing.objects.filter(Q(farmer_id = self.id) & Q(status = "Ongoing")):
+                    self.available_land_area = self.available_land_area - order.order_id.land_area_needed
+        except:
+            pass
         super().save(*args, **kwargs)
 
     def set_value(self, attr:[]):

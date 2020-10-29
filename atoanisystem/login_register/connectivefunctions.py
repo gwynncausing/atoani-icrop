@@ -224,6 +224,7 @@ def update_land_area():
 def matching_algorithm(farmer):
     # based on province
     available_order = pd.DataFrame(Order.objects.filter(Q(status="Posted") & Q(location__province=farmer.location.province)).values())
+    print(available_order)
     loc_list = available_order['location_id'].unique()
     available_order = available_order.merge(pd.DataFrame(Location.objects.filter(id__in=loc_list).values('id','name')),  left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
     # based on available_land_area
