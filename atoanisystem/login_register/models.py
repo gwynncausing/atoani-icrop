@@ -205,14 +205,17 @@ class Farmer(models.Model):
     first_question_answers = models.CharField(max_length=220,null=True)
     second_question_answers = models.CharField(max_length=220,null=True)
     def save(self, *args, **kwargs):
-        orig = Farmer.objects.get(name=self.name)
-        # checks if land_area has changed
-        if orig.land_area != self.land_area:
-            self.available_land_area = self.land_area
-        # updates available_land_area based on ongoing orders
-        if self.available_land_area == self.land_area:
-            for order in Order_Pairing.objects.filter(Q(farmer_id = self.id) & Q(status = "Ongoing")):
-                self.available_land_area = self.available_land_area - order.order_id.land_area_needed
+        try:
+            orig = Farmer.objects.get(name=self.name)
+            # checks if land_area has changed
+            if orig.land_area != self.land_area:
+                self.available_land_area = self.land_area
+            # updates available_land_area based on ongoing orders
+            if self.available_land_area == self.land_area:
+                for order in Order_Pairing.objects.filter(Q(farmer_id = self.id) & Q(status = "Ongoing")):
+                    self.available_land_area = self.available_land_area - order.order_id.land_area_needed
+        except:
+            pass
         super().save(*args, **kwargs)
 
     def set_value(self, attr:[]):
