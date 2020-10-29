@@ -1,0 +1,242 @@
+body{
+    background: #fff;
+}
+.body-dashoard{
+    position: relative; 
+    width: 90%; 
+    min-height: 180px; 
+    border: 2px $main-color solid; 
+    border-radius: 0.5rem;
+    .title{
+        position: absolute;
+        left: 2rem;
+        top: -1rem; 
+        background: #fff;
+        color: $main-color;
+        font-weight: bold;
+    }
+    .order-btn{
+        position: absolute;
+        right: 2rem;
+        top: -1.4rem;
+        background: $secondary-color;
+        font-weight: bold;  
+        width: 8rem;     
+        color: $white-color;
+    }
+    .orders{
+        height: 280px;
+        font-weight: bold;
+    }
+    .order-tab,
+    .reserved-orders,
+    .incoming-orders,
+    .finished-orders{
+        border-top-right-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+    }   
+    .order-table-holder{
+        border-bottom-right-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+    }
+    .order-type{
+        height: 84%; 
+        color: $tertiary-color;
+        font-size: 6rem;
+    }
+    .box, .tab{
+        border-radius: 0.5rem;
+    }
+    .box{
+        background: #EBF2F2;
+        color: $tertiary-color;
+        height: 2.75rem;
+        z-index: 4;
+        box-shadow: 0px 2px 6px 2px #e0e0e0;
+    }
+    .reserved-orders{
+        background-color: #9387DF;  
+        color: #fff;
+        cursor: pointer;
+       
+    }
+    #finished-table .order-tab{
+        background:  #5C5CE4;
+        color: #fff;
+    }
+    #incoming-table .order-tab{
+        background: #D2467B;
+        color: #fff;
+    }
+    #reserved-table .order-tab{
+        background: #9387DF;  
+        color: #fff;
+    }
+    .order-tab{
+        background: black;
+    }
+    .incoming-orders{
+        background-color: #D2467B;
+        color: #fff;
+        cursor: pointer;
+    }
+    .finished-orders{
+        background-color: #5C5CE4;
+        color: #fff;
+        cursor: pointer;
+    }
+    .order-table-holder{
+        background: #EBF2F2;
+    }
+    .reserved-orders:hover, 
+    .incoming-orders:hover,
+    .finished-orders:hover{
+        cursor: pointer;
+    }
+    .nav-tabs a {
+        text-decoration: none;
+        color: $tertiary-color;
+    }
+    .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active {
+        color:black;
+        background: none;
+    }
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active{
+       padding: 1rem;  
+    }
+    .nav-tabs{
+        border: 0;
+    }
+    .opbtn{
+        background-color: Transparent!important;
+        background-repeat:no-repeat;
+        border: none!important;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;  
+        color: #23A517;
+    }
+    .btnreserve{
+        background-color: Transparent!important;
+        background-repeat:no-repeat;
+        border: none!important;
+        cursor:pointer;
+        overflow: hidden;
+        outline:none;  
+        color: #001AFF;
+    }
+    table {
+        width: 95%; 
+        border-radius: 0.5rem;
+        color: $tertiary-color;
+        background-color: #fff;
+        border-bottom: 1px solid $tertiary-color;
+        thead{
+            color: $white-color;   
+            background: $tertiary-color;
+            border-top-right-radius: 0.5rem;
+            border-top-left-radius: 0.5rem;
+            font-weight: normal;
+
+            th{
+                font-weight: normal;
+            }
+        }   
+        thead th:first-child{
+            border-top-left-radius: 0.5rem;
+        }
+        thead th:last-child{
+            border-top-right-radius: 0.5rem;
+        }
+        
+        tbody td {
+            border-left: 1px solid $tertiary-color;
+            border-right: 1px solid $tertiary-color;
+            border-top: none!important;
+        }
+
+        tfoot td:not(:last-child), tfoot th:not(:last-child) {
+            border-right: 1px solid $tertiary-color
+        }
+        tfoot td, tfoot th{
+            border-top: 0;
+            text-align: center;
+            font-weight: normal;
+        }
+        
+    }
+    .search input[type=search]{
+        width: 15rem;
+        border: 0;
+        padding: 0.25rem;
+        border-radius: 0.5rem;
+    }
+    .search input[type=search]:focus {
+        outline: none !important;
+    }
+    .tab-content{
+        border-radius: 0.3rem;
+    }
+    .order-table{
+        box-shadow: 0px 0px 2px 2px #e0e0e0;
+        min-height: 100px;
+        padding-bottom: 3rem;
+        background: #EBF2F2;
+        border-radius: 0.5rem;
+    }
+    /*this is for the border-radius of the columns as they collaspse*/
+    @media only screen and (max-width: 678px){ thead th:nth-of-type(4){ border-top-right-radius: 0.5rem; } }
+    @media only screen and (max-width: 572px){ thead th:nth-of-type(3){ border-top-right-radius: 0.5rem; } }
+    @media only screen and (max-width: 472px){ thead th:nth-of-type(2){ border-top-right-radius: 0.5rem; } }
+    @media only screen and (max-width: 352px){ thead th:nth-of-type(1){ border-top-right-radius: 0.5rem; } }
+    /*this for breakpoint ui style*/
+    @media only screen and (max-width: 720px) {
+        .title{
+            position: absolute;
+            left: 0.5rem;
+            top: -1rem;
+            background: #fff;
+            color: $main-color;
+            font-weight: bold;
+        }
+        .order-btn{
+            position: absolute;
+            right: 0.5rem;
+            top: -1.4rem;
+            background: $secondary-color;
+            font-weight: bold;  
+            width: 8rem;     
+            color: $white-color;
+        }
+        .box{
+            background: #EBF2F2;
+            color: $tertiary-color;
+            height: 50px;
+            z-index: 4;
+            box-shadow: 0px 2px 6px 2px #e0e0e0;
+        }
+        .order-type{
+            height: 70%;
+            color: $tertiary-color;
+            font-size: 2.5rem;
+        }
+        .orders{
+            height: 130px;
+            font-weight: bold;
+        }
+        .reserved-orders,
+        .incoming-orders,
+        .finished-orders{
+            border-top-right-radius: 0.5rem;
+            border-top-left-radius: 0.5rem;
+            font-size: 12px;
+        }
+        .search input[type=search]{
+            width: 9rem;
+        }
+        .order-tab, table{
+            font-size: 12px;
+        }
+    }
+}
+

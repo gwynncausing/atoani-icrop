@@ -9,7 +9,7 @@
         "../global/_global.scss",
         "../global/_navbar.scss",
         "../global/_footer.scss",
-        "_body-dashboard.scss",
+        "_body-dashboard-farmer.scss",
         "_modal-farmer.scss",
         "../global/_loader.scss",
         "../global/_notify.scss"

@@ -1,26 +1,25 @@
 let data = null;
 
 //ajax urls
-const getTotalOrdersUrl = '/dashboard/get-customer-total-orders';
+const getPendingOrdersUrl = '/dashboard/get-customer-pending-orders';
 const getReservedOrdersUrl = '/dashboard/get-customer-reserved-orders';
 const getFinishedOrdersUrl = '/dashboard/get-customer-finished-orders';
 
 //data table settings
-const domPlacements = `<
-                        <"search d-block row mt-4 mb-3"
-                            <"col-1"f>
-                        >
-                        <"d-flex float-left">
-                        <t>
-                        <"bottom"
-                            <"d-inline"
-                                <"float-left mt-0 ml-5 mb-3 pb-3"i>
-                            >   
-                        >
-                      >`;
+const domPlacements = `<'row'<'col-md-12 d-sm-flex pt-4'f<'ml-3'l>>>
+                        <'row'<'col-sm-12'tr>>
+                        <'row'<'col-sm-12 mt-2 col-md-5'i>
+                        >`;
+
+//`<'row'<'col-md-12 d-sm-flex pt-4'f<'ml-3'l>>>
+//<'row'<'col-sm-12'tr>>
+//<'row'<'col-sm-12 mt-2 col-md-5'i>
+//<'col-12 col-md-7 mt-3'p>>`
 
 const customerReservedTableConfig = {
-  paging: false,
+  paging: true,
+  searching: true,
+  lengthMenu: [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
@@ -68,7 +67,9 @@ const customerReservedTableConfig = {
 };
 
 const customerFinishedTableConfig = {
-  paging: false,
+  paging: true,
+  searching: true,
+  lengthMenu: [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
@@ -115,8 +116,10 @@ const customerFinishedTableConfig = {
   responsive: true
 };
 
-const customerTotalTableConfig = {
-  paging: false,
+const customerPendingTableConfig = {
+  paging: true,
+  searching: true,
+  lengthMenu: [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ],
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
@@ -124,7 +127,7 @@ const customerTotalTableConfig = {
       targets: 4,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center p-0 m-0">
-                            <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-total" onclick="viewTotalOrders(this)">
+                            <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-pending" onclick="viewPendingOrders(this)">
                                 View Order
                             </button>
                             </div>`
@@ -132,7 +135,7 @@ const customerTotalTableConfig = {
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
   ajax: {
-    url: getTotalOrdersUrl,
+    url: getPendingOrdersUrl,
     data: "data",
   },
   //matches the data to appropriate column
@@ -155,9 +158,9 @@ const customerTotalTableConfig = {
   },
 
   initComplete: function(){
-    total_data = totalTable.ajax.json().data;
+    pending_data = pendingTable.ajax.json().data;
     //show the total count of orders
-    $("#total-orders-counter").html(total_data.length);
+    $("#pending-orders-counter").html(pending_data.length);
   },
   responsive: true
 };
@@ -182,7 +185,7 @@ function viewReservedOrders(button){
   document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
   document.getElementById('reserved-date-approved').innerHTML = String("wala sa JSON");
   document.getElementById('reserved-date-reserved').innerHTML = String("wala sa JSON");
-  document.getElementById('reserved-status').innerHTML = String(order.status);
+  //document.getElementById('reserved-status').innerHTML = String(order.status);
   document.getElementById('reserved-crop-name').innerHTML = String(order.name);
   document.getElementById('reserved-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('reserved-location').innerHTML = String(order.location_id);
@@ -212,16 +215,28 @@ function viewFinishedOrders(button){
   document.getElementById('finished-date-ordered').innerHTML = String(order.order_date);
   document.getElementById('finished-date-approved').innerHTML = String("wala sa JSON");
   document.getElementById('finished-date-reserved').innerHTML = String("wala sa JSON");
-  document.getElementById('finished-date-finished').innerHTML = String("wala sa JSON");
-  document.getElementById('finished-status').innerHTML = String(order.status);
+  document.getElementById('finished-date-collected').innerHTML = String("wala sa JSON");
+  document.getElementById('finished-date-harvested').innerHTML = String("wala sa JSON");
   document.getElementById('finished-crop-name').innerHTML = String(order.name);
   document.getElementById('finished-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('finished-location').innerHTML = String(order.location_id);
   document.getElementById('finished-order-number').innerHTML = String(order.order_pair_id);
+
+  //reset the modal
+  document.querySelector(".finished-date-harvested p").classList.remove("label");
+  document.querySelector(".finished-date-collected").classList.add("d-none");
+
+  if(String(order.status) == "Delivered"){
+    document.querySelector(".finished-date-collected").classList.remove("d-none");
+    document.querySelector(".finished-date-collected p").classList.add("label");
+  }
+  else
+    document.querySelector(".finished-date-harvested p").classList.add("label");
+
   $("#modal-customer-finished").modal("show");
 }
 
-function viewTotalOrders(button){
+function viewPendingOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
   //when mobile view, or a column collapse
   //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
@@ -232,27 +247,38 @@ function viewTotalOrders(button){
     selectedOrderID = $(button).closest("tr").prev("tr").attr("order-id")
   
   let order = null;
-  for(let i = 0; i < total_data.length; i++){
-    if(total_data[i].order_id == selectedOrderID){
-      order = total_data[i];
+  for(let i = 0; i < pending_data.length; i++){
+    if(pending_data[i].order_id == selectedOrderID){
+      order = pending_data[i];
       break;
     }
   }
   console.log(button)
-  console.log(total_data)
+  console.log(pending_data)
   console.log(JSON.stringify(order));
 
-  document.getElementById('total-date-ordered').innerHTML = order.order_date;
-  document.getElementById('total-date-approved').innerHTML = String("wala sa JSON");
-  document.getElementById('total-date-reserved').innerHTML = String("wala sa JSON");
-  document.getElementById('total-date-finished').innerHTML = String("wala sa JSON");
-  document.getElementById('total-status').innerHTML = String(order.status);
-  document.getElementById('total-crop-name').innerHTML = String(order.name);
-  document.getElementById('total-demand').innerHTML = String(order.weight) + " kilos";
-  document.getElementById('total-location').innerHTML = String(order.location_id);
-  document.getElementById('total-order-number').innerHTML = String(order.order_pair_id);
+  document.getElementById('pending-date-ordered').innerHTML = order.order_date;
+  document.getElementById('pending-date-approved').innerHTML = String("wala sa JSON");
+  document.getElementById('pending-crop-name').innerHTML = String(order.name);
+  document.getElementById('pending-demand').innerHTML = String(order.weight) + " kilos";
+  document.getElementById('pending-location').innerHTML = String(order.location_id);
+  document.getElementById('pending-order-number').innerHTML = String(order.order_pair_id);
 
-  $("#modal-customer-total").modal("show");
+  //reset the status
+  document.querySelector('.pending-date-ordered p').classList.remove("label");
+  document.querySelector('.pending-date-approved p').classList.remove("label");
+  document.querySelector('.pending-date-approved').classList.add("d-none");
+  document.querySelector('.pending-date-ordered').classList.add("d-none");
+
+  document.querySelector('.pending-date-ordered').classList.remove("d-none");
+  if(String(order.status) == "Posted"){
+    document.querySelector('.pending-date-approved').classList.remove("d-none");
+    document.querySelector('.pending-date-approved p').classList.add("label");
+  }
+  else
+    document.querySelector('.pending-date-ordered p').classList.add("label");
+
+  $("#modal-customer-pending").modal("show");
 
 }
 
@@ -280,7 +306,7 @@ function viewTotalOrders(button){
 //     }
 //   });
 // }
-var totalTable = null;
+var pendingTable = null;
 var finishedTable = null;
 var reservedTable = null;
 
@@ -291,9 +317,60 @@ var totalCount = null;
 
 //Executing it all
 $(document).ready(function () {
-  totalTable = $('.customer-total-table').DataTable(customerTotalTableConfig);
+  pendingTable = $('.customer-pending-table').DataTable(customerPendingTableConfig);
   finishedTable = $('.customer-finished-table').DataTable(customerFinishedTableConfig);
   reservedTable = $('.customer-reserved-table').DataTable(customerReservedTableConfig);
+
+  /*Date Range Filter*/
+  let table = pendingTable;
+  const pendingTab = $("#nav-pending-tab");
+  const reservedTab = $("#nav-reserved-tab");
+  const finishedTab = $("#nav-finished-tab");
+
+  $.fn.dataTable.ext.search.push((settings, data, dataIndex ) => {
+      let minDate = null;
+      let maxDate = null;
+      let path = null;
+      const date = data[0];
+      const id =  settings.nTable.getAttribute('id')
+      
+      if(id == "finished-table-orders")
+        path = "#finished-table";
+      else if(id == "reserved-table-orders")
+        path = "#reserved-table";
+      else
+        path = "#pending-table";
+      
+      //console.log(path)
+      minDate = $(path).find('.min-date').val();
+      maxDate = $(path).find('.max-date').val();
+    
+      if (minDate === '' || maxDate === '' )
+        return true;
+      if (Date.parse(date) >= Date.parse(minDate) && Date.parse(date) <= Date.parse(maxDate))
+        return true;  
+      else 
+        return false;
+    }
+  );
+
+  pendingTab.click(() => table = pendingTable );
+  reservedTab.click(() => table = reservedTable );
+  finishedTab.click(() => table = finishedTable );
+
+  $('.min-date, .max-date').keyup(() => table.draw());
+  $('.min-date, .max-date').change(() => table.draw());
+
+  const clear = () => {
+    $('.min-date').val("");
+    $('.max-date').val("");
+    table.draw();
+  }
+
+  $("#pending-table").find('#refresh-btn').click(clear);
+  $("#reserved-table").find('#refresh-btn').click(clear);
+  $("#finished-table").find('#refresh-btn').click(clear);
+
 });
 
 //https://www.gyrocode.com/articles/jquery-datatables-column-width-issues-with-bootstrap-tabs/#example2

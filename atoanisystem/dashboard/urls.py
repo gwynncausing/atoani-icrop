@@ -15,6 +15,7 @@ urlpatterns = [
     path('get-customer-total-orders', views.CustomerTotalOrdersView.as_view(), name="get_customer_total_orders"),
     path('get-customer-reserved-orders', views.CustomerReservedOrdersView.as_view(), name="get_customer_reserved_orders"),
     path('get-customer-finished-orders', views.CustomerFinishedOrdersView.as_view(), name="get_customer_finished_orders"),
+    path('get-customer-pending-orders', views.CustomerPendingOrdersView.as_view(), name="get_customer_pending_orders"),
     #modals
     path('get-customer-finished-orders-modal', views.CustomerFinishedOrdersViewModal.as_view(), name="get_customer_finished_orders_modal"),
     #edit account, same url since both kay same ra og fields

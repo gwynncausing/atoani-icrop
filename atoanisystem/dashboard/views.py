@@ -136,11 +136,12 @@ class CustomerDashboardView(View):
                 location_id = request.POST.get('address')
                 crop_id = request.POST.get('crop-id')
                 
-                print("Crop: " + crop_id)                
+                print("Crop: " + request.POST.get('crop-id'))                
                 crop = Crop.objects.get(id=crop_id)  
-                customer = request.user.customer     
+                customer = request.user.customer    
                          
                 #check if address is custom
+                print("location: " + location_id)
                 if location_id == 'custom-address':
                     street = request.POST.get('street')
                     brgy = request.POST.get('barangay')
@@ -202,6 +203,15 @@ class CustomerFinishedOrdersViewModal(View):
             'user': user
         }
         return JsonResponse(data)
+
+class CustomerPendingOrdersView(View):
+    def get(self,request):
+        if request.is_ajax():
+            #does not include deleted customer
+            arr = cf.get_pending_orders(request.user)
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request,'dashboard/customer-dashboard.html')
 
 class AccountView(View):
     def post(self, request):

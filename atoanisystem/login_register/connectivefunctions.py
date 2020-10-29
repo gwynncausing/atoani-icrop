@@ -213,6 +213,7 @@ def update_time_single(order_pair):
 def add_order(customer_id, crop_id, demand, location_id):
     new_order = Order(customer_id=customer_id, crop_id=crop_id, weight=demand, location_id=location_id)
     new_order.save()
+    #print(new_order)
     calculate_land_area_single(new_order)
     new_order.save()
 
