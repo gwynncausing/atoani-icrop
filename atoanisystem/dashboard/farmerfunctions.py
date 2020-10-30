@@ -10,6 +10,7 @@ import math
 def get_location_str(location_id,street):
     location = Location.objects.get(id=location_id)
     loc = str(location)
+    print('LOCATION IS ' + loc)
     if street:
         loc = str(street)+', '+loc
     return loc
@@ -24,9 +25,9 @@ def format_nan_values(list,column_key):
 def format_location(orders,user):
     
     for order in orders:
-        print('AWFAWFAWF',order)
+        #print('AWFAWFAWF',order)
         street = None#Customer.objects.get(id=order['customer_id']).street
-        order['location'] = get_location_str(order['location_id'],street)
+        order['location_id'] = get_location_str(order['location_id'],street)
 
 #formats the crop id into the crop name
 #adds an additional field which is name (name of crop) to each dictionary in orders list
@@ -37,9 +38,9 @@ def format_crop_name(orders):
 #returns incoming orders from the recommendation algorithm
 def get_incoming_orders(user):
     incoming_orders = dashboard_utility.matching_algorithm(user.farmer)
-    #print(incoming_orders)
+    print("@@@@@@@@@@@@@@@@@",incoming_orders)
     format_crop_name(incoming_orders)
-    # format_location(incoming_orders,user)
+    #format_location(incoming_orders,user)
     return incoming_orders
 
 #returns the reserved orders of the farmer
