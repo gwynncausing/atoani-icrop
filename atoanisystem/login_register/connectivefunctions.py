@@ -242,6 +242,8 @@ def matching_algorithm_all():
 
 # added 25 as a contingency measure
 def calculate_land_area_single(order):
+    if type(order) == Order:
+        order = Order.objects.filter(order_id=order.order_id).values()[0]
     order_crop = Crop.objects.filter(id=order['crop_id']).values('harvest_weight_per_land_area','productivity')[0]
     land_area = ((order['weight'] * 0.001)/order_crop['harvest_weight_per_land_area']) * 10000
     land_area = land_area + (land_area * (1-(order_crop['productivity']/100))) + 25

@@ -132,7 +132,7 @@ class Customer(models.Model):
     def get_locations(self):
         splt = self.street.split("|")
         final_location = []
-        # pairs street and location 
+        # pairs street and location
         for i in self.location.all().values_list('name','id'):
             final_location.append((i[0]+", " + splt.pop(0),i[1]))
 
@@ -175,7 +175,6 @@ class Order(models.Model):
             for att in attr:
                 setattr(self,att[0],att[1])
             self.save()
-            print(self.status)
         except:
             pass
 
