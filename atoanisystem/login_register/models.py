@@ -224,6 +224,17 @@ class Farmer(models.Model):
     def get_farmer_name(self):
         return get_name(self.contact_number)
 
+    def get_location(self):
+        return self.location
+
+    def set_location(self, id):
+        new_loc = Location.objects.get(id=id)
+        self.location = new_loc
+        self.save()
+
+    # def set_location(self, id)
+
+
     class Meta:
         ordering = ['location','name','-registration_date']
 

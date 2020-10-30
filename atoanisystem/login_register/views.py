@@ -150,7 +150,7 @@ class RegistrationView(View):
             return redirect('login_register:login')
         else:
             return HttpResponse(form.errors)
-        
+    
 class ApprovalView(View):
     def get(self,request):
         if request.user.is_authenticated:
@@ -170,9 +170,6 @@ class ApprovalView(View):
         else:
             return redirect("login_register:login")
 
-# class ChangePasswordView(PasswordChangeView):
-#     form_class = PasswordChangeForm
-
 class LogoutView(View):
     def get(self,request):
         logout(request)
@@ -183,42 +180,164 @@ class LogoutView(View):
 
 class SettingsView(View):
     def get(self, request):
-        if(hasattr(request.user, 'customer')):
-            locations = Customer.objects.get(id=request.user.customer.id).get_all_locations()
-        context = {
-            "locations" : locations
-        }
         if request.user.is_authenticated and not request.user.is_staff:
+            context = {}
+            if(hasattr(request.user, 'customer')):
+                locations = Customer.objects.get(id=request.user.customer.id).get_all_locations()
+                context = {
+                    "locations" : locations
+                }
+            # if(hasattr(request.user, 'farmer')):
+            #     location = Farmer.objects.get(id = request.user.farmer.id).get_location()
+            #     context = {
+            #         "location" : location
+            #     }
             return render(request, "login_register/settings.html", context)
         else:
             return redirect("login_register:login")
 
     def post(self, request):
-        if request.method == 'POST':
-            if 'btn-save-name' in request.POST:
-                firstname = request.POST.get("first-name")
-                lastname = request.POST.get("last-name")
-                User.objects.filter(id = request.user.id).update(first_name = firstname, last_name = lastname)
-            elif 'btn-save-others' in request.POST:
-                land_area = request.POST.get("land-area")
-                company = request.POST.get("company")
-                Farmer.objects.filter(id = request.user.farmer.id).update(land_area = land_area, company = company)
-            elif 'btn-save-contact' in request.POST:
-                contact_number = request.POST.get("contact-num")
-                email = request.POST.get("email")
-                User.objects.filter(id = request.user.id).update(email=email)
-                if(hasattr(request.user, 'farmer')):
-                    Farmer.objects.filter(id = request.user.farmer.id).update(contact_number = contact_number)
-                elif(hasattr(request.user, 'customer')):
-                    Customer.objects.filter(id = request.user.customer.id).update(contact_number = contact_number)
-            # elif 'btn-save-address' in request.POST:
-            #     if(hasattr(request.user, 'farmer')):
-            #         Farmer.objects.filter(id = request.user.farmer.id).update(contact_number = contact_number)
-            #     elif(hasattr(request.user, 'customer')):
-            #         Customer.objects.filter(id = request.user.customer.id).update(contact_number = contact_number)
-            
-            return redirect("login_register:settings")
-            
+        # if request.is_ajax():
+            data = {}
+            if request.method == 'POST':
+                print(request.POST)
+                if 'btn-save-name' in request.POST:
+                    firstname = request.POST.get('firstname')
+                    lastname = request.POST.get('lastname')
+                    user = User.objects.filter(id = request.user.id).update(first_name = firstname, last_name = lastname)
+                    data['firstname'] = firstname
+                    data['lastname'] = lastname
+                    return JsonResponse(data, safe=False, status=200)
+                
+                elif 'btn-save-others' in request.POST:
+                    print(request.POST)
+                    land_area = request.POST.get("land_area")
+                    company = request.POST.get("company")
+                    data['land_area'] = land_area
+                    data['company'] = company
+                    Farmer.objects.filter(id = request.user.farmer.id).update(land_area = land_area, company = company)
+                    return JsonResponse(data, safe=False, status=200)
+                
+                elif 'btn-save-contact' in request.POST:
+                    print(request.POST)
+                    contact_number = request.POST.get("contact_number")
+                    email = request.POST.get("email")
+                    print("num: " + str(contact_number) + "\nemail: " + str(email))
+                    data['contact_number'] = contact_number
+                    data['email'] = email
+                    User.objects.filter(id = request.user.id).update(email=email)
+                    if(hasattr(request.user, 'farmer')):
+                        farmer = Farmer.objects.filter(id = request.user.farmer.id).update(contact_number = contact_number)
+                        print(farmer)
+                    elif(hasattr(request.user, 'customer')):
+                        customer = Customer.objects.filter(id = request.user.customer.id).update(contact_number = contact_number)
+                        print(customer)
+                    return JsonResponse(data, safe=False, status=200)
+                
+                elif 'btn-edit-farmer-address' in request.POST:
+                    farmer = request.user.farmer
+                    province = request.POST.get('province')
+                    city = request.POST.get('city')
+                    brgy = request.POST.get('brgy')
+                    street = request.POST.get('street')
+                    new_name = str(province) + "," + str(city) + "," + str(brgy) + "," + str(street)
+                    location, created = Location.objects.get_or_create(name=new_name)
+                    if created:
+                        new_loc = Location.objects.create(name=new_name, province=province, city=city, brgy=brgy, street=street)
+                        farmer.set_location(new_loc.id)
+                        data['id'] = new_loc.id
+                        data['name'] = new_loc.name
+                        data['province'] = province
+                        data['city'] = city
+                        data['brgy'] = brgy
+                        data['street'] = street
+                    else:
+                        existing_loc = Location.objects.get(name = new_name)
+                        farmer.set_location(existing_loc.id)
+                        data['id'] = existing_loc.id
+                        data['name'] = existing_loc.name
+                        data['province'] = existing_loc.province
+                        data['city'] = existing_loc.city
+                        data['brgy'] = existing_loc.brgy
+                        data['street'] = existing_loc.street
+                
+                elif 'btn-edit-customer-address' in request.POST:
+                    print("clicked edit customer")
+                    print(request.POST)
+                    customer = request.user.customer
+                    location_id = request.POST.get('location-id')
+                    print(location_id)
+                    province = request.POST.get('province')
+                    city = request.POST.get('city')
+                    brgy = request.POST.get('brgy')
+                    street = request.POST.get('street')
+                    new_name = str(province) + "," + str(city) + "," + str(brgy) + "," + str(street)
+                    old_loc = Location.objects.get(id=location_id)
+                    # location, created = Location.objects.get_or_create(name=new_name)
+                    exists = Location.objects.filter(name=new_name).exists()
+                    # if created:
+                    if not exists:
+                        new_loc = Location.objects.create(name=new_name, province = province, city = city, brgy = brgy, street = street)
+                        data['id'] = new_loc.id
+                        data['name'] = new_loc.name
+                        data['province'] = province
+                        data['city'] = city
+                        data['brgy'] = brgy
+                        data['street'] = street
+                        customer.location.remove(old_loc)
+                        customer.location.add(new_loc)
+                        print("created new")
+                    else:
+                        existing_loc = Location.objects.filter(name = new_name)[0]
+                        customer.location.remove(old_loc)
+                        customer.location.add(existing_loc)
+                        data['id'] = existing_loc.id
+                        data['name'] = existing_loc.name
+                        data['province'] = existing_loc.province
+                        data['city'] = existing_loc.city
+                        data['brgy'] = existing_loc.brgy
+                        data['street'] = existing_loc.street
+                        print("added existing")
+                
+                elif 'btn-delete-address' in request.POST:
+                    print("clicked delete")
+                    customer = request.user.customer
+                    location_id = request.POST.get('location-id-delete')
+                    print("selected to delete: " + str(location_id))
+                    customer.location.remove(Location.objects.get(id=location_id))    
+                    
+                elif 'btn-add-customer-address':
+                    customer = request.user.customer
+                    province = request.POST.get('province')
+                    city = request.POST.get('city')
+                    brgy = request.POST.get('brgy')
+                    street = request.POST.get('street')
+                    new_name = str(province) + "," + str(city) + "," + str(brgy) + "," + str(street)
+
+                    exists = Location.objects.filter(name=new_name).exists()
+                    if not exists:
+                        new_loc = Location.objects.create(name=new_name, province = province, city = city, brgy = brgy, street = street)
+                        data['id'] = new_loc.id
+                        data['name'] = new_loc.name
+                        data['province'] = province
+                        data['city'] = city
+                        data['brgy'] = brgy
+                        data['street'] = street
+                        customer.location.add(new_loc)
+                        print("added new")
+                    else:
+                        existing_loc = Location.objects.filter(name = new_name)[0]
+                        customer.location.add(existing_loc)
+                        data['id'] = existing_loc.id
+                        data['name'] = existing_loc.name
+                        data['province'] = existing_loc.province
+                        data['city'] = existing_loc.city
+                        data['brgy'] = existing_loc.brgy
+                        data['street'] = existing_loc.street
+                        print("added existing")
+
+                return JsonResponse(data, safe=False, status=200)
+
 
 # def change_password(request):
 #     if request.method == 'POST':
