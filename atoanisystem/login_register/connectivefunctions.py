@@ -164,7 +164,7 @@ def datatable_customer(id):
     order= get_complete_order_customer(id)
     if len(order) !=0:
         #df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
-        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[1] for val in order.values]).values()).drop(columns=["status"])
+        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[1] for val in order.values]).values())
 
         if len(df) == 0:
             order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"

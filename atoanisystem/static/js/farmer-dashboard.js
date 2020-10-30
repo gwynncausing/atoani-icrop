@@ -260,7 +260,7 @@ function viewIncomingOrders(button){
   document.getElementById('incoming-status').innerHTML = String(order.status);
   document.getElementById('incoming-crop-name').innerHTML = String(order.name);
   document.getElementById('incoming-demand').innerHTML = String(order.weight) + " kilos";
-  document.getElementById('incoming-location').innerHTML = String(order.location_id);
+  document.getElementById('incoming-location').innerHTML = String(order.location);
   document.getElementById('incoming-area-needed').innerHTML = String(order.land_area_needed);
   document.getElementById('incoming-days').innerHTML = String(order.weight);
   $("#incoming-modal-farmer").modal("show");
