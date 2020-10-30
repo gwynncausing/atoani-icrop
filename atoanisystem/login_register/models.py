@@ -129,6 +129,9 @@ class Customer(models.Model):
     def get_locations(self):
         return self.location.all().values_list('name','id')
 
+    def get_all_locations(self):
+        return self.location.all()
+
     def add_location(self,location_id):
         self.location.add(location_id)
 
@@ -239,6 +242,14 @@ class Farmer(models.Model):
 
     def get_farmer_name(self):
         return get_name(self.contact_number)
+
+    def get_location(self):
+        return self.location
+
+    def set_location(self, id):
+        new_loc = Location.objects.get(id=id)
+        self.location = new_loc
+        self.save()
 
     def add_land(new_land_area):
         self.available_land_area = self.available_land_area+new_land_area

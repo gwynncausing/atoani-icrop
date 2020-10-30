@@ -62,6 +62,7 @@ class FarmerDashboardView(View):
                 return JsonResponse(data=json,status=200)
 
 class FarmerIncomingOrdersView(View):
+    print("Incoming Orders View ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     def get(self,request):
         if request.is_ajax():
             #does not include deleted customer
