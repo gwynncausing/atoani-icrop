@@ -8,19 +8,24 @@ let csrf_token = null;
 function setCSRF(value){
   csrf_token = value;
 }
+
+let reserved_data = null;
+let incoming_data = null;
+let finished_data = null;
+
 //data table settings
 const domPlacements = `<
-                        <"d-flex float-left ml-5 mb-3 mt-4"
-                            <"mr-3 ml-1"f>
+                        <"search d-block row mt-4 mb-3"
+                            <"col-1"f>
                         >
-                        <"d-flex float-right ">
+                        <"d-flex float-left">
                         <t>
                         <"bottom"
                             <"d-inline"
                                 <"float-left mt-0 ml-5 mb-3 pb-3"i>
                             >   
                         >
-                      >`;
+                        >`;
 
 const farmerFinishedTableConfig = {
   paging: false,
@@ -30,8 +35,8 @@ const farmerFinishedTableConfig = {
     {
       targets: 4,
       data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="viewFinishedOrders(this)">
+      defaultContent: `<div class="button-container d-flex justify-content-center  p-0 m-0">
+                            <button type="button" class="btn-secondary opbtn" onclick="viewFinishedOrders(this)">
                                 View Order
                             </button>
                       </div>`
@@ -48,6 +53,8 @@ const farmerFinishedTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'harvested_date' },
+    //add this extra column so that it will also collapse in responsive view
+    { "data": ''},
   ],
   createdRow: function(row, data, dataIndex) {
     $(row).attr('order-pair-id', data.order_pair_id);
@@ -55,7 +62,10 @@ const farmerFinishedTableConfig = {
 
   initComplete: function(){
     finished_data = finishTable.ajax.json().data;
-  }
+    //show the total count of finished orders
+    $("#finished-orders-counter").html(finished_data.length);
+  },
+  responsive: true
 };
 
 const farmerReservedTableConfig = {
@@ -66,8 +76,8 @@ const farmerReservedTableConfig = {
     {
       targets: 4,
       data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" id=modal-farmer-btn class="btn-secondary mx-1 opbtn" onclick="viewReservedOrders(this)">
+      defaultContent: `<div class="button-container d-flex justify-content-center p-0 m-0">
+                            <button type="button" id=modal-farmer-btn class="btn-secondary opbtn" onclick="viewReservedOrders(this)">
                                 View Order
                             </button>
                             </div>`
@@ -84,6 +94,8 @@ const farmerReservedTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'status' },
+    //add this extra column so that it will also collapse in responsive view
+    { "data": ''},
   ],
   createdRow: function(row, data, dataIndex) {
     $(row).attr('order-pair-id', data.order_pair_id);
@@ -91,7 +103,11 @@ const farmerReservedTableConfig = {
 
   initComplete: function(){
     reserved_data = reservedTable.ajax.json().data;
-  }
+    //show the total count of reserved orders
+    console.log(reserved_data);
+    $("#reserved-orders-counter").html(reserved_data.length);
+  },
+  responsive: true
 };
 
 const farmerIncomingTableConfig = {
@@ -102,8 +118,8 @@ const farmerIncomingTableConfig = {
     {
       targets: 4,
       data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center">
-                            <button type="button" class="btn-secondary mx-1 opbtn" onclick="viewIncomingOrders(this)">
+      defaultContent: `<div class="button-container d-flex justify-content-center  p-0 m-0">
+                            <button type="button" class="btn-secondary opbtn" onclick="viewIncomingOrders(this)">
                                 View
                             </button>
                             </div>`
@@ -118,6 +134,8 @@ const farmerIncomingTableConfig = {
     { "data": 'weight' },
     { "data": 'land_area_needed' },
     { "data": 'location_id' },
+    //add this extra column so that it will also collapse in responsive view
+    { "data": ''},
   ],
   createdRow: function(row, data, dataIndex) {
     $(row).attr('order-id', data.order_id);
@@ -125,7 +143,10 @@ const farmerIncomingTableConfig = {
 
   initComplete: function(){
     incoming_data = incomingTable.ajax.json().data;
-  }
+    //show the total incoming of orders
+    $("#incoming-orders").html(incoming_data.length);
+  },
+  responsive: true
 };
 
 //Used to identify the viewed order
@@ -137,10 +158,18 @@ const confirmMsg = document.getElementById("confirmReserveMsg");
 const failedMsg = document.getElementById("failedReserveMsg");
 const successMsg = document.getElementById("successReserveMsg");
 const reserveButton = document.getElementById('reserveBtn');
-const cancelButton = document.getElementById('cancelBtn');
+const cancelButton = document.getElementById('cancelReserveBtn');
 
 function viewFinishedOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-pair-id");
+  //when mobile view, or a column collapse
+  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
+  //these two rows become siblings
+  //when selectedOrderID is null, it is assumed in mobile view
+  //temporary fix
+  if(selectedOrderID == null)
+    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-pair-id");
+
   let order = null;
 
   for(let i = 0; i < finished_data.length; i++){
@@ -167,6 +196,14 @@ function viewFinishedOrders(button){
 
 function viewReservedOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-pair-id");
+  //when mobile view, or a column collapse
+  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
+  //these two rows become siblings
+  //when selectedOrderID is null, it is assumed in mobile view
+  //temporary fix
+  if(selectedOrderID == null)
+    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-pair-id");
+
   let order = null;
   for(let i = 0; i < reserved_data.length; i++){
     if(reserved_data[i].order_pair_id == selectedOrderID){
@@ -191,6 +228,14 @@ function viewReservedOrders(button){
 
 function viewIncomingOrders(button){
   selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
+  //when mobile view, or a column collapse
+  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
+  //these two rows become siblings
+  //when selectedOrderID is null, it is assumed in mobile view
+  //temporary fix
+  if(selectedOrderID == null)
+    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-id");
+
   let order = null;
   for(let i = 0; i < incoming_data.length; i++){
     if(incoming_data[i].order_id == selectedOrderID){
@@ -224,6 +269,7 @@ function viewIncomingOrders(button){
 // Checks if order is available
 let checkOrder = function() {
   //Disables the button so that while it is fetching  data from server it wont duplicate the request, and because there is no loading indicator yet
+  console.log("AWFWAFWAFAWF")
   reserveButton.disabled = true;
   let formData = new FormData();//.append('action','add');
   formData.append('order-id', selectedOrderID);
@@ -259,6 +305,7 @@ let checkOrder = function() {
 
 //When farmer presses Yes button as confirmation
 let confirmReservation = function() {
+  cancelButton.disabled = true;
   let formData = new FormData();
   formData.append('order-id', selectedOrderID);
   formData.append('operation', 'confirm-reserve');
@@ -280,17 +327,22 @@ let confirmReservation = function() {
       //Display message
       //remove loading 
       $(".loading").addClass("d-none"); 
-      //when modal closes, and a succss notification will display
+      //when modal closes, and a success notification will display
       notify('success','Reserved Success!','You have successfully reserved an order.')
-      //if (successMsg.style.display === "none"){
-      //  confirmMsg.style.display = "none";
-      //  successMsg.style.display = "block";
-      //}
-      //reserveButton.innerHTML = "Reserved";
-      //reserveButton.disabled = true;
-      //cancelButton.innerHTML = "OK"
-      //isOrderReserved = false;
-      //reserveButton.removeEventListener()
+
+      //This will update the data after reloading the ajax call
+      incomingTable.ajax.reload(()=>{
+        incoming_data = incomingTable.ajax.json().data;
+        $("#incoming-orders").html(incoming_data.length);
+      },true);
+      finishTable.ajax.reload(()=>{
+        finished_data = finishTable.ajax.json().data;
+        $("#finished-orders-counter").html(finished_data.length);
+      },true);
+      reservedTable.ajax.reload(()=>{
+        reserved_data = reservedTable.ajax.json().data;
+        $("#reserved-orders-counter").html(reserved_data.length)
+      },true);
     },
     error: function (response) {
       //remove loading 
@@ -323,6 +375,16 @@ function cancelReservation() {
     }
   });
 }
+//Customized close modal function, because when the farmer views an incoming order, it is temporarily reserved to him/her, 
+function closeModal(){
+  //isOrderReserved only becomes false during initialization or if the farmer confirms the reservation
+  //if this is true this means that the farmer checked for its availability (it is temporarily reserved) and that we should cancel the reservation or else it would remain reserved
+  if(isOrderReserved){
+    cancelReservation();
+  }
+  else
+    $(".modal-farmer").modal("hide");
+};
 
 var incomingTable = null;
 var finishedTable = null;
@@ -331,19 +393,21 @@ var reservedTable = null;
 //Executing it all
 $(document).ready(function () {
   //Detects if the modal is closed
-  $(".modal-farmer").on("hidden.bs.modal", function () {
-    //isOrderReserved only becomes false during initialization or if the farmer confirms the reservation
-    //if this is true this means that the farmer checked for its availability (it is temporarily reserved) and that we should cancel the reservation or else it would remain reserved
-    if(isOrderReserved){
-      cancelReservation();
-    }
-    //refresh/reload the tables
-    incomingTable.ajax.reload();
-    finishTable.ajax.reload();
-    reservedTable.ajax.reload();
+  $(".modal-farmer").on("hidden.bs.modal", function (e) {
+    e.preventDefault();
+    closeModal();
   });
   incomingTable = $('.farmer-incoming-table').DataTable(farmerIncomingTableConfig);
   finishTable = $('.farmer-finished-table').DataTable(farmerFinishedTableConfig);
   reservedTable = $('.farmer-reserved-table').DataTable(farmerReservedTableConfig);
   
+});
+
+//https://www.gyrocode.com/articles/jquery-datatables-column-width-issues-with-bootstrap-tabs/#example2
+//code below to recalculate column widths of all visible tables once a tab becomes active by using a combination of columns.adjust() and responsive.recalc() API methods
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+  $($.fn.dataTable.tables(true)).DataTable()
+     .columns.adjust()
+     //.responsive.recalc();
 });

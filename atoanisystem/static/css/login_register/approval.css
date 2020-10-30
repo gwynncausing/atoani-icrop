@@ -148,19 +148,19 @@ h6 {
   font-size: 1.2rem;
 }
 
-h3 {
+.approval h3 {
   color: #dcfaea;
 }
 
-h4, h5, span {
+.approval h4, .approval h5, .approval span {
   color: #fafafa;
 }
 
-html, body {
+.approval html, .approval body {
   height: 100%;
 }
 
-.fill-height {
+.approval .fill-height {
   min-height: 100%;
   height: auto !important;
   /* cross-browser */

@@ -127,8 +127,8 @@ class RegistrationView(View):
         if form.is_valid() and location_form.is_valid():
             location = location_form.save(commit=False)
             location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
-            if location.street:
-                location.name=str(location.street)+', '+location.name
+            # if form.street:
+            #     location.name=str(location.street)+', '+form.name
             duplicate_list = Location.objects.filter(name=location.name)
             #check if location exists
             if len(duplicate_list) > 1:
@@ -146,11 +146,11 @@ class RegistrationView(View):
             if account_type == "Customer":
                 new_user.save()
                 new_user.location.add(location)
-            
             return redirect('login_register:login')
         else:
             return HttpResponse(form.errors)
-    
+
+
 class ApprovalView(View):
     def get(self,request):
         if request.user.is_authenticated:
@@ -363,9 +363,12 @@ class ContactUsView(View):
     def get(self,request):
         return render(request, "login_register/contact-us.html")
 
+class TermsAndConditionsView(View):
+    def get(self,request):
+        return render(request, "login_register/terms-and-conditions.html")
 
-# def handler404(request, *args, **argv):
-#     response = render_to_response("404.html", {}, context_instance=RequestContext(request))
-#     response.status_code = 404
-#     return response
 
+def handler404(request, *args, **argv):
+    response = render_to_response("404.html", {}, context_instance=RequestContext(request))
+    response.status_code = 404
+    return response

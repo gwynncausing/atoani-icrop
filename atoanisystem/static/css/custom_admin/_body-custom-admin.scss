@@ -9,17 +9,71 @@ body{
     margin-left: 4rem;
 }
 .sidebar{
-    background: lightgray;
+    background: $sidebar-green;
     flex-direction: column;
     .sidebar-nav{
-        background: none;
-        &:hover{background-color: lightgreen;}
-        &:focus{
-            background-color: lightseagreen;
-            outline: none;
+        background: $sidebar-submenu-green;
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        color: black;
+        text-align: left;
+        border: none;
+        outline: none;
+        &:hover{
+            background-color: #00CC00;
+            color: $tertiary-color;
         }
+        // &:focus{
+        //     background-color: #006600;
+        //     color: white;
+        //     outline: none;
+        // }
+    }
+    .focussed{
+        background-color: #006600;
+        color: white;
+        outline: none;
+    }
+    .dropdown-container {
+        // display: none;
+        background-color: #262626;
     }
     .orders-title{
+        margin-top: 20px;
+        background: transparent;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+        text-align: left;
+        width: 100;
+        color: $tertiary-color;
+        &.active:hover, &:hover{
+            text-decoration: none;
+        }
+        &.active {
+            background: $tertiary-color;
+            color: white;
+            &:hover{
+                background: $tertiary-color;
+                color: white;
+            }
+        }
+        &:hover{
+            background-color: green;
+            color: black;
+        }
+    }
+    .sidebar-nav, .orders-title {
+        padding-left: 20%;
+    }
+    .fa-caret-down {
+        float: right;
+        padding-right: 8px;
+        padding-top: 5px;
+    }
+    .users-title{
         margin-top: 7.5rem;
     }
 }

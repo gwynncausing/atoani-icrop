@@ -62,10 +62,13 @@ class FarmerDashboardView(View):
                 return JsonResponse(data=json,status=200)
 
 class FarmerIncomingOrdersView(View):
+    print("Incoming Orders View ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     def get(self,request):
         if request.is_ajax():
             #does not include deleted customer
             arr = ff.get_incoming_orders(request.user)
+            print("Incoming")
+            print(arr)
             json = {'data':arr}
             return JsonResponse(json)
         return render(request,'dashboard/farmer-dashboard.html')
@@ -134,7 +137,7 @@ class CustomerDashboardView(View):
                 location_id = request.POST.get('address')
                 crop_id = request.POST.get('crop-id')
                 
-                #print("Crop: " + crop_id)                
+                print("Crop: " + crop_id)                
                 crop = Crop.objects.get(id=crop_id)  
                 customer = request.user.customer     
                          
@@ -144,15 +147,16 @@ class CustomerDashboardView(View):
                     brgy = request.POST.get('barangay')
                     city = request.POST.get('city')
                     province = request.POST.get('province')
-                    location = Location.objects.create(street=street,brgy=brgy,city=city,province=province)
+                    location = Location.objects.create(brgy=brgy,city=city,province=province)
                     location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
                     location.save()
                     location_id = location.id
                 
                 location = Location.objects.get(id=location_id)
+                print(location.id)
                 
                 order = cf.create_order(customer,crop,demand,location,0)
-
+                print(order.order_id)
                 arr = cf.get_total_orders(request.user)
                 json = {'data':arr}
                 return JsonResponse(json)
@@ -244,12 +248,17 @@ class AccountView(View):
         if account_type == 'Customer':
             form = CustomerForm(request.POST)
         if form.is_valid() and location_form.is_valid():
-            #check if location exists
+            #by cary -- changed when I was removing street from location
             location = location_form.save(commit=False)
             location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
-            if location.street:
-                location.name=str(location.street)+', '+location.name
-            location.save()
+            duplicate_list = Location.objects.filter(name=location.name)
+            #check if location exists
+            if len(duplicate_list) > 1:
+                #replace location with the existing location
+                location = duplicate_list.first()
+            else:
+                #save location if it has no duplicates
+                location.save()
             new_user = form.save(commit=False)
             new_user.name = user
             new_user.location = location

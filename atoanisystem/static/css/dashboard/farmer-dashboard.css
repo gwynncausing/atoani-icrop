@@ -158,6 +158,8 @@ body {
   min-height: 180px;
   border: 2px #114a44 solid;
   border-radius: 0.5rem;
+  /*this is for the border-radius of the columns as they collaspse*/
+  /*this for breakpoint ui style*/
 }
 
 .body-dashoard .title {
@@ -345,8 +347,19 @@ body {
   font-weight: normal;
 }
 
-.body-dashoard .tab-content {
+.body-dashoard .search input[type=search] {
+  width: 15rem;
+  border: 0;
+  padding: 0.25rem;
   border-radius: 0.5rem;
+}
+
+.body-dashoard .search input[type=search]:focus {
+  outline: none !important;
+}
+
+.body-dashoard .tab-content {
+  border-radius: 0.3rem;
 }
 
 .body-dashoard .order-table {
@@ -356,6 +369,80 @@ body {
   padding-bottom: 3rem;
   background: #EBF2F2;
   border-radius: 0.5rem;
+}
+
+@media only screen and (max-width: 678px) {
+  .body-dashoard thead th:nth-of-type(4) {
+    border-top-right-radius: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 572px) {
+  .body-dashoard thead th:nth-of-type(3) {
+    border-top-right-radius: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 472px) {
+  .body-dashoard thead th:nth-of-type(2) {
+    border-top-right-radius: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 352px) {
+  .body-dashoard thead th:nth-of-type(1) {
+    border-top-right-radius: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .body-dashoard .title {
+    position: absolute;
+    left: 0.5rem;
+    top: -1rem;
+    background: #fff;
+    color: #114a44;
+    font-weight: bold;
+  }
+  .body-dashoard .order-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: -1.4rem;
+    background: #628474;
+    font-weight: bold;
+    width: 8rem;
+    color: #fafafa;
+  }
+  .body-dashoard .box {
+    background: #EBF2F2;
+    color: #0b3531;
+    height: 50px;
+    z-index: 4;
+    -webkit-box-shadow: 0px 2px 6px 2px #e0e0e0;
+            box-shadow: 0px 2px 6px 2px #e0e0e0;
+  }
+  .body-dashoard .order-type {
+    height: 70%;
+    color: #0b3531;
+    font-size: 2.5rem;
+  }
+  .body-dashoard .orders {
+    height: 130px;
+    font-weight: bold;
+  }
+  .body-dashoard .reserved-orders,
+  .body-dashoard .incoming-orders,
+  .body-dashoard .finished-orders {
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    font-size: 12px;
+  }
+  .body-dashoard .search input[type=search] {
+    width: 9rem;
+  }
+  .body-dashoard .order-tab, .body-dashoard table {
+    font-size: 12px;
+  }
 }
 
 .modal-farmer {

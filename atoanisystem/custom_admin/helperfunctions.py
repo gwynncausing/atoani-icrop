@@ -3,6 +3,17 @@ from django.contrib.auth.models import User
 from login_register import connectivefunctions as dashboard_utility
 from login_register.models import *
 from django.utils import timezone as tz
+import math
+
+def format_name_of_users(users):
+    for user in users:
+        user['name']=user['last_name']+', '+user['first_name']
+    return users
+
+def format_nan_values(list,column_key):
+    for x in list:
+        if math.isnan(x[column_key]):
+            x[column_key]=None
 
 def get_users():
     users = dashboard_utility.display_all_users()
@@ -10,7 +21,9 @@ def get_users():
 
 def get_farmers():
     users = get_users()
-    return users['farmer']
+    farmers = users['farmer']
+    format_nan_values(farmers,'land_area')
+    return farmers
 
 def get_unapproved_farmers():
     farmers = get_farmers()
@@ -36,10 +49,30 @@ def approve_user(id):
     user = User.objects.get(id=id)
     if hasattr(user,'customer'):
         user.customer.is_approved = True
+        user.customer.save()
     elif hasattr(user,'farmer'):
         user.farmer.is_approved = True
+        user.farmer.save()
     else:
-        pass
+        print("Unable to approve, no customer or farmer attribute")
+    user.save()
+
+def unapprove_user(id):
+    user = User.objects.get(id=id)
+    if hasattr(user,'customer'):
+        user.customer.is_approved = False
+        user.customer.save()
+    elif hasattr(user,'farmer'):
+        user.farmer.is_approved = False
+        user.farmer.save()
+    else:
+        print("Unable to approve, no customer or farmer attribute")
+    user.save()
+
+def reset_password(id):
+    user = User.objects.get(id=id)
+    new_password = 'atoani.'+user.username
+    user.set_password(new_password)
     user.save()
 
 def format_name(orders,key,newkey):
@@ -49,9 +82,13 @@ def format_name(orders,key,newkey):
     return orders
 
 def get_all_orders():
-    df = dashboard_utility.all_orders_datatable()
+    df = dashboard_utility.datatable_orders()
     orders = dashboard_utility.display_all_orders(df)
-    return format_name(orders,'customer_names','customer_name')
+    if orders:
+        format_name(orders,'customer_names','customer_name')
+    else:
+        orders = []
+    return orders
 
 def get_all_order_pairs():
     df = dashboard_utility.datatable_order_pairs()

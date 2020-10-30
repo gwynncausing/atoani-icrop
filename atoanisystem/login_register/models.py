@@ -11,6 +11,7 @@ from enum import Enum
 from django.utils import timezone as tz
 from datetime import datetime as dt
 import copy
+from django.db.models import Q
 # Create your models here
 
 # https://stackoverflow.com/questions/54802616/how-to-use-enums-as-a-choice-field-in-django-model
@@ -50,7 +51,6 @@ class Crop(models.Model):
 class Location(models.Model):
     name = models.CharField(max_length=220)
     # to match the html form
-    street = models.CharField(max_length=100,default="")
     brgy = models.CharField(max_length=50,default="")
     city = models.CharField(max_length=50,default="")
     province = models.CharField(max_length=50,default="")
@@ -69,7 +69,6 @@ class Soil_type(models.Model):
 class Location_Soil(models.Model):
     location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     soil_type = models.ManyToManyField(Soil_type)
-
     def __str__(self):
         return "{} - {}".format(self.location, self.soil_type)
 
@@ -96,14 +95,17 @@ class Crop_Soil(models.Model):
     class Meta:
         verbose_name_plural = "Crop-Soil type Relations"
 
+# to save street in customer?
 class Customer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ManyToManyField(Location)
+    street = models.CharField(max_length=220, null=True, blank=True)
     contact_number = models.CharField(max_length=14,null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True)
     is_approved = models.BooleanField(default=False)
-
+    first_question_answers = models.CharField(max_length=220,null=True)
+    second_question_answers = models.CharField(max_length=220,null=True)
     def set_value(self, attr:[]):
         try:
             for att in attr:
@@ -138,9 +140,11 @@ class Customer(models.Model):
 
 
 class Order(models.Model):
+
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    crop = models.ForeignKey(Crop, on_delete=models.CASCADE)
+    crop = models.ForeignKey(Crop, on_delete=models.CASCADE, null=True)
+    custom_crop = models.CharField(max_length=220, null=True, blank=True, help_text="Uninitialized crop, after add a crop in db, please select appropriate crop in the selection above")
     order_date = models.DateTimeField(default=tz.now, verbose_name="Order date", help_text = "Date in which the order was done")
     weight = models.FloatField()
     location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
@@ -148,20 +152,17 @@ class Order(models.Model):
     is_done = models.BooleanField(help_text="Is the order finished?",default=False)
     is_reserved = models.BooleanField(help_text="Is  the order reserved?",default=False)
     is_approved = models.BooleanField(help_text="Is the order approved by AtoANI?",default=False)
-    # status = models.CharField(max_length=20, choices=Status.choices(),null=True, default="Pending")
     status = models.CharField(max_length=20, null=True, default="Pending")
     message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")
+
 
     def is_eligible(self):
         pass
 
     def set_value(self, attr:[]):
-        print("in set_valueeeeeee")
         try:
-            print("i tried")
             for att in attr:
                 setattr(self,att[0],att[1])
-                print("done " + str(att))
             self.save()
             print(self.status)
         except:
@@ -169,8 +170,17 @@ class Order(models.Model):
 
 
     def save(self, *args, **kwargs):
-        if self.is_approved and self.status == "Pending":
-            self.status = "Posted"
+        try:
+            prev = Order.objects.get(order_id=self.order_id)
+
+            if self.is_approved and self.status == "Pending":
+                self.status = "Posted"
+
+            if prev.weight != self.weight:
+                self.land_area_needed = ((self.weight * 0.001)/self.crop.harvest_weight_per_land_area) * 10000
+                self.land_area_needed = round(self.land_area_needed + (self.land_area_needed * (1-(self.crop.productivity/100))) + 25)
+        except:
+            pass
         super().save(*args, **kwargs)
 
     def get_value(self, attr:str):
@@ -189,25 +199,34 @@ class Order(models.Model):
 class Farmer(models.Model):
     name = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    contact_number = models.CharField(max_length=14, verbose_name=True, null=True, blank=True)
+    street = models.CharField(max_length=220, null=True, blank=True)
+    contact_number = models.CharField(max_length=14, verbose_name="Contact Number", null=True, blank=True)
     company = models.CharField(max_length=30,null=True,blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, blank=True, verbose_name=True)
     is_approved = models.BooleanField(default=False)
     land_area = models.FloatField(help_text="Farmer's land area in square meters", null=True)
     is_available = models.BooleanField(help_text="Is the farmer able to take up orders?", null=True)
     available_land_area = models.FloatField(blank=True, null=True, help_text="Available planting land of farmer")
-
+    first_question_answers = models.CharField(max_length=220,null=True)
+    second_question_answers = models.CharField(max_length=220,null=True)
     def save(self, *args, **kwargs):
-        if self.available_land_area == None or (self.available_land_area > self.land_area):
-            self.available_land_area = self.land_area
+        try:
+            orig = Farmer.objects.get(name=self.name)
+            # checks if land_area has changed
+            if orig.land_area != self.land_area:
+                self.available_land_area = self.land_area
+            # updates available_land_area based on ongoing orders
+            if self.available_land_area == self.land_area:
+                for order in Order_Pairing.objects.filter(Q(farmer_id = self.id) & Q(status = "Ongoing")):
+                    self.available_land_area = self.available_land_area - order.order_id.land_area_needed
+        except:
+            pass
         super().save(*args, **kwargs)
 
     def set_value(self, attr:[]):
         try:
             for att in attr:
-                print("ngari")
                 setattr(self,att[0],att[1])
-                print("sucess " + str(att))
             self.save()
         except:
             pass
@@ -232,8 +251,13 @@ class Farmer(models.Model):
         self.location = new_loc
         self.save()
 
-    # def set_location(self, id)
+    def add_land(new_land_area):
+        self.available_land_area = self.available_land_area+new_land_area
+        self.save()
 
+    def subtract_land(new_land_area):
+        self.available_land_area = self.available_land_area-new_land_area
+        self.save()
 
     class Meta:
         ordering = ['location','name','-registration_date']
@@ -245,6 +269,7 @@ class Order_Pairing(models.Model):
     accepted_date = models.DateTimeField(blank=True,null=True, default=tz.now)
     harvested_date = models.DateTimeField(blank=True,null=True)
     collected_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
+    delivered_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
     status = models.CharField(max_length=100, default="Ongoing")
 
     def __str__(self):
@@ -256,11 +281,28 @@ class Order_Pairing(models.Model):
         except:
             return None
 
+    def set_value(self, attr:[]):
+        try:
+            for att in attr:
+                setattr(self,att[0],att[1])
+            self.save()
+        except:
+            pass
+
     def save(self, *args, **kwargs):
-        status = "Ongoing" if self.harvested_date == None else "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None else ""
-        self.status = status
-        super().save(*args, **kwargs)
-        Order.objects.get(order_id=self.order_id_id).set_value([['status',status]])
+        status = "Ongoing" if self.harvested_date == None else "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None else "Delivered" if self.delivered_date != None else ""
+        if self.status != status:
+            # status has changed
+            self.status = status
+            super().save(*args, **kwargs)
+            # sets order to the same status as the pairing
+            Order.objects.get(order_id=self.order_id_id).set_value([['status',status]])
+            farmer = Farmer.objects.get(id=self.farmer_id)
+            if status == "Ongoing":
+                farmer.subtract_land(self.order_id.land_area)
+            elif status == "Harvested":
+                # Farmer.objects.get()
+                farmer.add_land(self.order_id.land_area)
     #Add get_status(self) after boss martin pushes his changes to order_pair model
 
     class Meta:

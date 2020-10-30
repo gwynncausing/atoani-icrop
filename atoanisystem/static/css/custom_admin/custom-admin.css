@@ -161,7 +161,7 @@ body {
 }
 
 .sidebar {
-  background: lightgray;
+  background: #8FAB9E;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -169,19 +169,73 @@ body {
 }
 
 .sidebar .sidebar-nav {
-  background: none;
-}
-
-.sidebar .sidebar-nav:hover {
-  background-color: lightgreen;
-}
-
-.sidebar .sidebar-nav:focus {
-  background-color: lightseagreen;
+  background: #628474;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  color: black;
+  text-align: left;
+  border: none;
   outline: none;
 }
 
+.sidebar .sidebar-nav:hover {
+  background-color: #00CC00;
+  color: #0b3531;
+}
+
+.sidebar .focussed {
+  background-color: #006600;
+  color: white;
+  outline: none;
+}
+
+.sidebar .dropdown-container {
+  background-color: #262626;
+}
+
 .sidebar .orders-title {
+  margin-top: 20px;
+  background: transparent;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+  width: 100;
+  color: #0b3531;
+}
+
+.sidebar .orders-title.active:hover, .sidebar .orders-title:hover {
+  text-decoration: none;
+}
+
+.sidebar .orders-title.active {
+  background: #0b3531;
+  color: white;
+}
+
+.sidebar .orders-title.active:hover {
+  background: #0b3531;
+  color: white;
+}
+
+.sidebar .orders-title:hover {
+  background-color: green;
+  color: black;
+}
+
+.sidebar .sidebar-nav, .sidebar .orders-title {
+  padding-left: 20%;
+}
+
+.sidebar .fa-caret-down {
+  float: right;
+  padding-right: 8px;
+  padding-top: 5px;
+}
+
+.sidebar .users-title {
   margin-top: 7.5rem;
 }
 

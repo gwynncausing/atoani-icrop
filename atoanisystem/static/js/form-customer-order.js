@@ -1,9 +1,3 @@
-
-let csrf_token = null;
-function setCSRF(value){
-    csrf_token = value;
-}
-
 (() =>{
     const urlCreateOrder = "/dashboard/customer/";
 
@@ -162,7 +156,19 @@ function setCSRF(value){
             processData: false,
             success: function(response){
                 //this total table came from customer dashboard
-                totalTable.ajax.reload();
+                //update the all the table
+                totalTable.ajax.reload( ()=> {
+                    total_data = totalTable.ajax.json().data;
+                    $("#total-orders-counter").html(total_data.length)
+                },true );
+                reservedTable.ajax.reload( () => {
+                    resevered_data = reservedTable.ajax.json().data;
+                    $("#reserved-orders-counter").html(resevered_data.length)
+                },true );
+                finishedTable.ajax.reload( () => { 
+                    finished_data = finishedTable.ajax.json().data;
+                    $("#finished-orders-counter").html(finished_data.length)
+                },true );
 
                 //remove loading 
                 $(".loading").addClass("d-none");
