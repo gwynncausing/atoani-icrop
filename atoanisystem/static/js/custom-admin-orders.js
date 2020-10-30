@@ -9,8 +9,11 @@ function setCSRFToken(csrf){
 //ajax urls
 const getAllOrdersURL = '/admin/get-all-orders/';
 const getUnapprovedOrdersURL = '/admin/get-unapproved-orders/';
+const getApprovedOrdersURL = '/admin/get-approved-orders/';
 const getOngoingOrdersURL = '/admin/get-ongoing-orders/';
+const getHarvestedOrdersURL = '/admin/get-harvested-orders/';
 const getCollectedOrdersURL = '/admin/get-collected-orders/';
+const getDeliveredOrdersURL = '/admin/get-delivered-orders/';
 
 //data table settings
 const domPlacements = `<
@@ -152,42 +155,81 @@ let ordersTable = null;
 
 const allBtn = document.getElementById("allBtn");
 const waitlistBtn = document.getElementById("waitlistBtn");
+const approvedBtn = document.getElementById("approvedBtn");
 const ongoingBtn = document.getElementById("ongoingBtn");
+const harvestedBtn = document.getElementById("harvestedBtn");
 const collectedBtn = document.getElementById("collectedBtn");
+const deliveredBtn = document.getElementById("deliveredBtn");
 
 const cancelBtn = document.getElementById("cancelBtn");
 const approveBtn = document.getElementById("approveBtn");
 const collectBtn = document.getElementById("collectBtn");
+const harvestBtn = document.getElementById("harvestBtn");
+const deliverBtn = document.getElementById("deliverBtn");
 
 function initializeButtons(){
   allBtn.addEventListener("click",e => {
     resetViewOrder();
     showElement(cancelBtn);
     hideElement(approveBtn);
+    hideElement(harvestBtn);
     hideElement(collectBtn);
+    hideElement(deliverBtn);
     getDataFromServer(getAllOrdersURL);
   });
   waitlistBtn.addEventListener("click",e => {
     resetViewOrder();
     hideElement(cancelBtn);
     showElement(approveBtn);
+    hideElement(harvestBtn);
     hideElement(collectBtn);
+    hideElement(deliverBtn);
     getDataFromServer(getUnapprovedOrdersURL);
+  });
+  approvedBtn.addEventListener("click",e => {
+    resetViewOrder();
+    hideElement(cancelBtn);
+    hideElement(approveBtn);
+    hideElement(harvestBtn);
+    hideElement(collectBtn);
+    hideElement(deliverBtn);
+    getDataFromServer(getApprovedOrdersURL);
   });
   ongoingBtn.addEventListener("click",e => {
     resetViewOrder();
     hideElement(cancelBtn);
     hideElement(approveBtn);
-    showElement(collectBtn);
+    showElement(harvestBtn);
+    hideElement(collectBtn);
+    hideElement(deliverBtn);
     getDataFromServer(getOngoingOrdersURL);
   });
-  // collectedBtn.addEventListener("click",e => {
-  //   resetViewOrder();
-  //   hideElement(cancelBtn);
-  //   hideElement(approveBtn);
-  //   hideElement(collectBtn);
-  //   getDataFromServer(getCollectedOrdersURL);
-  // });
+  harvestedBtn.addEventListener("click",e => {
+    resetViewOrder();
+    hideElement(cancelBtn);
+    hideElement(approveBtn);
+    hideElement(harvestBtn);
+    showElement(collectBtn);
+    hideElement(deliverBtn);
+    getDataFromServer(getHarvestedOrdersURL);
+  });
+  collectedBtn.addEventListener("click",e => {
+    resetViewOrder();
+    hideElement(cancelBtn);
+    hideElement(approveBtn);
+    hideElement(collectBtn);
+    showElement(deliverBtn);
+    getDataFromServer(getCollectedOrdersURL);
+  });
+  deliveredBtn.addEventListener("click",e => {
+    resetViewOrder();
+    hideElement(cancelBtn);
+    hideElement(approveBtn);
+    hideElement(collectBtn);
+    hideElement(deliverBtn);
+    getDataFromServer(getCollectedOrdersURL);
+  });
+
 
   cancelBtn.addEventListener("click", e => {
     if (selectedOrderID != -1)
@@ -201,18 +243,26 @@ function initializeButtons(){
     else
       alert("Select an order first.");
   });
-  // collectBtn.addEventListener("click", e => {
-  //   if (selectedOrderID != -1)
-  //     processOrder(selectedOrderID,getOngoingOrdersURL);
-  //   else
-  //     alert("Select an order first.");
-  // });
+  harvestBtn.addEventListener("click", e => {
+    if (selectedOrderID != -1)
+      processOrder(selectedOrderID,getOngoingOrdersURL);
+    else
+      alert("Select an order first.");
+  });
+  collectBtn.addEventListener("click", e => {
+    if (selectedOrderID != -1)
+      processOrder(selectedOrderID,getHarvestedOrdersURL);
+    else
+      alert("Select an order first.");
+  });
 }
 
 function initialize(){
   ordersTable = $('.orders-table').DataTable(ordersTableConfig);
   hideElement(approveBtn);
   hideElement(collectBtn);
+  hideElement(harvestBtn);
+  hideElement(deliverBtn);
   initializeButtons();
 }
 

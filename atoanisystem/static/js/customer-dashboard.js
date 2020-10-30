@@ -5,6 +5,7 @@ const getTotalOrdersUrl = '/dashboard/get-customer-total-orders';
 const getReservedOrdersUrl = '/dashboard/get-customer-reserved-orders';
 const getFinishedOrdersUrl = '/dashboard/get-customer-finished-orders';
 
+const atoanimessage = "<i>To Be Updated by Atoani</i>"
 //data table settings
 const domPlacements = `<
                         <"search d-block row mt-4 mb-3"
@@ -180,8 +181,8 @@ function viewReservedOrders(button){
     }
   }
   document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
-  document.getElementById('reserved-date-approved').innerHTML = String("wala sa JSON");
-  document.getElementById('reserved-date-reserved').innerHTML = String("wala sa JSON");
+  //document.getElementById('reserved-date-approved').innerHTML = String(order.app);
+  document.getElementById('reserved-date-reserved').innerHTML = String(order.accepted_date);
   document.getElementById('reserved-status').innerHTML = String(order.status);
   document.getElementById('reserved-crop-name').innerHTML = String(order.name);
   document.getElementById('reserved-demand').innerHTML = String(order.weight) + " kilos";
@@ -241,16 +242,17 @@ function viewTotalOrders(button){
   console.log(button)
   console.log(total_data)
   console.log(JSON.stringify(order));
-
   document.getElementById('total-date-ordered').innerHTML = order.order_date;
-  document.getElementById('total-date-approved').innerHTML = String("wala sa JSON");
-  document.getElementById('total-date-reserved').innerHTML = String("wala sa JSON");
-  document.getElementById('total-date-finished').innerHTML = String("wala sa JSON");
+  //document.getElementById('total-date-approved').innerHTML = String("wala sa JSON");
+  document.getElementById('total-date-reserved').innerHTML = String(order.accepted_date)||"<i>Waiting for a Farmer</i>";
+  document.getElementById('total-date-harvested').innerHTML = String(order.harvested_date)||atoanimessage;
+  document.getElementById('total-date-collected').innerHTML = String(order.collected_date)||atoanimessage;
+  document.getElementById('total-date-delivered').innerHTML = String(order.delivered_date)||atoanimessage;
   document.getElementById('total-status').innerHTML = String(order.status);
   document.getElementById('total-crop-name').innerHTML = String(order.name);
   document.getElementById('total-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('total-location').innerHTML = String(order.location_id);
-  document.getElementById('total-order-number').innerHTML = String(order.order_pair_id);
+  document.getElementById('total-order-number').innerHTML = String(order.order_id);
 
   $("#modal-customer-total").modal("show");
 

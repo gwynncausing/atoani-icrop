@@ -10,7 +10,7 @@ import math
 def get_location_str(location_id,street):
     location = Location.objects.get(id=location_id)
     loc = str(location)
-    print('LOCATION IS ' + loc)
+    #print('LOCATION IS ' + loc)
     if street:
         loc = str(street)+', '+loc
     return loc
@@ -38,7 +38,6 @@ def format_crop_name(orders):
 #returns incoming orders from the recommendation algorithm
 def get_incoming_orders(user):
     incoming_orders = dashboard_utility.matching_algorithm(user.farmer)
-    print("@@@@@@@@@@@@@@@@@",incoming_orders)
     format_crop_name(incoming_orders)
     #format_location(incoming_orders,user)
     return incoming_orders
@@ -48,7 +47,6 @@ def get_incoming_orders(user):
 def get_reserved_orders(user):
     df = dashboard_utility.datatable_farmer(user.farmer)
     orders = dashboard_utility.display_farmer_table(df)
-    print(orders)
     format_location(orders,user)
     format_nan_values(orders,'land_area_needed')
     #print(orders)
@@ -87,9 +85,8 @@ def reserve_to(farmer,order):
     order_pair = None
     #assumes that order is already reserved for farmer
     order_pair = Order_Pairing(order_id = order, farmer = farmer)
+    order_pair.accepted_date = tz.now()
     order_pair.save()
-    print("RESEEEERRRRVEEE")
-    print(order_pair.accepted_date)
     return order_pair
 
 def cancel_reservation(order_pair):
