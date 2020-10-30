@@ -164,8 +164,8 @@ def datatable_customer(id):
     order= get_complete_order_customer(id)
     if len(order) !=0:
         #df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
-        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values())
-        
+        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[1] for val in order.values]).values()).drop(columns=["status"])
+
         if len(df) == 0:
             order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"
             return order
@@ -234,10 +234,10 @@ def matching_algorithm(farmer):
     if len(available_order) != 0:
         loc_list = available_order['location_id'].unique()
         available_order = available_order.merge(pd.DataFrame(Location.objects.filter(id__in=loc_list).values('id','name')),  left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
-        
+
         # based on available_land_area
         available_order = available_order[available_order['land_area_needed'] <= farmer.available_land_area].sort_values('land_area_needed',ascending=False)
-        
+
         available_order['index'] = [i for i in range(1,len(available_order)+1)]
         return available_order[:10].to_dict('records')
     else:
