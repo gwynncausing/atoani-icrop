@@ -199,7 +199,8 @@ class SettingsView(View):
     def post(self, request):
         # if request.is_ajax():
             data = {}
-            if request.method == 'POST':
+            # if request.method == 'POST':
+            if request.is_ajax() and request.POST:
                 print(request.POST)
                 if 'btn-save-name' in request.POST:
                     firstname = request.POST.get('firstname')
@@ -337,6 +338,8 @@ class SettingsView(View):
                         print("added existing")
 
                 return JsonResponse(data, safe=False, status=200)
+            else:
+                print("not ajax")
 
 
 # def change_password(request):
