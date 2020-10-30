@@ -128,32 +128,32 @@ class CustomerDashboardView(View):
     def post(self,request):
         if request.is_ajax():
             print("request was ajax")
+            print(request.POST)
             if request.POST.get('operation') == 'create-order':
-                
-                print(request.POST)
-                
                 demand = request.POST.get('weight')
                 location_id = request.POST.get('address')
-                crop_id = request.POST.get('crop-id')
-                
-                print("Crop: " + crop_id)                
+                orig_location_id = request.POST.get('original-address')
+                crop_id = request.POST.get('crop-id')            
                 crop = Crop.objects.get(id=crop_id)  
-                customer = request.user.customer     
-                         
-                #check if address is custom
-                if location_id == 'custom-address':
-                    street = request.POST.get('street')
+                customer = request.user.customer
+                location = Location.objects.get(id=orig_location_id)
+                #check if address is custom, quick fix is to check if province is empty because if it does that means it is not a custom address
+                province = request.POST.get('province')
+                if location_id == 'custom-address' and province != '-1':
+                    #street = request.POST.get('street')
                     brgy = request.POST.get('barangay')
                     city = request.POST.get('city')
-                    province = request.POST.get('province')
-                    location = Location.objects.create(brgy=brgy,city=city,province=province)
-                    location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
-                    location.save();
-                    location_id = location.id;
-                
-                location = Location.objects.get(id=location_id)
-                print(location.id)
-                
+                    location_name = brgy +', '+ city + ', ' + province
+                    duplicate_list = Location.objects.filter(name=location_name)
+                    #check if location exists
+                    if len(duplicate_list) > 1:
+                        #replace location with the existing location
+                        location = duplicate_list.first()
+                    else:
+                        #save location if it has no duplicates
+                        location = Location.objects.create(brgy=brgy,city=city,province=province)
+                        location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
+                        location.save()
                 order = cf.create_order(customer,crop,demand,location,0)
                 print(order.order_id)
                 arr = cf.get_total_orders(request.user)
