@@ -345,7 +345,7 @@
                                     {% for location in user.customer.location.all %}
                                         {% if forloop.first %}
                                             <div class="form-check col-12 col-md-9 mt-2">
-                                                <input class="form-check-input addresses-on-file default-address" type="radio" name="address"  id="{{location.id}}" value="{{location.id}}" checked>
+                                                <input class="form-check-input addresses-on-file default-address" type="radio" name="original-address"  id="{{location.id}}" value="{{location.id}}" checked>
                                                 <label class="form-check-label text-truncate d-inline-block" for="{{location.id}}" style="max-width: 18rem;">
                                                     {{location.name}}
                                                 </label>

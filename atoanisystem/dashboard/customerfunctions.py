@@ -10,7 +10,10 @@ import math
 def get_location_str(location_id,street):
     if not math.isnan(location_id):
         location = Location.objects.get(id=location_id)
-        return str(street)+', '+str(location)
+        loc = str(location)
+        if street:
+            loc = str(street)+', '+loc
+        return loc
     else:
         return 'N/A'
 
@@ -76,8 +79,8 @@ def create_order(customer,crop_instance,weight,location_instance,land_area_neede
         "productivity": order.crop.productivity,
         "weight": float(order.weight)
     })    
-    
-    return order;
+    print(order.land_area_needed)
+    return order
 
 #return all crops
 def get_all_crops():
