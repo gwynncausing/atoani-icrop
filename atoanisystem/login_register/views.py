@@ -208,7 +208,7 @@ class SettingsView(View):
                     data['firstname'] = firstname
                     data['lastname'] = lastname
                     return JsonResponse(data, safe=False, status=200)
-                
+
                 elif 'btn-save-others' in request.POST:
                     print(request.POST)
                     land_area = request.POST.get("land_area")
@@ -217,7 +217,7 @@ class SettingsView(View):
                     data['company'] = company
                     Farmer.objects.filter(id = request.user.farmer.id).update(land_area = land_area, company = company)
                     return JsonResponse(data, safe=False, status=200)
-                
+
                 elif 'btn-save-contact' in request.POST:
                     print(request.POST)
                     contact_number = request.POST.get("contact_number")
@@ -233,7 +233,7 @@ class SettingsView(View):
                         customer = Customer.objects.filter(id = request.user.customer.id).update(contact_number = contact_number)
                         print(customer)
                     return JsonResponse(data, safe=False, status=200)
-                
+
                 elif 'btn-edit-farmer-address' in request.POST:
                     farmer = request.user.farmer
                     province = request.POST.get('province')
@@ -260,7 +260,7 @@ class SettingsView(View):
                         data['city'] = existing_loc.city
                         data['brgy'] = existing_loc.brgy
                         data['street'] = existing_loc.street
-                
+
                 elif 'btn-edit-customer-address' in request.POST:
                     print("clicked edit customer")
                     print(request.POST)
@@ -298,14 +298,14 @@ class SettingsView(View):
                         data['brgy'] = existing_loc.brgy
                         data['street'] = existing_loc.street
                         print("added existing")
-                
+
                 elif 'btn-delete-address' in request.POST:
                     print("clicked delete")
                     customer = request.user.customer
                     location_id = request.POST.get('location-id-delete')
                     print("selected to delete: " + str(location_id))
-                    customer.location.remove(Location.objects.get(id=location_id))    
-                    
+                    customer.location.remove(Location.objects.get(id=location_id))
+
                 elif 'btn-add-customer-address':
                     customer = request.user.customer
                     province = request.POST.get('province')
