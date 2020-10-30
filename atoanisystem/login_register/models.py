@@ -186,7 +186,7 @@ class Order(models.Model):
             if self.is_approved and self.status == "Pending":
                 self.status = "Posted"
 
-            if prev.weight != self.weight:
+            if prev.weight != self.weight or self.land_area_needed == None:
                 self.land_area_needed = ((self.weight * 0.001)/self.crop.harvest_weight_per_land_area) * 10000
                 self.land_area_needed = round(self.land_area_needed + (self.land_area_needed * (1-(self.crop.productivity/100))) + 25)
         except:
