@@ -141,6 +141,8 @@ class RegistrationView(View):
             new_user.name = user
             if account_type == "Farmer":
                 new_user.location = location
+                new_user.available_land_area = new_user.land_area
+                new_user.is_available = True
                 new_user.save()
             # to cater the ManyToManyField of customer.location
             if account_type == "Customer":

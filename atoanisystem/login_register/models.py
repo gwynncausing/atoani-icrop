@@ -220,7 +220,6 @@ class Farmer(models.Model):
     first_question_answers = models.CharField(max_length=220,null=True)
     second_question_answers = models.CharField(max_length=220,null=True)
     def save(self, *args, **kwargs):
-        slist.append("hatdog")
         try:
             orig = Farmer.objects.get(name=self.name)
             # checks if land_area has changed
@@ -314,6 +313,7 @@ class Order_Pairing(models.Model):
             elif status == "Harvested":
                 # Farmer.objects.get()
                 farmer.add_land(self.order_id.land_area)
+        super().save(*args, **kwargs)
     #Add get_status(self) after boss martin pushes his changes to order_pair model
 
     class Meta:

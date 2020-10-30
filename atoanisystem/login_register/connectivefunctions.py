@@ -164,12 +164,15 @@ def datatable_customer(id):
     order= get_complete_order_customer(id)
     if len(order) !=0:
         #df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
-        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values())
+        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[1] for val in order.values]).values())
+
         if len(df) == 0:
             order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"
             return order
         else:
+            print('XXXXXXXXXXXXXXX',df)
             df = order.merge(df, how="left", left_on="order_id", right_on="order_id_id").fillna("N/A").drop(columns=["order_id_id"])
+            print(df)
             if len(df) != 0:
                 df['accepted_date'] = df['accepted_date'].apply(convert)
                 return df.rename(columns={'id':'order_pair_id'})
@@ -217,6 +220,7 @@ def add_order(customer_id, crop_id, demand, location_id):
     #print(new_order)
     calculate_land_area_single(new_order)
     new_order.save()
+    return new_order
 
 def update_land_area():
     for x in Order.objects.all().values():
@@ -227,11 +231,14 @@ def matching_algorithm(farmer):
     # based on province
 
     available_order = pd.DataFrame(Order.objects.filter(Q(status="Posted") & Q(location__province=farmer.location.province)).values())
+    print('AVIALBLEEEEEE',available_order)
     if len(available_order) != 0:
         loc_list = available_order['location_id'].unique()
         available_order = available_order.merge(pd.DataFrame(Location.objects.filter(id__in=loc_list).values('id','name')),  left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
+
         # based on available_land_area
         available_order = available_order[available_order['land_area_needed'] <= farmer.available_land_area].sort_values('land_area_needed',ascending=False)
+
         available_order['index'] = [i for i in range(1,len(available_order)+1)]
         return available_order[:10].to_dict('records')
     else:
@@ -242,13 +249,16 @@ def matching_algorithm_all():
     pass
 
 # added 25 as a contingency measure
-def calculate_land_area_single(order):
-    if type(order) == Order:
-        order = Order.objects.filter(order_id=order.order_id).values()[0]
+def calculate_land_area_single(new_order):
+    if type(new_order) == Order:
+        order = Order.objects.filter(order_id=new_order.order_id).values()[0]
+        print(order)
     order_crop = Crop.objects.filter(id=order['crop_id']).values('harvest_weight_per_land_area','productivity')[0]
     land_area = ((order['weight'] * 0.001)/order_crop['harvest_weight_per_land_area']) * 10000
     land_area = land_area + (land_area * (1-(order_crop['productivity']/100))) + 25
-    Order.objects.get(order_id=order['order_id']).set_value([['land_area_needed',round(land_area)]])
+    new_order.set_value([['land_area_needed',round(land_area)]])
+    print("ORDER SAVEDDD? LANDAREA:",new_order.land_area_needed)
+    #order.set_value([['land_area_needed',round(land_area)]])
 
 def calculate_land_area():
     [calculate_land_area_single(order) for order in Order.objects.filter(Q(land_area_needed__isnull=True) & Q(crop_id__isnull=False)).values()]
