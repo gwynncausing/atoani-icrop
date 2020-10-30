@@ -200,6 +200,8 @@
             }
             formData.append(elements[i].name,elements[i].value)
         }
+        //instead of adding default address to html form
+        formData.append("original-address", $(".default-address").val());
         formData.append("operation","create-order")
         
         $.ajax({
