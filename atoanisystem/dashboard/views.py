@@ -149,8 +149,8 @@ class CustomerDashboardView(View):
                     province = request.POST.get('province')
                     location = Location.objects.create(brgy=brgy,city=city,province=province)
                     location.name = str(location.brgy) +', '+ str(location.city) + ', ' + str(location.province)
-                    location.save();
-                    location_id = location.id;
+                    location.save()
+                    location_id = location.id
                 
                 location = Location.objects.get(id=location_id)
                 print(location.id)
