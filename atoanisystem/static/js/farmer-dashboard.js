@@ -397,8 +397,8 @@ $(document).ready(function () {
 
   /*Date Range Filter*/
   $.fn.dataTable.ext.search.push((settings, data, dataIndex ) => {
-      let minDate = $(path).find('.min-date').val();
-      let maxDate = $(path).find('.max-date').val();
+      let minDate = $('.min-date').val();
+      let maxDate = $('.max-date').val();
       
       if (minDate === '' || maxDate === '' )
         return true;
@@ -416,7 +416,7 @@ $(document).ready(function () {
     $('.min-date').val("");
     $('.max-date').val("");
     finishedTable.draw();
-  }
+  } 
 
   $("#finished-table").find('#refresh-btn').click(clear);
   
