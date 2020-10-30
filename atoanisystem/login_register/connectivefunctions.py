@@ -163,7 +163,8 @@ def get_complete_order_customer(id):
 def datatable_customer(id):
     order= get_complete_order_customer(id)
     if len(order) !=0:
-        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
+        #df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
+        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values())
         if len(df) == 0:
             order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"
             return order
@@ -224,11 +225,12 @@ def update_land_area():
 # algorithm, to be launched as part of the
 def matching_algorithm(farmer):
     # based on province
+
     available_order = pd.DataFrame(Order.objects.filter(Q(status="Posted") & Q(location__province=farmer.location.province)).values())
-    loc_list = available_order['location_id'].unique()
-    available_order = available_order.merge(pd.DataFrame(Location.objects.filter(id__in=loc_list).values('id','name')),  left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
-    # based on available_land_area
     if len(available_order) != 0:
+        loc_list = available_order['location_id'].unique()
+        available_order = available_order.merge(pd.DataFrame(Location.objects.filter(id__in=loc_list).values('id','name')),  left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
+        # based on available_land_area
         available_order = available_order[available_order['land_area_needed'] <= farmer.available_land_area].sort_values('land_area_needed',ascending=False)
         available_order['index'] = [i for i in range(1,len(available_order)+1)]
         return available_order[:10].to_dict('records')
@@ -241,6 +243,8 @@ def matching_algorithm_all():
 
 # added 25 as a contingency measure
 def calculate_land_area_single(order):
+    if type(order) == Order:
+        order = Order.objects.filter(order_id=order.order_id).values()[0]
     order_crop = Crop.objects.filter(id=order['crop_id']).values('harvest_weight_per_land_area','productivity')[0]
     land_area = ((order['weight'] * 0.001)/order_crop['harvest_weight_per_land_area']) * 10000
     land_area = land_area + (land_area * (1-(order_crop['productivity']/100))) + 25
@@ -294,15 +298,20 @@ def all_orders_datatable():
 
 def datatable_orders(orders=None):
     try:
+
         if orders == None:
             orders = pd.DataFrame(Order.objects.all().values())
         orders = orders.merge(pd.DataFrame(Crop.objects.filter(id__in=orders['crop_id'].unique()).values('name','id')), left_on="crop_id", right_on="id").drop(columns="id").rename(columns={'name':'crop_name'})
         orders = orders.merge(pd.DataFrame(Location.objects.filter(id__in=orders['location_id'].unique()).values('name','id')), left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
+
         customers = pd.DataFrame(Customer.objects.all().values())
         customers['customer_names'] = customers['name_id'].apply(get_name)
         customers = customers[['id','customer_names']]
+
         return orders.merge(customers, left_on="customer_id",right_on="id").drop(columns='id')
-    except:
+    except Exception as e:
+        print(e)
+        print("aaaaaaaaaa")
         return []
 
 def display_all_orders(df):

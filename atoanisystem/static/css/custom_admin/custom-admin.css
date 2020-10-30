@@ -176,6 +176,7 @@ body {
   color: black;
   text-align: left;
   border: none;
+  outline: none;
 }
 
 .sidebar .sidebar-nav:hover {
@@ -183,14 +184,13 @@ body {
   color: #0b3531;
 }
 
-.sidebar .sidebar-nav:focus {
+.sidebar .focussed {
   background-color: #006600;
   color: white;
   outline: none;
 }
 
 .sidebar .dropdown-container {
-  display: none;
   background-color: #262626;
 }
 
@@ -203,16 +203,26 @@ body {
   outline: none;
   text-align: left;
   width: 100;
+  color: #0b3531;
 }
 
-.sidebar .orders-title:hover {
-  background-color: #00CC00;
-  color: black;
+.sidebar .orders-title.active:hover, .sidebar .orders-title:hover {
+  text-decoration: none;
 }
 
 .sidebar .orders-title.active {
   background: #0b3531;
   color: white;
+}
+
+.sidebar .orders-title.active:hover {
+  background: #0b3531;
+  color: white;
+}
+
+.sidebar .orders-title:hover {
+  background-color: green;
+  color: black;
 }
 
 .sidebar .sidebar-nav, .sidebar .orders-title {

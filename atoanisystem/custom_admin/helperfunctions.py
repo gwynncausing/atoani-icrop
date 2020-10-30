@@ -84,6 +84,7 @@ def format_name(orders,key,newkey):
 def get_all_orders():
     df = dashboard_utility.datatable_orders()
     orders = dashboard_utility.display_all_orders(df)
+    print('printing df',df)
     if orders:
         format_name(orders,'customer_names','customer_name')
     else:
@@ -93,6 +94,7 @@ def get_all_orders():
 def get_all_order_pairs():
     df = dashboard_utility.datatable_order_pairs()
     orders = dashboard_utility.display_all_order_pairs(df)
+    
     orders = format_name(orders,'customer_names','customer_name')
     orders = format_name(orders,'farmer_names','farmer_name')
     return orders

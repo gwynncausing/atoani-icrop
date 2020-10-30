@@ -7,10 +7,13 @@ import math
 ########################
 
 #returns the [street, barangay, city, province] string format of the location instance
-def get_location_str(location_id):
+def get_location_str(location_id,street):
     if not math.isnan(location_id):
         location = Location.objects.get(id=location_id)
-        return str(location)
+        loc = str(location)
+        if street:
+            loc = str(street)+', '+loc
+        return loc
     else:
         return 'N/A'
 
@@ -21,9 +24,10 @@ def format_nan_values(list,column_key):
             x[column_key]=None
 
 #formats the location_id in orders list so that it will return the sting format of the location instance
-def format_location(orders):
+def format_location(orders,user):
+    street = user.farmer.street
     for order in orders:
-        order['location_id'] = get_location_str(order['location_id'])
+        order['location_id'] = get_location_str(order['location_id'],street)
 
 #formats the crop id into the crop name
 #adds an additional field which is name (name of crop) to each dictionary in orders list
@@ -33,9 +37,9 @@ def format_crop_name(orders):
 
 #returns incoming orders from the recommendation algorithm
 def get_incoming_orders(user):
-    incoming_orders = dashboard_utility.matching_algorithm(user.farmer.land_area)
+    incoming_orders = dashboard_utility.matching_algorithm(user.farmer)
     format_crop_name(incoming_orders)
-    format_location(incoming_orders)
+    format_location(incoming_orders,user)
     return incoming_orders
 
 #returns the reserved orders of the farmer
@@ -43,7 +47,7 @@ def get_incoming_orders(user):
 def get_reserved_orders(user):
     df = dashboard_utility.datatable_farmer(user.farmer)
     orders = dashboard_utility.display_farmer_table(df)
-    format_location(orders)
+    format_location(orders,user)
     format_nan_values(orders,'land_area_needed')
     #print(orders)
     reserved_orders = []
@@ -60,7 +64,7 @@ def get_finished_orders(user):
     df = dashboard_utility.datatable_farmer(user.farmer)
     orders = dashboard_utility.display_farmer_table(df)
     format_nan_values(orders,'land_area_needed')
-    format_location(orders)
+    format_location(orders,user)
     finished_orders = []
     for order in orders:
         #CHANGE TO COLLECTED

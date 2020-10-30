@@ -282,30 +282,6 @@ function viewPendingOrders(button){
 
 }
 
-
-// Reserve button
-// function reserveOrder(orderId) {
-//   //Make sure to enclose this to a form where a csrftoken is present
-//   //document.getElementById("form-id")
-//   const form = null;
-//   let formData = new FormData(form);//.append('action','add');
-//   formData.append('order_id', orderId);
-//   $.ajax({
-//     url: '',
-//     type: 'post',
-//     //data to be passed to django view
-//     data: formData,
-//     contentType: false,
-//     processData: false,
-//     //when successful, change the data in table with new data from server
-//     success: function (response) {
-//       console.log('success');
-//     },
-//     error: function (response) {
-//       console.log('fail');
-//     }
-//   });
-// }
 var pendingTable = null;
 var finishedTable = null;
 var reservedTable = null;
