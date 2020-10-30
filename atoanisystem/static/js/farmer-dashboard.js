@@ -133,7 +133,7 @@ const farmerIncomingTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'land_area_needed' },
-    { "data": 'location_id' },
+    { "data": 'location' },
     //add this extra column so that it will also collapse in responsive view
     { "data": ''},
   ],
@@ -256,7 +256,7 @@ function viewIncomingOrders(button){
   reserveButton.addEventListener('click',checkOrder);
   //Assigning values
   document.getElementById('incoming-date-ordered').innerHTML = String(order.order_date);
-  document.getElementById('incoming-date-approved').innerHTML = "Not Yet Approved";
+  //document.getElementById('incoming-date-approved').innerHTML = "Not Yet Approved";
   document.getElementById('incoming-status').innerHTML = String(order.status);
   document.getElementById('incoming-crop-name').innerHTML = String(order.name);
   document.getElementById('incoming-demand').innerHTML = String(order.weight) + " kilos";

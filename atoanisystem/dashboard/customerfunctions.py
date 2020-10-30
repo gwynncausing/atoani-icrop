@@ -27,6 +27,7 @@ def format_location(orders,user):
 def get_total_orders(user):
     df = dashboard_utility.datatable_customer(user.customer)
     orders = dashboard_utility.display_customer_table(df)
+    print(orders)
     if orders == None:
         orders = []
     format_location(orders,user)
@@ -61,25 +62,25 @@ def get_finished_orders(user):
 
 #returns the created object
 def create_order(customer,crop_instance,weight,location_instance,land_area_needed):
-
-    #create order
-    order = Order.objects.create(
-        customer=customer,
-        crop=crop_instance,
-        weight=weight,
-        location=location_instance,
-        land_area_needed=land_area_needed
-    )
+    order = dashboard_utility.add_order(customer.id,crop_instance.id,weight,location_instance.id)
+    # #create order
+    # order = Order.objects.create(
+    #     customer=customer,
+    #     crop=crop_instance,
+    #     weight=weight,
+    #     location=location_instance,
+    #     land_area_needed=land_area_needed
+    # )
     
-    #calculate the land area needed based on the order
-    dashboard_utility.calculate_land_area_single({
-        "order_id": order.order_id,
-        "crop_id": order.crop_id,
-        "harvest_weight_per_land_area": order.crop.harvest_weight_per_land_area,
-        "productivity": order.crop.productivity,
-        "weight": float(order.weight)
-    })    
-    print(order.land_area_needed)
+    # #calculate the land area needed based on the order
+    # dashboard_utility.calculate_land_area_single({
+    #     "order_id": order.order_id,
+    #     "crop_id": order.crop_id,
+    #     "harvest_weight_per_land_area": order.crop.harvest_weight_per_land_area,
+    #     "productivity": order.crop.productivity,
+    #     "weight": float(order.weight)
+    # })    
+    # print(order.land_area_needed)
     return order
 
 #return all crops
