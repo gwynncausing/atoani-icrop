@@ -370,6 +370,9 @@ class TermsAndConditionsView(View):
     def get(self,request):
         return render(request, "login_register/terms-and-conditions.html")
 
+class ForgotUsernamePasswordView(View):
+    def get(self,request):
+        return render(request, "login_register/forgot-username-password.html")
 
 def handler404(request, *args, **argv):
     response = render_to_response("404.html", {}, context_instance=RequestContext(request))

@@ -10,7 +10,10 @@ import math
 def get_location_str(location_id,street):
     if not math.isnan(location_id):
         location = Location.objects.get(id=location_id)
-        return str(street)+', '+str(location)
+        loc = str(location)
+        if street:
+            loc = str(street)+', '+loc
+        return loc
     else:
         return 'N/A'
 
