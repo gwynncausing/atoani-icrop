@@ -14,21 +14,15 @@ let incoming_data = null;
 let finished_data = null;
 
 //data table settings
-const domPlacements = `<
-                        <"search d-block row mt-4 mb-3"
-                            <"col-1"f>
-                        >
-                        <"d-flex float-left">
-                        <t>
-                        <"bottom"
-                            <"d-inline"
-                                <"float-left mt-0 ml-5 mb-3 pb-3"i>
-                            >   
-                        >
+const domPlacements = `<'row'<'col-md-12 d-sm-flex pt-4'f<'ml-3'l>>>
+                        <'row'<'col-sm-12'tr>>
+                        <'row'<'col-sm-12 mt-2 col-md-5'i>
                         >`;
 
 const farmerFinishedTableConfig = {
-  paging: false,
+  paging: true,
+  searching: true,
+  lengthMenu: [ [-1,5, 10, 25, 50], ["All",5, 10, 25, 50] ],
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
@@ -400,6 +394,31 @@ $(document).ready(function () {
   incomingTable = $('.farmer-incoming-table').DataTable(farmerIncomingTableConfig);
   finishTable = $('.farmer-finished-table').DataTable(farmerFinishedTableConfig);
   reservedTable = $('.farmer-reserved-table').DataTable(farmerReservedTableConfig);
+
+  /*Date Range Filter*/
+  $.fn.dataTable.ext.search.push((settings, data, dataIndex ) => {
+      let minDate = $('.min-date').val();
+      let maxDate = $('.max-date').val();
+      
+      if (minDate === '' || maxDate === '' )
+        return true;
+      if (Date.parse(date) >= Date.parse(minDate) && Date.parse(date) <= Date.parse(maxDate))
+        return true;  
+      else 
+        return false;
+    }
+  );
+
+  $('.min-date, .max-date').keyup(() => finishedTable.draw());
+  $('.min-date, .max-date').change(() => finishedTable.draw());
+
+  const clear = () => {
+    $('.min-date').val("");
+    $('.max-date').val("");
+    finishedTable.draw();
+  } 
+
+  $("#finished-table").find('#refresh-btn').click(clear);
   
 });
 

@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% load static %} 
+{% block tags %}
+
+<!-- Customized CSS -->
+<link rel="stylesheet" href="{% static 'css/login_register/404.css' %}"> 
+{% endblock %} 
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="row justify-content-center pt-5 pb-4">
+                <h5>Error 500, Internal Server.</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -28,6 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#to allow testing of error pages
+#uncomment these codes
+#DEBUG = False
+#ALLOWED_HOSTS = ['127.0.0.1']
+
 
 # Application definition
 

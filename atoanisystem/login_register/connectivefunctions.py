@@ -218,6 +218,7 @@ def update_time_single(order_pair):
 def add_order(customer_id, crop_id, demand, location_id):
     new_order = Order(customer_id=customer_id, crop_id=crop_id, weight=demand, location_id=location_id)
     new_order.save()
+    #print(new_order)
     calculate_land_area_single(new_order)
     new_order.save()
     return new_order
@@ -234,11 +235,13 @@ def matching_algorithm(farmer):
     print('AVIALBLEEEEEE',available_order)
     if len(available_order) != 0:
         loc_list = available_order['location_id'].unique()
-        available_order = available_order.merge(pd.DataFrame(Location.objects.filter(id__in=loc_list).values('id','name')),  left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
-
+        available_order = available_order.merge(pd.DataFrame(Location.objects.filter(id__in=loc_list).values('id','name')),  left_on="location_id", right_on="id").drop(columns=["id"]).rename(columns={'name':'location'})
         # based on available_land_area
         available_order = available_order[available_order['land_area_needed'] <= farmer.available_land_area].sort_values('land_area_needed',ascending=False)
-
+        # based on suitability (refer to Location_Crop)
+        suitable_crops = Location_Crop.objects.get(location_id=farmer.location_id).name.values_list("id",flat=True)
+        available_order['is_suitable'] = available_order['crop_id'].apply(lambda crop: crop in suitable_crops)
+        available_order.sort_values(["is_suitable",'weight'], ascending=False)
         available_order['index'] = [i for i in range(1,len(available_order)+1)]
         return available_order[:10].to_dict('records')
     else:
@@ -280,6 +283,18 @@ def check_obsolete_orders():
             if (date_now - val['order_date']).days > 29 and not val['is_cancelled']:
                 print(val)
                 Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])
+
+        delete_obsolete_orders()
+
+def delete_obsolete_orders():
+    overdue_df = pd.DataFrame(Order.objects.filter(status="Cancelled").values())
+    if len(overdue_df) > 0:
+        overdue_df.dropna(subset=['cancelled_date'],inplace=True)
+        overdue_df['cancelled_date'] = overdue_df['cancelled_date'].apply(convert)
+        overdue_df['diff'] = overdue_df['cancelled_date'].apply(lambda w: (dt.now()-w).days)
+        print("overdueeee")
+        print(overdue_df)
+        for i in overdue_df.loc[overdue_df['diff'] > 14]['order_id']: Order.objects.get(order_id=i).delete()
 
 def get_crop_list():
     return Crop.objects.all().values('id','name')

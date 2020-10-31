@@ -163,9 +163,10 @@ class Order(models.Model):
     is_done = models.BooleanField(help_text="Is the order finished?",default=False)
     is_reserved = models.BooleanField(help_text="Is  the order reserved?",default=False)
     is_approved = models.BooleanField(help_text="Is the order approved by AtoANI?",default=False)
+    is_cancelled = models.BooleanField(default=False, null=True, blank=True)
     status = models.CharField(max_length=20, null=True, default="Pending")
     message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")
-
+    cancelled_date = models.DateTimeField(null=True, blank=True, help_text="Date in which order was cancelled, automatically generated")
 
     def is_eligible(self):
         pass
@@ -183,10 +184,17 @@ class Order(models.Model):
         try:
             prev = Order.objects.get(order_id=self.order_id)
 
+            if prev.is_cancelled == False and self.is_cancelled == True:
+                self.cancelled_date = dt.now()
+                self.status = "Cancelled"
+            elif prev.is_cancelled == True and self.is_cancelled == False:
+                self.cancelled_date = None
+                self.status = "Pending"
+
             if self.is_approved and self.status == "Pending":
                 self.status = "Posted"
 
-            if prev.weight != self.weight:
+            if prev.weight != self.weight or self.land_area_needed == None:
                 self.land_area_needed = ((self.weight * 0.001)/self.crop.harvest_weight_per_land_area) * 10000
                 self.land_area_needed = round(self.land_area_needed + (self.land_area_needed * (1-(self.crop.productivity/100))) + 25)
         except:

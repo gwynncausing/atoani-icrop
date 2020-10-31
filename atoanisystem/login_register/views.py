@@ -374,6 +374,13 @@ class ForgotUsernamePasswordView(View):
         return render(request, "login_register/forgot-username-password.html")
 
 def handler404(request, *args, **argv):
-    response = render_to_response("404.html", {}, context_instance=RequestContext(request))
+    response = render(request, "error_pages/404.html")
     response.status_code = 404
     return response
+
+def handler500(request, *args, **argv):
+    response = render(request, "error_pages/500.html")
+    response.status_code = 404
+    return response
+
+

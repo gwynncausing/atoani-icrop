@@ -3,14 +3,15 @@
 
     const inputs = $("input, select");
     const orderForm = $("#customer-order-form");
-    const demand = $("input[name=demand]");
+    const demand = $("input[name=weight]");
     const customAddress = $("#custom-address");
     const customAddressHolder = $("#custom-address-holder");    
     const addressesOnFile = $(".addresses-on-file");    
     const modalOrder = $(".modal-order");    
     const inputTexts = $("input[type=text]");    
     const defaultAddress = $(".default-address"); 
-    
+    const cropName = $("[name=crop-id]");
+
     //located on the modal footer
     const confirmTag = $("#confirmOrderMsg");   
     const orderBtn = $("#order-btn");
@@ -27,10 +28,10 @@
     //if valid, show confirmation tag
     //else, show validation guide
     orderBtn.on("click", e => {
-        if(orderForm[0].checkValidity() === false){
-            orderForm.addClass("was-validated");
-        }
-        else{
+        //if(orderForm[0].checkValidity() === false){
+        //    orderForm.addClass("was-validated");
+        //}
+        if(validity() === true){
             setInputDisabled(true);
 
             //show yes, no, and confirm tag
@@ -48,19 +49,25 @@
     //when the user click yes to confirm 
     //this submit the form
     orderForm.on("submit", e => {
-        //console.log(orderForm.serialize());
+        e.preventDefault();
         yesBtn.prop("disabled", true);
         $('#modal-create-order').modal('hide');
-        e.preventDefault();
-        if(orderForm[0].checkValidity())
+        if(validity() === true)
             createOrder();
-        
     });
 
 
     //make the demand input accept only numbers
     demand.on("input", e => {
         e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')
+        if(e.target.value != ''){
+            demand.addClass("is-valid");
+            demand.removeClass("is-invalid");
+        }
+        else{
+            demand.addClass("is-invalid");
+            demand.removeClass("is-valid");
+        }
     });
 
     //when all address on file radio button is clicked
@@ -97,12 +104,16 @@
     //resets the modal when close
     modalOrder.on('hidden.bs.modal', e => {
         resetModal();
+        if($("#province option:selected").val() == '-1')
+            $("[name=city], [name=barangay]").prop("disabled", true);
     })
 
     //detect change in province selector
     provinceSelector.addEventListener("change", e => {
         $('select[name=city]').prop('disabled', false);
         $('select[name=barangay]').prop('disabled', false);
+        provinceSelector.classList.remove("is-invalid");
+        provinceSelector.classList.add("is-valid");
     });
 
     //resets the modal order form
@@ -125,6 +136,11 @@
 
         setInputDisabled(false);
 
+        demand.removeClass("is-invalid is-valid");
+        cropName.removeClass("is-invalid is-valid");
+        provinceSelector.classList.remove("is-invalid");
+        provinceSelector.classList.remove("is-valid");
+
         if(isCustomAddressClicked == true){
             customAddressHolder.slideToggle( 280, () => {});
             isCustomAddressClicked = false;
@@ -136,6 +152,38 @@
         inputs.prop('disabled', boolean)
     }
 
+    //check the validity
+    const validity = () => {
+        let isValid = true;
+        //make all important inputs neutral
+        demand.removeClass("is-valid");
+        demand.removeClass("is-invalid");
+        provinceSelector.classList.remove("is-valid");
+        provinceSelector.classList.remove("is-invalid");
+        //crop name is already valid
+        cropName.addClass("is-valid");
+        
+        if(demand[0].checkValidity())
+            demand.addClass("is-valid")
+        else{
+            demand.addClass("is-invalid");
+            isValid = false;
+        }
+
+        //if custom address is chosen, then do this
+        if(customAddress.is(':checked')){
+            //check the validity of the province
+            if(provinceSelector.options[provinceSelector.selectedIndex].value === "-1"){
+                provinceSelector.classList.add("is-invalid")
+                isValid = false;
+            }
+            else        
+                provinceSelector.classList.add("is-valid")
+        }
+        
+        return isValid;
+    }
+
     const createOrder = () => {
         //show the loading ui
         $(".loading").removeClass("d-none");
@@ -144,10 +192,18 @@
         //workaround for form data not capturing values of the orderForm when passed to its constructor
         const elements = orderForm[0].elements;
         for(i=0;i < elements.length; i++){
+            if(elements[i].name == "address"){
+                //only a single location id will be sent to the form
+                if(elements[i].checked)
+                    formData.append(elements[i].name,elements[i].value)
+                continue;
+            }
             formData.append(elements[i].name,elements[i].value)
         }
-        formData.append("operation", "create-order");
-
+        //instead of adding default address to html form
+        formData.append("original-address", $(".default-address").val());
+        formData.append("operation","create-order")
+        
         $.ajax({
             url: urlCreateOrder,
             type: 'post',
@@ -157,9 +213,9 @@
             success: function(response){
                 //this total table came from customer dashboard
                 //update the all the table
-                totalTable.ajax.reload( ()=> {
-                    total_data = totalTable.ajax.json().data;
-                    $("#total-orders-counter").html(total_data.length)
+                pendingTable.ajax.reload( ()=> {
+                    pending_data = pendingTable.ajax.json().data;
+                    $("#pending-orders-counter").html(pending_data.length)
                 },true );
                 reservedTable.ajax.reload( () => {
                     resevered_data = reservedTable.ajax.json().data;

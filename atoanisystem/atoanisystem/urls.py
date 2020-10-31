@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path('django-admin/', admin.site.urls),
     path('', include('login_register.urls',namespace = 'login_register')),
@@ -25,5 +26,9 @@ urlpatterns = [
     #admin custom page
     path('admin/', include('custom_admin.urls',namespace = 'custom_admin')),
 ]
+
+handler500 = 'login_register.views.handler500'
+handler404 = 'login_register.views.handler404'
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

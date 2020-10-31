@@ -39,7 +39,7 @@ def get_reserved_orders(user):
     orders = get_total_orders(user)
     reserved_orders = []
     for order in orders:
-        if order['status'] == 'Ongoing':
+        if order['status'] == 'Ongoing' or order['status'] == 'Harvested':
             reserved_orders.append(order)
     return reserved_orders
 
@@ -48,9 +48,18 @@ def get_finished_orders(user):
     orders = get_total_orders(user)
     finished_orders = []
     for order in orders:
-        if order['status'] == 'Collected':
+        if order['status'] == 'Collected' or order['status'] == 'Delivered':
             finished_orders.append(order)
     return finished_orders
+
+#returns the total order
+def get_pending_orders(user):
+    orders = orders = get_total_orders(user)
+    pending_orders = []
+    for order in orders:
+        if order['status'] == 'Pending' or order['status'] == 'Posted':
+            pending_orders.append(order)
+    return pending_orders
 
 ########################
 #  CUSTOMER FUNCTIONS  #

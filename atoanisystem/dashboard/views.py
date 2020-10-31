@@ -204,6 +204,15 @@ class CustomerFinishedOrdersViewModal(View):
         }
         return JsonResponse(data)
 
+class CustomerPendingOrdersView(View):
+    def get(self,request):
+        if request.is_ajax():
+            #does not include deleted customer
+            arr = cf.get_pending_orders(request.user)
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request,'dashboard/customer-dashboard.html')
+
 class AccountView(View):
     def post(self, request):
         if request.is_ajax():
