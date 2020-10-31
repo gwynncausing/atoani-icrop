@@ -48,35 +48,34 @@ const passwordConfirm = document.querySelector("#password-confirm");
 ( validate = () => {
     const forms = document.querySelector(".registration-form")
     const textFields = forms.querySelectorAll("form input[required]")
-
     const password = forms.querySelector("#pr-password");
-
     const passwordEye = forms.querySelector(".view-password");
     const passwordConfirmEye = forms.querySelector(".view-password-confirm");
-
     const email = document.getElementById('email');
     const contact = document.getElementById('contact-number');
-
     const contactInfo = document.querySelector("#contact-info");
-
     const username = document.getElementById('username');
-
     const landarea = document.getElementById('landarea');
-
     const farmerRadio = document.getElementById('farmer');
     const customerRadio = document.getElementById('customer');
-
     const provinceSelector = document.getElementById("province");
+    const termsAndConditions = document.getElementById("termsAndConditions");
+    const termsAndConditionsErrorHolder = document.getElementById("terms-and-conditions-invalid");
+    const firstQuestionAnswers = document.querySelector("[name=first_question_answers]")
+    const secondQuestionAnswers = document.querySelector("[name=second_question_answers]")
+    const securityQuestion1 = document.querySelector("[name=security-question-1]")
+    const securityQuestion2 = document.querySelector("[name=security-question-2]")
+    const securityAnswer1 = document.querySelector("[name=answer-1]")
+    const securityAnswer2 = document.querySelector("[name=answer-2]")
+    
     //ERROR MESSAGES:
-
     const usernameBlank  = "Please enter a username. It must not contain a space.";
     const usernameExists = "The username is already in use";
-
     const contactInvalidFormat = "Phone number must be in one of these formats: 9xxxxxxxxx or 09xxxxxxxxx";
     const contactExists = "The contact number is already in use";
-
     const emailInvalidFormat = "Please enter your email address in format: yourname@example.com";
     const emailExists = "The email address is already in use";
+    const termsAndConditionsUnchecked = "Please mark check if you have read and agree the Terms and Conditions.";
 
     let isEmailValid = false;
     let isContactValid = false;
@@ -84,19 +83,18 @@ const passwordConfirm = document.querySelector("#password-confirm");
 
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
-
+        let isValid = true;
         //check if email or phone number is answered
         if(isEmailValid || isContactValid){
             contactInfo.value = "contact-info";
-            displayValidity(contactInfo);
+            if(displayValidity(contactInfo) == false)
+                isValid = false;
         }
 
         //check the validity of each fields
         textFields.forEach(field => {
-            if(displayValidity(field) == false){
-                e.preventDefault();
-                e.stopPropagation();
-            }
+            if(displayValidity(field) == false)
+                isValid = false;
         });
 
 
@@ -104,19 +102,34 @@ const passwordConfirm = document.querySelector("#password-confirm");
         if(provinceSelector.options[provinceSelector.selectedIndex].value === "-1"){
             provinceSelector.classList.add("is-invalid")
             provinceSelector.classList.remove("is-valid");
+            isValid = false;
         }
 
         //check if both passwords are the same
         if(!isPasswordsSame(password.value, passwordConfirm.value)){
             passwordConfirm.classList.remove("is-valid");
             passwordConfirm.classList.add("is-invalid")
+            isValid = false;
+        }
 
+        if(isValid == false){
             e.preventDefault();
             e.stopPropagation();
         }
+        else if(isValid == true && termsAndConditions.checked == false){
+            e.preventDefault();
+            e.stopPropagation();
+            termsAndConditionsErrorHolder.classList.remove("d-none");
+            termsAndConditionsErrorHolder.innerHTML = termsAndConditionsUnchecked;    
+        }
+        else{
+            //if all input data needed is valid
+            //populate the hidden fields with correct format for storing it on the db
+            firstQuestionAnswers.value = `${securityQuestion1.options[securityQuestion1.selectedIndex].value} : ${securityAnswer1.value}`;
+            secondQuestionAnswers.value = `${securityQuestion2.options[securityQuestion2.selectedIndex].value} : ${securityAnswer2.value}`;
+        }
 
     })
-
     /*start - Important Listeners*/
 
     farmerRadio.addEventListener('click',e => {landarea.setAttribute("type", "number");});
@@ -233,15 +246,11 @@ const passwordConfirm = document.querySelector("#password-confirm");
             field.classList.add('fa-eye-slash');
             field.classList.remove('fa-eye');
             $(id).prop('type', 'text');
-
-            console.log("Show password")
         }
         else{
             field.classList.add('fa-eye');
             field.classList.remove('fa-eye-slash');
             $(id).prop('type', 'password');
-            
-            console.log("Not show password")
         }
     }
 
@@ -260,9 +269,27 @@ const passwordConfirm = document.querySelector("#password-confirm");
         }
     }
 
+    const addInvalidClass = field => {
+        field.classList.remove('is-valid');
+        field.classList.add('is-invalid');
+    };
+    const addValidClass = field => {
+        field.classList.remove('is-invalid');
+        field.classList.add('is-valid');
+    }
+
+    const removeValidClass = field => {
+        field.classList.remove('is-valid');
+        field.classList.remove('is-valid');
+    }
+
+    const removeInvalidClass = field => {
+        field.classList.remove('is-valid');
+        field.classList.remove('is-invalid');
+    }
+
     //check if password and confirm password are same
     const isPasswordsSame = (p1, p2) => p1 === p2;
-
 
     /*end - Helper Functions*/
 

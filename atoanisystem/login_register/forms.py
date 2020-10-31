@@ -9,6 +9,8 @@ class FarmerForm(forms.ModelForm):
     company = forms.CharField(required=False)
     location = forms.ModelChoiceField(queryset=Location.objects.all(),required=False)
     contact_number = forms.CharField(required=False)
+    first_question_answers = forms.CharField(required=False)
+    second_question_answers = forms.CharField(required=False)
     # use the class Meta to specify the model for the customer form
     class Meta:
         model = Farmer
@@ -20,6 +22,9 @@ class FarmerForm(forms.ModelForm):
                     #location
                     'location',
                     'street',
+                    'contact_number', 
+                    'first_question_answers', 
+                    'second_question_answers'
                     )
 class CustomerForm(forms.ModelForm):
     street = forms.CharField(max_length=220, required=False)
@@ -28,6 +33,8 @@ class CustomerForm(forms.ModelForm):
     company = forms.CharField(required=False)
     location = forms.ModelMultipleChoiceField(queryset=Location.objects.all(),required=False)
     contact_number = forms.CharField(required=False)
+    first_question_answers = forms.CharField(required=False)
+    second_question_answers = forms.CharField(required=False)
     # use the class Meta to specify the model for the customer form
     class Meta:
         model = Customer
@@ -38,6 +45,9 @@ class CustomerForm(forms.ModelForm):
                     #location
                     'location',
                     'street',
+                    'contact_number', 
+                    'first_question_answers', 
+                    'second_question_answers'
                     )
 class LocationForm(forms.ModelForm):
     name = forms.CharField(max_length=220, required=False)
