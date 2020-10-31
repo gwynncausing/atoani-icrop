@@ -283,6 +283,18 @@ def check_obsolete_orders():
                 print(val)
                 Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])
 
+        delete_obsolete_orders()
+
+def delete_obsolete_orders():
+    overdue_df = pd.DataFrame(Order.objects.filter(status="Cancelled").values())
+    if len(overdue_df) > 0:
+        overdue_df.dropna(subset=['cancelled_date'],inplace=True)
+        overdue_df['cancelled_date'] = overdue_df['cancelled_date'].apply(convert)
+        overdue_df['diff'] = overdue_df['cancelled_date'].apply(lambda w: (dt.now()-w).days)
+        print("overdueeee")
+        print(overdue_df)
+        for i in overdue_df.loc[overdue_df['diff'] > 14]['order_id']: Order.objects.get(order_id=i).delete()
+
 def get_crop_list():
     return Crop.objects.all().values('id','name')
 
