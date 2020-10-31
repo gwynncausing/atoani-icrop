@@ -165,16 +165,17 @@ def datatable_customer(id):
     if len(order) !=0:
         #df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
         df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[1] for val in order.values]).values())
-
+        print(df)
         if len(df) == 0:
             order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"
             return order
         else:
-            print('XXXXXXXXXXXXXXX',df)
             df = order.merge(df, how="left", left_on="order_id", right_on="order_id_id").fillna("N/A").drop(columns=["order_id_id"])
-            print(df)
             if len(df) != 0:
                 df['accepted_date'] = df['accepted_date'].apply(convert)
+                df['accepted_date'] = df['harvested_date'].apply(convert)
+                df['accepted_date'] = df['collected_date'].apply(convert)
+                df['accepted_date'] = df['delivered_date'].apply(convert)
                 return df.rename(columns={'id':'order_pair_id'})
     return order
 
@@ -185,7 +186,7 @@ def display_customer_table(df):
         return None
     else:
         df = df.sort_values('order_date',ascending=False).reset_index(drop=True).rename(columns={'status_y':'status'})
-        return df[['order_id','order_pair_id','order_date','location_id','name','weight','status']].to_dict('records')
+        return df[['order_id','order_pair_id','order_date','accepted_date','harvested_date','collected_date','delivered_date','location_id','name','weight','status']].to_dict('records')
 
 # search a database based on date
 def search_pairing(predate,postdate,df):
@@ -282,6 +283,18 @@ def check_obsolete_orders():
             if (date_now - val['order_date']).days > 29 and not val['is_cancelled']:
                 print(val)
                 Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])
+
+        delete_obsolete_orders()
+
+def delete_obsolete_orders():
+    overdue_df = pd.DataFrame(Order.objects.filter(status="Cancelled").values())
+    if len(overdue_df) > 0:
+        overdue_df.dropna(subset=['cancelled_date'],inplace=True)
+        overdue_df['cancelled_date'] = overdue_df['cancelled_date'].apply(convert)
+        overdue_df['diff'] = overdue_df['cancelled_date'].apply(lambda w: (dt.now()-w).days)
+        print("overdueeee")
+        print(overdue_df)
+        for i in overdue_df.loc[overdue_df['diff'] > 14]['order_id']: Order.objects.get(order_id=i).delete()
 
 def get_crop_list():
     return Crop.objects.all().values('id','name')

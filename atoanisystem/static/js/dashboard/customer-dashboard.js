@@ -5,6 +5,7 @@ const getPendingOrdersUrl = '/dashboard/get-customer-pending-orders';
 const getReservedOrdersUrl = '/dashboard/get-customer-reserved-orders';
 const getFinishedOrdersUrl = '/dashboard/get-customer-finished-orders';
 
+const atoanimessage = "<i>To Be Updated by Atoani</i>"
 //data table settings
 const domPlacements = `<'row'<'col-md-12 d-sm-flex pt-4'f<'ml-3'l>>>
                         <'row'<'col-sm-12'tr>>
