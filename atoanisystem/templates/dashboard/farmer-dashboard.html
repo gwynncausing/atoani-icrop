@@ -370,12 +370,12 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>  
     <!-- dashboard js -->
-    <script src="{% static '/js/farmer-dashboard.js' %}"></script>
+    <script src="{% static '/js/dashboard/farmer-dashboard.js' %}"></script>
     <script>
         const csrftoken = '{{ csrf_token }}';
         setCSRF(csrftoken)
     </script>
     <!-- shows the notification success or error when reserved -->
-    <script src="{% static '/js/notify.js' %}"></script>
+    <script src="{% static '/js/global/notify.js' %}"></script>
 {% endblock %}
 

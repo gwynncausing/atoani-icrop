@@ -61,12 +61,12 @@ const passwordConfirm = document.querySelector("#password-confirm");
     const provinceSelector = document.getElementById("province");
     const termsAndConditions = document.getElementById("termsAndConditions");
     const termsAndConditionsErrorHolder = document.getElementById("terms-and-conditions-invalid");
-    const firstQuestionAnswers = document.querySelector("[name=first_question_answers]")
-    const secondQuestionAnswers = document.querySelector("[name=second_question_answers]")
-    const securityQuestion1 = document.querySelector("[name=security-question-1]")
-    const securityQuestion2 = document.querySelector("[name=security-question-2]")
-    const securityAnswer1 = document.querySelector("[name=answer-1]")
-    const securityAnswer2 = document.querySelector("[name=answer-2]")
+    const firstQuestionAnswers = document.querySelector("[name=first_question_answers]");
+    const secondQuestionAnswers = document.querySelector("[name=second_question_answers]");
+    const securityQuestion1 = document.querySelector("[name=security-question-1]");
+    const securityQuestion2 = document.querySelector("[name=security-question-2]");
+    const securityAnswer1 = document.querySelector("[name=answer-1]");
+    const securityAnswer2 = document.querySelector("[name=answer-2]");
     
     //ERROR MESSAGES:
     const usernameBlank  = "Please enter a username. It must not contain a space.";
@@ -83,42 +83,40 @@ const passwordConfirm = document.querySelector("#password-confirm");
 
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
+
         let isValid = true;
         //check if email or phone number is answered
         if(isEmailValid || isContactValid){
             contactInfo.value = "contact-info";
-            if(displayValidity(contactInfo) == false)
-                isValid = false;
+            isValid = displayValidity(contactInfo);
         }
 
         //check the validity of each fields
         textFields.forEach(field => {
-            if(displayValidity(field) == false)
-                isValid = false;
+            if(field.id != 'username')
+                isValid = displayValidity(field)
+            else{
+                if(field.classList.contains("is-invalid") == false)
+                    isValid = displayValidity(field);
+            }
         });
-
 
         //check the validity of the province
         if(provinceSelector.options[provinceSelector.selectedIndex].value === "-1"){
-            provinceSelector.classList.add("is-invalid")
-            provinceSelector.classList.remove("is-valid");
+            addInvalidClass(provinceSelector);
             isValid = false;
         }
 
         //check if both passwords are the same
         if(!isPasswordsSame(password.value, passwordConfirm.value)){
-            passwordConfirm.classList.remove("is-valid");
-            passwordConfirm.classList.add("is-invalid")
+            addInvalidClass(passwordConfirm);
             isValid = false;
         }
 
-        if(isValid == false){
-            e.preventDefault();
-            e.stopPropagation();
-        }
+        if(isValid == false)
+            stopDefaultFormAction(e);
         else if(isValid == true && termsAndConditions.checked == false){
-            e.preventDefault();
-            e.stopPropagation();
+            stopDefaultFormAction(e);
             termsAndConditionsErrorHolder.classList.remove("d-none");
             termsAndConditionsErrorHolder.innerHTML = termsAndConditionsUnchecked;    
         }
@@ -128,25 +126,29 @@ const passwordConfirm = document.querySelector("#password-confirm");
             firstQuestionAnswers.value = `${securityQuestion1.options[securityQuestion1.selectedIndex].value} : ${securityAnswer1.value}`;
             secondQuestionAnswers.value = `${securityQuestion2.options[securityQuestion2.selectedIndex].value} : ${securityAnswer2.value}`;
         }
-
     })
-    /*start - Important Listeners*/
 
+
+    /////////////////////////////////////////////
+    //--- Start of Event Listener Functions ---//
+    /////////////////////////////////////////////
+
+    //famer radio button is shown, make the landarea show
     farmerRadio.addEventListener('click',e => {landarea.setAttribute("type", "number");});
     customerRadio.addEventListener('click',e => {landarea.setAttribute("type", "hidden");});
 
     //required field event input listeners
     textFields.forEach(field => {
         field.addEventListener("input", e => {
-            if(e.target.id !== "pr-password" && e.target.name !== "contact_number")
+           if(e.target.id !== "pr-password" && e.target.name !== "contact_number")
                 displayValidity(e.target)
         })
     })
 
+    //if province selector is selected
+    //make barangay and city selector enabled
     provinceSelector.addEventListener("change", e => {
-        provinceSelector.classList.remove("is-invalid")
-        provinceSelector.classList.add("is-valid");
-
+        addValidClass(provinceSelector);
         $("#barangay").prop("disabled", false);
         $("#city").prop("disabled", false);
     })
@@ -156,8 +158,8 @@ const passwordConfirm = document.querySelector("#password-confirm");
         //if input length is 0
         //make it neutral
         if(e.target.value.toString().length === 0){
-            email.classList.remove("is-invalid");
-            email.classList.remove("is-valid");
+            removeValidClass(email);
+            removeInvalidClass(email)
             isEmailValid = false;
         }
         else{
@@ -175,13 +177,11 @@ const passwordConfirm = document.querySelector("#password-confirm");
     contact.addEventListener('input', e => {
         e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
 
-        console.log(e.target.value.toString().length)
-
         //if input length is 0
         //make it neutral
         if(e.target.value.toString().length === 0){
-            contact.classList.remove("is-invalid");
-            contact.classList.remove("is-valid");
+            removeValidClass(contact);
+            removeInvalidClass(contact)
             isContactValid = false;
         }
         else{
@@ -198,16 +198,15 @@ const passwordConfirm = document.querySelector("#password-confirm");
     contact.addEventListener('keydown', function(event) {
         const key = event.key; // const {key} = event; ES6+
         if (key == "Backspace") {
-            document.getElementById("contact-invalid").innerHTML = contactInvalidFormat;
-            contact.classList.remove("is-invalid");
-            contact.classList.remove("is-valid");
+            document.getElementById("contact-invalid").innerHTML = contactInvalidFormat; 
+            removeValidClass(contact);
+            removeInvalidClass(contact)
         }
     });
 
     username.addEventListener('input',(e) => {
         //if value is space, make it not show on the input
         e.target.value = e.target.value.replace(/[ ]/g, '').replace(/(\..*)\./g, '$1');
-
         if(e.target.value.toString().length === 0){
             document.getElementById("username-invalid").innerHTML = usernameBlank;
             displayValidity(username);
@@ -221,25 +220,25 @@ const passwordConfirm = document.querySelector("#password-confirm");
     //password eye/view click listener
     //shows the input password into text
     passwordEye.addEventListener('click', (e) => makePasswordShow(e.target, "#pr-password"));
-
     //confirm-password eye/view click listener
     //shows the input password into text
     passwordConfirmEye.addEventListener('click', (e) => makePasswordShow(e.target, "#password-confirm"));
-
     passwordConfirm.addEventListener('input', (e) => {
-        passwordConfirm.classList.remove('is-valid');
-        passwordConfirm.classList.remove('is-invalid');
-
         if(isPasswordsSame(password.value, e.target.value))
-            passwordConfirm.classList.add("is-valid")
+            addValidClass(passwordConfirm);
         else
-            passwordConfirm.classList.add("is-invalid")
-        
+            addInvalidClass(passwordConfirm)
     })
 
-    /*end - Important Listeners*/
+    /////////////////////////////////////////////
+    //--- End of Event Listener Functions ---//
+    /////////////////////////////////////////////
 
-    /*start - Helper Functions*/
+
+    /////////////////////////////////////////////
+    //------- Start of Helper Functions -------//
+    /////////////////////////////////////////////
+
     //show or not the input password into text
     const makePasswordShow = (field, id) => {
         if(field.classList.contains('fa-eye')){
@@ -253,22 +252,19 @@ const passwordConfirm = document.querySelector("#password-confirm");
             $(id).prop('type', 'password');
         }
     }
-
     //displays the validation message/response
     const displayValidity = (field) => {
-        field.classList.remove('is-valid');
-        field.classList.remove('is-invalid');
-
         if(field.checkValidity() === true){
-            field.classList.add('is-valid');
+            addValidClass(field);
             return true;
         }
         else{
-            field.classList.add('is-invalid');
+            addInvalidClass(field);
             return false;
         }
     }
-
+    //adding of in-valid/valid class bootstrap
+    //show the invalid messages response
     const addInvalidClass = field => {
         field.classList.remove('is-valid');
         field.classList.add('is-invalid');
@@ -277,21 +273,19 @@ const passwordConfirm = document.querySelector("#password-confirm");
         field.classList.remove('is-invalid');
         field.classList.add('is-valid');
     }
-
-    const removeValidClass = field => {
-        field.classList.remove('is-valid');
-        field.classList.remove('is-valid');
+    const removeValidClass = field => field.classList.remove('is-valid');
+    const removeInvalidClass = field => field.classList.remove('is-invalid');
+    //stop default action of rom
+    const stopDefaultFormAction = e => {
+        e.preventDefault();
+        e.stopPropagation();
     }
-
-    const removeInvalidClass = field => {
-        field.classList.remove('is-valid');
-        field.classList.remove('is-invalid');
-    }
-
     //check if password and confirm password are same
     const isPasswordsSame = (p1, p2) => p1 === p2;
 
-    /*end - Helper Functions*/
+    /////////////////////////////////////////////
+    //------- End of Helper Functions ---------//
+    /////////////////////////////////////////////
 
 })()
 

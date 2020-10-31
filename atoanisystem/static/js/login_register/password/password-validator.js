@@ -2,9 +2,10 @@
 let isPasswordValid = false;
 
 //make these variables within this scopse
+
 (() => {
 	
-	var defaults = {
+	let defaults = {
 		numCharacters: 8,
 		useLowercase: true,
 		useUppercase: true,
@@ -15,49 +16,55 @@ let isPasswordValid = false;
 		fadeTime:300 
 	};
 
-	var o = defaults;
+	let settings = defaults;
+	settings.infoMessage = 'In order to have a secure passsword, it must have the following characteristics: ';
 
+	let numCharactersUI = '<li class="pr-numCharacters"><span></span>at least '+ settings.numCharacters + ' characters</li>'
+	let	useLowercaseUI = ''
+	let	useUppercaseUI = ''
+	let	useNumbersUI   = ''
+	let	useSpecialUI   = ''
 
-	o.infoMessage = 'In order to have a secure passsword, it must have the following characteristics: ';
+	let numCharactersDone = false;
+	let useLowercaseDone = false;
+	let useUppercaseDone = false;
+	let useNumbersDone   = false;
+	//useSpecialDone   = false;
 
-	var numCharactersUI = '<li class="pr-numCharacters"><span></span>at least '+ o.numCharacters + ' characters</li>',
-		useLowercaseUI = '',
-		useUppercaseUI = '',
-		useNumbersUI   = '',
-		useSpecialUI   = '';
+	// Show or Hide password hint based on user's event
+	// Set variables
+	let lowerCase   		= new RegExp('[a-z]');
+	let upperCase   		= new RegExp('[A-Z]');
+	let numbers     		= new RegExp('[0-9]');
+	let specialCharacter     = new RegExp('[!,%,&,@,#,$,^,*,?,_,~]');
 
 	// Check if the options are checked
-	if (o.useLowercase === true) {
+	if (settings.useLowercase === true) 
 		useLowercaseUI = '<li class="pr-useLowercase"><span></span>Lowercase letter</li>';
-	}
-	if (o.useUppercase === true) {
+	if (settings.useUppercase === true) 
 		useUppercaseUI = '<li class="pr-useUppercase"><span></span>Capital letter</li>';
-	}
-	if (o.useNumbers === true) {
+	if (settings.useNumbers === true) 
 		useNumbersUI = '<li class="pr-useNumbers"><span></span>Number</li>';
-	}
-	if (o.useSpecial === true) {
+	if (settings.useSpecial === true) 
 		useSpecialUI = '<li class="pr-useSpecial"><span></span>Special character</li>';
-	}
 
 	// Append password hint div
-	var messageDiv = '<div id="pr-box"><i></i><div id="pr-box-inner"><p>' + o.infoMessage + '</p><ul>' + numCharactersUI + useLowercaseUI + useUppercaseUI + useNumbersUI + useSpecialUI + '</ul></div></div>';
-
-	// Set campletion vatiables
-	//var numCharactersDone = true,
-	//	useLowercaseDone = true,
-	//	useUppercaseDone = true,
-	//	useNumbersDone   = true,
-	//	useSpecialDone   = true;
-
-	var numCharactersDone = false,
-		useLowercaseDone = false,
-		useUppercaseDone = false,
-		useNumbersDone   = false,
-		useSpecialDone   = false;
+	let passwordHints = `<div id="pr-box">
+							<i></i>
+							<div id="pr-box-inner">
+								<p>${settings.infoMessage} </p>
+								<ul>
+									${numCharactersUI}
+									${useLowercaseUI}
+									${useUppercaseUI}
+									${useNumbersUI}
+									${useSpecialUI} 
+								</ul>
+							</div>
+						</div>`;
 
 	// Show Message reusable function 
-	var showMessage = function () {
+	let showMessage = function () {
 		if (numCharactersDone === false || useLowercaseDone === false || useUppercaseDone === false || useNumbersDone === false) {
 			$(".pr-password").each(function() {
 				// Find the position of element
@@ -67,12 +74,10 @@ let isPasswordValid = false;
 					itemL = $(this).offset().left;
 				// Append info box tho the body
 				
-				$("body").append(messageDiv);
-				$("#pr-box").addClass(o.style)
-								.fadeIn(o.fadeTime)
+				$("body").append(passwordHints);
+				$("#pr-box").addClass(settings.style)
+								.fadeIn(settings.fadeTime)
 								.css({top:totalH, left:itemL});
-				
-					console.log("HEEEELLLOOOO");
 			});
 			
 		}
@@ -81,13 +86,12 @@ let isPasswordValid = false;
 
 	$(".pr-password input").on("focus",function (){
 		showMessage();
-		console.log("I am the last")
 	});
 
 	// Delete Message reusable function 
-	var deleteMessage = function () {
-		var targetMessage = $("#pr-box");
-		targetMessage.fadeOut(o.fadeTime, function(){
+	const deleteMessage = function () {
+		const targetMessage = $("#pr-box");
+		targetMessage.fadeOut(settings.fadeTime, function(){
 			$(this).remove();
 		});
 	};
@@ -95,28 +99,19 @@ let isPasswordValid = false;
 	// Show / Delete Message when completed requirements function 
 	var checkCompleted = function () {
 
-		console.log(numCharactersDone)
-		console.log(useLowercaseDone)
-		console.log(useUppercaseDone)
-		console.log(useNumbersDone)
-
 		if (numCharactersDone === true && useLowercaseDone === true && useUppercaseDone === true && useNumbersDone === true) {
 			deleteMessage();
-
 			$("#pr-password").removeClass("is-invalid");
 			$("#pr-password").addClass("is-valid");
+			//global variable
 			isPasswordValid = true;
-
-			
-			console.log("Valid Password")
 			
 		} else {
 			showMessage();
 			$("#pr-password").removeClass("is-valid");
 			$("#pr-password").addClass("is-invalid");
+			//global variable
 			isPasswordValid = false;
-
-			console.log("Checked Completed Here")
 		}
 	};
 
@@ -134,73 +129,54 @@ let isPasswordValid = false;
 		}
 	});
 
-
-	// Show or Hide password hint based on user's event
-	// Set variables
-	var lowerCase   		= new RegExp('[a-z]'),
-	upperCase   		= new RegExp('[A-Z]'),
-	numbers     		= new RegExp('[0-9]'),
-	specialCharacter     = new RegExp('[!,%,&,@,#,$,^,*,?,_,~]');
-
 	// Show or Hide password hint based on keyup
 	$("#pr-password").on("keyup focus", function (){
-		var thisVal = $(this).val();  
+		let currentPassword = $(this).val();  
 
-		//console.log("Change")
-		// Check # of characters
-		if ( thisVal.length >= o.numCharacters ) {
-			// console.log("good numCharacters");
+		//number of characters meet the requirements
+		if ( currentPassword.length >= settings.numCharacters ) {
 			$(".pr-numCharacters span").addClass("pr-ok");
 			numCharactersDone = true;
 		} else {
-			// console.log("bad numCharacters");
 			$(".pr-numCharacters span").removeClass("pr-ok");
 			numCharactersDone = false;
 		}
 		// lowerCase meet requirements
-		if (o.useLowercase === true) {
-			if ( thisVal.match(lowerCase) ) {
-				// console.log("good lowerCase");
+		if (settings.useLowercase === true) {
+			if ( currentPassword.match(lowerCase) ) {
 				$(".pr-useLowercase span").addClass("pr-ok");
 				useLowercaseDone = true;
 			} else {
-				// console.log("bad lowerCase");
 				$(".pr-useLowercase span").removeClass("pr-ok");
 				useLowercaseDone = false;
 			}
 		}
 		// upperCase meet requirements
-		if (o.useUppercase === true) {
-			if ( thisVal.match(upperCase) ) {
-				// console.log("good upperCase");
+		if (settings.useUppercase === true) {
+			if ( currentPassword.match(upperCase) ) {
 				$(".pr-useUppercase span").addClass("pr-ok");
 				useUppercaseDone = true;
 			} else {
-				// console.log("bad upperCase");
 				$(".pr-useUppercase span").removeClass("pr-ok");
 				useUppercaseDone = false;
 			}
 		}
 		// upperCase meet requirements
-		if (o.useNumbers === true) {
-			if ( thisVal.match(numbers) ) {
-				// console.log("good numbers");
+		if (settings.useNumbers === true) {
+			if ( currentPassword.match(numbers) ) {
 				$(".pr-useNumbers span").addClass("pr-ok");
 				useNumbersDone = true;
 			} else {
-				// console.log("bad numbers");
 				$(".pr-useNumbers span").removeClass("pr-ok");
 				useNumbersDone = false;
 			}
 		}
 		// upperCase meet requirements
-		if (o.useSpecial === true) {
-			if ( thisVal.match(specialCharacter) ) {
-				// console.log("good specialCharacter");
+		if (settings.useSpecial === true) {
+			if ( currentPassword.match(specialCharacter) ) {
 				$(".pr-useSpecial span").addClass("pr-ok");
 				useSpecialDone = true;
 			} else {
-				// console.log("bad specialCharacter");
 				$(".pr-useSpecial span").removeClass("pr-ok");
 				useSpecialDone = false;
 			}
@@ -223,16 +199,5 @@ let isPasswordValid = false;
 			}
 		}
 	});
-
-	const displayPasswordValidity = () => {
-		if(isPasswordValid == false){
-			$("#pr-password").removeClass("is-valid");
-			$("#pr-password").addClass("is-invalid");
-		}
-		else{
-			$("#pr-password").removeClass("is-invalid");
-			$("#pr-password").addClass("is-valid");
-		}	
-	}
 
 })()
