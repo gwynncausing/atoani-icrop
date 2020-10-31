@@ -336,6 +336,28 @@ function cancelReservation() {
     }
   });
 }
+
+function harvestOrder() {
+  let formData = new FormData();//.append('action','add');
+  formData.append('order-id', selectedOrderID);
+  formData.append('operation', 'harvest-order');
+  formData.append('csrfmiddlewaretoken',csrf_token);
+  $.ajax({
+    url: '',
+    type: 'post',
+    //data to be passed to django view
+    data: formData,
+    contentType: false,
+    processData: false,
+
+    success: function (response) {
+      console.log("order marked as harvested");
+    },
+    error: function (response) {
+
+    }
+  });
+}
 //Customized close modal function, because when the farmer views an incoming order, it is temporarily reserved to him/her, 
 function closeModal(){
   //isOrderReserved only becomes false during initialization or if the farmer confirms the reservation

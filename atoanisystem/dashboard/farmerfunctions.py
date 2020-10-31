@@ -89,6 +89,13 @@ def reserve_to(farmer,order):
     order_pair.save()
     return order_pair
 
+def harvest_order(order):
+    order_pair = Order_Pairing.objects.get(order_id=order)
+    order_pair.status = "Harvested"
+    order_pair.harvested_date = tz.now()
+    order_pair.save()
+    return order_pair
+
 def cancel_reservation(order_pair):
     #clarify if farmer can cancel
     #get order instance, set order.is_reserved = False
