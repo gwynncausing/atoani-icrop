@@ -2,11 +2,15 @@
   width: 85%;
   background: #EBF2F2;
   min-height: 400px;
+  height: 90%;
+  border-radius: 5px;
 }
 
 .settings-container .setting-header {
   color: black;
   background: #628474;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .settings-container .card {
@@ -40,8 +44,18 @@
   color: #0677E0;
 }
 
+.settings-container .card .card-header {
+  cursor: pointer;
+}
+
 .settings-container .btn-header {
   color: #010101;
+  text-decoration: none;
+}
+
+.settings-container .btn-header:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 .modal-delete {
@@ -63,7 +77,6 @@
   border: 0;
   width: 7rem;
   color: #FFFFFF;
-  background-color: red;
 }
 
 .modal-delete .modal-content .cancel-btn {
