@@ -41,14 +41,12 @@ function check(input){
     });
 }
 
-//make this as global variable
-const passwordConfirm = document.querySelector("#password-confirm");
-
 //make these variables within this scopse
 ( validate = () => {
     const forms = document.querySelector(".registration-form")
     const textFields = forms.querySelectorAll("form input[required]")
     const password = forms.querySelector("#pr-password");
+    const passwordConfirm = document.querySelector("#password-confirm");
     const passwordEye = forms.querySelector(".view-password");
     const passwordConfirmEye = forms.querySelector(".view-password-confirm");
     const email = document.getElementById('email');
@@ -80,17 +78,17 @@ const passwordConfirm = document.querySelector("#password-confirm");
     let isEmailValid = false;
     let isContactValid = false;
 
+    //password validator helper
+    passwordHelper.init($("#pr-password"), $("#password-confirm"));
 
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
-
         let isValid = true;
         //check if email or phone number is answered
         if(isEmailValid || isContactValid){
             contactInfo.value = "contact-info";
             isValid = displayValidity(contactInfo);
         }
-
         //check the validity of each fields
         textFields.forEach(field => {
             if(field.id != 'username')
@@ -100,19 +98,23 @@ const passwordConfirm = document.querySelector("#password-confirm");
                     isValid = displayValidity(field);
             }
         });
-
         //check the validity of the province
         if(provinceSelector.options[provinceSelector.selectedIndex].value === "-1"){
             addInvalidClass(provinceSelector);
             isValid = false;
         }
-
-        //check if both passwords are the same
-        if(!isPasswordsSame(password.value, passwordConfirm.value)){
+        // start - check the credibility of password
+        //check the validity of password
+        if(passwordHelper.passwordValidity == false){
+            addInvalidClass(password);
+            isValid = false;
+        }
+        //check the validity of confirm password
+        if(passwordHelper.passwordConfirmValidity == false){
             addInvalidClass(passwordConfirm);
             isValid = false;
         }
-
+        // end - check the credibility of password
         if(isValid == false)
             stopDefaultFormAction(e);
         else if(isValid == true && termsAndConditions.checked == false){
@@ -128,11 +130,9 @@ const passwordConfirm = document.querySelector("#password-confirm");
         }
     })
 
-
     /////////////////////////////////////////////
     //--- Start of Event Listener Functions ---//
     /////////////////////////////////////////////
-
     //famer radio button is shown, make the landarea show
     farmerRadio.addEventListener('click',e => {landarea.setAttribute("type", "number");});
     customerRadio.addEventListener('click',e => {landarea.setAttribute("type", "hidden");});
@@ -140,7 +140,7 @@ const passwordConfirm = document.querySelector("#password-confirm");
     //required field event input listeners
     textFields.forEach(field => {
         field.addEventListener("input", e => {
-           if(e.target.id !== "pr-password" && e.target.name !== "contact_number")
+           if(e.target.id !== "pr-password" && e.target.id != "password-confirm" && e.target.name !== "contact_number")
                 displayValidity(e.target)
         })
     })
@@ -217,19 +217,8 @@ const passwordConfirm = document.querySelector("#password-confirm");
         }
     });
 
-    //password eye/view click listener
-    //shows the input password into text
     passwordEye.addEventListener('click', (e) => makePasswordShow(e.target, "#pr-password"));
-    //confirm-password eye/view click listener
-    //shows the input password into text
     passwordConfirmEye.addEventListener('click', (e) => makePasswordShow(e.target, "#password-confirm"));
-    passwordConfirm.addEventListener('input', (e) => {
-        if(isPasswordsSame(password.value, e.target.value))
-            addValidClass(passwordConfirm);
-        else
-            addInvalidClass(passwordConfirm)
-    })
-
     /////////////////////////////////////////////
     //--- End of Event Listener Functions ---//
     /////////////////////////////////////////////
@@ -238,7 +227,6 @@ const passwordConfirm = document.querySelector("#password-confirm");
     /////////////////////////////////////////////
     //------- Start of Helper Functions -------//
     /////////////////////////////////////////////
-
     //show or not the input password into text
     const makePasswordShow = (field, id) => {
         if(field.classList.contains('fa-eye')){
@@ -280,9 +268,6 @@ const passwordConfirm = document.querySelector("#password-confirm");
         e.preventDefault();
         e.stopPropagation();
     }
-    //check if password and confirm password are same
-    const isPasswordsSame = (p1, p2) => p1 === p2;
-
     /////////////////////////////////////////////
     //------- End of Helper Functions ---------//
     /////////////////////////////////////////////

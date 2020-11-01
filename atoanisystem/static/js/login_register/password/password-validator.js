@@ -1,203 +1,243 @@
-//make this as global variable
-let isPasswordValid = false;
+/*
+	To use this password Helper
+	password = input password 
+	password_confirm = input password confirm
+	passwordHelper.init(password, password_confirm)
+	jquery style in getting the dom elements
 
-//make these variables within this scopse
+	example: 
+		passwordHelper.init($("#password"), $("#password_confirm"));
+		
+		- to check the validity of password
+		- this function returns true or false
+		passwordHelper.passwordValidity
+		passwordHelper.passwordConfirmValidity
 
-(() => {
 	
-	let defaults = {
+	<div class="pr-password">
+		<input type="password">
+		.......
+	</div>
+	.pr-password
+	sa container sa password mismo kay naa na class kay maoy basehan sa position sa created na nofication for validator tag
+
+	make sure sad na
+		sa scss file, 
+		included ang _password-hint.scss
+		para naay design ang created na nofication for validator tag
+
+	passwordHelper.init($("#pr-password"), $("#password-confirm"));
+
+	if(passwordHelper.passwordValidity == false){
+        ......
+    }
+    if(passwordHelper.passwordConfirmValidity == false){
+        ......
+	}
+	
+	pd sad nimo macheck ang naa sa validate-registration.js
+*/
+
+const passwordHelper = {
+	passwordValidity: false,
+	passwordConfirmValidity: false,
+	settings: {
 		numCharacters: 8,
 		useLowercase: true,
 		useUppercase: true,
 		useNumbers: true,
 		useSpecial: false,
-		infoMessage: '',
+		infoMessage: 'In order to have a secure passsword, it must have the following characteristics: ',
 		style: "light", 
-		fadeTime:300 
-	};
-
-	let settings = defaults;
-	settings.infoMessage = 'In order to have a secure passsword, it must have the following characteristics: ';
-
-	let numCharactersUI = '<li class="pr-numCharacters"><span></span>at least '+ settings.numCharacters + ' characters</li>'
-	let	useLowercaseUI = ''
-	let	useUppercaseUI = ''
-	let	useNumbersUI   = ''
-	let	useSpecialUI   = ''
-
-	let numCharactersDone = false;
-	let useLowercaseDone = false;
-	let useUppercaseDone = false;
-	let useNumbersDone   = false;
-	//useSpecialDone   = false;
-
-	// Show or Hide password hint based on user's event
-	// Set variables
-	let lowerCase   		= new RegExp('[a-z]');
-	let upperCase   		= new RegExp('[A-Z]');
-	let numbers     		= new RegExp('[0-9]');
-	let specialCharacter     = new RegExp('[!,%,&,@,#,$,^,*,?,_,~]');
-
-	// Check if the options are checked
-	if (settings.useLowercase === true) 
-		useLowercaseUI = '<li class="pr-useLowercase"><span></span>Lowercase letter</li>';
-	if (settings.useUppercase === true) 
-		useUppercaseUI = '<li class="pr-useUppercase"><span></span>Capital letter</li>';
-	if (settings.useNumbers === true) 
-		useNumbersUI = '<li class="pr-useNumbers"><span></span>Number</li>';
-	if (settings.useSpecial === true) 
-		useSpecialUI = '<li class="pr-useSpecial"><span></span>Special character</li>';
-
-	// Append password hint div
-	let passwordHints = `<div id="pr-box">
-							<i></i>
-							<div id="pr-box-inner">
-								<p>${settings.infoMessage} </p>
-								<ul>
-									${numCharactersUI}
-									${useLowercaseUI}
-									${useUppercaseUI}
-									${useNumbersUI}
-									${useSpecialUI} 
-								</ul>
-							</div>
-						</div>`;
-
-	// Show Message reusable function 
-	let showMessage = function () {
-		if (numCharactersDone === false || useLowercaseDone === false || useUppercaseDone === false || useNumbersDone === false) {
-			$(".pr-password").each(function() {
-				// Find the position of element
-				var posH = $(this).offset().top,
-					itemH = $(this).innerHeight(),
-					totalH = posH+itemH,
-					itemL = $(this).offset().left;
-				// Append info box tho the body
-				
-				$("body").append(passwordHints);
-				$("#pr-box").addClass(settings.style)
-								.fadeIn(settings.fadeTime)
-								.css({top:totalH, left:itemL});
-			});
-			
+		fadeTime:300, 
+	},
+	required: {
+		numCharactersDone : false,
+		useLowercaseDone : false,
+		useUppercaseDone : false,
+		useNumbersDone : false,
+		useSpecialDone : false,
+	},
+	regex: {
+		lowerCase : new RegExp('[a-z]'),
+		upperCase : new RegExp('[A-Z]'),
+		numbers : new RegExp('[0-9]'),
+		specialCharacter : new RegExp('[!,%,&,@,#,$,^,*,?,_,~]'),
+	},
+	cacheDom: function(password, password_confirm) {
+		this.$body = $('body');
+		this.$pr_password = $(".pr-password");
+		this.$password = password;
+		this.$password_confirm = password_confirm;
+	},
+	bindEvents: function() {
+		this.$password.on("focus", this.showMessage.bind(this));
+		this.$password.on("blur", this.hintOnBlur.bind(this));
+		this.$password.on("keyup focus", this.check.bind(this));
+		this.$password_confirm.on("keyup", this.checkPasswordIfSame.bind(this));
+	},
+	init: function (password, password_confirm){
+		this.cacheDom(password, password_confirm);
+		this.bindEvents();
+	},
+	showMessage: function() {
+		if(this.required.numCharactersDone === false || this.required.useLowercaseDone === false || this.required.useUppercaseDone === false || this.required.useNumbersDone === false) {
+			this.$pr_password.each(this.createHint.bind(this));
 		}
-	};
+	},
+	createHint: function() {
+		let pos_h = this.$pr_password.offset().top,
+			item_h = this.$pr_password.innerHeight(),
+			total_h = pos_h + item_h,
+			item_l = this.$pr_password.offset().left;
+		this.$body.append(this.templateHints());
+		$("#pr-box").addClass(this.settings.style)
+						.fadeIn(this.settings.fadeTime)
+						.css({top:total_h, left:item_l});
 
-
-	$(".pr-password input").on("focus",function (){
-		showMessage();
-	});
-
-	// Delete Message reusable function 
-	const deleteMessage = function () {
+	},
+	deleteMessage: function() {
 		const targetMessage = $("#pr-box");
-		targetMessage.fadeOut(settings.fadeTime, function(){
-			$(this).remove();
-		});
-	};
-
-	// Show / Delete Message when completed requirements function 
-	var checkCompleted = function () {
-
-		if (numCharactersDone === true && useLowercaseDone === true && useUppercaseDone === true && useNumbersDone === true) {
-			deleteMessage();
-			$("#pr-password").removeClass("is-invalid");
-			$("#pr-password").addClass("is-valid");
-			//global variable
-			isPasswordValid = true;
+		targetMessage.fadeOut(this.settings.fadeTime, function() { targetMessage.remove() });
+	},
+	checkCompletedRequirements: function () {
+		if (this.required.numCharactersDone === true && this.required.useLowercaseDone === true && this.required.useUppercaseDone === true && this.required.useNumbersDone === true) {
+			this.deleteMessage();
+			this.addValidClass(this.$password)
+			this.passwordValidity = true;
 			
 		} else {
-			showMessage();
-			$("#pr-password").removeClass("is-valid");
-			$("#pr-password").addClass("is-invalid");
-			//global variable
-			isPasswordValid = false;
+			this.showMessage();
+			this.addInvalidClass(this.$password);
+			this.passwordValidity = false;
 		}
-	};
-
-	// Show password hint 
-	$('.pr-password input').on("blur",function (){
-		deleteMessage();
-
-		if(isPasswordValid == false){
-			$("#pr-password").removeClass("is-valid");
-			$("#pr-password").addClass("is-invalid");
-		}
-		else{
-			$("#pr-password").removeClass("is-invalid");
-			$("#pr-password").addClass("is-valid");
-		}
-	});
-
-	// Show or Hide password hint based on keyup
-	$("#pr-password").on("keyup focus", function (){
-		let currentPassword = $(this).val();  
-
-		//number of characters meet the requirements
-		if ( currentPassword.length >= settings.numCharacters ) {
+	},
+	hintOnBlur: function() {
+		this.deleteMessage();
+		if(this.passwordValidity == false)
+			this.addInvalidClass(this.$password);
+		else
+			this.addValidClass(this.$password);
+	},
+	templateHints: function() {
+		let numCharactersUI = '<li class="pr-numCharacters"><span></span>at least '+ this.settings.numCharacters + ' characters</li>';
+		let	useLowercaseUI = '';
+		let	useUppercaseUI = '';
+		let	useNumbersUI   = '';
+		let	useSpecialUI   = '';
+		// Check if the options are checked
+		if(this.settings.useLowercase === true) 
+			useLowercaseUI = '<li class="pr-useLowercase"><span></span>Lowercase letter</li>';
+		if(this.settings.useUppercase === true) 
+			useUppercaseUI = '<li class="pr-useUppercase"><span></span>Capital letter</li>';
+		if(this.settings.useNumbers === true) 
+			useNumbersUI = '<li class="pr-useNumbers"><span></span>Number</li>';
+		if(this.settings.useSpecial === true) 
+			useSpecialUI = '<li class="pr-useSpecial"><span></span>Special character</li>';
+		return  `<div id="pr-box">
+						<i></i>
+						<div id="pr-box-inner">
+							<p>${this.settings.infoMessage} </p>
+							<ul>
+								${numCharactersUI}
+								${useLowercaseUI}
+								${useUppercaseUI}
+								${useNumbersUI}
+								${useSpecialUI} 
+							</ul>
+						</div>
+					</div>`;
+	},
+	check: function() {
+		let currentPassword =this.$password.val();  
+		if (currentPassword.length >= this.settings.numCharacters ) {
 			$(".pr-numCharacters span").addClass("pr-ok");
-			numCharactersDone = true;
+			this.required.numCharactersDone = true;
 		} else {
 			$(".pr-numCharacters span").removeClass("pr-ok");
-			numCharactersDone = false;
+			this.required.numCharactersDone = false;
 		}
 		// lowerCase meet requirements
-		if (settings.useLowercase === true) {
-			if ( currentPassword.match(lowerCase) ) {
+		if (this.settings.useLowercase === true) {
+			if ( currentPassword.match(this.regex.lowerCase) ) {
 				$(".pr-useLowercase span").addClass("pr-ok");
-				useLowercaseDone = true;
+				this.required.useLowercaseDone = true;
 			} else {
 				$(".pr-useLowercase span").removeClass("pr-ok");
-				useLowercaseDone = false;
+				this.required.useLowercaseDone = false;
 			}
 		}
 		// upperCase meet requirements
-		if (settings.useUppercase === true) {
-			if ( currentPassword.match(upperCase) ) {
+		if (this.settings.useUppercase === true) {
+			if ( currentPassword.match(this.regex.upperCase) ) {
 				$(".pr-useUppercase span").addClass("pr-ok");
-				useUppercaseDone = true;
+				this.required.useUppercaseDone = true;
 			} else {
 				$(".pr-useUppercase span").removeClass("pr-ok");
-				useUppercaseDone = false;
+				this.required.useUppercaseDone = false;
 			}
 		}
 		// upperCase meet requirements
-		if (settings.useNumbers === true) {
-			if ( currentPassword.match(numbers) ) {
+		if (this.settings.useNumbers === true) {
+			if ( currentPassword.match(this.regex.numbers) ) {
 				$(".pr-useNumbers span").addClass("pr-ok");
-				useNumbersDone = true;
+				this.required.useNumbersDone = true;
 			} else {
 				$(".pr-useNumbers span").removeClass("pr-ok");
-				useNumbersDone = false;
+				this.required.useNumbersDone = false;
 			}
 		}
 		// upperCase meet requirements
-		if (settings.useSpecial === true) {
-			if ( currentPassword.match(specialCharacter) ) {
+		if (this.settings.useSpecial === true) {
+			if ( currentPassword.match(this.regex.specialCharacter) ) {
 				$(".pr-useSpecial span").addClass("pr-ok");
-				useSpecialDone = true;
+				this.required.useSpecialDone = true;
 			} else {
 				$(".pr-useSpecial span").removeClass("pr-ok");
-				useSpecialDone = false;
+				this.required.useSpecialDone = false;
 			}
 		}
 
-		checkCompleted();
+		this.checkCompletedRequirements();
 
-		if(($(this).val() !== passwordConfirm.value) && passwordConfirm.value.trim()  !== ""){
-			passwordConfirm.classList.remove("is-valid");
-			passwordConfirm.classList.add("is-invalid");
+		if((currentPassword !== this.$password_confirm.val()) && this.$password_confirm.val().trim()  !== ""){
+			this.passwordConfirmValidity = false;
+			this.addInvalidClass(this.$password_confirm)
 		}
-		if(isPasswordValid === true){
-			if(passwordConfirm.value.trim()  !== "" && passwordConfirm.value === $(this).val()){
-				passwordConfirm.classList.remove("is-invalid");
-				passwordConfirm.classList.add("is-valid");			
+		if(this.passwordValidity === true){
+			if(this.$password_confirm.val().trim()  !== "" && this.$password_confirm.val() === currentPassword){
+				this.passwordConfirmValidity = true;
+				this.addValidClass(this.$password_confirm)		
 			}
 			else{
-				passwordConfirm.classList.remove("is-valid");
-				passwordConfirm.classList.add("is-invalid");		
+				this.passwordConfirmValidity = false;
+				this.addInvalidClass(this.$password_confirm);	
 			}
 		}
-	});
-
-})()
+	},
+	checkPasswordIfSame: function() {
+		if(this.isPasswordsSame(this.$password.val(), this.$password_confirm.val())){
+			this.passwordConfirmValidity = true;
+			this.addValidClass(this.$password_confirm);
+		}
+        else{
+			this.passwordConfirmValidity = false;
+			this.addInvalidClass(this.$password_confirm);
+		}
+		if(this.passwordValidity == false){
+			this.passwordConfirmValidity = false;
+			this.addInvalidClass(this.$password_confirm);		
+		}
+	},
+	isPasswordsSame: function (p1, p2) {
+		return p1 === p2;
+	},
+	addInvalidClass: function(field) {
+        field.removeClass('is-valid');
+        field.addClass('is-invalid');
+	},
+	addValidClass: function(field) {
+        field.removeClass('is-invalid');
+        field.addClass('is-valid');
+    }
+}
