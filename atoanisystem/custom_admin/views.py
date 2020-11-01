@@ -83,7 +83,7 @@ class GetHarvestedOrdersView(View):
             #does not include deleted customer
             orders = hf.get_all_orders()
             #orders.extend(hf.get_all_order_pairs())
-            arr = hf.get_approved_orders(orders)
+            arr = hf.get_harvested_orders(orders)
             json = {'data':arr}
             return JsonResponse(json)
         return render(request, 'custom_admin/admin-orders.html')
@@ -176,7 +176,7 @@ class GetUnapprovedUsersView(View):
 class GetFarmersView(View):
     def get(self,request):
         if request.is_ajax():
-            farmers = hf.get_unapproved_farmers()
+            farmers = hf.get_farmers()
             hf.format_name_of_users(farmers)
             arr = farmers
             print(arr)
@@ -187,7 +187,7 @@ class GetFarmersView(View):
 class GetCustomersView(View):
     def get(self,request):
         if request.is_ajax():
-            customers = hf.get_unapproved_customers()
+            customers = hf.get_customers()
             hf.format_name_of_users(customers)
             arr = customers
             json = {'data':arr}

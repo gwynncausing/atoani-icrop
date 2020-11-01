@@ -5,7 +5,7 @@ from django.contrib.auth.models import Group, User, auth
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, redirect, render
 from django.views.generic import View
-from django.contrib.auth.views import PasswordChangeView
+# from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
@@ -152,7 +152,6 @@ class RegistrationView(View):
         else:
             return HttpResponse(form.errors)
 
-
 class ApprovalView(View):
     def get(self,request):
         if request.user.is_authenticated:
@@ -189,18 +188,13 @@ class SettingsView(View):
                 context = {
                     "locations" : locations
                 }
-            # if(hasattr(request.user, 'farmer')):
-            #     location = Farmer.objects.get(id = request.user.farmer.id).get_location()
-            #     context = {
-            #         "location" : location
-            #     }
             return render(request, "login_register/settings.html", context)
         else:
             return redirect("login_register:login")
 
     def post(self, request):
-        # if request.is_ajax():
-            data = {}
+        data = {}
+        if request.is_ajax():
             if request.method == 'POST':
                 print(request.POST)
                 if 'btn-save-name' in request.POST:
@@ -241,18 +235,16 @@ class SettingsView(View):
                     province = request.POST.get('province')
                     city = request.POST.get('city')
                     brgy = request.POST.get('brgy')
-                    street = request.POST.get('street')
-                    new_name = str(province) + "," + str(city) + "," + str(brgy) + "," + str(street)
+                    new_name = str(province) + "," + str(city) + "," + str(brgy)
                     location, created = Location.objects.get_or_create(name=new_name)
                     if created:
-                        new_loc = Location.objects.create(name=new_name, province=province, city=city, brgy=brgy, street=street)
+                        new_loc = Location.objects.create(name=new_name, province=province, city=city, brgy=brgy)
                         farmer.set_location(new_loc.id)
                         data['id'] = new_loc.id
                         data['name'] = new_loc.name
                         data['province'] = province
                         data['city'] = city
                         data['brgy'] = brgy
-                        data['street'] = street
                     else:
                         existing_loc = Location.objects.get(name = new_name)
                         farmer.set_location(existing_loc.id)
@@ -261,8 +253,7 @@ class SettingsView(View):
                         data['province'] = existing_loc.province
                         data['city'] = existing_loc.city
                         data['brgy'] = existing_loc.brgy
-                        data['street'] = existing_loc.street
-
+                
                 elif 'btn-edit-customer-address' in request.POST:
                     print("clicked edit customer")
                     print(request.POST)
@@ -272,20 +263,16 @@ class SettingsView(View):
                     province = request.POST.get('province')
                     city = request.POST.get('city')
                     brgy = request.POST.get('brgy')
-                    street = request.POST.get('street')
-                    new_name = str(province) + "," + str(city) + "," + str(brgy) + "," + str(street)
+                    new_name = str(province) + "," + str(city) + "," + str(brgy)
                     old_loc = Location.objects.get(id=location_id)
-                    # location, created = Location.objects.get_or_create(name=new_name)
                     exists = Location.objects.filter(name=new_name).exists()
-                    # if created:
                     if not exists:
-                        new_loc = Location.objects.create(name=new_name, province = province, city = city, brgy = brgy, street = street)
+                        new_loc = Location.objects.create(name=new_name, province = province, city = city, brgy = brgy)
                         data['id'] = new_loc.id
                         data['name'] = new_loc.name
                         data['province'] = province
                         data['city'] = city
                         data['brgy'] = brgy
-                        data['street'] = street
                         customer.location.remove(old_loc)
                         customer.location.add(new_loc)
                         print("created new")
@@ -293,12 +280,12 @@ class SettingsView(View):
                         existing_loc = Location.objects.filter(name = new_name)[0]
                         customer.location.remove(old_loc)
                         customer.location.add(existing_loc)
+
                         data['id'] = existing_loc.id
                         data['name'] = existing_loc.name
                         data['province'] = existing_loc.province
                         data['city'] = existing_loc.city
                         data['brgy'] = existing_loc.brgy
-                        data['street'] = existing_loc.street
                         print("added existing")
 
                 elif 'btn-delete-address' in request.POST:
@@ -306,25 +293,44 @@ class SettingsView(View):
                     customer = request.user.customer
                     location_id = request.POST.get('location-id-delete')
                     print("selected to delete: " + str(location_id))
-                    customer.location.remove(Location.objects.get(id=location_id))
+                    customer.location.remove(Location.objects.get(id=location_id))    
+                
+                elif 'btn-save-account' in request.POST:
+                    print(request.POST)
+                    user = request.user
+                    current_pass = request.POST.get('current_pass')
+                    new_pass = request.POST.get('new_password1')
+                    retype_pass = request.POST.get('new_password2')
+
+                    if user.check_password(current_pass) or not current_pass == "":
+                        print("correct pass")
+                        if(new_pass == retype_pass):
+                            if not new_pass == "" and retype_pass == "":
+                                print("passwords the same")
+                                user.set_password(new_pass)
+                                user.save()
+                                update_session_auth_hash(request, user)
+                                print("password changed")
+                            else:
+                                print("new pass is empty, old pass kept")
+                        else:
+                            print("new passwords not the same")
+                    else:
+                        print("password is incorrect or empty")
 
                 elif 'btn-add-customer-address':
                     customer = request.user.customer
                     province = request.POST.get('province')
                     city = request.POST.get('city')
                     brgy = request.POST.get('brgy')
-                    street = request.POST.get('street')
-                    new_name = str(province) + "," + str(city) + "," + str(brgy) + "," + str(street)
-
+                    new_name = str(province) + "," + str(city) + "," + str(brgy)
                     exists = Location.objects.filter(name=new_name).exists()
                     if not exists:
-                        new_loc = Location.objects.create(name=new_name, province = province, city = city, brgy = brgy, street = street)
+                        new_loc = Location.objects.create(name=new_name, province = province, city = city, brgy = brgy)
                         data['id'] = new_loc.id
                         data['name'] = new_loc.name
                         data['province'] = province
                         data['city'] = city
-                        data['brgy'] = brgy
-                        data['street'] = street
                         customer.location.add(new_loc)
                         print("added new")
                     else:
@@ -335,27 +341,31 @@ class SettingsView(View):
                         data['province'] = existing_loc.province
                         data['city'] = existing_loc.city
                         data['brgy'] = existing_loc.brgy
-                        data['street'] = existing_loc.street
                         print("added existing")
-
+                    print("customer.get_all_locations")    
+                    print(customer.get_all_locations)
+                
                 return JsonResponse(data, safe=False, status=200)
+            else:
+                return HttpResponse('')
 
 
-# def change_password(request):
-#     if request.method == 'POST':
-#         form = PasswordChangeForm(request.user, request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             update_session_auth_hash(request, user)  # Important!
-#             messages.success(request, 'Your password was successfully updated!')
-#             return redirect('change_password')
+# class ChangePasswordView(View):
+#     def get(self, request):
+#         if request.method == 'POST':
+#             form = PasswordChangeForm(request.POST, instance=request.user)
+#             if form.is_valid():
+#                 user = form.save()
+#                 update_session_auth_hash(request, user)  # Important!
+#                 print('Your password was successfully updated!')
+#                 return redirect('login_register: login')
+#             else:
+#                 print('Please correct the error below.')
 #         else:
-#             messages.error(request, 'Please correct the error below.')
-#     else:
-#         form = PasswordChangeForm(request.user)
-#     return render(request, 'login_register/settings.html', {
-#         'form': form
-#     })
+#             form = PasswordChangeForm(request.user)
+#         return render(request, 'login_register/change-password.html', {
+#             'form': form
+#         })
 
 class AboutUsView(View):
     def get(self,request):
@@ -368,10 +378,6 @@ class ContactUsView(View):
 class TermsAndConditionsView(View):
     def get(self,request):
         return render(request, "login_register/terms-and-conditions.html")
-
-class ForgotUsernamePasswordView(View):
-    def get(self,request):
-        return render(request, "login_register/forgot-username-password.html")
 
 def handler404(request, *args, **argv):
     response = render(request, "error_pages/404.html")

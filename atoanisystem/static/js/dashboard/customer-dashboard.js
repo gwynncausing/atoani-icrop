@@ -215,7 +215,7 @@ function viewPendingOrders(selectedOrderID){
   //console.log(JSON.stringify(order));
 
   document.getElementById('pending-date-ordered').innerHTML = order.order_date;
-  document.getElementById('pending-date-approved').innerHTML = String("wala sa JSON");
+  document.getElementById('pending-date-approved').innerHTML = order.order_date;//String("wala sa JSON");
   document.getElementById('pending-crop-name').innerHTML = String(order.name);
   document.getElementById('pending-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('pending-location').innerHTML = String(order.location_id);

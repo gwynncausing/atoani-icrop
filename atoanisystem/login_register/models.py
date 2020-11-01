@@ -49,10 +49,10 @@ class Crop(models.Model):
         return str(self.name)
 
 class Location(models.Model):
-    name = models.CharField(max_length=220)
+    name = models.CharField(max_length=220, blank=True)
     # to match the html form
-    brgy = models.CharField(max_length=50,default="")
-    city = models.CharField(max_length=50,default="")
+    brgy = models.CharField(max_length=50,default="", blank=True, null=True)
+    city = models.CharField(max_length=50,default="", blank=True, null=True)
     province = models.CharField(max_length=50,default="")
     def __str__(self):
         return str(self.name)
@@ -139,12 +139,27 @@ class Customer(models.Model):
         return final_location
 
     def get_all_locations(self):
-        return [self.location.all()]
+        return self.location.all()
 
     def add_location(self,location_id, street):
-        self.location.add(location_id)
+        new_loc = Location.objects.get(id = location_id)
+        self.location.add(new_loc)
         self.street += "|" + street
         self.save()
+
+    # def replace_location(self,old_id,new_id):
+    #     all_loc = self.location.all()
+    #     new_loc = Location.objects.get(id=new_id)
+    #     print("new loc")
+    #     print(new_loc)
+    #     for location in all_loc:
+    #         if(location.id == old_id):
+    #             location = None
+    #             location = new_loc
+    #             print(location)
+    #             self.save()
+    #             break
+    #     print(self.get_all_locations())
 
     class Meta:
         ordering = ['name']
