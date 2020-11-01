@@ -164,20 +164,21 @@ def get_complete_order_customer(id):
 # generates datatable for customer dashboard
 def datatable_customer(id):
     order= get_complete_order_customer(id)
-    print(order['order_id'].to_list())
     if len(order) !=0:
         #df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
-        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val for val in order['order_id'].to_list()]).values())
+        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val for val in order['order_id'].to_list()]).values()).drop(columns="status")
+        print(df['accepted_date'])
         if len(df) == 0:
             order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"
             return order
         else:
             df = order.merge(df, how="left", left_on="order_id", right_on="order_id_id").fillna("N/A").drop(columns=["order_id_id"])
+            print(df['accepted_date'])
             if len(df) != 0:
                 df['accepted_date'] = df['accepted_date'].apply(convert)
-                df['accepted_date'] = df['harvested_date'].apply(convert)
-                df['accepted_date'] = df['collected_date'].apply(convert)
-                df['accepted_date'] = df['delivered_date'].apply(convert)
+                df['harvested_date'] = df['harvested_date'].apply(convert)
+                df['collected_date'] = df['collected_date'].apply(convert)
+                df['delivered_date'] = df['delivered_date'].apply(convert)
                 return df.rename(columns={'id':'order_pair_id'})
     return order
 
