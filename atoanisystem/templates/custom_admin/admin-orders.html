@@ -16,9 +16,11 @@
       <div class="dropdown-container">
         <button id="allBtn" type="button" class="sidebar-nav" autofocus>All</button>
         <button id="waitlistBtn" type="button" class="sidebar-nav">Waitlist</button>
+        <button id="approvedBtn" type="button" class="sidebar-nav">Approved</button>
         <button id="ongoingBtn" type="button" class="sidebar-nav">Ongoing</button>
-        <!-- <button id="collectedBtn" type="button" class="sidebar-nav border-0">Collected</button> -->
-        <!-- <button id="harvestedBtn" type="button" class="sidebar-nav border-0">Harvested</button> -->
+        <button id="harvestedBtn" type="button" class="sidebar-nav border-0">Harvested</button>
+        <button id="collectedBtn" type="button" class="sidebar-nav border-0">Collected</button>
+        <button id="deliveredBtn" type="button" class="sidebar-nav border-0">Delivered</button>
         <!-- <button id="" type="button" class="sidebar-nav border-0">Collected</button> -->
         <!-- <button id="collectedBtn" type="button" class="sidebar-nav border-0">Delivered</button> -->
       </div>
@@ -75,7 +77,9 @@
             <div class="label col-12 text-center justify-content-center pt-1 pb-1 mb-4">
               <button id="cancelBtn" type="button m-0" class="btn btn-danger px-5 mx-auto">Cancel Order</button>
               <button id="approveBtn" type="button m-0" class="btn btn-info px-5 mx-auto">Approve Order</button>
+              <button id="harvestBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Mark as Harvested</button>
               <button id="collectBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Mark as Collected</button>
+              <button id="deliverBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Mark as Delivered</button>
             </div>
           </div>
         </div>
@@ -103,8 +107,8 @@
 <!-- Datatables JS -->
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
 <!-- Admin JS -->
-<script src="{% static '/js/custom-admin-sidebar.js' %}"></script>
-<script src="{% static '/js/custom-admin-orders.js' %}"></script>
+<script src="{% static '/js/custom-admin/custom-admin-sidebar.js' %}"></script>
+<script src="{% static '/js/custom-admin/custom-admin-orders.js' %}"></script>
 <script>
   $(document).ready(function () {
     initialize();

@@ -28,17 +28,6 @@ body{
         height: 280px;
         font-weight: bold;
     }
-    .order-tab,
-    .reserved-orders,
-    .incoming-orders,
-    .finished-orders{
-        border-top-right-radius: 0.5rem;
-        border-top-left-radius: 0.5rem;
-    }   
-    .order-table-holder{
-        border-bottom-right-radius: 0.5rem;
-        border-bottom-left-radius: 0.5rem;
-    }
     .order-type{
         height: 84%; 
         color: $tertiary-color;
@@ -54,45 +43,49 @@ body{
         z-index: 4;
         box-shadow: 0px 2px 6px 2px #e0e0e0;
     }
-    .reserved-orders{
-        background-color: #9387DF;  
+    #reserved-table .order-tab{
+        background:  #8FAB9E;
         color: #fff;
-        cursor: pointer;
-       
     }
     #finished-table .order-tab{
-        background:  #5C5CE4;
+        background: #0B3531;
         color: #fff;
     }
-    #incoming-table .order-tab{
-        background: #D2467B;
+    #pending-table .order-tab{
+        background: #9D7C69;  
         color: #fff;
     }
-    #reserved-table .order-tab{
-        background: #9387DF;  
-        color: #fff;
-    }
-    .order-tab{
-        background: black;
-    }
-    .incoming-orders{
-        background-color: #D2467B;
+    .finished-orders{
+        background-color: #0B3531;
         color: #fff;
         cursor: pointer;
     }
-    .finished-orders{
-        background-color: #5C5CE4;
+    .reserved-orders{
+        background-color: #8FAB9E;
+        color: #fff;
+        cursor: pointer;
+    }
+    .pending-orders{
+        background-color:#9D7C69;  
         color: #fff;
         cursor: pointer;
     }
     .order-table-holder{
         background: #EBF2F2;
     }
-    .reserved-orders:hover, 
-    .incoming-orders:hover,
-    .finished-orders:hover{
-        cursor: pointer;
+    .order-tab{
+        background: black;
     }
+    .order-tab,
+    .pending-orders,
+    .finished-orders,
+    .reserved-orders{
+        border-top-right-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+        &:hover{
+            cursor: pointer;
+        }
+    }   
     .nav-tabs a {
         text-decoration: none;
         color: $tertiary-color;
@@ -125,54 +118,56 @@ body{
         outline:none;  
         color: #001AFF;
     }
+        table {
+        border-collapse: collapse;
+      }
+      
+    
     table {
         width: 95%; 
         border-radius: 0.5rem;
         color: $tertiary-color;
         background-color: #fff;
         border-bottom: 1px solid $tertiary-color;
+        border: 0;
         thead{
             color: $white-color;   
             background: $tertiary-color;
-            border-top-right-radius: 0.5rem;
-            border-top-left-radius: 0.5rem;
             font-weight: normal;
-
             th{
                 font-weight: normal;
             }
         }   
-        thead th:first-child{
-            border-top-left-radius: 0.5rem;
+        tbody {
+            tr td{
+                border-left: 0.2px solid $tertiary-color;
+                border-right: 0.2px solid $tertiary-color;
+                border-top: none!important;
+            }
+            tr:first-child td {
+                border-top: 0;
+            }
+            tr:last-child td {
+                border-bottom: 0;
+            }
         }
-        thead th:last-child{
-            border-top-right-radius: 0.5rem;
-        }
-        
-        tbody td {
-            border-left: 1px solid $tertiary-color;
-            border-right: 1px solid $tertiary-color;
-            border-top: none!important;
-        }
-
-        tfoot td:not(:last-child), tfoot th:not(:last-child) {
-            border-right: 1px solid $tertiary-color
-        }
-        tfoot td, tfoot th{
-            border-top: 0;
-            text-align: center;
-            font-weight: normal;
-        }
-        
     }
     .search input[type=search]{
         width: 15rem;
         border: 0;
         padding: 0.25rem;
         border-radius: 0.5rem;
+        &:focus{
+            outline: none !important;
+        }
     }
-    .search input[type=search]:focus {
-        outline: none !important;
+    input[type=date]{
+        border: 0 !important;
+        padding: 2px;
+        background: white;
+        &:focus{
+            outline: none !important;
+        }
     }
     .tab-content{
         border-radius: 0.3rem;
@@ -184,11 +179,15 @@ body{
         background: #EBF2F2;
         border-radius: 0.5rem;
     }
+    .pagination{
+        background: red;
+        display: flex;
+    }
     /*this is for the border-radius of the columns as they collaspse*/
-    @media only screen and (max-width: 678px){ thead th:nth-of-type(4){ border-top-right-radius: 0.5rem; } }
-    @media only screen and (max-width: 572px){ thead th:nth-of-type(3){ border-top-right-radius: 0.5rem; } }
-    @media only screen and (max-width: 472px){ thead th:nth-of-type(2){ border-top-right-radius: 0.5rem; } }
-    @media only screen and (max-width: 352px){ thead th:nth-of-type(1){ border-top-right-radius: 0.5rem; } }
+    //@media only screen and (max-width: 678px){ thead th:nth-of-type(4){ border-top-right-radius: 0.5rem; } }
+    //@media only screen and (max-width: 572px){ thead th:nth-of-type(3){ border-top-right-radius: 0.5rem; } }
+    //@media only screen and (max-width: 472px){ thead th:nth-of-type(2){ border-top-right-radius: 0.5rem; } }
+    //@media only screen and (max-width: 352px){ thead th:nth-of-type(1){ border-top-right-radius: 0.5rem; } }
     /*this for breakpoint ui style*/
     @media only screen and (max-width: 720px) {
         .title{
@@ -225,7 +224,7 @@ body{
             font-weight: bold;
         }
         .reserved-orders,
-        .incoming-orders,
+        .pending-orders,
         .finished-orders{
             border-top-right-radius: 0.5rem;
             border-top-left-radius: 0.5rem;
@@ -234,7 +233,7 @@ body{
         .search input[type=search]{
             width: 9rem;
         }
-        .order-tab, table{
+        .order-tab, table, input, label, .dataTables_info, .pagination, .modal-body .row div{
             font-size: 12px;
         }
     }

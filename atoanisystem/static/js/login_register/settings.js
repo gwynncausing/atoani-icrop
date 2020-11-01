@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 // console.log(form_name);
 
 // const url = "/settings/";

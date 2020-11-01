@@ -14,32 +14,29 @@ let incoming_data = null;
 let finished_data = null;
 
 //data table settings
-const domPlacements = `<
-                        <"search d-block row mt-4 mb-3"
-                            <"col-1"f>
-                        >
-                        <"d-flex float-left">
-                        <t>
-                        <"bottom"
-                            <"d-inline"
-                                <"float-left mt-0 ml-5 mb-3 pb-3"i>
-                            >   
-                        >
+const domPlacements = `<'row'<'col-md-12 d-sm-flex pt-4'f<'ml-3'l>>>
+                        <'row'<'col-sm-12'tr>>
+                        <'row'<'col-sm-12 mt-2 col-md-5'i>
                         >`;
 
 const farmerFinishedTableConfig = {
-  paging: false,
+  paging: true,
+  searching: true,
+  lengthMenu: [ [-1,5, 10, 25, 50], ["All",5, 10, 25, 50] ],
   dom: domPlacements,
   columnDefs: [
     { orderable: false, "targets": 4 },
     {
       targets: 4,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center  p-0 m-0">
-                            <button type="button" class="btn-secondary opbtn" onclick="viewFinishedOrders(this)">
-                                View Order
-                            </button>
-                      </div>`
+      //make the data (columns) as order_pair_id
+      //and dynamic content
+      render: function (data, type, row){
+        return `<div class="button-container d-flex justify-content-center  p-0 m-0">
+                  <button type="button" class="btn-secondary opbtn" onclick="viewFinishedOrders('${data}')">
+                      View Order
+                  </button>
+                </div>`
+      }
     }
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
@@ -53,13 +50,8 @@ const farmerFinishedTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'harvested_date' },
-    //add this extra column so that it will also collapse in responsive view
-    { "data": ''},
+    { "data": 'order_pair_id'},
   ],
-  createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-pair-id', data.order_pair_id);
-  },
-
   initComplete: function(){
     finished_data = finishTable.ajax.json().data;
     //show the total count of finished orders
@@ -75,12 +67,15 @@ const farmerReservedTableConfig = {
     { orderable: false, "targets": 4 },
     {
       targets: 4,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center p-0 m-0">
-                            <button type="button" id=modal-farmer-btn class="btn-secondary opbtn" onclick="viewReservedOrders(this)">
-                                View Order
-                            </button>
-                            </div>`
+      //make the data (columns) as order_pair_id
+      //and dynamic content
+      render: function (data, type, row) {
+        return `<div class="button-container d-flex justify-content-center p-0 m-0">
+                  <button type="button" id=modal-farmer-btn class="btn-secondary opbtn" onclick="viewReservedOrders('${data}')">
+                      View Order
+                  </button>
+                </div>`
+      }
     }
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
@@ -94,13 +89,8 @@ const farmerReservedTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'status' },
-    //add this extra column so that it will also collapse in responsive view
-    { "data": ''},
+    { "data": 'order_pair_id'},
   ],
-  createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-pair-id', data.order_pair_id);
-  },
-
   initComplete: function(){
     reserved_data = reservedTable.ajax.json().data;
     //show the total count of reserved orders
@@ -117,12 +107,15 @@ const farmerIncomingTableConfig = {
     { orderable: false, "targets": 4 },
     {
       targets: 4,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center  p-0 m-0">
-                            <button type="button" class="btn-secondary opbtn" onclick="viewIncomingOrders(this)">
-                                View
-                            </button>
-                            </div>`
+      //make the data (columns) as order_id
+      //and dynamic content
+      render: function(data,type,row){
+        return  `<div class="button-container d-flex justify-content-center  p-0 m-0">
+                    <button type="button" class="btn-secondary opbtn" onclick="viewIncomingOrders('${data}')">
+                        View
+                    </button>
+                  </div>`
+      }
     }
   ],
   ajax: {
@@ -133,14 +126,9 @@ const farmerIncomingTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'land_area_needed' },
-    { "data": 'location_id' },
-    //add this extra column so that it will also collapse in responsive view
-    { "data": ''},
+    { "data": 'location' },
+    { "data": 'order_id'},
   ],
-  createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-id', data.order_id);
-  },
-
   initComplete: function(){
     incoming_data = incomingTable.ajax.json().data;
     //show the total incoming of orders
@@ -160,16 +148,7 @@ const successMsg = document.getElementById("successReserveMsg");
 const reserveButton = document.getElementById('reserveBtn');
 const cancelButton = document.getElementById('cancelReserveBtn');
 
-function viewFinishedOrders(button){
-  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-pair-id");
-  //when mobile view, or a column collapse
-  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
-  //these two rows become siblings
-  //when selectedOrderID is null, it is assumed in mobile view
-  //temporary fix
-  if(selectedOrderID == null)
-    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-pair-id");
-
+function viewFinishedOrders(selectedOrderID){
   let order = null;
 
   for(let i = 0; i < finished_data.length; i++){
@@ -178,7 +157,7 @@ function viewFinishedOrders(button){
       break;
     }
   }
-  console.log(JSON.stringify(order));
+  //console.log(JSON.stringify(order));
   // document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
   // document.getElementById('reserved-date-approved').innerHTML = String(order.date_approved);
   document.getElementById('finished-date-reserved').innerHTML = String(order.accepted_date);
@@ -194,16 +173,7 @@ function viewFinishedOrders(button){
   $("#finished-modal-farmer").modal("show");
 }
 
-function viewReservedOrders(button){
-  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-pair-id");
-  //when mobile view, or a column collapse
-  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
-  //these two rows become siblings
-  //when selectedOrderID is null, it is assumed in mobile view
-  //temporary fix
-  if(selectedOrderID == null)
-    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-pair-id");
-
+function viewReservedOrders(selectedOrderID){
   let order = null;
   for(let i = 0; i < reserved_data.length; i++){
     if(reserved_data[i].order_pair_id == selectedOrderID){
@@ -226,16 +196,7 @@ function viewReservedOrders(button){
   $("#reserved-modal-farmer").modal("show");
 }
 
-function viewIncomingOrders(button){
-  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
-  //when mobile view, or a column collapse
-  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
-  //these two rows become siblings
-  //when selectedOrderID is null, it is assumed in mobile view
-  //temporary fix
-  if(selectedOrderID == null)
-    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-id");
-
+function viewIncomingOrders(selectedOrderID){
   let order = null;
   for(let i = 0; i < incoming_data.length; i++){
     if(incoming_data[i].order_id == selectedOrderID){
@@ -256,11 +217,11 @@ function viewIncomingOrders(button){
   reserveButton.addEventListener('click',checkOrder);
   //Assigning values
   document.getElementById('incoming-date-ordered').innerHTML = String(order.order_date);
-  document.getElementById('incoming-date-approved').innerHTML = "Not Yet Approved";
+  //document.getElementById('incoming-date-approved').innerHTML = "Not Yet Approved";
   document.getElementById('incoming-status').innerHTML = String(order.status);
   document.getElementById('incoming-crop-name').innerHTML = String(order.name);
   document.getElementById('incoming-demand').innerHTML = String(order.weight) + " kilos";
-  document.getElementById('incoming-location').innerHTML = String(order.location_id);
+  document.getElementById('incoming-location').innerHTML = String(order.location);
   document.getElementById('incoming-area-needed').innerHTML = String(order.land_area_needed);
   document.getElementById('incoming-days').innerHTML = String(order.weight);
   $("#incoming-modal-farmer").modal("show");
@@ -375,6 +336,28 @@ function cancelReservation() {
     }
   });
 }
+
+function harvestOrder() {
+  let formData = new FormData();//.append('action','add');
+  formData.append('order-id', selectedOrderID);
+  formData.append('operation', 'harvest-order');
+  formData.append('csrfmiddlewaretoken',csrf_token);
+  $.ajax({
+    url: '',
+    type: 'post',
+    //data to be passed to django view
+    data: formData,
+    contentType: false,
+    processData: false,
+
+    success: function (response) {
+      console.log("order marked as harvested");
+    },
+    error: function (response) {
+
+    }
+  });
+}
 //Customized close modal function, because when the farmer views an incoming order, it is temporarily reserved to him/her, 
 function closeModal(){
   //isOrderReserved only becomes false during initialization or if the farmer confirms the reservation
@@ -400,6 +383,31 @@ $(document).ready(function () {
   incomingTable = $('.farmer-incoming-table').DataTable(farmerIncomingTableConfig);
   finishTable = $('.farmer-finished-table').DataTable(farmerFinishedTableConfig);
   reservedTable = $('.farmer-reserved-table').DataTable(farmerReservedTableConfig);
+
+  /*Date Range Filter*/
+  $.fn.dataTable.ext.search.push((settings, data, dataIndex ) => {
+      let minDate = $('.min-date').val();
+      let maxDate = $('.max-date').val();
+      
+      if (minDate === '' || maxDate === '' )
+        return true;
+      if (Date.parse(date) >= Date.parse(minDate) && Date.parse(date) <= Date.parse(maxDate))
+        return true;  
+      else 
+        return false;
+    }
+  );
+
+  $('.min-date, .max-date').keyup(() => finishedTable.draw());
+  $('.min-date, .max-date').change(() => finishedTable.draw());
+
+  const clear = () => {
+    $('.min-date').val("");
+    $('.max-date').val("");
+    finishedTable.draw();
+  } 
+
+  $("#finished-table").find('#refresh-btn').click(clear);
   
 });
 

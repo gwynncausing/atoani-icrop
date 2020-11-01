@@ -376,11 +376,11 @@
 
 
 {% block scripts %}
-    <script src="{% static '/js/load-address.js' %}"></script>
-    <script src="{% static '/js/settings.js' %}"></script>
+    <script src="{% static '/js/global/load-address.js' %}"></script>
+    <script src="{% static '/js/login_register/settings.js' %}"></script>
     <script>
         $(document).ready(function() {
-            loadAddresses("{% static '/js/philippine_address_2019v2.json' %}");
+            loadAddresses("{% static '/js/json/philippine_address_2019v2.json' %}");
         });
     </script>  
 {% endblock %}

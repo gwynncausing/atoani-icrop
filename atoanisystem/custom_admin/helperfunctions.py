@@ -106,6 +106,13 @@ def get_unapproved_orders(orders):
             unapproved_orders.append(order)
     return unapproved_orders
 
+def get_approved_orders(orders):
+    approved_orders = []
+    for order in orders:
+        if order['status'] == "Posted":
+            approved_orders.append(order)
+    return approved_orders
+
 def get_ongoing_orders(orders):
     ongoing_orders = []
     for order in orders:
@@ -113,12 +120,26 @@ def get_ongoing_orders(orders):
             ongoing_orders.append(order)
     return ongoing_orders
 
+def get_harvested_orders(orders):
+    harvested_orders = []
+    for order in orders:
+        if order['status'] == "Harvested":
+            harvested_orders.append(order)
+    return harvested_orders
+
 def get_collected_orders(orders):
     collected_orders = []
     for order in orders:
         if order['status'] == "Collected":
             collected_orders.append(order)
     return collected_orders
+
+def get_delivered_orders(orders):
+    delivered_orders = []
+    for order in orders:
+        if order['status'] == "Delivered":
+            delivered_orders.append(order)
+    return delivered_orders
 
 def approve_order(order_id):
     order = Order.objects.get(order_id=order_id)
@@ -141,6 +162,15 @@ def force_reserve_to(user_id,order_id):
         ok = True
     return ok
 
+def harvest_order(order_id):
+    order = Order.objects.get(order_id=order_id)
+    order.status = "Harvested"
+    order.save()
+    order_pair = Order_Pairing.objects.get(order_id=order_id)
+    order_pair.status = "Harvested"
+    order_pair.harvested_date = tz.now()
+    order_pair.save()
+
 def complete_order(order_id):
     order = Order.objects.get(order_id=order_id)
     order.status = "Collected"
@@ -148,3 +178,13 @@ def complete_order(order_id):
     order_pair = Order_Pairing.objects.get(order_id=order_id)
     order_pair.status = "Collected"
     order_pair.collected_date = tz.now()
+    order_pair.save()
+
+def deliver_order(order_id):
+    order = Order.objects.get(order_id=order_id)
+    order.status = "Delivered"
+    order.save()
+    order_pair = Order_Pairing.objects.get(order_id=order_id)
+    order_pair.status = "Delivered"
+    order_pair.delivered_date = tz.now()
+    order_pair.save()

@@ -141,6 +141,8 @@ class RegistrationView(View):
             new_user.name = user
             if account_type == "Farmer":
                 new_user.location = location
+                new_user.available_land_area = new_user.land_area
+                new_user.is_available = True
                 new_user.save()
             # to cater the ManyToManyField of customer.location
             if account_type == "Customer":
@@ -204,7 +206,7 @@ class SettingsView(View):
                     data['firstname'] = firstname
                     data['lastname'] = lastname
                     return JsonResponse(data, safe=False, status=200)
-                
+
                 elif 'btn-save-others' in request.POST:
                     print(request.POST)
                     land_area = request.POST.get("land_area")
@@ -213,7 +215,7 @@ class SettingsView(View):
                     data['company'] = company
                     Farmer.objects.filter(id = request.user.farmer.id).update(land_area = land_area, company = company)
                     return JsonResponse(data, safe=False, status=200)
-                
+
                 elif 'btn-save-contact' in request.POST:
                     print(request.POST)
                     contact_number = request.POST.get("contact_number")
@@ -300,7 +302,7 @@ class SettingsView(View):
                         data['brgy'] = existing_loc.brgy
                         # data['street'] = existing_loc.street
                         print("added existing")
-                
+
                 elif 'btn-delete-address' in request.POST:
                     print("clicked delete")
                     customer = request.user.customer
@@ -403,6 +405,13 @@ class ForgotUsernamePasswordView(View):
         return render(request, "login_register/forgot-username-password.html")
 
 def handler404(request, *args, **argv):
-    response = render_to_response("404.html", {}, context_instance=RequestContext(request))
+    response = render(request, "error_pages/404.html")
     response.status_code = 404
     return response
+
+def handler500(request, *args, **argv):
+    response = render(request, "error_pages/500.html")
+    response.status_code = 404
+    return response
+
+

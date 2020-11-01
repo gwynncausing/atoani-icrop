@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/rowreorder/1.2.7/css/rowReorder.dataTables.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css"/>
+    <script src="https://use.fontawesome.com/60a410ab8d.js"></script>
 {% endblock %}
 
 
@@ -32,6 +33,18 @@
 
         <div class="upper container-fluid mt-5 mb-4">
             <ul class="nav nav-pills nav-tabs row pl-0 pr-0" id="nav-tab" role="tablist">
+                <li class="nav-item  active pl-0 pr-0 pt-0 orders col-sm-4 col-6 ">
+                    <a class="nav-link h-100 py-sm-1 py-0 px-sm-3 px-2" id="nav-pending-tab"  data-toggle="tab" href="#pending-table" role="tab" aria-controls="pending-table" aria-selected="true">
+                        <div class="box col-12 pl-0 pr-0 h-100">
+                            <div class="pending-orders pl-sm-3 pl-2 pt-2 pb-2">
+                                <i>Pending Orders</i>
+                            </div>
+                            <div id="pending-orders-counter" class="order-type d-flex justify-content-center align-items-center" >
+                                0
+                            </div>
+                        </div>
+                    </a>
+                </li>
                 <li class="nav-item active pl-0 pr-0 pt-0 orders col-sm-4 col-6">
                     <a class="nav-link h-100 py-sm-1 py-0 px-sm-3 px-2"  id="nav-reserved-tab" data-toggle="tab" href="#reserved-table" role="tab" aria-controls="reserved-table" aria-selected="false">
                         <div class="box col-12 pl-0 pr-0 px-0 h-100">
@@ -44,7 +57,7 @@
                         </div>
                     </a>
                 </li>
-                <li class="nav-item  active pl-0 pr-0 pt-0 mb-0 orders col-sm-4 col-6">
+                <li class="nav-item  active pl-0 pr-0 pt-0 mb-0 orders offset-sm-0 offset-3 col-sm-4 col-6">
                     <a class="nav-link h-100 py-sm-1 py-0 px-sm-3 px-2" id="nav-finished-tab"  data-toggle="tab" href="#finished-table" role="tab" aria-controls="finished-table" aria-selected="false">
                         <div class="box col-12 pl-0 pr-0 h-100">
                             <div class="finished-orders pl-sm-3 pl-2 pt-2 pb-2" >
@@ -56,99 +69,30 @@
                         </div>
                     </a>
                 </li>
-                <li class="nav-item  active pl-0 pr-0 pt-0 orders offset-sm-0 offset-3 col-sm-4 col-6">
-                    <a class="nav-link h-100 py-sm-1 py-0 px-sm-3 px-2" id="nav-incoming-tab"  data-toggle="tab" href="#incoming-table" role="tab" aria-controls="incoming-table" aria-selected="true">
-                        <div class="box col-12 pl-0 pr-0 h-100">
-                            <div class="incoming-orders pl-sm-3 pl-2 pt-2 pb-2">
-                                <i>Total Orders</i>
-                            </div>
-                            <div id="total-orders-counter" class="order-type d-flex justify-content-center align-items-center" >
-                                0
-                            </div>
-                        </div>
-                    </a>
-                </li>
             </ul>
         </div>
 
 
         <div class="tab-content col-12 mt-sm-3 mt-1 pb-3 ml-auto mr-auto" id="nav-tabContent">
-            <!-- Reserved Table -->
-            <div id="reserved-table" class="order-table row mt-sm-2 mt-0 mb-5 tab-pane fade  w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-reserved-tab">
+
+            <!-- Pending Table -->
+            <div id="pending-table" class="order-table row mt-2 mb-3 tab-pane fade show active w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-pending-tab">
                 <div class="order-tab w-100 pl-3 pt-2 pb-2">
-                    <i>Reserved Orders</i>  
+                    <i>Pending Orders</i>  
                 </div>
                 <div class="order-table-holder col-12 container pb-2 pr-md-2 pl-md-2 pr-0 pl-0 pb-5" style="width: 95%">
-                    <!-- Insert here the Reserved Table -->
-                    <table class="table display customer-reserved-table no-wrap" style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th>Date Ordered</th>
-                                <th>Name</th>
-                                <th>Location</th>
-                                <th>Demand</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <!-- <tfoot>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>    
-                        </tfoot> -->
-                    </table>
-                    <!-- End Here -->
-                </div>
-            </div>
-            <!-- End Reserved Table -->
-
-            <!-- Finished Table -->
-            <div id="finished-table" class="order-table row mt-2 mb-5 tab-pane fade w-90 mr-auto ml-auto px-0"  role="tabpanel" aria-labelledby="nav-reserved-tab">
-                <div class="order-tab w-100 pl-3 pt-2 pb-2">
-                    <i>Finished Orders</i>  
-                </div>
-                <div class="order-table-holder col-12 container pb-2 pr-md-2 pl-md-2 pr-0 pl-0 pb-5"  style="width: 95%">
-                    <!-- Insert here the Reserved Table -->
-                    <table class="table display customer-finished-table no-wrap" style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th>Date Ordered</th>
-                                <th>Name</th>
-                                <th>Location</th>
-                                <th>Demand</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <!-- <tfoot>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>    
-                        </tfoot> -->
-                    </table>
-                    <!-- End Here -->
-                </div>
-            </div>
-            <!-- End Finished Table -->
-
-            <!-- Incoming Table -->
-            <div id="incoming-table" class="order-table row mt-2 mb-5 tab-pane fade show active w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-incoming-tab">
-                <div class="order-tab w-100 pl-3 pt-2 pb-2">
-                    <i>Total Orders</i>  
-                </div>
-                <div class="order-table-holder col-12 container pb-2 pr-md-2 pl-md-2 pr-0 pl-0 pb-5" style="width: 95%">
-                    <!-- Template Table 
-                        Note: add these classes to other table -> mr-auto ml-auto table
-                    -->
-                    <table class="table display customer-total-table no-wrap" style="width: 100%;">
+                    <div class="date-range row pt-4 float-right pl-3">
+                        <div class="">
+                            <label class="pr-2">from</label>
+                            <input class="min-date" type="date" />
+                        </div>
+                        <div class="pl-sm-2">
+                            <label class="pr-md-2 pr-4">to</label>
+                            <input class="max-date" type="date" />
+                            <button class="btn btn-light ml-2 position-relative mr-0" id="refresh-btn" style="background: none;"><i class="fa fa-refresh p-0 m-0"></i></button>
+                        </div>
+                    </div>
+                    <table id="pending-table-orders" class="table display customer-pending-table no-wrap" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>Date Ordered</th>
@@ -158,289 +102,343 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <!-- <tfoot>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>    
-                        </tfoot> -->
                     </table>
                 </div>
             </div>
             <!-- End Incoming Table -->
 
+            <!-- Reserved Table -->
+            <div id="reserved-table" class="order-table row mt-sm-2 mt-0 mb-3 tab-pane fade  w-90 mr-auto ml-auto" role="tabpanel" aria-labelledby="nav-reserved-tab">
+                <div class="order-tab w-100 pl-3 pt-2 pb-2">
+                    <i>Reserved Orders</i>  
+                </div>
+                <div class="order-table-holder col-12 container pb-2 pr-md-2 pl-md-2 pr-0 pl-0 pb-5" style="width: 95%">
+                    <!-- Insert here the Reserved Table -->
+                    <div class="date-range row pt-4 float-right pl-3">
+                        <div class="">
+                            <label class="pr-2">from</label>
+                            <input class="min-date" type="date" />
+                        </div>
+                        <div class="pl-sm-2">
+                            <label class="pr-md-2 pr-4">to</label>
+                            <input class="max-date" type="date" />
+                            <button class="btn btn-light ml-2 position-relative mr-0" id="refresh-btn" style="background: none;"><i class="fa fa-refresh p-0 m-0"></i></button>
+                        </div>
+                    </div>
+                    <table id="reserved-table-orders" class="table display customer-reserved-table no-wrap" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Date Ordered</th>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Demand</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <!-- End Here -->
+                </div>
+            </div>
+            <!-- End Reserved Table -->
+
+            <!-- Finished Table -->
+            <div id="finished-table" class="order-table row mt-2 mb-3 tab-pane fade w-90 mr-auto ml-auto px-0"  role="tabpanel" aria-labelledby="nav-reserved-tab">
+                <div class="order-tab w-100 pl-3 pt-2 pb-2">
+                    <i>Finished Orders</i>  
+                </div>
+                <div class="order-table-holder col-12 container pb-2 pr-md-2 pl-md-2 pr-0 pl-0 pb-5"  style="width: 95%">
+                    <!-- Insert here the Reserved Table -->
+                    <div class="date-range row pt-4 float-right pl-3">
+                        <div class="">
+                            <label class="pr-2">From</label>
+                            <input class="min-date" type="date" />
+                        </div>
+                        <div class="pl-sm-2">
+                            <label class="pr-md-2 pr-4">To</label>
+                            <input class="max-date" type="date" />
+                            <button class="btn btn-light ml-2 position-relative mr-0" id="refresh-btn" style="background: none;"><i class="fa fa-refresh p-0 m-0"></i></button>
+                        </div>
+                    </div>
+                    <table id="finished-table-orders" class="table display customer-finished-table no-wrap" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Date Ordered</th>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Demand</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <!-- End Here -->
+                </div>
+            </div>
+            <!-- End Finished Table -->
         </div>
     </div>
 </div>
 
     <!-- Separated different modals and functions just in case there are changes -->
 
-    <!-- Modal Order Reserved-->
-    <div class="modal-customer modal fade" id="modal-customer-reserved" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Order Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row d-flex justify-content-center mt-3 pl-5 pr-5" style="font-size: 16px">
-                        <div class="col-md-6 col-12 row">
-                            <div class="label col-sm-6 col-4 text-right pt-1 pb-1">Date Ordered:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="reserved-date-ordered">-</div>
-                            <div class="label col-sm-6 col-4 text-right pt-1 pb-1">Date Approved:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="reserved-date-approved">-</div>
-                            <div class="label col-sm-6 col-4 text-right pt-1 pb-1">Date Reserved:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="reserved-date-reserved">-</div>
+<!-- Modal Order Pending -->
+<div class="modal-customer modal fade" id="modal-customer-pending" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pending Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center mt-3 pl-sm-5 pr-sm-5 pl-0 pr-0">
+                    <div class="label col-sm-3 col-4 text-right mb-3">Order Number:</div>
+                    <div class="col-sm-9 col-8 mb-3" id="pending-order-number">-</div>
+                    <div class="label col-sm-3 col-4 text-right pt-1">Crop Name:</div>
+                    <div class="col-sm-9 col-8 pt-1" id="pending-crop-name">-</div>
+                    <div class="label col-sm-3 col-4  text-right pt-1 pb-1">Demand:</div>
+                    <div class="col-sm-9 col-8 pt-1 pb-1" id="pending-demand">-</div>
+                    <div class="label col-sm-3 col-4  text-right pt-1 pb-1">Location:</div>
+                    <div class="col-sm-9 col-8 pt-1 pb-1" id="pending-location">-</div>
+                    <div class="col-12 row mt-4">
+                        <div class="label col-12 text-center mb-2">Status</div>
+                        <div class="pending-date-ordered col-12 text-center py-1 d-none">
+                            <div class="">Date Ordered on <span id="pending-date-ordered" style="color: black; background: none;">January 1, 2020 10:30<span></div>
+                            <p class="col-12 text-center pt-1 pb-2">On Review to AtoANI</p>
                         </div>
-                        <div class="col-md-6 col-12 row mt-md-0 mt-3">
-                            <div class="label col-sm-6 col-4 text-right">Status:</div>
-                            <div class="col-sm-6 col-8" id="reserved-status">-</div>
-                            <div class="label col-sm-6 col-4 text-right">Order Number:</div>
-                            <div class="col-sm-6 col-8" id="reserved-order-number">-</div>
-                            <div class="col-6"></div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-4">
-                            <div class="label col-sm-6 col-4 text-right pt-1">Crop Name:</div>
-                            <div class="col-sm-6 col-8 pt-1" id="reserved-crop-name">-</div>
-                            <div class="label col-sm-6 col-4  text-right pt-1 pb-1">Demand:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="reserved-demand">-</div>
-                            <div class="label col-sm-6 col-4  text-right pt-1 pb-1">Location:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="reserved-location">-</div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-4">
+                        <div class="pending-date-approved col-12 text-center py-1 d-none">
+                            <div class="">Date Approved on <span id="pending-date-approved" style="color: black; background: none;">January 1, 2020 10:30</span></div>
+                            <p class="col-12 text-center pt-1 pb-2">Waiting for Farmer</p>
                         </div>
                     </div>
-                </div>
-                <div class="pt-3 pb-3 pl-5 pr-5 d-flex justify-content-between">
-                    <input type="button" class="btn btn-danger report-btn" value="Report Problem">
-                    <button type="button" class="btn ok-btn" data-dismiss="modal">OK</button>
                 </div>
             </div>
-        </div>
-    </div>   
-        
-    <!-- Modal Order Finished-->
-    <div class="modal-customer modal fade" id="modal-customer-finished" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document"    >
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Finished Order Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row d-flex justify-content-center mt-3 pl-5 pr-5" style="font-size: 16px">
-                        <div class="col-md-6 col-12 row">
-                            <div class="label col-sm-6 col-4 text-right pt-1 pb-1">Date Ordered:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="finished-date-ordered">-</div>
-                            <div class="label col-sm-6 col-4 text-right pt-1 pb-1">Date Approved:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="finished-date-approved">-</div>
-                            <div class="label col-sm-6 col-4 text-right pt-1 pb-1">Date Reserved:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="finished-date-reserved">-</div>
-                            <div class="label col-sm-6 col-4 text-right pt-1 pb-1">Date Finished:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="finished-date-finished">-</div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-md-0 mt-3">
-                            <div class="label col-sm-6 col-4 text-right">Status:</div>
-                            <div class="col-sm-6 col-8" id="finished-status">-</div>
-                            <div class="label col-sm-6 col-4 text-right">Order Number:</div>
-                            <div class="col-sm-6 col-8" id="finished-order-number">-</div>
-                            <div class="col-6 "></div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-4">
-                            <div class="label col-sm-6 col-4 text-right pt-1">Crop Name:</div>
-                            <div class="col-sm-6 col-8 pt-1" id="finished-crop-name">-</div>
-                            <div class="label col-sm-6 col-4  text-right pt-1 pb-1">Demand:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="finished-demand">-</div>
-                            <div class="label col-sm-6 col-4  text-right pt-1 pb-1">Location:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="finished-location">-</div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-4">
-                        </div>
-                    </div>
-                </div>
-                <div class="pt-3 pb-3 pl-5 pr-5 d-flex justify-content-between">
-                    <button type="button" class="btn ok-btn" data-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>   
-
-    <!-- Modal Order TOTAL-->
-    <div class="modal-customer modal fade" id="modal-customer-total" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document"    >
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Total Order Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row d-flex justify-content-center mt-3 pl-sm-5 pr-sm-5 pl-0 pr-0" style="font-size: 16px">
-                        <div class="col-md-6 col-12 row">
-                            <div class="label col-sm-6 col-4 text-right pt-1 pb-1">Date Ordered:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="total-date-ordered">-</div>
-                            <div class="label col-sm-6 col-4  text-right pt-1 pb-1">Date Approved:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="total-date-approved">-</div>
-                            <div class="label col-sm-6 col-4  text-right pt-1 pb-1">Date Reserved:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="total-date-reserved">-</div>
-                            <div class="label col-sm-6 col-4 text-right pt-1 pb-1">Date Finished:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="total-date-finished">-</div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-md-0 mt-3">
-                            <div class="label col-sm-6 col-4 text-right">Status:</div>
-                            <div class="col-sm-6 col-8" id="total-status">-</div>
-                            <div class="label col-sm-6 col-4 text-right">Order Number:</div>
-                            <div class="col-sm-6 col-8" id="total-order-number">-</div>
-                            <div class="col-6 "></div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-4">
-                            <div class="label col-sm-6 col-4 text-right pt-1">Crop Name:</div>
-                            <div class="col-sm-6 col-8 pt-1" id="total-crop-name">-</div>
-                            <div class="label col-sm-6 col-4  text-right pt-1 pb-1">Demand:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="total-demand">-</div>
-                            <div class="label col-sm-6 col-4  text-right pt-1 pb-1">Location:</div>
-                            <div class="col-sm-6 col-8 pt-1 pb-1" id="total-location">-</div>
-                        </div>
-                        <div class="col-md-6 col-12 row mt-4">
-                        </div>
-                    </div>
-                </div>
-                <div class="pt-3 pb-5 pl-5 pr-5 text-right">
-                    <button type="button" class="btn ok-btn" data-dismiss="modal">OK</button>
-                </div>
+            <div class="py-2 px-sm-5 px-2 d-flex justify-content-between">
+                <a type="button" href="{% url 'login_register:contact-us' %}" class="btn btn-danger report-btn">Report Problem</a>
+                <button type="button" class="btn ok-btn" data-dismiss="modal">OK</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal Order CREATE-->
-    <div class="modal-customer modal fade modal-order" id="modal-create-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div id="modal-create-order" class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content pb-4">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Order Form</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="customer-order-form" method="POST" class="customer-order-form" novalidate autocomplete="on">
-                        {% csrf_token %}
-                        <div class="container pl-4 pr-5 mt-5 group-inputs">
-                            <div class="form-row row-12 mt-2">
-                                <div class="form-group col-12 col-md-3 pt-2 d-flex justify-content-md-end font-weight-bold">
-                                    <label for="province">Address:</label>
-                                </div>
-                                
-                                <div class="col-md-9 col-12 row pl-4 pt-2W">
-                                    
-                                    {% for location in user.customer.location.all %}
-                                        {% if forloop.first %}
-                                            <div class="form-check col-12 col-md-9 mt-2">
-                                                <input class="form-check-input addresses-on-file default-address" type="radio" name="original-address"  id="{{location.id}}" value="{{location.id}}" checked>
-                                                <label class="form-check-label text-truncate d-inline-block" for="{{location.id}}" style="max-width: 18rem;">
-                                                    {{location.name}}
-                                                </label>
-                                            </div>
-                                        {% else %}
-                                            <div class="form-check col-12 col-md-9 mt-2">
-                                                <input class="form-check-input addresses-on-file" type="radio" name="address"  id="{{location.id}}" value="{{location.id}}">
-                                                <label class="form-check-label text-truncate d-inline-block" for="{{location.id}}" style="max-width: 18rem;">
-                                                    {{location.name}}
-                                                </label>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                    
-                                    <div class="form-check col-12 col-md-9 mt-2">
-                                        <input class="form-check-input" type="radio" name="address" id="custom-address" value="custom-address">
-                                        <label class="form-check-label" for="custom-address">
-                                            Custom Address
-                                        </label>
-                                    </div>
-                                </div>
-                                
-                                <div id="custom-address-holder" class="offset-md-3 col-md-9 col-12 row mt-3 p-0" style="display: none;">
-                                    <div class="form-group col-12 col-md-12">
-                                        <select class="form-control" name="province" id="province" >
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-12 col-md-12">
-                                        <select class="form-control" name="city" id="city" disabled>
-                                            <option value="" disabled selected hidden>City *</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-12 col-md-12">
-                                        <select class="form-control" name="barangay" id="barangay" disabled>
-                                            <option value="" disabled selected hidden>Barangay *</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-12 col-md-12">
-                                        <input class="form-control" type="text" name="street" id="street" placeholder="Street/House Number" maxlength="30">
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="form-row row-12 mt-4">
-                                <div class="form-group col-12 col-md-3 pt-2 d-flex justify-content-md-end align-items-center font-weight-bold">
-                                    <label for="crop-name">Crop Name:</label>
-                                </div>
-                                <div class="form-group col-12 col-md-9 row pr-0">
-                                    <div class="col-12 pl-4 pr-0">
-                                        <select class="form-control" name="crop-id" id="crop-selector">
-                                            {% for crop in crops %}
-                                                <option value="{{crop.id}}">{{crop.name}}</option>
-                                            {% endfor %}
-                                        </select>
-                                        <div id="crop-name-invalid" class="invalid-feedback">
-                                            Please enter the name of the crop.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-12 col-md-3 pt-2 d-flex justify-content-md-end align-items-center font-weight-bold">
-                                    <label for="province">Demand:</label>
-                                </div>
-                                <div class="form-groupcol-12 col-md-9 row pr-0">
-                                    <div class="col-12 pl-4 pr-0">
-                                        <input class="form-control" type="text" name="weight" id="demand" placeholder="Demand" maxlength="5" required>
-                                        <span id="kg-indicator">kg.</span>
-                                        <div id="demand-invalid" class="invalid-feedback">
-                                            Please enter your target demand.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+<!-- Modal Order Reserved -->
+<div class="modal-customer modal fade" id="modal-customer-reserved" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reserved Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center mt-3 pl-sm-5 pr-sm-5 pl-0 pr-0">
+                    <div class="label col-sm-3 col-4 text-right mb-3">Order Number:</div>
+                    <div class="col-sm-9 col-8 mb-3" id="reserved-order-number">-</div>
+                    <div class="label col-sm-3 col-4 text-right pt-1">Crop Name:</div>
+                    <div class="col-sm-9 col-8 pt-1" id="reserved-crop-name">-</div>
+                    <div class="label col-sm-3 col-4  text-right pt-1 pb-1">Demand:</div>
+                    <div class="col-sm-9 col-8 pt-1 pb-1" id="reserved-demand">-</div>
+                    <div class="label col-sm-3 col-4  text-right pt-1 pb-1">Location:</div>
+                    <div class="col-sm-9 col-8 pt-1 pb-1" id="reserved-location">-</div>
+                    <div class="col-12 row mt-4">
+                        <div class="label col-12 text-center mb-2">Status</div>
+                        <div class="col-12 text-center py-1">
+                            <div class="">Date Ordered on <span id="reserved-date-ordered" style="color: black; background: none;">January 1, 2020 10:30<span></div>
+                            <p class="col-12 text-center pb-1">On Review to AtoANI</p>
                         </div>
-                        <div class="modal-footer mt-5 pt-2 pb-2">
-                            <div class="row w-100">
-                                <!-- Confirmation for order for reservation, and needs to confirm -->
-                                <div id="confirmOrderMsg" class="d-none col-12 rounded text-center text-light bg-success border-info px-1 py-2">
-                                    Are you sure you want to send this order?
-                                </div>
-                            </div>
-                            <div class="pr-2 pt-2 text-right">
-                                <button type="button" id="order-btn" class="btn ok-btn mr-2">Order</button>
-                                <button type="submit" id="yes-btn" class="d-none btn ok-btn mr-2">Yes</button>
-                                <button type="button" id="no-btn" class="d-none btn btn-outline-secondary mr-2" style="width: 5rem;">No</button>
-                                <button type="button" id="cancel-btn" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            </div>
+                        <div class="col-12 text-center py-1">
+                            <div class="">Date Approved on <span id="reserved-date-approved" style="color: black; background: none;">January 1, 2020 10:30</span></div>
+                            <p class="col-12 text-center pb-1">Waiting for Farmer</p>
                         </div>
-                    </form>                    
+                        <div class="col-12 text-center py-1 ">
+                            <div class="">Date Reserved on <span id="reserved-date-reserved" style="color: black; background: none;">January 1, 2020 10:30</span></div>
+                            <p class="label col-12 text-center pb-1">Planting</p>
+                        </div>
+                    </div>
                 </div>
-
+            </div>
+            <div class="py-2 px-sm-5 px-2 d-flex justify-content-between">
+                <a type="button" href="{% url 'login_register:contact-us' %}" class="btn btn-danger report-btn">Report Problem</a>
+                <button type="button" class="btn ok-btn" data-dismiss="modal">OK</button>
             </div>
         </div>
-    </div>      
+    </div>
+</div>
+    
+<!-- Modal Order Finished -->
+<div class="modal-customer modal fade" id="modal-customer-finished" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document"    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Finished Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row d-flex justify-content-center mt-3 pl-sm-5 pr-sm-5 pl-0 pr-0">
+                    <div class="label col-sm-3 col-4 text-right mb-3">Order Number:</div>
+                    <div class="col-sm-9 col-8 mb-3" id="finished-order-number">-</div>
+                    <div class="label col-sm-3 col-4 text-right pt-1">Crop Name:</div>
+                    <div class="col-sm-9 col-8 pt-1" id="finished-crop-name">-</div>
+                    <div class="label col-sm-3 col-4  text-right pt-1 pb-1">Demand:</div>
+                    <div class="col-sm-9 col-8 pt-1 pb-1" id="finished-demand">-</div>
+                    <div class="label col-sm-3 col-4  text-right pt-1 pb-1">Location:</div>
+                    <div class="col-sm-9 col-8 pt-1 pb-1" id="finished-location">-</div>
+                    <div class="col-12 row mt-4">
+                        <div class="label col-12 text-center mb-2">Status</div>
+                        <div class="col-12 text-center pt-1">
+                            <div>Date Ordered on <span id="finished-date-ordered" style="color: black; background: none;">January 1, 2020 10:30<span></div>
+                            <p class="col-12 text-center p-0">On Review to AtoANI</p>
+                        </div>
+                        <div class="col-12 text-center pt-1">
+                            <div>Date Approved on <span id="finished-date-approved" style="color: black; background: none;">January 1, 2020 10:30</span></div>
+                            <p class="col-12 text-center p-0">Waiting for Farmer</p>
+                        </div>
+                        <div class="col-12 text-center pt-1">
+                            <div>Date Reserved on <span id="finished-date-reserved" style="color: black; background: none;">January 1, 2020 10:30</span></div>
+                            <p class="col-12 text-center p-0">Planting</p>
+                        </div>
+                        <div class="finished-date-harvested col-12 text-center pt-1">
+                            <div>Date Harvested on <span id="finished-date-harvested" style="color: black; background: none;">January 1, 2020 10:30</span></div>
+                            <p class="col-12 text-center p-0">Waiting to be Collected</p>
+                        </div>
+                        <div class="finished-date-collected col-12 text-center pt-1 d-none">
+                            <div>Date Collected on <span id="finished-date-collected" style="color: black; background: none;">January 1, 2020 10:30</span></div>
+                            <p class="col-12 text-center p-0">Delivering to <span id="finished-location"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="py-2 px-sm-5 px-2 d-flex justify-content-between">
+                <a type="button" href="{% url 'login_register:contact-us' %}" class="btn btn-danger report-btn">Report Problem</a>
+                <button type="button" class="btn ok-btn" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>  
+
+<!-- Modal Order CREATE-->
+<div class="modal-customer modal fade modal-order" id="modal-create-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div id="modal-create-order" class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content pb-4">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Order Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="customer-order-form" method="POST" class="customer-order-form" novalidate autocomplete="on">
+                    {% csrf_token %}
+                    <div class="container pl-4 pr-5 mt-5 group-inputs">
+                        <div class="form-row row-12 mt-2">
+                            <div class="form-group col-12 col-md-3 pt-2 d-flex justify-content-md-end font-weight-bold">
+                                <label for="province">Address:</label>
+                            </div>
+                            
+                            <div class="form-group col-md-9 col-12 row pl-4 pt-2">                    
+                                {% for location in user.customer.location.all %}
+                                     {% if forloop.first %} 
+                                        <div class="form-check col-12 col-md-9 mt-2">
+                                            <input class="form-check-input addresses-on-file default-address" type="radio" name="address"  id="{{location.id}}" value="{{location.id}}" checked>
+                                            <label class="form-check-label text-truncate d-inline-block" for="{{location.id}}" style="max-width: 18rem;">{{location.name}}</label>
+                                        </div>
+                                    {% else %}
+                                        <div class="form-check col-12 col-md-9 mt-2">
+                                            <input class="form-check-input addresses-on-file" type="radio" name="address"  id="{{location.id}}" value="{{location.id}}">
+                                            <label class="form-check-label text-truncate d-inline-block" for="{{location.id}}" style="max-width: 18rem;">{{location.name}}</label>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                <div class="form-check col-12 col-md-9 mt-2">
+                                    <input class="form-check-input" type="radio" name="address" id="custom-address" value="custom-address">
+                                    <label class="form-check-label" for="custom-address">Custom Address</label>
+                                </div>
+                            </div>
+                            
+                            <div id="custom-address-holder" class="offset-md-3 col-md-9 col-12 row mt-3 p-sm-0 pl-3 w-100" style="display: none;">
+                                <div class="form-group col-12 col-md-12">
+                                    <select class="form-control" name="province" id="province" >
+                                    </select>
+                                    <div id="demand-invalid" class="invalid-feedback">
+                                        Please enter the province.
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-md-12">
+                                    <select class="form-control" name="city" id="city" disabled>
+                                        <option value="" disabled selected hidden>City *</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-12 col-md-12">
+                                    <select class="form-control" name="barangay" id="barangay" disabled>
+                                        <option value="" disabled selected hidden>Barangay *</option>
+                                    </select>
+                                </div>
+                                <!--
+                                <div class="form-group col-12 col-md-12">
+                                    <input class="form-control" type="text" name="street" id="street" placeholder="Street/House Number" maxlength="30">
+                                </div>
+                                -->
+                            </div>
+
+                        </div>
+
+                        <div class="form-row row-12 mt-4">
+                            <div class="form-group col-12 col-md-3 pt-2 d-flex justify-content-md-end align-items-center font-weight-bold">
+                                <label for="crop-name">Crop Name:</label>
+                            </div>
+                            <div class="form-group col-12 col-md-9 row pr-0">
+                                <div class="col-12 pl-4 pr-0">
+                                    <select class="form-control" name="crop-id" id="crop-selector">
+                                        {% for crop in crops %}
+                                            <option value="{{crop.id}}">{{crop.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <div id="crop-name-invalid" class="invalid-feedback">
+                                        Please enter the name of the crop.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-12 col-md-3 pt-2 d-flex justify-content-md-end align-items-center font-weight-bold">
+                                <label for="province">Demand:</label>
+                            </div>
+                            <div class="form-groupcol-12 col-md-9 row pr-0">
+                                <div class="col-12 pl-4 pr-0">
+                                    <input class="form-control" type="text" name="weight" id="demand" placeholder="Demand" maxlength="5" required>
+                                    <span id="kg-indicator">kg.</span>
+                                    <div id="demand-invalid" class="invalid-feedback">
+                                        Please enter your target demand.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer mt-5 pt-2 pb-2">
+                        <div class="row w-100">
+                            <!-- Confirmation for order for reservation, and needs to confirm -->
+                            <div id="confirmOrderMsg" class="d-none col-12 rounded text-center text-light bg-success border-info px-1 py-2">
+                                Are you sure you want to send this order?
+                            </div>
+                        </div>
+                        <div class="pr-2 pt-2 text-right">
+                            <button type="button" id="order-btn" class="btn ok-btn mr-2">Order</button>
+                            <button type="submit" id="yes-btn" class="d-none btn ok-btn mr-2">Yes</button>
+                            <button type="button" id="no-btn" class="d-none btn btn-outline-secondary mr-2" style="width: 5rem;">No</button>
+                            <button type="button" id="cancel-btn" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>                    
+            </div>
+
+        </div>
+    </div>
+</div>      
 {% endblock %}
 
 {% block scripts %}
@@ -448,21 +446,20 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/rowreorder/1.2.7/js/dataTables.rowReorder.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.21/b-1.6.3/b-html5-1.6.3/b-print-1.6.3/fh-3.1.7/sp-1.1.1/datatables.min.js"></script>  
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
     <!-- for customer dashboard tables -->
-    <script src="{% static '/js/customer-dashboard.js' %}"></script>
+    <script src="{% static '/js/dashboard/customer-dashboard.js' %}"></script>
     <!-- For modal transition and validate form report -->
-    <script src="{% static '/js/form-customer-report.js' %}"></script>
-    <script src="{% static '/js/form-customer-order.js' %}"></script>
+    <script src="{% static '/js/dashboard/form-customer-order.js' %}"></script>
     <!-- load address-->
-    <script src="{% static '/js/load-address.js' %}"></script>
+    <script src="{% static '/js/global/load-address.js' %}"></script>
     <script>
         $(document).ready(function() {
-            loadAddresses("{% static '/js/philippine_address_2019v2.json' %}");
+            loadAddresses("{% static '/js/json/philippine_address_2019v2.json' %}");
         });
-    </script>   
+    </script>  
     <!-- shows the notification success or error when reserved-->
-    <script src="{% static '/js/notify.js' %}"></script>
+    <script src="{% static '/js/global/notify.js' %}"></script>
 {% endblock %}
 
 
