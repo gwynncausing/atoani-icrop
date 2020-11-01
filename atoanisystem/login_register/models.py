@@ -135,6 +135,20 @@ class Customer(models.Model):
     def add_location(self,location_id):
         self.location.add(location_id)
 
+    def replace_location(self,old_id,new_id):
+        all_loc = self.location.all()
+        new_loc = Location.objects.get(id=new_id)
+        print("new loc")
+        print(new_loc)
+        for location in all_loc:
+            if(location.id == old_id):
+                location = None
+                location = new_loc
+                print(location)
+                self.save()
+                break
+        print(self.get_all_locations())
+
     class Meta:
         ordering = ['name']
 
