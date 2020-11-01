@@ -5,16 +5,12 @@ const getPendingOrdersUrl = '/dashboard/get-customer-pending-orders';
 const getReservedOrdersUrl = '/dashboard/get-customer-reserved-orders';
 const getFinishedOrdersUrl = '/dashboard/get-customer-finished-orders';
 
+const atoanimessage = "<i>To Be Updated by Atoani</i>"
 //data table settings
 const domPlacements = `<'row'<'col-md-12 d-sm-flex pt-4'f<'ml-3'l>>>
                         <'row'<'col-sm-12'tr>>
                         <'row'<'col-sm-12 mt-2 col-md-5'i>
                       >`;
-
-//`<'row'<'col-md-12 d-sm-flex pt-4'f<'ml-3'l>>>
-//<'row'<'col-sm-12'tr>>
-//<'row'<'col-sm-12 mt-2 col-md-5'i>
-//<'col-12 col-md-7 mt-3'p>>`
 
 const customerReservedTableConfig = {
   paging: true,
@@ -26,12 +22,15 @@ const customerReservedTableConfig = {
     { orderable: false, "targets": 5 },
     {
       targets: 5,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center p-0 m-0">
-                            <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-reserved" onclick="viewReservedOrders(this)">
-                                View Order
-                            </button>
-                            </div>`
+      //make the data (columns) as order_id
+      //and add dynamic content
+      render: function(data, row, type) {
+        return  `<div class="button-container d-flex justify-content-center p-0 m-0">
+                    <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-reserved" onclick="viewReservedOrders('${data}')">
+                        View Order
+                    </button>
+                  </div>`
+        }
     }
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
@@ -46,18 +45,11 @@ const customerReservedTableConfig = {
     { "data": 'location_id'},
     { "data": 'weight' },
     { "data": 'status' },
-    //add this extra column so that it will also collapse in responsive view
-    { "data": ''},
+    { "data": 'order_id'},
   ],
-
   order: [
     [ 1, 'asc' ]
   ],
-
-  createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-id', data.order_id);
-  },
-
   initComplete: function(){
     resevered_data = reservedTable.ajax.json().data;
     //show the total count of reserved orders
@@ -76,12 +68,15 @@ const customerFinishedTableConfig = {
     { orderable: false, "targets": 5 },
     {
       targets: 5,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center p-0 m-0">
-                            <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-finished" onclick="viewFinishedOrders(this)">
-                                View Order
-                            </button>
-                      </div>`
+      //make the data (columns) as order_id
+      //and add dynamic content
+      render: function(data, type, row){
+        return `<div class="button-container d-flex justify-content-center p-0 m-0">
+                  <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-finished" onclick="viewFinishedOrders('${data}')">
+                      View Order
+                  </button>
+                </div>`
+       }
     }
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
@@ -96,18 +91,12 @@ const customerFinishedTableConfig = {
     { "data": 'location_id'},
     { "data": 'weight' },
     { "data": 'status' },
-    //add this extra column so that it will also collapse in responsive view
-    { "data": ''},
+    { "data": 'order_id'},
   ],
 
   order: [
     [ 1, 'asc' ]
   ],
-
-  createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-id', data.order_id);
-  },
-
   initComplete: function(){
     finished_data = finishedTable.ajax.json().data;
     //show the total count of finished orders
@@ -125,12 +114,15 @@ const customerPendingTableConfig = {
     { orderable: false, "targets": 4 },
     {
       targets: 4,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center p-0 m-0">
-                            <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-pending" onclick="viewPendingOrders(this)">
-                                View Order
-                            </button>
-                            </div>`
+      //make the data (columns) as order_id
+      //and add dynamic content
+      render: function (data, type, row) {
+        return `<div class="button-container d-flex justify-content-center p-0 m-0">
+                  <button type="button" class="btn-secondary opbtn" data-target="#modal-customer-pending" onclick="viewPendingOrders('${data}')">
+                    View Order
+                  </button>
+                </div>`
+      }
     },
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
@@ -144,19 +136,11 @@ const customerPendingTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'status' },
-    //add this extra column so that it will also collapse in responsive view
-    { "data": ''},
+    { "data": 'order_id'},
   ],
-
   order: [
     [ 1, 'asc' ]
   ],
-
-  //Adds data-id attribute to each row
-  createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-id', data.order_id);
-  },
-
   initComplete: function(){
     pending_data = pendingTable.ajax.json().data;
     //show the total count of orders
@@ -165,16 +149,7 @@ const customerPendingTableConfig = {
   responsive: true
 };
 
-function viewReservedOrders(button){
-  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
-  //when mobile view, or a column collapse
-  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
-  //these two rows become siblings
-  //when selectedOrderID is null, it is assumed in mobile view
-  //temporary fix
-  if(selectedOrderID == null)
-    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-id")
-
+function viewReservedOrders(selectedOrderID){
   let order = null;
   for(let i = 0; i < resevered_data.length; i++){
     if(resevered_data[i].order_id == selectedOrderID){
@@ -193,16 +168,7 @@ function viewReservedOrders(button){
   $("#modal-customer-reserved").modal("show")
 }
 
-function viewFinishedOrders(button){
-  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
-  //when mobile view, or a column collapse
-  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
-  //these two rows become siblings
-  //when selectedOrderID is null, it is assumed in mobile view
-  //temporary fix
-  if(selectedOrderID == null)
-    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-id");
-
+function viewFinishedOrders(selectedOrderID){
   let order = null;
   console.log(selectedOrderID);
   for(let i = 0; i < finished_data.length; i++){
@@ -211,7 +177,7 @@ function viewFinishedOrders(button){
       break;
     }
   }
-  console.log(JSON.stringify(order));
+  //console.log(JSON.stringify(order));
   document.getElementById('finished-date-ordered').innerHTML = String(order.order_date);
   document.getElementById('finished-date-approved').innerHTML = String("wala sa JSON");
   document.getElementById('finished-date-reserved').innerHTML = String("wala sa JSON");
@@ -236,16 +202,7 @@ function viewFinishedOrders(button){
   $("#modal-customer-finished").modal("show");
 }
 
-function viewPendingOrders(button){
-  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
-  //when mobile view, or a column collapse
-  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
-  //these two rows become siblings
-  //when selectedOrderID is null, it is assumed in mobile view
-  //temporary fix
-  if(selectedOrderID == null)
-    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-id")
-  
+function viewPendingOrders(selectedOrderID){
   let order = null;
   for(let i = 0; i < pending_data.length; i++){
     if(pending_data[i].order_id == selectedOrderID){
@@ -253,12 +210,12 @@ function viewPendingOrders(button){
       break;
     }
   }
-  console.log(button)
-  console.log(pending_data)
-  console.log(JSON.stringify(order));
+  //console.log(button)
+  //console.log(pending_data)
+  //console.log(JSON.stringify(order));
 
   document.getElementById('pending-date-ordered').innerHTML = order.order_date;
-  document.getElementById('pending-date-approved').innerHTML = String("wala sa JSON");
+  document.getElementById('pending-date-approved').innerHTML = order.order_date;//String("wala sa JSON");
   document.getElementById('pending-crop-name').innerHTML = String(order.name);
   document.getElementById('pending-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('pending-location').innerHTML = String(order.location_id);
@@ -357,4 +314,5 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
      .columns.adjust()
      //.responsive.recalc();
 });
+
 

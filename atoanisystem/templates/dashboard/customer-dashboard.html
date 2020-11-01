@@ -448,21 +448,18 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
     <!-- for customer dashboard tables -->
-    <script src="{% static '/js/customer-dashboard.js' %}"></script>
+    <script src="{% static '/js/dashboard/customer-dashboard.js' %}"></script>
     <!-- For modal transition and validate form report -->
-    <script src="{% static '/js/form-customer-report.js' %}"></script>
-    <script src="{% static '/js/form-customer-order.js' %}"></script>
+    <script src="{% static '/js/dashboard/form-customer-order.js' %}"></script>
     <!-- load address-->
-    <script src="{% static '/js/load-address.js' %}"></script>
-    <script src="{% static '/js/responsive-paginate.js' %}"></script>
+    <script src="{% static '/js/global/load-address.js' %}"></script>
     <script>
         $(document).ready(function() {
-            loadAddresses("{% static '/js/philippine_address_2019v2.json' %}");
-            //$(".pagination").rPage();
+            loadAddresses("{% static '/js/json/philippine_address_2019v2.json' %}");
         });
     </script>  
     <!-- shows the notification success or error when reserved-->
-    <script src="{% static '/js/notify.js' %}"></script>
+    <script src="{% static '/js/global/notify.js' %}"></script>
 {% endblock %}
 
 

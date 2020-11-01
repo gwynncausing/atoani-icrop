@@ -172,10 +172,12 @@ def datatable_customer(id):
             order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"
             return order
         else:
-            print('XXXXXXXXXXXXXXX',df)
             df = order.merge(df, how="left", left_on="order_id", right_on="order_id_id").fillna("N/A").drop(columns=["order_id_id"])
             if len(df) != 0:
                 df['accepted_date'] = df['accepted_date'].apply(convert)
+                df['accepted_date'] = df['harvested_date'].apply(convert)
+                df['accepted_date'] = df['collected_date'].apply(convert)
+                df['accepted_date'] = df['delivered_date'].apply(convert)
                 return df.rename(columns={'id':'order_pair_id'})
     return order
 
@@ -186,7 +188,7 @@ def display_customer_table(df):
         return None
     else:
         df = df.sort_values('order_date',ascending=False).reset_index(drop=True).rename(columns={'status_y':'status'})
-        return df[['order_id','order_pair_id','order_date','location_id','name','weight','status']].to_dict('records')
+        return df[['order_id','order_pair_id','order_date','accepted_date','harvested_date','collected_date','delivered_date','location_id','name','weight','status']].to_dict('records')
 
 # search a database based on date
 def search_pairing(predate,postdate,df):

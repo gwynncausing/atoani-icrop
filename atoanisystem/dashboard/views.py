@@ -60,6 +60,14 @@ class FarmerDashboardView(View):
                 order_pair = ff.reserve_to(request.user.farmer,order)
                 json = {'data': ''}
                 return JsonResponse(data=json,status=200)
+            #marks order as harvested
+            elif request.POST.get('operation') == 'harvest-order':
+                #order = Order.objects.get(order_id=request.POST.get('order-id'))
+                #order.status = "Harvested"
+                #order.save()
+                order_pair = ff.harvest_order(request.POST.get('order-id'))
+                json = {'data': ''}
+                return JsonResponse(data=json,status=200)
 
 class FarmerIncomingOrdersView(View):
     print("Incoming Orders View ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -177,6 +185,7 @@ class CustomerReservedOrdersView(View):
         if request.is_ajax():
             #does not include deleted customer
             arr = cf.get_reserved_orders(request.user)
+            print(arr)
             json = {'data':arr}
             return JsonResponse(json)
         return render(request,'dashboard/customer-dashboard.html')

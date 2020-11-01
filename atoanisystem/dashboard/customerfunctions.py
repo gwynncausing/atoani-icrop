@@ -27,10 +27,11 @@ def format_location(orders,user):
 def get_total_orders(user):
     df = dashboard_utility.datatable_customer(user.customer)
     orders = dashboard_utility.display_customer_table(df)
-    print(orders)
     if orders == None:
         orders = []
+    
     format_location(orders,user)
+    #print('1231232132',orders)
     return orders
 
 #returns the reserved order, which is filtered using the status field

@@ -15,4 +15,5 @@ urlpatterns = [
     path('contact-us/', views.ContactUsView.as_view(), name="contact-us"),
     path('terms-and-conditions-of-use/', views.TermsAndConditionsView.as_view(), name="terms-and-conditions-of-use"),
     path('forgot-username-password/', views.ForgotUsernamePasswordView.as_view(), name="forgot-username-password"),
+    # path('change-password/', views.ChangePasswordView.as_view(), name='change_password')
 ]

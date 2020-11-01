@@ -61,24 +61,24 @@
                         </div>
                         <div id="account" class="collapse" aria-labelledby="headingTwo" data-parent="#userEditAccordion">
                             <div class="card-body">
-                                <form class="pt-3" method="POST" id="form-account" data-parent="#userEditAccordion">
+                                <form class="pt-3" method="POST" id="form-account">
                                     {% csrf_token %}
                                     <div class="form-row row pr-2 pl-2">
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12" for="first-name">Username</label>
-                                            <input class="col-lg-6 col-12 form-control" type="text" name="username" id="username" placeholder="Username" required maxlength="30" value="{{user.username}}">
+                                            <input class="col-lg-6 col-12 form-control" type="text" name="username" id="username" placeholder="Username" required maxlength="30" value="{{user.username}}" readonly>
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12" for="middle-name">Current Password</label>
-                                            <input class="col-lg-6 col-12 form-control" type="password" name="old_password" id="current-password" placeholder="Current Password" required maxlength="30">
+                                            <input class="col-lg-6 col-12 form-control" type="password" name="current-password" id="current-password" placeholder="Current Password" required maxlength="30">
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12"  for="last-name">New Password</label>
-                                            <input class="col-lg-6 col-12 form-control" type="password" name="new_password1" id="new-password" placeholder="New Password" required maxlength="30">
+                                            <input class="col-lg-6 col-12 form-control" type="password" name="new_password1" id="new_password1" placeholder="New Password" required maxlength="30">
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12"  for="last-name">Retype New Password</label>
-                                            <input class="col-lg-6 col-12 form-control" type="password" name="new_password2" id="retype-password" placeholder="Retype New Password" required maxlength="30">
+                                            <input class="col-lg-6 col-12 form-control" type="password" name="new_password2" id="new_password2" placeholder="Retype New Password" required maxlength="30">
                                         </div>
                                         <div class="form-group col-12">
                                             <button type="submit" class="btn float-right save-btn" id="btn-save-account" name="btn-save-account">Save Changes</button>
@@ -106,7 +106,7 @@
                                     <div class="form-row row pr-2 pl-2">
                                         {% if user.customer %}
                                         <!-- customer address -->
-                                        <div class="form-group col-lg-12 col-12 row">
+                                        <div class="form-group col-lg-12 col-12 row" id="locations">
                                             {% for location in locations %}
                                                 {% if forloop.first %}
                                                 <label class="col-lg-3 col-12">Address *</label>
@@ -116,7 +116,6 @@
                                                 <input class="col-lg-6 form-control" type="text" name="address" id="address" placeholder="Address" required value="{{ location.name }}" readonly>
                                                 <button type="button" class="col btn edit-address-btn form-control" data-toggle="modal" data-target="#modal-customer-address" data-location-id="{{ location.id }}" id="btn-edit-address-modal" name="btn-edit-address-modal">Edit</button>
                                                 <button type="button" class="col btn delete-address-btn form-control" data-toggle="modal" data-target="#modal-delete" id="btn-delete-address-modal" name="btn-delete-address-modal" data-location-name="{{ location.name }}" data-location-id="{{ location.id }}">Delete</button>
-                                             
                                             {% endfor %}
                                         </div>
                                         <div class="form-group col-12">
@@ -311,7 +310,7 @@
                         <div class="modal-body">
                             <h5 style="color: #628474;">Are you sure you want to delete this address?</h5> <br>
                             <h5 style="color: #628474;" id="location-name-delete"> {{location.name}} </h5>
-                            <input style="color: #628474;" type="text" name="location-id-delete" id="location-id-delete" value="" readonly>
+                            <input style="color: #628474;" type="text" name="location-id-delete" id="location-id-delete" value="" hidden readonly>
                         </div>
                         <div class="pt-3 pb-3 pl-5 pr-5 d-flex justify-content-between">
                             <button type="button" class="btn cancel-btn" data-dismiss="modal">Cancel</button>
@@ -321,7 +320,6 @@
                 </div>
             </div>
         </div>  
-
 
         <!-- Success Modals-->
         <div class="modal-edit modal fade" id="modal-message" tabindex="-1" role="dialog" aria-labelledby="modalEditAddress" aria-hidden="true">
@@ -377,11 +375,11 @@
 
 
 {% block scripts %}
-    <script src="{% static '/js/load-address.js' %}"></script>
-    <script src="{% static '/js/settings.js' %}"></script>
+    <script src="{% static '/js/global/load-address.js' %}"></script>
+    <script src="{% static '/js/login_register/settings.js' %}"></script>
     <script>
         $(document).ready(function() {
-            loadAddresses("{% static '/js/philippine_address_2019v2.json' %}");
+            loadAddresses("{% static '/js/json/philippine_address_2019v2.json' %}");
         });
     </script>  
 {% endblock %}

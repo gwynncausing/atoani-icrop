@@ -28,19 +28,15 @@
     //if valid, show confirmation tag
     //else, show validation guide
     orderBtn.on("click", e => {
-        //if(orderForm[0].checkValidity() === false){
-        //    orderForm.addClass("was-validated");
-        //}
         if(validity() === true){
             setInputDisabled(true);
 
             //show yes, no, and confirm tag
             yesBtn.removeClass("d-none");
             noBtn.removeClass("d-none");
-
             confirmTag.removeClass("d-none");
             
-            //hide the order button
+            //hide the order/cancel button
             orderBtn.addClass("d-none");
             cancelBtn.addClass("d-none");
         }

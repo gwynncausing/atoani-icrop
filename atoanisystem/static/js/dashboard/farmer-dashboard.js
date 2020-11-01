@@ -28,12 +28,15 @@ const farmerFinishedTableConfig = {
     { orderable: false, "targets": 4 },
     {
       targets: 4,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center  p-0 m-0">
-                            <button type="button" class="btn-secondary opbtn" onclick="viewFinishedOrders(this)">
-                                View Order
-                            </button>
-                      </div>`
+      //make the data (columns) as order_pair_id
+      //and dynamic content
+      render: function (data, type, row){
+        return `<div class="button-container d-flex justify-content-center  p-0 m-0">
+                  <button type="button" class="btn-secondary opbtn" onclick="viewFinishedOrders('${data}')">
+                      View Order
+                  </button>
+                </div>`
+      }
     }
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
@@ -47,13 +50,8 @@ const farmerFinishedTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'harvested_date' },
-    //add this extra column so that it will also collapse in responsive view
-    { "data": ''},
+    { "data": 'order_pair_id'},
   ],
-  createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-pair-id', data.order_pair_id);
-  },
-
   initComplete: function(){
     finished_data = finishTable.ajax.json().data;
     //show the total count of finished orders
@@ -69,12 +67,15 @@ const farmerReservedTableConfig = {
     { orderable: false, "targets": 4 },
     {
       targets: 4,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center p-0 m-0">
-                            <button type="button" id=modal-farmer-btn class="btn-secondary opbtn" onclick="viewReservedOrders(this)">
-                                View Order
-                            </button>
-                            </div>`
+      //make the data (columns) as order_pair_id
+      //and dynamic content
+      render: function (data, type, row) {
+        return `<div class="button-container d-flex justify-content-center p-0 m-0">
+                  <button type="button" id=modal-farmer-btn class="btn-secondary opbtn" onclick="viewReservedOrders('${data}')">
+                      View Order
+                  </button>
+                </div>`
+      }
     }
   ],
   //alternatively you can use the syntax-->>>  ajax: " url 'customer:customer_dashboard' ",
@@ -88,13 +89,8 @@ const farmerReservedTableConfig = {
     { "data": 'name' },
     { "data": 'weight' },
     { "data": 'status' },
-    //add this extra column so that it will also collapse in responsive view
-    { "data": ''},
+    { "data": 'order_pair_id'},
   ],
-  createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-pair-id', data.order_pair_id);
-  },
-
   initComplete: function(){
     reserved_data = reservedTable.ajax.json().data;
     //show the total count of reserved orders
@@ -111,12 +107,15 @@ const farmerIncomingTableConfig = {
     { orderable: false, "targets": 4 },
     {
       targets: 4,
-      data: null,
-      defaultContent: `<div class="button-container d-flex justify-content-center  p-0 m-0">
-                            <button type="button" class="btn-secondary opbtn" onclick="viewIncomingOrders(this)">
-                                View
-                            </button>
-                            </div>`
+      //make the data (columns) as order_id
+      //and dynamic content
+      render: function(data,type,row){
+        return  `<div class="button-container d-flex justify-content-center  p-0 m-0">
+                    <button type="button" class="btn-secondary opbtn" onclick="viewIncomingOrders('${data}')">
+                        View
+                    </button>
+                  </div>`
+      }
     }
   ],
   ajax: {
@@ -128,13 +127,8 @@ const farmerIncomingTableConfig = {
     { "data": 'weight' },
     { "data": 'land_area_needed' },
     { "data": 'location' },
-    //add this extra column so that it will also collapse in responsive view
-    { "data": ''},
+    { "data": 'order_id'},
   ],
-  createdRow: function(row, data, dataIndex) {
-    $(row).attr('order-id', data.order_id);
-  },
-
   initComplete: function(){
     incoming_data = incomingTable.ajax.json().data;
     //show the total incoming of orders
@@ -153,26 +147,20 @@ const failedMsg = document.getElementById("failedReserveMsg");
 const successMsg = document.getElementById("successReserveMsg");
 const reserveButton = document.getElementById('reserveBtn');
 const cancelButton = document.getElementById('cancelReserveBtn');
+//Messages and buttons for harvested
+const harvestBtn = document.getElementById("harvestBtn");
+const confirmHarvestMsg = document.getElementById("confirmHarvestMsg");
 
-function viewFinishedOrders(button){
-  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-pair-id");
-  //when mobile view, or a column collapse
-  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
-  //these two rows become siblings
-  //when selectedOrderID is null, it is assumed in mobile view
-  //temporary fix
-  if(selectedOrderID == null)
-    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-pair-id");
-
+function viewFinishedOrders(orderID){
   let order = null;
-
+  selectedOrderID = orderID;
   for(let i = 0; i < finished_data.length; i++){
     if(finished_data[i].order_pair_id == selectedOrderID){
       order = finished_data[i];
       break;
     }
   }
-  console.log(JSON.stringify(order));
+  //console.log(JSON.stringify(order));
   // document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
   // document.getElementById('reserved-date-approved').innerHTML = String(order.date_approved);
   document.getElementById('finished-date-reserved').innerHTML = String(order.accepted_date);
@@ -188,22 +176,29 @@ function viewFinishedOrders(button){
   $("#finished-modal-farmer").modal("show");
 }
 
-function viewReservedOrders(button){
-  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-pair-id");
-  //when mobile view, or a column collapse
-  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
-  //these two rows become siblings
-  //when selectedOrderID is null, it is assumed in mobile view
-  //temporary fix
-  if(selectedOrderID == null)
-    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-pair-id");
-
+function viewReservedOrders(orderID){
   let order = null;
+  selectedOrderID = orderID;
   for(let i = 0; i < reserved_data.length; i++){
     if(reserved_data[i].order_pair_id == selectedOrderID){
       order = reserved_data[i];
       break;
     }
+  }
+  //Initializing displays
+  confirmHarvestMsg.style.display = "none";
+  $("#harvestBtn").addClass("d-none"); 
+  if (order['status']=='Ongoing'){
+    //Initializing buttons
+    $("#harvestBtn").removeClass("d-none"); 
+    harvestBtn.disabled = false;
+    harvestBtn.innerHTML = "Harvest"
+    //Initialize listener
+    harvestBtn.removeEventListener("click", confirmHarvest);
+    harvestBtn.removeEventListener('click',harvestOrder);
+    harvestBtn.addEventListener('click',confirmHarvest);
+    
+    reserveButton.addEventListener('click',checkOrder);
   }
   // document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
   // document.getElementById('reserved-date-approved').innerHTML = String(order.date_approved);
@@ -220,16 +215,8 @@ function viewReservedOrders(button){
   $("#reserved-modal-farmer").modal("show");
 }
 
-function viewIncomingOrders(button){
-  selectedOrderID = button.parentNode.parentNode.parentNode.getAttribute("order-id");
-  //when mobile view, or a column collapse
-  //two rows are created for 1 column data (.parent(class) row (where order-id resides) for seen column and .child(class) row for the collapse column)
-  //these two rows become siblings
-  //when selectedOrderID is null, it is assumed in mobile view
-  //temporary fix
-  if(selectedOrderID == null)
-    selectedOrderID = $(button).closest("tr").prev("tr").attr("order-id");
-
+function viewIncomingOrders(orderID){
+  selectedOrderID = orderID;
   let order = null;
   for(let i = 0; i < incoming_data.length; i++){
     if(incoming_data[i].order_id == selectedOrderID){
@@ -263,7 +250,6 @@ function viewIncomingOrders(button){
 // Checks if order is available
 let checkOrder = function() {
   //Disables the button so that while it is fetching  data from server it wont duplicate the request, and because there is no loading indicator yet
-  console.log("AWFWAFWAFAWF")
   reserveButton.disabled = true;
   let formData = new FormData();//.append('action','add');
   formData.append('order-id', selectedOrderID);
@@ -363,6 +349,54 @@ function cancelReservation() {
 
     success: function (response) {
       console.log("reservation cancelled");
+    },
+    error: function (response) {
+
+    }
+  });
+}
+
+// Checks if order is available
+let confirmHarvest = function() {
+  //Displays message
+  if (confirmHarvestMsg.style.display === "none")
+    confirmHarvestMsg.style.display = "block";
+  harvestBtn.innerHTML = "Yes";
+  //Update listeners
+  harvestBtn.removeEventListener("click", confirmHarvest);
+  harvestBtn.addEventListener('click',harvestOrder);
+}
+
+let harvestOrder = function() {
+  let formData = new FormData();//.append('action','add');
+  formData.append('order-id', selectedOrderID);
+  formData.append('operation', 'harvest-order');
+  formData.append('csrfmiddlewaretoken',csrf_token);
+  $.ajax({
+    url: '',
+    type: 'post',
+    //data to be passed to django view
+    data: formData,
+    contentType: false,
+    processData: false,
+
+    success: function (response) {
+      //No notifications yet
+      $("#reserved-modal-farmer").modal("hide");
+      console.log("order marked as harvested");
+      //Update table
+      incomingTable.ajax.reload(()=>{
+        incoming_data = incomingTable.ajax.json().data;
+        $("#incoming-orders").html(incoming_data.length);
+      },true);
+      finishTable.ajax.reload(()=>{
+        finished_data = finishTable.ajax.json().data;
+        $("#finished-orders-counter").html(finished_data.length);
+      },true);
+      reservedTable.ajax.reload(()=>{
+        reserved_data = reservedTable.ajax.json().data;
+        $("#reserved-orders-counter").html(reserved_data.length);
+      },true);
     },
     error: function (response) {
 
