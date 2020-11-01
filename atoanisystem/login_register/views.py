@@ -97,6 +97,7 @@ class RegistrationView(View):
                 else:
                     return JsonResponse({'result':'ok'},status=200)
             elif request.POST.get('input') == 'username':
+
                 # check username if it already exists
                 if User.objects.filter(username=request.POST.get('username')).exists():
                     return JsonResponse({'result':'not ok'},status=500)
@@ -196,7 +197,40 @@ class SettingsView(View):
         data = {}
         if request.is_ajax():
             if request.method == 'POST':
-                print(request.POST)
+                if request.POST.get('input') == 'contact_number':
+                    print(request.POST.get('contact-num'))
+                    # check contact number if it already exists
+                    if Customer.objects.filter(contact_number=request.POST.get('contact-num')).exists() or Farmer.objects.filter(contact_number=request.POST.get('contact-num')).exists():
+                        # check if the existing email is owned by current user
+                        if hasattr(request.user, 'customer'):
+                            if request.user.customer.contact_number == request.POST.get('contact-num'):
+                                print("owned by current customer")
+                                return JsonResponse({'result':'ok'},status=200)
+                            else:
+                                print("owned by somebody else")
+                                return JsonResponse({'result':'used'},status=500)
+                        elif hasattr(request.user, 'farmer'):
+                            if request.user.farmer.contact_number == request.POST.get('contact-num'):
+                                print("owned by current farmer")
+                                return JsonResponse({'result':'ok'},status=200)
+                            else:
+                                print("owned by somebody else")
+                                return JsonResponse({'result':'used'},status=500)
+                    else:
+                        print("does not exist")
+                        return JsonResponse({'result':'ok'},status=200)
+
+                elif request.POST.get('input') == 'email':
+                    # check email if it already exists
+                    if User.objects.filter(email=request.POST.get('email')).exists():
+                        # check if the existing email is owned by current user
+                        if request.user.email == request.POST.get('email'):
+                            return JsonResponse({'result':'ok'},status=200)
+                        else:
+                            return JsonResponse({'result':'not ok'},status=500)
+                    else:
+                        return JsonResponse({'result':'ok'},status=200)
+
                 if 'btn-save-name' in request.POST:
                     firstname = request.POST.get('firstname')
                     lastname = request.POST.get('lastname')
@@ -219,8 +253,17 @@ class SettingsView(View):
                     contact_number = request.POST.get("contact_number")
                     email = request.POST.get("email")
                     print("num: " + str(contact_number) + "\nemail: " + str(email))
-                    data['contact_number'] = contact_number
-                    data['email'] = email
+                    
+                    # result = {}
+
+                    # if Customer.objects.filter(contact_number=contact_number).exists() or Farmer.objects.filter(contact_number=contact_number).exists():
+                    #     result['contact-num'] = "Used"
+                    #     return JsonResponse(result ,status=500)
+                    # if User.objects.filter(email = email).exists():
+                    #     result['email'] = "Used"
+                    #     return JsonResponse(result ,status=500)
+
+                    # if passed
                     User.objects.filter(id = request.user.id).update(email=email)
                     if(hasattr(request.user, 'farmer')):
                         farmer = Farmer.objects.filter(id = request.user.farmer.id).update(contact_number = contact_number)
@@ -228,7 +271,9 @@ class SettingsView(View):
                     elif(hasattr(request.user, 'customer')):
                         customer = Customer.objects.filter(id = request.user.customer.id).update(contact_number = contact_number)
                         print(customer)
-                    return JsonResponse(data, safe=False, status=200)
+                    data['contact_number'] = contact_number
+                    data['email'] = email
+                    # return JsonResponse(data, safe=False, status=200)
 
                 elif 'btn-edit-farmer-address' in request.POST:
                     farmer = request.user.farmer
@@ -302,17 +347,17 @@ class SettingsView(View):
                     new_pass = request.POST.get('new_password1')
                     retype_pass = request.POST.get('new_password2')
 
-                    if user.check_password(current_pass) or not current_pass == "":
+                    if user.check_password(current_pass) and not current_pass == "":
                         print("correct pass")
                         if(new_pass == retype_pass):
-                            if not new_pass == "" and retype_pass == "":
+                            if not new_pass == "" and not retype_pass == "":
                                 print("passwords the same")
                                 user.set_password(new_pass)
                                 user.save()
                                 update_session_auth_hash(request, user)
                                 print("password changed")
                             else:
-                                print("new pass is empty, old pass kept")
+                                print("new pass is empty -> old pass kept")
                         else:
                             print("new passwords not the same")
                     else:
@@ -332,7 +377,6 @@ class SettingsView(View):
                         data['province'] = province
                         data['city'] = city
                         customer.location.add(new_loc)
-                        print("added new")
                     else:
                         existing_loc = Location.objects.filter(name = new_name)[0]
                         customer.location.add(existing_loc)
@@ -341,10 +385,7 @@ class SettingsView(View):
                         data['province'] = existing_loc.province
                         data['city'] = existing_loc.city
                         data['brgy'] = existing_loc.brgy
-                        print("added existing")
-                    print("customer.get_all_locations")    
-                    print(customer.get_all_locations)
-                
+
                 return JsonResponse(data, safe=False, status=200)
             else:
                 return HttpResponse('')

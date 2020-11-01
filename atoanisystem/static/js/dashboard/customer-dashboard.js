@@ -250,6 +250,7 @@ var totalCount = null;
 
 //Executing it all
 $(document).ready(function () {
+  
   pendingTable = $('.customer-pending-table').DataTable(customerPendingTableConfig);
   finishedTable = $('.customer-finished-table').DataTable(customerFinishedTableConfig);
   reservedTable = $('.customer-reserved-table').DataTable(customerReservedTableConfig);

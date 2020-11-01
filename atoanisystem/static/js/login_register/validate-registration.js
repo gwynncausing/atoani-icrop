@@ -43,6 +43,7 @@ function check(input){
 
 //make these variables within this scopse
 ( validate = () => {
+    
     const forms = document.querySelector(".registration-form")
     const textFields = forms.querySelectorAll("form input[required]")
     const password = forms.querySelector("#pr-password");
