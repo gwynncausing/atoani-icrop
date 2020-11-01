@@ -218,7 +218,6 @@ $(document).ready(function () {
             type: 'POST',
             data: {
                 'csrfmiddlewaretoken' : csrf_token[0].value,
-                'username' : username.value,
                 'current_pass' : current_pass.value,
                 'new_password1': new_password1.value,
                 'new_password2': new_password2.value,

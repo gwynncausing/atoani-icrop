@@ -183,18 +183,16 @@ class SettingsView(View):
     def get(self, request):
         if request.user.is_authenticated and not request.user.is_staff:
             context = {}
-            form = PasswordChangeForm(request.user)
             if(hasattr(request.user, 'customer')):
                 locations = Customer.objects.get(id=request.user.customer.id).get_all_locations()
                 context = {
-                    "locations" : locations,
+                    "locations" : locations
                 }
             return render(request, "login_register/settings.html", context)
         else:
             return redirect("login_register:login")
 
     def post(self, request):
-        # if request.is_ajax():
         data = {}
         if request.is_ajax():
             if request.method == 'POST':
@@ -237,9 +235,7 @@ class SettingsView(View):
                     province = request.POST.get('province')
                     city = request.POST.get('city')
                     brgy = request.POST.get('brgy')
-                    # street = request.POST.get('street')
                     new_name = str(province) + "," + str(city) + "," + str(brgy)
-                    #  + "," + str(street)
                     location, created = Location.objects.get_or_create(name=new_name)
                     if created:
                         new_loc = Location.objects.create(name=new_name, province=province, city=city, brgy=brgy)
@@ -249,7 +245,6 @@ class SettingsView(View):
                         data['province'] = province
                         data['city'] = city
                         data['brgy'] = brgy
-                        # data['street'] = street
                     else:
                         existing_loc = Location.objects.get(name = new_name)
                         farmer.set_location(existing_loc.id)
@@ -258,7 +253,6 @@ class SettingsView(View):
                         data['province'] = existing_loc.province
                         data['city'] = existing_loc.city
                         data['brgy'] = existing_loc.brgy
-                        # data['street'] = existing_loc.street
                 
                 elif 'btn-edit-customer-address' in request.POST:
                     print("clicked edit customer")
@@ -269,13 +263,9 @@ class SettingsView(View):
                     province = request.POST.get('province')
                     city = request.POST.get('city')
                     brgy = request.POST.get('brgy')
-                    # street = request.POST.get('street')
                     new_name = str(province) + "," + str(city) + "," + str(brgy)
-                    #  + "," + str(street)
                     old_loc = Location.objects.get(id=location_id)
-                    # location, created = Location.objects.get_or_create(name=new_name)
                     exists = Location.objects.filter(name=new_name).exists()
-                    # if created:
                     if not exists:
                         new_loc = Location.objects.create(name=new_name, province = province, city = city, brgy = brgy)
                         data['id'] = new_loc.id
@@ -283,15 +273,11 @@ class SettingsView(View):
                         data['province'] = province
                         data['city'] = city
                         data['brgy'] = brgy
-                        # data['street'] = street
-                        # customer.replace_location(old_loc.id, new_loc.id)
                         customer.location.remove(old_loc)
                         customer.location.add(new_loc)
                         print("created new")
                     else:
                         existing_loc = Location.objects.filter(name = new_name)[0]
-                        
-                        # customer.replace_location(old_loc.id, existing_loc.id)
                         customer.location.remove(old_loc)
                         customer.location.add(existing_loc)
 
@@ -300,7 +286,6 @@ class SettingsView(View):
                         data['province'] = existing_loc.province
                         data['city'] = existing_loc.city
                         data['brgy'] = existing_loc.brgy
-                        # data['street'] = existing_loc.street
                         print("added existing")
 
                 elif 'btn-delete-address' in request.POST:
@@ -313,33 +298,32 @@ class SettingsView(View):
                 elif 'btn-save-account' in request.POST:
                     print(request.POST)
                     user = request.user
-                    username = request.POST.get('username')
                     current_pass = request.POST.get('current_pass')
                     new_pass = request.POST.get('new_password1')
                     retype_pass = request.POST.get('new_password2')
-                    print(username)
-                    print(current_pass)
-                    if user.check_password(current_pass):
+
+                    if user.check_password(current_pass) or not current_pass == "":
                         print("correct pass")
                         if(new_pass == retype_pass):
-                            print("passwords the same")
-                            user.set_password(new_pass)
-                            user.save()
-                            update_session_auth_hash(request, user)
-                            print("password changed")
+                            if not new_pass == "" and retype_pass == "":
+                                print("passwords the same")
+                                user.set_password(new_pass)
+                                user.save()
+                                update_session_auth_hash(request, user)
+                                print("password changed")
+                            else:
+                                print("new pass is empty, old pass kept")
                         else:
                             print("new passwords not the same")
                     else:
-                        print("password is incorrect")
+                        print("password is incorrect or empty")
 
                 elif 'btn-add-customer-address':
                     customer = request.user.customer
                     province = request.POST.get('province')
                     city = request.POST.get('city')
                     brgy = request.POST.get('brgy')
-                    # street = request.POST.get('street')
                     new_name = str(province) + "," + str(city) + "," + str(brgy)
-                    #  + "," + str(street)
                     exists = Location.objects.filter(name=new_name).exists()
                     if not exists:
                         new_loc = Location.objects.create(name=new_name, province = province, city = city, brgy = brgy)
@@ -347,8 +331,6 @@ class SettingsView(View):
                         data['name'] = new_loc.name
                         data['province'] = province
                         data['city'] = city
-                        data['brgy'] = brgy
-                        # data['street'] = street
                         customer.location.add(new_loc)
                         print("added new")
                     else:
@@ -359,14 +341,11 @@ class SettingsView(View):
                         data['province'] = existing_loc.province
                         data['city'] = existing_loc.city
                         data['brgy'] = existing_loc.brgy
-                        # data['street'] = existing_loc.street
                         print("added existing")
+                    print("customer.get_all_locations")    
+                    print(customer.get_all_locations)
                 
-
-
-
                 return JsonResponse(data, safe=False, status=200)
-
             else:
                 return HttpResponse('')
 
