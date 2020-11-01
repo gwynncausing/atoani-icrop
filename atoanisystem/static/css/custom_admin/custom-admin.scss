@@ -1,2 +1,9 @@
-@import "../index";
+// Made for Global html files
+@import "../global/variables";
+@import "../global/fonts";
+// Global CSS Files
+@import "../global/global";
+@import "./navbar-admin";
+@import "../global/footer";
+// Custom Admin CSS
 @import "./_body-custom-admin.scss";

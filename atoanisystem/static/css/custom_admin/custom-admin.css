@@ -33,7 +33,7 @@ h6 {
 }
 
 .navbar .div-1 {
-  width: calc( 25% - 40px);
+  width: calc( 40% - 40px);
   height: 100%;
   background: #0b3531;
 }
@@ -44,8 +44,19 @@ h6 {
   width: auto;
 }
 
+.navbar .div-1 #adminHome {
+  font-size: 1.2rem;
+  margin-top: 25px;
+  margin-left: 15px;
+  color: white;
+}
+
+.navbar .div-1 #adminHome:hover {
+  text-decoration: none;
+}
+
 .navbar .div-2 {
-  width: calc( 75% + 40px);
+  width: calc( 60% + 40px);
   height: 100%;
   border-left: 50px solid #0b3531;
   border-bottom: 70px solid transparent;
@@ -82,14 +93,14 @@ h6 {
 
 @media only screen and (max-width: 990px) {
   .navbar .div-1 {
-    width: calc( 35% - 40px);
+    width: calc(50% - 40px);
   }
   .navbar .div-1 .imgLogo {
     margin-top: 10px;
     height: 35px;
   }
   .navbar .div-2 {
-    width: calc( 65% + 40px);
+    width: calc( 50% + 40px);
   }
   .navbar .div-2 div.navbar-collapse {
     background-color: #628474;
@@ -104,20 +115,33 @@ h6 {
 
 @media only screen and (max-width: 770px) {
   .navbar .div-1 {
-    width: calc( 40% - 40px);
+    width: calc( 60% - 40px);
   }
   .navbar .div-1 .imgLogo {
     margin-top: 13px;
     height: 35px;
   }
   .navbar .div-2 {
-    width: calc( 60% + 40px);
+    width: calc( 40% + 40px);
   }
 }
 
 @media only screen and (max-width: 600px) {
   .navbar .div-1 {
     width: calc( 60% - 40px);
+  }
+  .navbar .div-1 .imgLogo {
+    margin-top: 13px;
+    height: 35px;
+  }
+  .navbar .div-2 {
+    width: calc( 40% + 40px);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar .div-1 {
+    width: calc( 80% - 40px);
   }
   .navbar .div-1 .imgLogo {
     margin-top: 13px;
