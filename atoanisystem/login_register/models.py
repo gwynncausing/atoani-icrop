@@ -49,10 +49,10 @@ class Crop(models.Model):
         return str(self.name)
 
 class Location(models.Model):
-    name = models.CharField(max_length=220)
+    name = models.CharField(max_length=220, blank=True)
     # to match the html form
-    brgy = models.CharField(max_length=50,default="")
-    city = models.CharField(max_length=50,default="")
+    brgy = models.CharField(max_length=50,default="", blank=True, null=True)
+    city = models.CharField(max_length=50,default="", blank=True, null=True)
     province = models.CharField(max_length=50,default="")
     def __str__(self):
         return str(self.name)

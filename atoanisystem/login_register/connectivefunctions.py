@@ -107,6 +107,8 @@ count_status(< farmer/customer  datatable>)
 
 def convert(time):
     try:
+        if time == "N/A":
+            return "N/A"
         return dt(time.year,time.month,time.day)
     except:
         return None
@@ -164,18 +166,19 @@ def datatable_customer(id):
     order= get_complete_order_customer(id)
     if len(order) !=0:
         #df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
-        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[1] for val in order.values]).values())
-        print(df)
+        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val for val in order['order_id'].to_list()]).values()).drop(columns="status")
+        print(df['accepted_date'])
         if len(df) == 0:
             order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"
             return order
         else:
             df = order.merge(df, how="left", left_on="order_id", right_on="order_id_id").fillna("N/A").drop(columns=["order_id_id"])
+            print(df['accepted_date'])
             if len(df) != 0:
                 df['accepted_date'] = df['accepted_date'].apply(convert)
-                df['accepted_date'] = df['harvested_date'].apply(convert)
-                df['accepted_date'] = df['collected_date'].apply(convert)
-                df['accepted_date'] = df['delivered_date'].apply(convert)
+                df['harvested_date'] = df['harvested_date'].apply(convert)
+                df['collected_date'] = df['collected_date'].apply(convert)
+                df['delivered_date'] = df['delivered_date'].apply(convert)
                 return df.rename(columns={'id':'order_pair_id'})
     return order
 
@@ -292,8 +295,6 @@ def delete_obsolete_orders():
         overdue_df.dropna(subset=['cancelled_date'],inplace=True)
         overdue_df['cancelled_date'] = overdue_df['cancelled_date'].apply(convert)
         overdue_df['diff'] = overdue_df['cancelled_date'].apply(lambda w: (dt.now()-w).days)
-        print("overdueeee")
-        print(overdue_df)
         for i in overdue_df.loc[overdue_df['diff'] > 14]['order_id']: Order.objects.get(order_id=i).delete()
 
 def get_crop_list():
