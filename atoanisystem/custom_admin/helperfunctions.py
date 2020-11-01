@@ -124,6 +124,7 @@ def get_harvested_orders(orders):
     harvested_orders = []
     for order in orders:
         if order['status'] == "Harvested":
+            print("ITS HARVESTED")
             harvested_orders.append(order)
     return harvested_orders
 
