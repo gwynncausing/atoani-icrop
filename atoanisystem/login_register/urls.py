@@ -16,11 +16,16 @@ urlpatterns = [
     path('terms_and_conditions_of_use/', views.TermsAndConditionsView.as_view(), name="terms-and-conditions-of-use"),
 
     path('reset_password/',
-        auth_views.PasswordResetView.as_view(template_name="login_register/password-reset.html"),
+        auth_views.PasswordResetView.as_view(template_name="login_register/password_reset.html"),
         name="reset_password"),
     path('password_reset/done/',
         auth_views.PasswordResetDoneView.as_view(template_name="login_register/password_reset_done.html"),
         name="password_reset_done"),
-    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
-    path('reset-password/-complete/', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
+    path('reset/<uidb64>/<token>/',
+        auth_views.PasswordResetConfirmView.as_view(template_name="login_register/password_reset_confirm.html"),
+        name="password_reset_confirm"),
+        # template_name="login_register/password_reset_confirm.html"
+    path('reset/done/',
+        auth_views.PasswordResetCompleteView.as_view(template_name="login_register/password_reset_complete.html"),
+        name="password_reset_complete"),
 ]
