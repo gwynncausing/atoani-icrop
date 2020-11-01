@@ -147,10 +147,13 @@ const failedMsg = document.getElementById("failedReserveMsg");
 const successMsg = document.getElementById("successReserveMsg");
 const reserveButton = document.getElementById('reserveBtn');
 const cancelButton = document.getElementById('cancelReserveBtn');
+//Messages and buttons for harvested
+const harvestBtn = document.getElementById("harvestBtn");
+const confirmHarvestMsg = document.getElementById("confirmHarvestMsg");
 
-function viewFinishedOrders(selectedOrderID){
+function viewFinishedOrders(orderID){
   let order = null;
-
+  selectedOrderID = orderID;
   for(let i = 0; i < finished_data.length; i++){
     if(finished_data[i].order_pair_id == selectedOrderID){
       order = finished_data[i];
@@ -173,13 +176,29 @@ function viewFinishedOrders(selectedOrderID){
   $("#finished-modal-farmer").modal("show");
 }
 
-function viewReservedOrders(selectedOrderID){
+function viewReservedOrders(orderID){
   let order = null;
+  selectedOrderID = orderID;
   for(let i = 0; i < reserved_data.length; i++){
     if(reserved_data[i].order_pair_id == selectedOrderID){
       order = reserved_data[i];
       break;
     }
+  }
+  //Initializing displays
+  confirmHarvestMsg.style.display = "none";
+  $("#harvestBtn").addClass("d-none"); 
+  if (order['status']=='Ongoing'){
+    //Initializing buttons
+    $("#harvestBtn").removeClass("d-none"); 
+    harvestBtn.disabled = false;
+    harvestBtn.innerHTML = "Harvest"
+    //Initialize listener
+    harvestBtn.removeEventListener("click", confirmHarvest);
+    harvestBtn.removeEventListener('click',harvestOrder);
+    harvestBtn.addEventListener('click',confirmHarvest);
+    
+    reserveButton.addEventListener('click',checkOrder);
   }
   // document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
   // document.getElementById('reserved-date-approved').innerHTML = String(order.date_approved);
@@ -196,7 +215,8 @@ function viewReservedOrders(selectedOrderID){
   $("#reserved-modal-farmer").modal("show");
 }
 
-function viewIncomingOrders(selectedOrderID){
+function viewIncomingOrders(orderID){
+  selectedOrderID = orderID;
   let order = null;
   for(let i = 0; i < incoming_data.length; i++){
     if(incoming_data[i].order_id == selectedOrderID){
@@ -230,7 +250,6 @@ function viewIncomingOrders(selectedOrderID){
 // Checks if order is available
 let checkOrder = function() {
   //Disables the button so that while it is fetching  data from server it wont duplicate the request, and because there is no loading indicator yet
-  console.log("AWFWAFWAFAWF")
   reserveButton.disabled = true;
   let formData = new FormData();//.append('action','add');
   formData.append('order-id', selectedOrderID);
@@ -337,7 +356,18 @@ function cancelReservation() {
   });
 }
 
-function harvestOrder() {
+// Checks if order is available
+let confirmHarvest = function() {
+  //Displays message
+  if (confirmHarvestMsg.style.display === "none")
+    confirmHarvestMsg.style.display = "block";
+  harvestBtn.innerHTML = "Yes";
+  //Update listeners
+  harvestBtn.removeEventListener("click", confirmHarvest);
+  harvestBtn.addEventListener('click',harvestOrder);
+}
+
+let harvestOrder = function() {
   let formData = new FormData();//.append('action','add');
   formData.append('order-id', selectedOrderID);
   formData.append('operation', 'harvest-order');
@@ -351,7 +381,22 @@ function harvestOrder() {
     processData: false,
 
     success: function (response) {
+      //No notifications yet
+      $("#reserved-modal-farmer").modal("hide");
       console.log("order marked as harvested");
+      //Update table
+      incomingTable.ajax.reload(()=>{
+        incoming_data = incomingTable.ajax.json().data;
+        $("#incoming-orders").html(incoming_data.length);
+      },true);
+      finishTable.ajax.reload(()=>{
+        finished_data = finishTable.ajax.json().data;
+        $("#finished-orders-counter").html(finished_data.length);
+      },true);
+      reservedTable.ajax.reload(()=>{
+        reserved_data = reservedTable.ajax.json().data;
+        $("#reserved-orders-counter").html(reserved_data.length);
+      },true);
     },
     error: function (response) {
 

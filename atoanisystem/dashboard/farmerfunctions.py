@@ -52,9 +52,8 @@ def get_reserved_orders(user):
     #print(orders)
     reserved_orders = []
     for order in orders:
-        if order['status'] == 'Ongoing' and order['accepted_date'] != None:
+        if (order['status'] == 'Ongoing' and order['accepted_date'] != None) or (order['status'] == 'Harvested') or (order['status']=='Collected'):
             reserved_orders.append(order)
-    print(reserved_orders)
     return reserved_orders
 
 #returns the finished orders of the farmer
@@ -68,7 +67,7 @@ def get_finished_orders(user):
     finished_orders = []
     for order in orders:
         #CHANGE TO COLLECTED
-        if order['status']=='Collected':
+        if order['status']=='Delivered':
             finished_orders.append(order)
     return finished_orders
 
@@ -89,8 +88,8 @@ def reserve_to(farmer,order):
     order_pair.save()
     return order_pair
 
-def harvest_order(order):
-    order_pair = Order_Pairing.objects.get(order_id=order)
+def harvest_order(order_id):
+    order_pair = Order_Pairing.objects.get(id=order_id)
     order_pair.status = "Harvested"
     order_pair.harvested_date = tz.now()
     order_pair.save()
