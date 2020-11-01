@@ -75,6 +75,7 @@
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12"  for="last-name">New Password</label>
                                             <input class="col-lg-6 col-12 form-control" type="password" name="new_password1" id="new_password1" placeholder="New Password" required maxlength="30">
+                                            <label class="col" id="new_password1_feedback">Password Feedback</label>
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12"  for="last-name">Retype New Password</label>
@@ -104,6 +105,7 @@
                                 <form class="pt-3" method="POST" id="form-contact">
                                     {% csrf_token %}
                                     <div class="form-row row pr-2 pl-2">
+
                                         {% if user.customer %}
                                         <!-- customer address -->
                                         <div class="form-group col-lg-12 col-12 row" id="locations">
@@ -124,7 +126,12 @@
                                         <!-- customer contact number -->
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12" for="middle-name">Contact Number</label>
-                                            <input class="col-lg-6 col-12 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" maxlength="30" required value="{{user.customer.contact_number}}">
+                                            <input class="col-lg-6 col-12 form-control" type="text" name="contact-num" id="contact-num" pattern=".{10,11}" maxlength="11" placeholder="Contact Number" value="{{user.customer.contact_number}}" required>
+                                        </div>
+                                        <!-- feedback -->
+                                        <div class="form-group col-lg-12 col-12 row d-none" id="contact-num-feedback-div">
+                                            <label class="col-lg-3 col-12"></label>
+                                            <label class="col-lg-6 col-12" id="contact-num-feedback"></label>
                                         </div>
 
                                         {% elif user.farmer %}
@@ -138,13 +145,24 @@
                                         <!-- farmer contact number -->
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12" for="middle-name">Contact Number</label>
-                                            <input class="col-lg-6 col-12 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" maxlength="30" required value="{{user.farmer.contact_number}}">
+                                            <input class="col-lg-6 col-12 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" pattern=".{10,11}" maxlength="11" value="{{user.farmer.contact_number}}" required>
+                                        </div>
+                                        <div class="form-group col-lg-12 col-12 row d-none" id="contact-num-feedback-div">
+                                            <label class="col-lg-3 col-12"></label>
+                                            <label class="col-lg-6 col-12" id="contact-num-feedback"></label>
                                         </div>
                                         {% endif %}
+
+                                        <!-- email -->
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-12"  for="last-name">Email Address *</label>
-                                            <input class="col-lg-6 col-12 form-control" type="text" name="email" id="email" placeholder="Email Address" maxlength="30" required value="{{user.email}}">
+                                            <input class="col-lg-6 col-12 form-control" type="email" name="email" id="email" placeholder="Email Address" maxlength="30" required value="{{user.email}}">
                                         </div>
+                                        <div class="form-group col-lg-12 col-12 row d-none" id="email-feedback-div">
+                                            <label class="col-lg-3 col-12"></label>
+                                            <label class="col-lg-6 col-12" id="email-feedback"></label>
+                                        </div>
+
                                         <!-- buttons -->
                                         <div class="form-group col-12">
                                             <button type="submit" class="btn float-right save-btn" id="btn-save-contact" name="btn-save-contact">Save Changes</button>

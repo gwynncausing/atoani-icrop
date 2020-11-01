@@ -1,35 +1,33 @@
-// console.log(form_name);
-
-// const url = "/settings/";
-
-// form_name.addEventListener('submit', (e) =>{
-//     e.preventDefault();
-//     $.ajax({
-//         type: 'POST',
-//         url : url,
-//         data: {
-//             'csrfmiddlewaretoken' : csrf[0].value,
-//             'firstname' : firstname.value,
-//             'lastname' : lastname.value
-//         },
-//         success: function(response){
-//             console.log("response: " + response);
-//         },
-//         error: function(error){
-//             console.log(error);
-//         }
-//     })
-// })
 
 
+function checkFromServer(inputElement,inputName){
+    inputElement.classList.remove('is-valid');
+    inputElement.classList.remove('is-invalid');
+    const form = document.querySelector("#form-contact");
+    doesInputExist(form,inputElement,inputName);
+}
 
-function refreshLocations(){
-    $("#locations").html("");
+function doesInputExist(form,inputElement,inputName){
+    let formData = new FormData(form);
+    formData.append('input',inputName);
+    $.ajax({
+        url: '',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            inputElement.classList.add('is-valid');
+            console.log(response.result);
+        },
+        error: function(response){
+            inputElement.classList.add('is-invalid');
+        }
+    });
 }
 
 
 $(document).ready(function () {
-
     const csrf_token = document.getElementsByName('csrfmiddlewaretoken');
     const firstname = document.getElementById('first-name');
     const lastname = document.getElementById('last-name');
@@ -41,12 +39,139 @@ $(document).ready(function () {
     const province = document.getElementById("province");
     const city = document.getElementById("city");
     const brgy = document.getElementById("barangay");
-    // const street = document.getElementById("street");
     const name = document.getElementById("address");
     const location_id_delete = document.getElementById('location-id-delete');
+    const current_pass = document.getElementById('current-password');
+    const new_password1 = document.getElementById('new_password1');
+    const new_password2 = document.getElementById('new_password2');
 
 
+    let isEmailValid = false;
+    let isContactValid = false;
 
+    //Error Messages
+    const contact_num_feedback = document.getElementById('contact-num-feedback')
+    const contact_num_feedback_div = document.getElementById('contact-num-feedback-div');
+
+    const email_feedback = document.getElementById('email-feedback')
+    const email_feedback_div = document.getElementById('email-feedback-div');
+
+
+    const contact_form = document.getElementById('form-contact');
+
+    const contactInvalidFormat = "Phone number must be in this format 09xxxxxxxxx";
+
+    const contactExists = "The contact number is already in use";
+    const emailInvalidFormat = "Please enter your email address in format: yourname@example.com";
+    const emailExists = "The email address is already in use";
+
+    const displayValidity = (field) => {
+        if(field.checkValidity() === true){
+            addValidClass(field);
+            return true;
+        }
+        else{
+            addInvalidClass(field);
+            return false;
+        }
+    }
+
+    const stopDefaultFormAction = e => {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    const addInvalidClass = field => {
+        field.classList.remove('is-valid');
+        field.classList.add('is-invalid');
+    };
+    const addValidClass = field => {
+        field.classList.remove('is-invalid');
+        field.classList.add('is-valid');
+    }
+    const removeValidClass = field => field.classList.remove('is-valid');
+    const removeInvalidClass = field => field.classList.remove('is-invalid');
+
+
+    // let isEmailValid = false;
+    // let isContactValid = false;
+
+    email.addEventListener("input", (e) => {  
+        //if input length is 0
+        //make it neutral
+        if(e.target.value.toString().length === 0){
+            removeValidClass(email);
+            removeInvalidClass(email)
+            email_feedback.innerHTML = "";
+            email_feedback_div.classList.add("d-none");
+            isEmailValid = false;
+        }else{
+            email_feedback.innerHTML = emailInvalidFormat;
+            email_feedback_div.classList.remove("d-none");
+            isEmailValid = displayValidity(e.target);
+            if(isEmailValid){
+                email_feedback_div.classList.add("d-none");
+                // check if it exists
+                checkFromServer(email,'email');
+                isEmailValid = displayValidity(e.target);
+                if(isEmailValid){
+                    email_feedback_div.classList.add("d-none");
+                }
+                else{
+                    email_feedback.innerHTML = emailExists;
+                    email_feedback_div.classList.remove("d-none");
+                }
+            }
+        }
+    })
+
+    contact_number.addEventListener('input', e => {
+        e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+        //if input length is 0
+        //make it neutral
+        if(e.target.value.toString().length === 0){
+            removeValidClass(contact_number);
+            removeInvalidClass(contact_number)
+            contact_num_feedback.innerHTML = "";
+            contact_num_feedback_div.classList.add("d-none");
+            isContactValid = false;
+        }else{
+            contact_num_feedback.innerHTML = contactInvalidFormat;
+            contact_num_feedback_div.classList.remove("d-none");
+            isContactValid = displayValidity(e.target);
+            //check if contact num exists or not
+            if(isContactValid){
+                contact_num_feedback_div.classList.add("d-none");
+                // check if it exists
+                checkFromServer(contact,'contact_number');
+                isContactValid = displayValidity(e.target);
+                if(isContactValid){
+                    contact_num_feedback_div.classList.add("d-none");
+                }
+                else{
+                    contact_num_feedback.innerHTML = contactExists;
+                    contact_num_feedback_div.classList.remove("d-none");
+                }
+            }
+        }
+    })
+
+    // CONTACT FORM
+    contact_form.addEventListener("submit", e => {
+        let isValid = true;
+
+        //check the validity of each fields
+        textFields.forEach(field => {
+            if(field.classList.contains("is-invalid"))
+                isValid = displayValidity(field);
+        });
+
+        if(isValid == false)
+            stopDefaultFormAction(e);
+    })
+
+
+    // ajax requests
     $('#btn-save-name').click(function(e){
         e.preventDefault();
         $.ajax({
@@ -120,7 +245,6 @@ $(document).ready(function () {
                 'province' : province.value,
                 'city' : city.value,
                 'brgy' : brgy.value,
-                // 'street' : street.value,
                 'btn-add-customer-address' : $(this).html()
             },
             success: function(response){
@@ -144,7 +268,6 @@ $(document).ready(function () {
                 'province' : province.value,
                 'city' : city.value,
                 'brgy' : brgy.value,
-                // 'street' : street.value,
                 'btn-edit-farmer-address' : $(this).html()
             },
             success: function(response){
@@ -169,12 +292,10 @@ $(document).ready(function () {
                 'province' : province.value,
                 'city' : city.value,
                 'brgy' : brgy.value,
-                // 'street' : street.value,
                 'btn-edit-customer-address' : $(this).html()
             },
             success: function(response){
                 console.log(response);
-                // name.value = response.name;
                 $("#modal-message").modal('show');
             },
             error: function(response){
@@ -204,12 +325,6 @@ $(document).ready(function () {
         });
     });
     
-
-    const username = document.getElementById('username');
-    const current_pass = document.getElementById('current-password');
-    const new_password1 = document.getElementById('new_password1');
-    const new_password2 = document.getElementById('new_password2');
-
     $('#btn-save-account').click(function(e){
         console.log("clicked account")
         e.preventDefault();
@@ -274,8 +389,4 @@ $(document).ready(function () {
         // $( "#locations" ).load(window.location.href + " #locations" );
     });
 
-
-
 });
-
-
