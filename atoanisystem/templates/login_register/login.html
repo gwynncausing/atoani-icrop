@@ -6,7 +6,7 @@
 {% endblock %} 
 
 {% block content %}
-<div class="container mt-5 mb-5 h-100">
+<div class="container mt-5 mb-5" style="height: 100vh;">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-5">
             <form class="form-login" id="form-login" method="POST" enctype="multipart/form-data">
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="row pb-4">
-                        <a class="forgotpassword mx-auto my-auto" href="{% url 'login_register:forgot-username-password' %}">Forgot Username or Password</a>
+                        <a class="forgotpassword mx-auto my-auto" href="{% url 'login_register:reset_password' %}">Forgot Username or Password</a>
                     </div>
                 </div>
             </form>

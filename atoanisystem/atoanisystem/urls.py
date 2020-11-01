@@ -25,6 +25,8 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls',namespace = 'dashboard')),
     #admin custom page
     path('admin/', include('custom_admin.urls',namespace = 'custom_admin')),
+    # Password Reset
+    path('', include('django.contrib.auth.urls')), 
 ]
 
 handler500 = 'login_register.views.handler500'

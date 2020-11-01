@@ -369,10 +369,6 @@ class TermsAndConditionsView(View):
     def get(self,request):
         return render(request, "login_register/terms-and-conditions.html")
 
-class ForgotUsernamePasswordView(View):
-    def get(self,request):
-        return render(request, "login_register/forgot-username-password.html")
-
 def handler404(request, *args, **argv):
     response = render(request, "error_pages/404.html")
     response.status_code = 404
