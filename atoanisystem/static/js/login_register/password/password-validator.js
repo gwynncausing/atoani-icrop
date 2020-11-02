@@ -239,5 +239,29 @@ const passwordHelper = {
 	addValidClass: function(field) {
         field.removeClass('is-invalid');
         field.addClass('is-valid');
-    }
+	},
+	removeValidClass: function(field) {
+		field.removeClass('is-valid');
+	},
+	removeInvalidClass: function(field){
+		field.removeClass('is-invalid');
+	},
+	reset: function() {
+		this.removeValidClass(this.$password);
+		this.removeInvalidClass(this.$password);
+		this.removeValidClass(this.$password_confirm);
+		this.removeInvalidClass(this.$password_confirm);
+		this.required.numCharactersDone = false;
+		this.required.useLowercaseDone = false;
+		this.required.useUppercaseDone = false;
+		this.required.useNumbersDone = false;
+		this.required.useSpecialDone = false;
+		this.passwordValidity = false;
+		this.passwordConfirmValidity = false;
+		$(".pr-numCharacters span").removeClass("pr-ok");
+		$(".pr-useLowercase span").removeClass("pr-ok");
+		$(".pr-useUppercase span").removeClass("pr-ok");
+		$(".pr-useSpecial span").addClass("pr-ok");
+		$(".pr-useNumbers span").removeClass("pr-ok");
+	}
 }

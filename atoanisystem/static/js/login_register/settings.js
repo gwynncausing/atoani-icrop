@@ -65,6 +65,7 @@ $(document).ready(function () {
     const emailInvalidFormat = "Please enter your email address in format: yourname@example.com";
     const emailExists = "The email address is already in use";
 
+    //password Helper function
     passwordHelper.init($("#new_password1"), $("#new_password2"));
 
     const displayValidity = (field) => {
@@ -330,25 +331,47 @@ $(document).ready(function () {
     $('#btn-save-account').click(function(e){
         console.log("clicked account")
         e.preventDefault();
-        $.ajax({
-            url: '/settings/',
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken' : csrf_token[0].value,
-                'current_pass' : current_pass.value,
-                'new_password1': new_password1.value,
-                'new_password2': new_password2.value,
-                'btn-save-account' : $(this).html()
-            },
-            success: function(response){
-                console.log(response);
-                // $("#modal-message-deleted").modal('show');
-            },
-            error: function(response){
-                console.log(response);
-            }
-        });
+        if(passwordHelper.passwordValidity == true && passwordHelper.passwordConfirmValidity == true) {
+            $.ajax({
+                url: '/settings/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken' : csrf_token[0].value,
+                    'current_pass' : current_pass.value,
+                    'new_password1': new_password1.value,
+                    'new_password2': new_password2.value,
+                    'btn-save-account' : $(this).html()
+                },
+                success: function(response){
+                    // console.log(response);
+                    // $("#modal-message-deleted").modal('show');
+                    if(response.password_status == "incorrect")
+                        document.getElementById("current-password").classList.add("is-invalid");
+                    else{
+                        $("#modal-message").modal('show');
+                        current_pass.value = "";
+                        new_password1.value = "";
+                        new_password2.value = "";
+                        passwordHelper.reset();
+                        document.getElementById("current-password").classList.remove("is-invalid");
+                    }
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
+        else
+            console.log("invalid");
     });
+
+    $('#account').on('hidden.bs.collapse', function () {
+        current_pass.value = "";
+        new_password1.value = "";
+        new_password2.value = "";
+        passwordHelper.reset();
+        document.getElementById("current-password").classList.remove("is-invalid");
+    })
 
     // open edit address modal
     $(document).on("click", "#btn-edit-address-modal", function () {
