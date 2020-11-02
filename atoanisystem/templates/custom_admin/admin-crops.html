@@ -14,14 +14,14 @@
 
       <a class="orders-title active" href="{% url 'custom_admin:orders' %}">Orders<i class="fa fa-caret-down"></i></a>
       <div class="dropdown-container">
-        <button id="allBtn" type="button" class="sidebar-nav" autofocus>All</button>
-        <button id="waitlistBtn" type="button" class="sidebar-nav">Waitlist</button>
-        <button id="approvedBtn" type="button" class="sidebar-nav">Approved</button>
-        <button id="ongoingBtn" type="button" class="sidebar-nav">Ongoing</button>
-        <button id="harvestedBtn" type="button" class="sidebar-nav">Harvested</button>
-        <button id="collectedBtn" type="button" class="sidebar-nav">Collected</button>
-        <button id="deliveredBtn" type="button" class="sidebar-nav">Delivered</button>
-        <button id="cancelledBtn" type="button" class="sidebar-nav">Cancelled</button>
+        <button id="" type="button" class="sidebar-nav" autofocus>All</button>
+        <button id="" type="button" class="sidebar-nav">Waitlist</button>
+        <button id="" type="button" class="sidebar-nav">Approved</button>
+        <button id="" type="button" class="sidebar-nav">Ongoing</button>
+        <button id="" type="button" class="sidebar-nav">Harvested</button>
+        <button id="" type="button" class="sidebar-nav">Collected</button>
+        <button id="" type="button" class="sidebar-nav">Delivered</button>
+        <button id="" type="button" class="sidebar-nav">Cancelled</button>
         <!-- <button id="" type="button" class="sidebar-nav border-0">Collected</button> -->
         <!-- <button id="collectedBtn" type="button" class="sidebar-nav border-0">Delivered</button> -->
       </div>
@@ -32,9 +32,14 @@
         <button id="" type="button" class="sidebar-nav border-0">Customers</button>
         <button id="" type="button" class="sidebar-nav border-0">Farmers</button>
       </div>
+      <a class="others-title" href="#">Others</a>
+      <div class="dropdown-container d-none">
+        <button id="" type="button" class="sidebar-nav">Crops</button>
+        <button id="" type="button" class="sidebar-nav">Django Admin</button>
+      </div>
     </div>
     <div class="col-10 p-5 orders">
-      <h3 id="order-header">List of <span id="labelTop">All</span> Orders</h3>
+      <h3 id="order-header">List of Crops</h3>
       <div class="row">
         <div class="view-order ol-12 pt-3 pb-3 rounded ">
           <div class="row">
@@ -65,22 +70,9 @@
             <div class="col-3 pt-1 pb-1 mt-4" id="date-ordered">-</div>
             <div class="label col-3 text-right pt-1 pb-1"></div>
             <div class="col-3 pt-1 pb-1"></div>
-
-            <!-- <div class="label col-3 text-right pt-1 pb-1"><b>Date Reserved:</b></div>
-            <div class="col-3 pt-1 pb-1" id="date-reserved">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"></div>
-            <div class="col-3 pt-1 pb-1"></div>
-
-            <div class="label col-3 text-right pt-1 pb-1"><b>Date Collected:</b></div>
-            <div class="col-3 pt-1 pb-1" id="date-collected">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"></div>
-            <div class="col-3 pt-1 pb-1"></div> -->
+            
             <div class="label col-12 text-center justify-content-center pt-1 pb-1 mb-4">
-              <button id="cancelBtn" type="button m-0" class="btn btn-danger px-5 mx-auto">Cancel Order</button>
-              <button id="approveBtn" type="button m-0" class="btn btn-info px-5 mx-auto">Approve Order</button>
-              <button id="harvestBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Mark as Harvested</button>
-              <button id="collectBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Mark as Collected</button>
-              <button id="deliverBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Mark as Delivered</button>
+              <button id="cancelBtn" type="button m-0" class="btn btn-danger px-5 mx-auto">Delete Crop</button>
             </div>
           </div>
         </div>
@@ -88,9 +80,8 @@
           <table class="table orders-table mx-auto">
             <thead>
               <tr>
-                <th>Order ID</th>
+                <th>Crop ID</th>
                 <th>Crop Name</th>
-                <th>Customer Name</th>
                 <th>Status</th>
                 <th></th>
               </tr>
