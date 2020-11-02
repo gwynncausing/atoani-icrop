@@ -61,7 +61,7 @@
                         </div>
                         <div id="account" class="collapse" aria-labelledby="headingTwo" data-parent="#userEditAccordion">
                             <div class="card-body">
-                                <form class="pt-3" method="POST" id="form-account">
+                                <form class="pt-3" method="POST">
                                     {% csrf_token %}
                                     <div class="form-row row pr-2 pl-2">
                                         <div class="form-group col-lg-12 col-12 row">
@@ -75,14 +75,14 @@
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-4 mt-md-2"  for="last-name">New Password</label>
                                             <input class="col-lg-6 col-8 form-control" type="password" name="new_password1" id="new_password1" placeholder="New Password" required maxlength="30">
-                                            <label class="col mt-md-2" id="new_password1_feedback">Password Feedback</label>
+                                            <!-- <label class="col mt-md-2" id="new_password1_feedback">Password Feedback</label> -->
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-4 mt-md-2"  for="last-name">Retype New Password</label>
                                             <input class="col-lg-6 col-8 form-control" type="password" name="new_password2" id="new_password2" placeholder="Retype New Password" required maxlength="30">
                                         </div>
                                         <div class="form-group col-12">
-                                            <button type="submit" class="btn float-right save-btn" id="btn-save-account" name="btn-save-account">Save Changes</button>
+                                            <button type="submit" class="btn float-right save-btn" id="btn-save-account" name="btn-save-account" >Save Changes</button>
                                             <button type="button" class="btn float-right cancel-btn" data-toggle="collapse" data-target="#account">Cancel</button>
                                         </div>
                                     </div>

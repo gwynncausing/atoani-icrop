@@ -376,22 +376,22 @@ class SettingsView(View):
                 return HttpResponse('')
 
 
-# class ChangePasswordView(View):
-#     def get(self, request):
-#         if request.method == 'POST':
-#             form = PasswordChangeForm(request.POST, instance=request.user)
-#             if form.is_valid():
-#                 user = form.save()
-#                 update_session_auth_hash(request, user)  # Important!
-#                 print('Your password was successfully updated!')
-#                 return redirect('login_register: login')
-#             else:
-#                 print('Please correct the error below.')
-#         else:
-#             form = PasswordChangeForm(request.user)
-#         return render(request, 'login_register/change-password.html', {
-#             'form': form
-#         })
+class ChangePasswordView(View):
+    def get(self, request):
+        if request.method == 'POST':
+            form = PasswordChangeForm(request.POST, instance=request.user)
+            if form.is_valid():
+                user = form.save()
+                update_session_auth_hash(request, user)  # Important!
+                print('Your password was successfully updated!')
+                return redirect('login_register: login')
+            else:
+                print('Please correct the error below.')
+        else:
+            form = PasswordChangeForm(request.user)
+        return render(request, 'login_register/change-password.html', {
+            'form': form
+        })
 
 class AboutUsView(View):
     def get(self,request):

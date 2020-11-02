@@ -351,28 +351,28 @@ $(document).ready(function () {
         });
     });
     
-    $('#btn-save-account').click(function(e){
-        console.log("clicked account")
-        e.preventDefault();
-        $.ajax({
-            url: '/settings/',
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken' : csrf_token[0].value,
-                'current_pass' : current_pass.value,
-                'new_password1': new_password1.value,
-                'new_password2': new_password2.value,
-                'btn-save-account' : $(this).html()
-            },
-            success: function(response){
-                console.log(response);
-                // $("#modal-message-deleted").modal('show');
-            },
-            error: function(response){
-                console.log(response);
-            }
-        });
-    });
+    // $('#btn-save-account').click(function(e){
+    //     console.log("clicked account")
+    //     e.preventDefault();
+    //     $.ajax({
+    //         url: '/settings/',
+    //         type: 'POST',
+    //         data: {
+    //             'csrfmiddlewaretoken' : csrf_token[0].value,
+    //             'current_pass' : current_pass.value,
+    //             'new_password1': new_password1.value,
+    //             'new_password2': new_password2.value,
+    //             'btn-save-account' : $(this).html()
+    //         },
+    //         success: function(response){
+    //             console.log(response);
+    //             // $("#modal-message-deleted").modal('show');
+    //         },
+    //         error: function(response){
+    //             console.log(response);
+    //         }
+    //     });
+    // });
 
     // open edit address modal
     $(document).on("click", "#btn-edit-address-modal", function () {
