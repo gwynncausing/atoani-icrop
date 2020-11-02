@@ -94,7 +94,6 @@ const farmerReservedTableConfig = {
   initComplete: function(){
     reserved_data = reservedTable.ajax.json().data;
     //show the total count of reserved orders
-    console.log(reserved_data);
     $("#reserved-orders-counter").html(reserved_data.length);
   },
   responsive: true
@@ -185,6 +184,7 @@ function viewReservedOrders(orderID){
       break;
     }
   }
+  //console.log(JSON.stringify(order))
   //Initializing displays
   confirmHarvestMsg.style.display = "none";
   $("#harvestBtn").addClass("d-none"); 
@@ -200,8 +200,8 @@ function viewReservedOrders(orderID){
     
     reserveButton.addEventListener('click',checkOrder);
   }
-  // document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
-  // document.getElementById('reserved-date-approved').innerHTML = String(order.date_approved);
+  //document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date)
+  //document.getElementById('reserved-date-approved').innerHTML = String(order.date_approved);
   document.getElementById('reserved-date-reserved').innerHTML = String(order.accepted_date);
   document.getElementById('reserved-status').innerHTML = String(order.status);
   document.getElementById('reserved-crop-name').innerHTML = String(order.name);
@@ -224,6 +224,7 @@ function viewIncomingOrders(orderID){
       break;
     }
   }
+  //console.log(JSON.stringify(order));
   //Initializing displays
   confirmMsg.style.display = "none";
   failedMsg.style.display = "none";
@@ -237,7 +238,7 @@ function viewIncomingOrders(orderID){
   reserveButton.addEventListener('click',checkOrder);
   //Assigning values
   document.getElementById('incoming-date-ordered').innerHTML = String(order.order_date);
-  //document.getElementById('incoming-date-approved').innerHTML = "Not Yet Approved";
+  document.getElementById('incoming-date-approved').innerHTML = "Not Yet Approved";
   document.getElementById('incoming-status').innerHTML = String(order.status);
   document.getElementById('incoming-crop-name').innerHTML = String(order.name);
   document.getElementById('incoming-demand').innerHTML = String(order.weight) + " kilos";
@@ -294,8 +295,6 @@ let confirmReservation = function() {
   $(".loading").removeClass("d-none");
   //close the current modal open
   $("#incoming-modal-farmer").modal("hide");
-  $("#reserved-modal-farmer").modal("hide");
-  $("#finished-modal-farmer").modal("hide");
   $.ajax({
     url: '',
     type: 'post',
@@ -372,6 +371,12 @@ let harvestOrder = function() {
   formData.append('order-id', selectedOrderID);
   formData.append('operation', 'harvest-order');
   formData.append('csrfmiddlewaretoken',csrf_token);
+  //show the loading ui
+  $(".loading").removeClass("d-none");
+  //show the loading ui
+  $(".loading").removeClass("d-none");
+  //close the current modal open
+  $("#reserved-modal-farmer").modal("hide");
   $.ajax({
     url: '',
     type: 'post',
@@ -381,7 +386,11 @@ let harvestOrder = function() {
     processData: false,
 
     success: function (response) {
-      //No notifications yet
+      //Display message
+      //remove loading 
+      $(".loading").addClass("d-none"); 
+      //when modal closes, and a success notification will display
+      notify('success','Reserved Success!','You have successfully reserved an order.')
       $("#reserved-modal-farmer").modal("hide");
       console.log("order marked as harvested");
       //Update table
@@ -399,7 +408,10 @@ let harvestOrder = function() {
       },true);
     },
     error: function (response) {
-
+        //remove loading 
+        $(".loading").addClass("d-none");
+        //to nofity error
+        notify('error','Reserved Failed!','Sorry but the order is already taken. Please try with other orders.')
     }
   });
 }

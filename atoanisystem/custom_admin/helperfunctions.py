@@ -81,7 +81,8 @@ def format_name(orders,key,newkey):
         del order[key]
     return orders
 
-def get_all_orders():
+#gets all orders including Cancelled
+def get_orders():
     df = dashboard_utility.datatable_orders()
     orders = dashboard_utility.display_all_orders(df)
     print('printing df',df)
@@ -91,12 +92,22 @@ def get_all_orders():
         orders = []
     return orders
 
+#gets all orders except Cancelled
+def get_all_orders():
+    orders = get_orders()
+    all_orders = []
+    for order in orders:
+        if order['status'] != "Cancelled":
+            all_orders.append(order)
+    return all_orders
+
 def get_all_order_pairs():
     df = dashboard_utility.datatable_order_pairs()
     orders = dashboard_utility.display_all_order_pairs(df)
-    
     orders = format_name(orders,'customer_names','customer_name')
     orders = format_name(orders,'farmer_names','farmer_name')
+    orders = list(filter(lambda order: order.status != "cancelled", orders))
+    print(orders)
     return orders
 
 def get_unapproved_orders(orders):
@@ -142,17 +153,33 @@ def get_delivered_orders(orders):
             delivered_orders.append(order)
     return delivered_orders
 
+def get_cancelled_orders(orders):
+    cancelled_orders = []
+    for order in orders:
+        if order['status'] == "Cancelled":
+            cancelled_orders.append(order)
+    return cancelled_orders
+
 def approve_order(order_id):
     order = Order.objects.get(order_id=order_id)
     order.is_approved = True
     order.save()
 
 def cancel_order(order_id):
-    ok = True
-    try:
-        Order.objects.get(order_id=order_id).delete()
-    except:
-        ok = False
+    ok = False
+    order = Order.objects.get(order_id=order_id)
+    if order.status != "Finished":
+        order.status = "Cancelled"
+        order.is_cancelled = True
+        order.save()
+        #Needs to catch exception when order is not reserved
+        try:
+            order_pair = Order_Pairing.objects.get(order_id=order)
+            order_pair.status = "Cancelled"
+            order_pair.save()
+        except:
+            pass
+        ok = True
     return ok
 
 def force_reserve_to(user_id,order_id):
