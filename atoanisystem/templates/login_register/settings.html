@@ -11,7 +11,7 @@
     <div class="container-fluid mt-5 pl-0 pr-0 settings-container">
         
         <div class="d-flex justify-content-between align-items-center pl-3 pr-3 setting-header">
-            <h5 class="mt-3">Settings</h5>
+            <h5 class="mt-3 text-light">Settings</h5>
         </div>
 
         <div class="row pr-3 pl-3">
@@ -20,9 +20,9 @@
 
                     <!-- Name card -->
                     <div class="card">
-                      <div class="card-header" id="name-card">
+                      <div class="card-header" id="name-card" data-toggle="collapse" data-target="#name" aria-expanded="true" aria-controls="name">
                         <h5 class="mb-0">
-                          <button class="btn btn-header btn-link" type="button" data-toggle="collapse" data-target="#name" aria-expanded="true" aria-controls="name">
+                          <button class="btn btn-header btn-link" type="button">
                             Name
                           </button>
                         </h5>
@@ -33,12 +33,12 @@
                                 {% csrf_token %}
                                 <div class="form-row row pr-2 pl-2">
                                     <div class="form-group col-lg-12 col-12 row">
-                                        <label class="col-lg-3 col-12" for="first-name">First Name *</label>
-                                        <input class="col-lg-6 col-12 form-control" type="text" name="first-name" id="first-name" placeholder="First Name" required maxlength="30" value="{{user.first_name}}">
+                                        <label class="col-lg-3 col-4 mt-2" for="first-name">First Name *</label>
+                                        <input class="col-lg-6 col-8 form-control" type="text" name="first-name" id="first-name" placeholder="First Name" required maxlength="30" value="{{user.first_name}}">
                                     </div>
                                     <div class="form-group col-lg-12 col-12 row">
-                                        <label class="col-lg-3 col-12"  for="last-name">Last Name *</label>
-                                        <input class="col-lg-6 col-12 form-control" type="text" name="last-name" id="last-name" placeholder="Last Name" maxlength="30" required maxlength="30" value="{{user.last_name}}">
+                                        <label class="col-lg-3 col-4 mt-2"  for="last-name">Last Name *</label>
+                                        <input class="col-lg-6 col-8 form-control" type="text" name="last-name" id="last-name" placeholder="Last Name" maxlength="30" required maxlength="30" value="{{user.last_name}}">
                                     </div>
                                     <div class="form-group col-12">
                                         <button type="submit" class="btn float-right save-btn" name="btn-save-name" id="btn-save-name">Save Changes</button>
@@ -52,9 +52,9 @@
 
                     <!-- Account Card -->
                     <div class="card">
-                        <div class="card-header" id="headingTwo">
+                        <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#account" aria-expanded="false" aria-controls="collapseTwo">
                             <h5 class="mb-0">
-                            <button class="btn btn-link btn-header collapsed" type="button" data-toggle="collapse" data-target="#account" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="btn btn-link btn-header collapsed" type="button" >
                                 Account
                             </button>
                             </h5>
@@ -65,25 +65,25 @@
                                     {% csrf_token %}
                                     <div class="form-row row pr-2 pl-2">
                                         <div class="form-group col-lg-12 col-12 row">
-                                            <label class="col-lg-3 col-12" for="first-name">Username</label>
-                                            <input class="col-lg-6 col-12 form-control" type="text" name="username" id="username" placeholder="Username" required maxlength="30" value="{{user.username}}" readonly>
+                                            <label class="col-lg-3 col-4 mt-md-2" for="first-name">Username</label>
+                                            <input class="col-lg-6 col-8 form-control" type="text" name="username" id="username" placeholder="Username" required maxlength="30" value="{{user.username}}" readonly>
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
-                                            <label class="col-lg-3 col-12" for="middle-name">Current Password</label>
-                                            <input class="col-lg-6 col-12 form-control" type="password" name="current-password" id="current-password" placeholder="Current Password" required maxlength="30">
-                                            <label class="col invalid-feedback" id="new_password1_feedback">Incorrect Password.</label>
+                                            <label class="col-lg-3 col-4 mt-md-2" for="current-password">Current Password</label>
+                                            <input class="col-lg-6 col-8 form-control" type="password" name="current-password" id="current-password" placeholder="Current Password" required maxlength="30">
+                                            <label class="offset-4 col-lg-6 col-8 invalid-feedback" id="new_password1_feedback">Incorrect Password.</label>
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
-                                            <label class="col-lg-3 col-12"  for="last-name">New Password</label>
-                                            <input class="col-lg-6 col-12 form-control pr-password" type="password" name="new_password1" id="new_password1" placeholder="New Password" required maxlength="30">
-                                            <label class="col valid-feedback" id="new_password1_feedback">Password accepted.</label>
-                                            <label class="col invalid-feedback" id="new_password1_feedback">You must have a strong password.</label>
+                                            <label class="col-lg-3 col-4 mt-md-2"  for="last-name">New Password</label>
+                                            <input class="col-lg-6 col-8 form-control pr-password" type="password" name="new_password1" id="new_password1" placeholder="New Password" required maxlength="30">
+                                            <label class="offset-4 col-lg-6 col-8 valid-feedback" id="new_password1_feedback">Password accepted.</label>
+                                            <label class="offset-4 col-lg-6 col-8 invalid-feedback" id="new_password1_feedback">You must have a strong password.</label>
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
-                                            <label class="col-lg-3 col-12"  for="last-name">Retype New Password</label>
-                                            <input class="col-lg-6 col-12 form-control" type="password" name="new_password2" id="new_password2" placeholder="Retype New Password" required maxlength="30">
-                                            <label class="col valid-feedback" id="new_password1_feedback">Passwords match.</label>
-                                            <label class="col invalid-feedback" id="new_password1_feedback">Passwords don't match.</label>
+                                            <label class="col-lg-3 col-4 mt-md-2"  for="last-name">Retype New Password</label>
+                                            <input class="col-lg-6 col-8 form-control" type="password" name="new_password2" id="new_password2" placeholder="Retype New Password" required maxlength="30">
+                                            <label class="offset-4 col-lg-6 col-8 valid-feedback" id="new_password1_feedback">Passwords match.</label>
+                                            <label class="offset-4 col-lg-6 col-8 invalid-feedback" id="new_password1_feedback">Passwords don't match.</label>
                                         </div>
                                         <div class="form-group col-12">
                                             <button type="submit" class="btn float-right save-btn" id="btn-save-account" name="btn-save-account">Save Changes</button>
@@ -97,9 +97,9 @@
                     
                     <!-- Contact Card -->   
                     <div class="card">
-                        <div class="card-header" id="headingThree">
+                        <div class="card-header" id="headingThree" data-toggle="collapse" data-target="#contact" aria-expanded="false" aria-controls="collapseThree">
                             <h5 class="mb-0">
-                            <button class="btn btn-header btn-link collapsed" type="button" data-toggle="collapse" data-target="#contact" aria-expanded="false" aria-controls="collapseThree">
+                            <button class="btn btn-header btn-link collapsed" type="button" >
                                 Contact Details
                             </button>
                             </h5>
@@ -115,13 +115,13 @@
                                         <div class="form-group col-lg-12 col-12 row" id="locations">
                                             {% for location in locations %}
                                                 {% if forloop.first %}
-                                                <label class="col-lg-3 col-12">Address *</label>
+                                                <label class="col-lg-3 col-4 mt-md-2">Address *</label>
                                                 {% else %}
-                                                <label class="col-lg-3 col-12"></label>
+                                                <label class="col-lg-3 col-4 mt-md-2"></label>
                                                 {% endif %}
-                                                <input class="col-lg-6 form-control" type="text" name="address" id="address" placeholder="Address" required value="{{ location.name }}" readonly>
-                                                <button type="button" class="col btn edit-address-btn form-control" data-toggle="modal" data-target="#modal-customer-address" data-location-id="{{ location.id }}" id="btn-edit-address-modal" name="btn-edit-address-modal">Edit</button>
-                                                <button type="button" class="col btn delete-address-btn form-control" data-toggle="modal" data-target="#modal-delete" id="btn-delete-address-modal" name="btn-delete-address-modal" data-location-name="{{ location.name }}" data-location-id="{{ location.id }}">Delete</button>
+                                                <input class="col-lg-6 col-8 form-control" type="text" name="address" id="address" placeholder="Address" required value="{{ location.name }}" readonly>
+                                                <button type="button" class="col btn edit-address-btn form-control mt-3 mt-l-0" data-toggle="modal" data-target="#modal-customer-address" data-location-id="{{ location.id }}" id="btn-edit-address-modal" name="btn-edit-address-modal">Edit</button>
+                                                <button type="button" class="col btn delete-address-btn form-control btn-danger ml-3 mt-3 mt-l-0" data-toggle="modal" data-target="#modal-delete" id="btn-delete-address-modal" name="btn-delete-address-modal" data-location-name="{{ location.name }}" data-location-id="{{ location.id }}">Delete</button>
                                             {% endfor %}
                                         </div>
                                         <div class="form-group col-12">
@@ -129,42 +129,42 @@
                                         </div>
                                         <!-- customer contact number -->
                                         <div class="form-group col-lg-12 col-12 row">
-                                            <label class="col-lg-3 col-12" for="middle-name">Contact Number</label>
-                                            <input class="col-lg-6 col-12 form-control" type="text" name="contact-num" id="contact-num" pattern=".{10,11}" maxlength="11" placeholder="Contact Number" value="{{user.customer.contact_number}}" required>
+                                            <label class="col-lg-3 col-4 mt-md-2" for="middle-name">Contact Number</label>
+                                            <input class="col-lg-6 col-8 form-control" type="text" name="contact-num" id="contact-num" pattern=".{10,11}" maxlength="11" placeholder="Contact Number" value="{{user.customer.contact_number}}" required>
                                         </div>
                                         <!-- feedback -->
                                         <div class="form-group col-lg-12 col-12 row d-none" id="contact-num-feedback-div">
-                                            <label class="col-lg-3 col-12"></label>
-                                            <label class="col-lg-6 col-12" id="contact-num-feedback"></label>
+                                            <label class="col-lg-3 col-4 mt-md-2"></label>
+                                            <label class="col-lg-6 col-8" id="contact-num-feedback"></label>
                                         </div>
 
                                         {% elif user.farmer %}
                                         <!-- farmer address -->
                                         <div class="form-group col-lg-12 col-12 row">
-                                            <label class="col-lg-3 col-12">Address *</label>
-                                            <input class="col-lg-6 col-12 form-control" type="text" name="address" id="address" placeholder="Address" required value="{{ user.farmer.location.name }}" readonly>
+                                            <label class="col-lg-3 col-4 mt-md-2">Address *</label>
+                                            <input class="col-lg-6 col-8 form-control" type="text" name="address" id="address" placeholder="Address" required value="{{ user.farmer.location.name }}" readonly>
                                             <button type="button" class="col btn float-right edit-address-btn form-control" data-toggle="modal" data-target="#modal-edit-farmer-{{user.farmer.location.id}}">Edit Address</button>
                                         </div>
 
                                         <!-- farmer contact number -->
                                         <div class="form-group col-lg-12 col-12 row">
-                                            <label class="col-lg-3 col-12" for="middle-name">Contact Number</label>
-                                            <input class="col-lg-6 col-12 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" pattern=".{10,11}" maxlength="11" value="{{user.farmer.contact_number}}" required>
+                                            <label class="col-lg-3 col-4 mt-md-2" for="middle-name">Contact Number</label>
+                                            <input class="col-lg-6 col-8 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" pattern=".{10,11}" maxlength="11" value="{{user.farmer.contact_number}}" required>
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row d-none" id="contact-num-feedback-div">
-                                            <label class="col-lg-3 col-12"></label>
-                                            <label class="col-lg-6 col-12" id="contact-num-feedback"></label>
+                                            <label class="col-lg-3 col-4"></label>
+                                            <label class="col-lg-6 col-8" id="contact-num-feedback"></label>
                                         </div>
                                         {% endif %}
 
                                         <!-- email -->
                                         <div class="form-group col-lg-12 col-12 row">
-                                            <label class="col-lg-3 col-12"  for="last-name">Email Address *</label>
-                                            <input class="col-lg-6 col-12 form-control" type="email" name="email" id="email" placeholder="Email Address" maxlength="30" required value="{{user.email}}">
+                                            <label class="col-lg-3 col-4 mt-md-2"  for="last-name">Email Address *</label>
+                                            <input class="col-lg-6 col-8 form-control" type="email" name="email" id="email" placeholder="Email Address" maxlength="30" required value="{{user.email}}">
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row d-none" id="email-feedback-div">
-                                            <label class="col-lg-3 col-12"></label>
-                                            <label class="col-lg-6 col-12" id="email-feedback"></label>
+                                            <label class="col-lg-3 col-3"></label>
+                                            <label class="col-lg-6 col-9" id="email-feedback"></label>
                                         </div>
 
                                         <!-- buttons -->
@@ -181,9 +181,9 @@
                     <!-- Others -->
                     {% if user.farmer %}
                     <div class="card">
-                        <div class="card-header" id="headingFour">
+                        <div class="card-header" id="headingFour" data-toggle="collapse" data-target="#others" aria-expanded="false" aria-controls="collapseThree">
                             <h5 class="mb-0">
-                            <button class="btn btn-header btn-link collapsed" type="button" data-toggle="collapse" data-target="#others" aria-expanded="false" aria-controls="collapseThree">
+                            <button class="btn btn-header btn-link collapsed" type="button">
                                 Others
                             </button>
                             </h5>
@@ -194,12 +194,12 @@
                                     {% csrf_token %}
                                     <div class="form-row row pr-2 pl-2">
                                         <div class="form-group col-lg-12 col-12 row">
-                                            <label class="col-lg-3 col-12"  for="land-area">Land Area (sqm)*</label>
-                                            <input class="col-lg-6 col-12 form-control" type="number" name="land-area" id="land-area" placeholder="0 sqm"  required value="{{user.farmer.land_area}}">
+                                            <label class="col-lg-3 col-3 mt-md-2"  for="land-area">Land Area (sqm)*</label>
+                                            <input class="col-lg-6 col-9 form-control" type="number" name="land-area" id="land-area" placeholder="0 sqm"  required value="{{user.farmer.land_area}}">
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
-                                        <label class="col-lg-3 col-12"  for="company">Company *</label>
-                                        <input class="col-lg-6 col-12 form-control" type="text" name="company" id="company" placeholder="" maxlength="30" required value="{{user.farmer.company}}">
+                                        <label class="col-lg-3 col-3 mt-md-2"  for="company">Company *</label>
+                                        <input class="col-lg-6 col-9 form-control" type="text" name="company" id="company" placeholder="" maxlength="30" required value="{{user.farmer.company}}">
                                     </div>
                                         <div class="form-group col-12">
                                             <button type="submit" class="btn float-right save-btn" name="btn-save-others" id="btn-save-others">Save Changes</button>
@@ -336,7 +336,7 @@
                         </div>
                         <div class="pt-3 pb-3 pl-5 pr-5 d-flex justify-content-between">
                             <button type="button" class="btn cancel-btn" data-dismiss="modal">Cancel</button>
-                            <input type="submit" class="btn btn-danger delete-btn" id="btn-delete-address" name="btn-delete-address" value="Delete">
+                            <input type="submit" class="btn btn-danger delete-btn btn-danger" id="btn-delete-address" name="btn-delete-address" value="Delete">
                         </div>
                     </form>
                 </div>
@@ -392,7 +392,6 @@
             </div>
         </div> 
     </div>
-
 {% endblock %}
 
 

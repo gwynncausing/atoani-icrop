@@ -13,13 +13,13 @@
     <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="{% static 'css/login_register/approval.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login_register/approval_admin.css' %}">
     {% block tags %}
     <!-- Additional css tags -->
 
     {% endblock %}
 
-    <title>AtoANI iCROP</title>
+    <title>AtoANI iCROP - Administrator</title>
 </head>
 
 <body>
@@ -31,6 +31,7 @@
                     <div class="div-1">
                         <div class="logo d-flex justify-content-center">
                             <a href="{% url 'login_register:login' %}"><img class="imgLogo" src="/static/images/AtoANI-iCROP-Horizontal-white.png" alt="AtoANI Logo"></a>
+                            <span id="adminHome">Administrator</span>
                         </div>
                     </div>
                     <div class="div-2" style="z-index: 100;">
@@ -42,38 +43,18 @@
                             </button>
                         </div>
                         <div class="collapse navbar-collapse py-3" id="navbarSupportedContent">
-                            <ul class="nav navbar-nav">
+                            <!-- <ul class="nav navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'login_register:login' %}">Home<span
                                             class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'login_register:about-us' %}">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'login_register:contact-us' %}">Contact Us</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        Language
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Bisaya</a>
-                                        <a class="dropdown-item" href="#">English</a>
-                                        <a class="dropdown-item" href="#">Tagalog</a>
-                                    </div>
-                                </li>
-                            </ul>
+                            </ul> -->
                             <ul class="navbar-nav ml-auto">
                                 {% if not user.is_authenticated %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'login_register:register' %}">Register</a>
                                 </li>
                                 {% else %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'login_register:settings' %}">Settings</a>
-                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'login_register:logout' %}">Logout</a>
                                 </li>

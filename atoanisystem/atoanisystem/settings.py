@@ -155,11 +155,10 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media")
 
+# Session
+PASSWORD_RESET_TIMEOUT = 86400
 
-#SMTP Configuration
-
-# atoani.test@gmail.com
-# AtoaniTest123
+# SMTP Configuration
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
