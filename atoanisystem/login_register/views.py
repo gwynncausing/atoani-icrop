@@ -356,12 +356,16 @@ class SettingsView(View):
                                 user.save()
                                 update_session_auth_hash(request, user)
                                 print("password changed")
+                                data['password_status'] = "successful";
                             else:
                                 print("new pass is empty -> old pass kept")
+                                data['password_status'] = "successful";
                         else:
                             print("new passwords not the same")
+                            data['password_status'] = "passwords not same";
                     else:
                         print("password is incorrect or empty")
+                        data['password_status'] = "incorrect";
 
                 elif 'btn-add-customer-address':
                     customer = request.user.customer
