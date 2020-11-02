@@ -113,11 +113,21 @@ def convert(time):
     except:
         return None
 
+def printable_convert(time):
+    print(convert(time).strftime('%B %d, %Y'))
+    return convert(time).strftime('%B %d, %Y')
+
+def printable_month(time):
+    return convert(time).strftime('%B %Y')
 # get farmer's accepted orders
 def get_order_pairing_farmer(id):
     df = pd.DataFrame(Order_Pairing.objects.filter(farmer_id=id).values())
     if len(df) != 0:
-        df['accepted_date'] = df['accepted_date'].apply(convert)
+        df['accepted_date'] = df['accepted_date'].apply(printable_convert)
+        df['expected_time'] = df['expected_time'].apply(printable_month)
+        df['harvested_date'] = df['harvested_date'].apply(printable_convert)
+        df['delivered_date'] = df['delivered_date'].apply(printable_convert)
+        df['collected_date'] = df['collected_date'].apply(printable_convert)
         return df.rename(columns={"id":"order_pair_id"})
     return df
 
@@ -164,22 +174,29 @@ def get_complete_order_customer(id):
 # generates datatable for customer dashboard
 def datatable_customer(id):
     order= get_complete_order_customer(id)
+    print("finished " + str(len(order)))
     if len(order) !=0:
+        print("inside")
         #df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
-        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val for val in order['order_id'].to_list()]).values()).drop(columns="status")
-        print(df['accepted_date'])
+        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val for val in order['order_id'].to_list()]).values())
         if len(df) == 0:
+            order['order_date'] = order['order_date'].apply(printable_convert)
             order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"
             return order
         else:
-            df = order.merge(df, how="left", left_on="order_id", right_on="order_id_id").fillna("N/A").drop(columns=["order_id_id"])
             print(df['accepted_date'])
+            df.drop(columns="status",inplace=True)
+            df = order.merge(df, how="left", left_on="order_id", right_on="order_id_id").fillna("N/A").drop(columns=["order_id_id"])
+            print(df)
+            print("di pa tapos!")
             if len(df) != 0:
-                df['accepted_date'] = df['accepted_date'].apply(convert)
-                df['harvested_date'] = df['harvested_date'].apply(convert)
-                df['collected_date'] = df['collected_date'].apply(convert)
-                df['delivered_date'] = df['delivered_date'].apply(convert)
+                df['order_date'] = df['order_date'].apply(printable_convert)
+                df['accepted_date'] = df['accepted_date'].apply(printable_convert)
+                df['harvested_date'] = df['harvested_date'].apply(printable_convert)
+                df['collected_date'] = df['collected_date'].apply(printable_convert)
+                df['delivered_date'] = df['delivered_date'].apply(printable_convert)
                 return df.rename(columns={'id':'order_pair_id'})
+    print("SIKE MAAAAN")
     return order
 
 # to be called after datatable_customer to generate datatable dictionary
