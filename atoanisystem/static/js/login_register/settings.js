@@ -65,6 +65,8 @@ $(document).ready(function () {
     const emailInvalidFormat = "Please enter your email address in format: yourname@example.com";
     const emailExists = "The email address is already in use";
 
+    passwordHelper.init($("#new_password1"), $("#new_password2"));
+
     const displayValidity = (field) => {
         if(field.checkValidity() === true){
             addValidClass(field);

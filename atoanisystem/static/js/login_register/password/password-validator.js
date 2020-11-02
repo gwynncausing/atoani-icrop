@@ -73,7 +73,7 @@ const passwordHelper = {
 	bindEvents: function() {
 		this.$password.on("focus", this.showMessage.bind(this));
 		this.$password.on("blur", this.hintOnBlur.bind(this));
-		this.$password.on("keyup focus", this.check.bind(this));
+		this.$password.on("keyup", this.check.bind(this));
 		this.$password_confirm.on("keyup", this.checkPasswordIfSame.bind(this));
 	},
 	init: function (password, password_confirm){
