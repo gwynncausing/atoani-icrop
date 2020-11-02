@@ -130,12 +130,16 @@ class Customer(models.Model):
         return get_name(self.contact_number)
 
     def get_locations(self):
-        splt = self.street.split("|")
+        splt = []
         final_location = []
+        if self.street:
+            splt = self.street.split("|")
         # pairs street and location
-        for i in self.location.all().values_list('name','id'):
-            final_location.append((i[0]+", " + splt.pop(0),i[1]))
-
+            for i in self.location.all().values_list('name','id'):
+                final_location.append((i[0]+", " + splt.pop(0),i[1]))
+        else:
+            for i in self.location.all().values_list('name','id'):
+                final_location.append((i))
         return final_location
 
     def get_all_locations(self):
