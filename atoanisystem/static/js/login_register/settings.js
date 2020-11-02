@@ -347,7 +347,7 @@ $(document).ready(function () {
                     // $("#modal-message-deleted").modal('show');
                     if(response.password_status == "incorrect")
                         document.getElementById("current-password").classList.add("is-invalid");
-                    else{
+                    else if(response.password_status == "successful"){
                         $("#modal-message").modal('show');
                         current_pass.value = "";
                         new_password1.value = "";
@@ -355,6 +355,8 @@ $(document).ready(function () {
                         passwordHelper.reset();
                         document.getElementById("current-password").classList.remove("is-invalid");
                     }
+                    else if(response.password_status == "passwords not same")
+                        document.getElementById("new_password2").classList.add("is-invalid");
                 },
                 error: function(response){
                     console.log(response);

@@ -362,7 +362,7 @@ class SettingsView(View):
                                 data['password_status'] = "successful";
                         else:
                             print("new passwords not the same")
-                            data['password_status'] = "successful";
+                            data['password_status'] = "passwords not same";
                     else:
                         print("password is incorrect or empty")
                         data['password_status'] = "incorrect";
