@@ -12,12 +12,19 @@
     <div class="row h-100">
         <div class="col-2 sidebar d-flex column-vertical py-3 p-0">
             <a class="orders-title" href="{% url 'custom_admin:orders' %}">Orders<i class="fa fa-caret-down"></i></a>
-            <a class="orders-title active" href="{% url 'custom_admin:users' %}">Users <i class="fa fa-caret-down"></i></a>
+            <a class="orders-title active" href="{% url 'custom_admin:users' %}">Users <i
+                    class="fa fa-caret-down"></i></a>
             <div class="dropdown-container">
-              <button id="allBtn" type="button" class="sidebar-nav">All</button>
-              <button id="waitlistBtn" type="button" class="sidebar-nav">Waitlist</button>
-              <button id="customersBtn" type="button" class="sidebar-nav">Customers</button>
-              <button id="farmersBtn" type="button" class="sidebar-nav">Farmers</button>
+                <button id="allBtn" type="button" class="sidebar-nav">All</button>
+                <button id="waitlistBtn" type="button" class="sidebar-nav">Waitlist</button>
+                <button id="customersBtn" type="button" class="sidebar-nav">Customers</button>
+                <button id="farmersBtn" type="button" class="sidebar-nav">Farmers</button>
+            </div>
+            <a class="orders-title" href="{% url 'custom_admin:crops' %}">Others <i
+                    class="fa fa-caret-down"></i></a>
+            <div class="dropdown-container d-none">
+                <button id="" type="button" class="sidebar-nav border-0" autofocus>Crops</button>
+                <a href="{% url 'admin:index' %}" class="sidebar-nav border-0">Django Admin</a>
             </div>
         </div>
         <div class="col-10 p-5 orders">
@@ -70,7 +77,7 @@
                                 User</button>
                             <br>
                             <button id="resetPasswordBtn" type="button m-0" class="btn btn-info px-5 mx-auto"
-                            data-toggle="modal" data-target="#resetPasswordModal">Reset
+                                data-toggle="modal" data-target="#resetPasswordModal">Reset
                                 Password</button>
 
                             <div class="modal" id="resetPasswordModal" tabindex="-1" role="dialog"
@@ -90,7 +97,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
-                                            <button id="confirmResetBtn" type="button" data-dismiss="modal" class="btn btn-primary">Reset</button>
+                                            <button id="confirmResetBtn" type="button" data-dismiss="modal"
+                                                class="btn btn-primary">Reset</button>
                                         </div>
                                     </div>
                                 </div>

@@ -125,7 +125,7 @@ function resetViewOrder(){
 }
 
 function getDataFromServer(url){
-  ordersTable.ajax.url(url).load()
+  ordersTable.ajax.url(url).load(()=>{tableData = ordersTable.ajax.json().data;},true)
 }
 
 function processOrder(orderID,viewURL){
@@ -237,7 +237,7 @@ function initializeButtons(){
     hideElement(approveBtn);
     hideElement(collectBtn);
     hideElement(deliverBtn);
-    getDataFromServer(getCollectedOrdersURL);
+    getDataFromServer(getDeliveredOrdersURL);
   });
   cancelledBtn.addEventListener("click",e => {
     labelTop.innerHTML = "Cancelled";
@@ -270,6 +270,12 @@ function initializeButtons(){
   collectBtn.addEventListener("click", e => {
     if (selectedOrderID != -1)
       processOrder(selectedOrderID,getHarvestedOrdersURL);
+    else
+      alert("Select an order first.");
+  });
+  deliverBtn.addEventListener("click", e => {
+    if (selectedOrderID != -1)
+      processOrder(selectedOrderID,getCollectedOrdersURL);
     else
       alert("Select an order first.");
   });
