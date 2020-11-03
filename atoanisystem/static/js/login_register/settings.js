@@ -40,6 +40,7 @@ $(document).ready(function () {
     const city = document.getElementById("city");
     const brgy = document.getElementById("barangay");
     const name = document.getElementById("address");
+    const contactInfo = document.querySelector("#contact-info");
     const location_id_delete = document.getElementById('location-id-delete');
     const current_pass = document.getElementById('current-password');
     const new_password1 = document.getElementById('new_password1');
@@ -60,7 +61,6 @@ $(document).ready(function () {
     const contact_form = document.getElementById('form-contact');
 
     const contactInvalidFormat = "Phone number must be in this format 09xxxxxxxxx";
-
     const contactExists = "The contact number is already in use";
     const emailInvalidFormat = "Please enter your email address in format: yourname@example.com";
     const emailExists = "The email address is already in use";
@@ -106,19 +106,16 @@ $(document).ready(function () {
         if(e.target.value.toString().length === 0){
             removeValidClass(email);
             removeInvalidClass(email)
-            email_feedback.innerHTML = "";
-            email_feedback_div.classList.add("d-none");
             isEmailValid = false;
-        }
-        else{
-            email_feedback.innerHTML = emailInvalidFormat;
-            email_feedback_div.classList.remove("d-none");
+        }else{
             isEmailValid = displayValidity(e.target);
-            if(isEmailValid == true){
-                email_feedback.innerHTML = emailExists;
-                email_feedback_div.classList.remove("d-none");
+            if(isEmailValid){
+                email.classList.add("is-invalid");
+                email_feedback.innerHTML = contactExists;
                 checkFromServer(email,'email');
             }
+            else
+                email_feedback.innerHTML = emailInvalidFormat;
         }
         // else{
         //     email_feedback.innerHTML = emailInvalidFormat;
@@ -147,18 +144,17 @@ $(document).ready(function () {
         if(e.target.value.toString().length === 0){
             removeValidClass(contact_number);
             removeInvalidClass(contact_number)
-            contact_num_feedback.innerHTML = "";
-            contact_num_feedback_div.classList.add("d-none");
             isContactValid = false;
-        }
-        else{
-            document.getElementById("contact-invalid").innerHTML = contactInvalidFormat;
+        }else{
             isContactValid = displayValidity(e.target);
-            //check if contact exists or not
-            if(isContactValid === true){
-                document.getElementById("contact-invalid").innerHTML = contactExists;
-                checkFromServer(contact,'contact_number');
+            if(isContactValid){
+                // check if it exists
+                contact_number.classList.add("is-invalid");
+                contact_num_feedback.innerHTML = contactExists;
+                checkFromServer(contact_number,'contact_number');
             }
+            else
+                contact_num_feedback.innerHTML = contactInvalidFormat;
         }
         // else{
         //     contact_num_feedback.innerHTML = contactInvalidFormat;
@@ -182,13 +178,15 @@ $(document).ready(function () {
     })
 
     // CONTACT FORM
+    /*
     contact_form.addEventListener("submit", e => {
         let isValid = true;
 
         if(isEmailValid || isContactValid){
-            isValid = true;
+            contactInfo.value = "contact-info";
+            isValid = displayValidity(contactInfo);
         }
-
+        
         //check the validity of each fields
         textFields.forEach(field => {
             if(field.classList.contains("is-invalid"))
@@ -197,8 +195,9 @@ $(document).ready(function () {
 
         if(isValid == false)
             stopDefaultFormAction(e);
+        
     })
-
+    */
 
     // ajax requests
     $('#btn-save-name').click(function(e){
@@ -224,23 +223,27 @@ $(document).ready(function () {
 
     $('#btn-save-contact').click(function(e){
         e.preventDefault();
-        $.ajax({
-            url: '/settings/',
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken' : csrf_token[0].value,
-                'contact_number' : contact_number.value,
-                'email' : email.value,
-                'btn-save-contact' : $(this).html()
-            },
-            success: function(response){
-                $("#modal-message").modal('toggle');
-                console.log(response);
-            },
-            error: function(response){
-                console.log(response);
-            }
-        });
+        
+        //make sure that either of the fields is valid
+        if(contact_number.classList.contains("is-invalid") == false && email.classList.contains("is-invalid") == false){
+            $.ajax({
+                url: '/settings/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken' : csrf_token[0].value,
+                    'contact_number' : contact_number.value,
+                    'email' : email.value,
+                    'btn-save-contact' : $(this).html()
+                },
+                success: function(response){
+                    $("#modal-message").modal('toggle');
+                    console.log(response);
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
     });
 
     $('#btn-save-others').click(function(e){

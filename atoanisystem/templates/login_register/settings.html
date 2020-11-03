@@ -127,17 +127,30 @@
                                         <div class="form-group col-12">
                                             <button type="button" class="btn btn-primary float-right" id="btn-add-address-modal" name="btn-add-address-modal" data-toggle="modal" data-target="#modal-customer-address">Add Address</button>
                                         </div>
+                                        <div class="form-group col-lg-12 col-12 row">
+                                            <small>You may put your contact number or email or both. *</small>
+                                            <input name="contact-info" id="contact-info" hidden  required/>
+                                        </div>
                                         <!-- customer contact number -->
                                         <div class="form-group col-lg-12 col-12 row">
+<<<<<<< HEAD
+                                            <label class="col-lg-3 col-4 mt-md-2" for="middle-name">Contact Number</label>
+                                            <input class="col-lg-6 col-8 form-control" type="text" name="contact-num" id="contact-num" pattern=".{10,11}" maxlength="11" placeholder="Contact Number" value="{{user.customer.contact_number}}" required>
+                                            <label class="offset-3 col-lg-6 col-8 invalid-feedback" id="contact-num-feedback">Contact Number Already Exists</label>
+||||||| 762da70
+                                            <label class="col-lg-3 col-4 mt-md-2" for="middle-name">Contact Number</label>
+                                            <input class="col-lg-6 col-8 form-control" type="text" name="contact-num" id="contact-num" pattern=".{10,11}" maxlength="11" placeholder="Contact Number" value="{{user.customer.contact_number}}" required>
+=======
                                             <label class="col-lg-3 col-12" for="middle-name">Contact Number</label>
                                             <input class="col-lg-6 col-12 form-control" type="text" name="contact-num" id="contact-num" pattern=".{11}" maxlength="11" placeholder="Contact Number" value="{{user.customer.contact_number}}" required>
+>>>>>>> 4f02879d2f453867b60191d445fc50f1699625dc
                                         </div>
-                                        <!-- feedback -->
+                                        <!-- feedback 
                                         <div class="form-group col-lg-12 col-12 row d-none" id="contact-num-feedback-div">
                                             <label class="col-lg-3 col-4 mt-md-2"></label>
                                             <label class="col-lg-6 col-8" id="contact-num-feedback"></label>
                                         </div>
-
+                                        -->
                                         {% elif user.farmer %}
                                         <!-- farmer address -->
                                         <div class="form-group col-lg-12 col-12 row">
@@ -148,25 +161,38 @@
 
                                         <!-- farmer contact number -->
                                         <div class="form-group col-lg-12 col-12 row">
+<<<<<<< HEAD
+                                            <label class="col-lg-3 col-4 mt-md-2" for="middle-name">Contact Number</label>
+                                            <input class="col-lg-6 col-8 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" pattern=".{10,11}" maxlength="11" value="{{user.farmer.contact_number}}" required>
+                                            <label class="offset-4 col-lg-6 col-8 invalid-feedback" id="contact-num-feedback">Contact Number Already Exists</label>                                        
+||||||| 762da70
+                                            <label class="col-lg-3 col-4 mt-md-2" for="middle-name">Contact Number</label>
+                                            <input class="col-lg-6 col-8 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" pattern=".{10,11}" maxlength="11" value="{{user.farmer.contact_number}}" required>
+=======
                                             <label class="col-lg-3 col-12" for="middle-name">Contact Number</label>
                                             <input class="col-lg-6 col-12 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" pattern=".{11}" maxlength="11" value="{{user.farmer.contact_number}}" required>
+>>>>>>> 4f02879d2f453867b60191d445fc50f1699625dc
                                         </div>
+                                        <!--
                                         <div class="form-group col-lg-12 col-12 row d-none" id="contact-num-feedback-div">
                                             <label class="col-lg-3 col-4"></label>
                                             <label class="col-lg-6 col-8" id="contact-num-feedback"></label>
                                         </div>
+                                        -->
                                         {% endif %}
 
                                         <!-- email -->
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-4 mt-md-2"  for="last-name">Email Address *</label>
                                             <input class="col-lg-6 col-8 form-control" type="email" name="email" id="email" placeholder="Email Address" maxlength="30" required value="{{user.email}}">
+                                            <label class="offset-3 col-lg-6 col-8 invalid-feedback" id="email-feedback">Contact Number Already Exists</label>
                                         </div>
+                                        <!--
                                         <div class="form-group col-lg-12 col-12 row d-none" id="email-feedback-div">
                                             <label class="col-lg-3 col-3"></label>
                                             <label class="col-lg-6 col-9" id="email-feedback"></label>
                                         </div>
-
+                                        -->
                                         <!-- buttons -->
                                         <div class="form-group col-12">
                                             <button type="submit" class="btn float-right save-btn" id="btn-save-contact" name="btn-save-contact">Save Changes</button>
