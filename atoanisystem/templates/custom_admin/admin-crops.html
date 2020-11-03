@@ -33,54 +33,39 @@
     <div class="col-10 p-5 orders">
       <h3 id="order-header">List of Crops</h3>
       <div class="row">
-        <div class="view-order ol-12 pt-3 pb-3 rounded ">
-          <div class="row">
-            <div class="label col-12 text-center pt-1 pb-1 mb-4"><b class="mr-3">Crop ID:</b><span class="order-id" id="order-id">-</span></div>
-
-            <div class="label col-3 text-right pt-1 pb-1"><b>Crop Name:</b></div>
-            <div class="col-3 pt-1 pb-1" id="crop-name">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"><b>Customer ID:</b></div>
-            <div class="col-3 pt-1 pb-1" id="customer-id">-</div>
-
-            <div class="label col-3 text-right pt-1 pb-1"><b>Weight:</b></div>
-            <div class="col-3 pt-1 pb-1" id="weight">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"><b>Customer Name:</b></div>
-            <div class="col-3 pt-1 pb-1" id="customer-name">-</div>
-
-            <div class="label col-3 text-right pt-1 pb-1"><b>Status:</b></div>
-            <div class="col-3 pt-1 pb-1" id="status">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"><b>Farmer ID:</b></div>
-            <div class="col-3 pt-1 pb-1" id="farmer-id">-</div>
-
-            
-            <div class="label col-3 text-right pt-1 pb-1"><b>Location:</b></div>
-            <div class="col-3 pt-1 pb-1" id="location">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"><b>Farmer Name:</b></div>
-            <div class="col-3 pt-1 pb-1" id="farmer-name">-</div>
-
-            <div class="label col-3 text-right pt-1 pb-1 mt-4"><b>Date Ordered:</b></div>
-            <div class="col-3 pt-1 pb-1 mt-4" id="date-ordered">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"></div>
-            <div class="col-3 pt-1 pb-1"></div>
-            
-            <div class="label col-12 text-center justify-content-center pt-1 pb-1 mb-4">
-              <button id="cancelBtn" type="button m-0" class="btn btn-danger px-5 mx-auto">Delete Crop</button>
-            </div>
-          </div>
-        </div>
         <div class="col-12">
-          <table class="table orders-table mx-auto">
+          <table class="table crops-table mx-auto">
             <thead>
               <tr>
                 <th>Crop ID</th>
                 <th>Crop Name</th>
-                <th>Status</th>
+                <th>Location</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+    <!-- Confirm Delete Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Crop</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            This will delete the selected crop.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button id="confirmDeleteBtn" type="button" class="btn btn-primary">Confirm</button>
+          </div>
         </div>
       </div>
     </div>
@@ -92,11 +77,12 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
 <!-- Admin JS -->
 <script src="{% static '/js/custom-admin/custom-admin-sidebar.js' %}"></script>
-<!-- <script src="{% static '/js/custom-admin/custom-admin-orders.js' %}"></script> -->
-<!-- <script>
+<script src="{% static '/js/custom-admin/custom-admin-crops.js' %}"></script>
+<script>
   $(document).ready(function () {
     initialize();
     setCSRFToken("{{csrf_token}}")
+    console.log("ASFSAFASF")
   });
-</script> -->
+</script>
 {% endblock scripts %}

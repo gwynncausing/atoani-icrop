@@ -228,4 +228,11 @@ class GetAllCropsView(View):
             arr = crops
             json = {'data':arr}
             return JsonResponse(json)
-        return render(request, 'custom_admin/admin-users.html')
+        return render(request, 'custom_admin/admin-crops.html')
+
+    def post(self,request):
+        if request.is_ajax():
+            hf.delete_crop(request.POST.get("crop-id"))
+            json = {'status':'OK'}
+            return JsonResponse(json)
+        return render(request, 'custom_admin/admin-crops.html')

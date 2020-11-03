@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block tags %}
-    <!-- Customized CSS -->
-    <link rel="stylesheet" href="{% static '/css/custom_admin/custom-admin.css' %}">
-    <!-- Datatables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
+<!-- Customized CSS -->
+<link rel="stylesheet" href="{% static '/css/custom_admin/custom-admin.css' %}">
+<!-- Datatables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css" />
 {% endblock tags %}
 {% block content %}
 <div class="container-fluid">
@@ -32,13 +32,19 @@
         <button id="" type="button" class="sidebar-nav border-0">Customers</button>
         <button id="" type="button" class="sidebar-nav border-0">Farmers</button>
       </div>
+      <a class="orders-title" href="{% url 'custom_admin:crops' %}">Others <i class="fa fa-caret-down"></i></a>
+      <div class="dropdown-container d-none">
+        <button id="" type="button" class="sidebar-nav border-0" autofocus>Crops</button>
+        <a href="{% url 'admin:index' %}" class="sidebar-nav border-0">Django Admin</a>
+      </div>
     </div>
     <div class="col-10 p-5 orders">
       <h3 id="order-header">List of <span id="labelTop">All</span> Orders</h3>
       <div class="row">
         <div class="view-order ol-12 pt-3 pb-3 rounded ">
           <div class="row">
-            <div class="label col-12 text-center pt-1 pb-1 mb-4"><b class="mr-3">Order ID:</b><span class="order-id" id="order-id">-</span></div>
+            <div class="label col-12 text-center pt-1 pb-1 mb-4"><b class="mr-3">Order ID:</b><span class="order-id"
+                id="order-id">-</span></div>
 
             <div class="label col-3 text-right pt-1 pb-1"><b>Crop Name:</b></div>
             <div class="col-3 pt-1 pb-1" id="crop-name">-</div>
@@ -55,7 +61,7 @@
             <div class="label col-3 text-right pt-1 pb-1"><b>Farmer ID:</b></div>
             <div class="col-3 pt-1 pb-1" id="farmer-id">-</div>
 
-            
+
             <div class="label col-3 text-right pt-1 pb-1"><b>Location:</b></div>
             <div class="col-3 pt-1 pb-1" id="location">-</div>
             <div class="label col-3 text-right pt-1 pb-1"><b>Farmer Name:</b></div>

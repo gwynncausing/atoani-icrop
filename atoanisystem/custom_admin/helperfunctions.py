@@ -212,10 +212,14 @@ def deliver_order(order_id):
     order = Order.objects.get(order_id=order_id)
     order.status = "Delivered"
     order.save()
+    print(order.status)
     order_pair = Order_Pairing.objects.get(order_id=order_id)
     order_pair.status = "Delivered"
     order_pair.delivered_date = tz.now()
     order_pair.save()
+    print(order_pair.status)
+    print(order_pair.delivered_date)
+    print("MARKED AS DELIVERED")
 
 def get_all_crops():
     crops_dict = dashboard_utility.get_crop_list()
@@ -229,3 +233,9 @@ def get_all_crops():
 
 def add_crop(crop_instance,location_instance):
     Location_Crop.objects.create(name=crop_instance,location=location_instance)
+
+def delete_crop(crop_id):
+    crop_instance = Crop.objects.get(id=crop_id)
+    location_crop = Location_Crop.objects.get(name=crop_instance)
+    crop_instance.delete()
+    location_crop.delete()
