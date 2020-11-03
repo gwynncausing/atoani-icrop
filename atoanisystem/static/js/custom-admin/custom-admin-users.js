@@ -197,8 +197,11 @@ const unapproveBtn = document.getElementById("unapproveBtn");
 const resetPasswordBtn = document.getElementById("resetPasswordBtn");
 const confirmResetBtn = document.getElementById("confirmResetBtn");
 
+const labelTop = document.getElementById("labelTop");
+
 function initializeButtons() {
   allBtn.addEventListener("click", e => {
+    labelTop.innerHTML = "All";
     resetViewOrder();
     hideElement(approveBtn);
     hideElement(unapproveBtn);
@@ -206,6 +209,7 @@ function initializeButtons() {
     getDataFromServer(getAllUsersURL);
   });
   waitlistBtn.addEventListener("click", e => {
+    labelTop.innerHTML = "Pending";
     resetViewOrder();
     hideElement(approveBtn);
     hideElement(unapproveBtn);
@@ -213,6 +217,7 @@ function initializeButtons() {
     getDataFromServer(getUnapprovedUsersURL);
   });
   farmersBtn.addEventListener("click", e => {
+    labelTop.innerHTML = "Farmer";
     resetViewOrder();
     hideElement(approveBtn);
     hideElement(unapproveBtn);
@@ -220,6 +225,7 @@ function initializeButtons() {
     getDataFromServer(getFarmersURL);
   });
   customersBtn.addEventListener("click", e => {
+    labelTop.innerHTML = "Customer";
     resetViewOrder();
     hideElement(approveBtn);
     hideElement(unapproveBtn);

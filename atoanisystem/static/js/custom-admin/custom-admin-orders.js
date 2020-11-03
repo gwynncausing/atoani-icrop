@@ -14,7 +14,7 @@ const getOngoingOrdersURL = '/admin/get-ongoing-orders/';
 const getHarvestedOrdersURL = '/admin/get-harvested-orders/';
 const getCollectedOrdersURL = '/admin/get-collected-orders/';
 const getDeliveredOrdersURL = '/admin/get-delivered-orders/';
-
+const getCancelledOrdersURL = '/admin/get-cancelled-orders/';
 //data table settings
 const domPlacements = `<
                         <"d-flex float-left ml-5 mb-3 mt-4"
@@ -160,6 +160,7 @@ const ongoingBtn = document.getElementById("ongoingBtn");
 const harvestedBtn = document.getElementById("harvestedBtn");
 const collectedBtn = document.getElementById("collectedBtn");
 const deliveredBtn = document.getElementById("deliveredBtn");
+const cancelledBtn = document.getElementById("cancelledBtn");
 
 const cancelBtn = document.getElementById("cancelBtn");
 const approveBtn = document.getElementById("approveBtn");
@@ -167,8 +168,11 @@ const collectBtn = document.getElementById("collectBtn");
 const harvestBtn = document.getElementById("harvestBtn");
 const deliverBtn = document.getElementById("deliverBtn");
 
+const labelTop = document.getElementById("labelTop");
+
 function initializeButtons(){
   allBtn.addEventListener("click",e => {
+    labelTop.innerHTML = "All";
     resetViewOrder();
     showElement(cancelBtn);
     hideElement(approveBtn);
@@ -178,6 +182,7 @@ function initializeButtons(){
     getDataFromServer(getAllOrdersURL);
   });
   waitlistBtn.addEventListener("click",e => {
+    labelTop.innerHTML = "Pending";
     resetViewOrder();
     hideElement(cancelBtn);
     showElement(approveBtn);
@@ -187,6 +192,7 @@ function initializeButtons(){
     getDataFromServer(getUnapprovedOrdersURL);
   });
   approvedBtn.addEventListener("click",e => {
+    labelTop.innerHTML = "Approved";
     resetViewOrder();
     hideElement(cancelBtn);
     hideElement(approveBtn);
@@ -196,6 +202,7 @@ function initializeButtons(){
     getDataFromServer(getApprovedOrdersURL);
   });
   ongoingBtn.addEventListener("click",e => {
+    labelTop.innerHTML = "Ongoing";
     resetViewOrder();
     hideElement(cancelBtn);
     hideElement(approveBtn);
@@ -205,6 +212,7 @@ function initializeButtons(){
     getDataFromServer(getOngoingOrdersURL);
   });
   harvestedBtn.addEventListener("click",e => {
+    labelTop.innerHTML = "Harvested";
     resetViewOrder();
     hideElement(cancelBtn);
     hideElement(approveBtn);
@@ -214,6 +222,7 @@ function initializeButtons(){
     getDataFromServer(getHarvestedOrdersURL);
   });
   collectedBtn.addEventListener("click",e => {
+    labelTop.innerHTML = "Collected";
     resetViewOrder();
     hideElement(cancelBtn);
     hideElement(approveBtn);
@@ -222,6 +231,7 @@ function initializeButtons(){
     getDataFromServer(getCollectedOrdersURL);
   });
   deliveredBtn.addEventListener("click",e => {
+    labelTop.innerHTML = "Delivered";
     resetViewOrder();
     hideElement(cancelBtn);
     hideElement(approveBtn);
@@ -229,7 +239,15 @@ function initializeButtons(){
     hideElement(deliverBtn);
     getDataFromServer(getCollectedOrdersURL);
   });
-
+  cancelledBtn.addEventListener("click",e => {
+    labelTop.innerHTML = "Cancelled";
+    resetViewOrder();
+    hideElement(cancelBtn);
+    hideElement(approveBtn);
+    hideElement(collectBtn);
+    hideElement(deliverBtn);
+    getDataFromServer(getCancelledOrdersURL);
+  });
 
   cancelBtn.addEventListener("click", e => {
     if (selectedOrderID != -1)

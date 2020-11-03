@@ -15,6 +15,7 @@ urlpatterns = [
     path('get-harvested-orders/', views.GetHarvestedOrdersView.as_view(), name="get-harvested-orders"),
     path('get-collected-orders/', views.GetCollectedOrders.as_view(), name="get-collected-orders"),
     path('get-delivered-orders/', views.GetDeliveredOrders.as_view(), name="get-delivered-orders"),
+    path('get-cancelled-orders/', views.GetCancelledOrders.as_view(), name="get-cancelled-orders"),
     #USERS
     path('users/', views.GetFarmersView.as_view(), name="users"),
     path('get-all-users/', views.GetAllUsersView.as_view(), name="get-all-users"),

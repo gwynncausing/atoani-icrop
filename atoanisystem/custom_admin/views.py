@@ -120,6 +120,17 @@ class GetDeliveredOrders(View):
             return JsonResponse(json)
         return render(request, 'custom_admin/admin-orders.html')
 
+class GetCancelledOrders(View):
+    def get(self,request):
+        if request.is_ajax():
+            #does not include deleted customer
+            orders = hf.get_orders()
+            #orders.extend(hf.get_all_order_pairs())
+            arr = hf.get_cancelled_orders(orders)
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request, 'custom_admin/admin-orders.html')
+
 ##############################
 #       USERS SECTION        #
 ##############################

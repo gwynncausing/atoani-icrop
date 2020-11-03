@@ -100,6 +100,7 @@ $(document).ready(function () {
     // let isContactValid = false;
 
     email.addEventListener("input", (e) => {  
+        email_feedback.innerHTML = "";
         //if input length is 0
         //make it neutral
         if(e.target.value.toString().length === 0){
@@ -116,6 +117,24 @@ $(document).ready(function () {
             else
                 email_feedback.innerHTML = emailInvalidFormat;
         }
+        // else{
+        //     email_feedback.innerHTML = emailInvalidFormat;
+        //     email_feedback_div.classList.remove("d-none");
+        //     isEmailValid = displayValidity(e.target);
+        //     if(isEmailValid){
+        //         email_feedback_div.classList.add("d-none");
+        //         // check if it exists
+        //         checkFromServer(email,'email');
+        //         isEmailValid = displayValidity(e.target);
+        //         if(isEmailValid){
+        //             email_feedback_div.classList.add("d-none");
+        //         }
+        //         else{
+        //             email_feedback.innerHTML = emailExists;
+        //             email_feedback_div.classList.remove("d-none");
+        //         }
+        //     }
+        // }
     })
 
     contact_number.addEventListener('input', e => {
@@ -137,6 +156,25 @@ $(document).ready(function () {
             else
                 contact_num_feedback.innerHTML = contactInvalidFormat;
         }
+        // else{
+        //     contact_num_feedback.innerHTML = contactInvalidFormat;
+        //     contact_num_feedback_div.classList.remove("d-none");
+        //     isContactValid = displayValidity(e.target);
+        //     //check if contact num exists or not
+        //     if(isContactValid){
+        //         contact_num_feedback_div.classList.add("d-none");
+        //         // check if it exists
+        //         checkFromServer(contact,'contact_number');
+        //         isContactValid = displayValidity(contact_number);
+        //         if(isContactValid){
+        //             contact_num_feedback_div.classList.add("d-none");
+        //         }
+        //         else{
+        //             contact_num_feedback.innerHTML = contactExists;
+        //             contact_num_feedback_div.classList.remove("d-none");
+        //         }
+        //     }
+        // }
     })
 
     // CONTACT FORM

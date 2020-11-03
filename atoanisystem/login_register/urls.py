@@ -15,6 +15,8 @@ urlpatterns = [
     path('contact_us/', views.ContactUsView.as_view(), name="contact-us"),
     path('terms_and_conditions_of_use/', views.TermsAndConditionsView.as_view(), name="terms-and-conditions-of-use"),
 
+    # path('change_password/', views.ChangePasswordView.as_view(), name="change-password"),
+
     path('reset_password/',
         auth_views.PasswordResetView.as_view(template_name="login_register/password_reset.html"),
         name="reset_password"),

@@ -61,7 +61,7 @@
                         </div>
                         <div id="account" class="collapse" aria-labelledby="headingTwo" data-parent="#userEditAccordion">
                             <div class="card-body">
-                                <form class="pt-3" method="POST" id="form-account">
+                                <form class="pt-3" method="POST">
                                     {% csrf_token %}
                                     <div class="form-row row pr-2 pl-2">
                                         <div class="form-group col-lg-12 col-12 row">
@@ -86,7 +86,7 @@
                                             <label class="offset-4 col-lg-6 col-8 invalid-feedback" id="new_password1_feedback">Passwords don't match.</label>
                                         </div>
                                         <div class="form-group col-12">
-                                            <button type="submit" class="btn float-right save-btn" id="btn-save-account" name="btn-save-account">Save Changes</button>
+                                            <button type="submit" class="btn float-right save-btn" id="btn-save-account" name="btn-save-account" >Save Changes</button>
                                             <button type="button" class="btn float-right cancel-btn" data-toggle="collapse" data-target="#account">Cancel</button>
                                         </div>
                                     </div>
@@ -133,9 +133,17 @@
                                         </div>
                                         <!-- customer contact number -->
                                         <div class="form-group col-lg-12 col-12 row">
+<<<<<<< HEAD
                                             <label class="col-lg-3 col-4 mt-md-2" for="middle-name">Contact Number</label>
                                             <input class="col-lg-6 col-8 form-control" type="text" name="contact-num" id="contact-num" pattern=".{10,11}" maxlength="11" placeholder="Contact Number" value="{{user.customer.contact_number}}" required>
                                             <label class="offset-3 col-lg-6 col-8 invalid-feedback" id="contact-num-feedback">Contact Number Already Exists</label>
+||||||| 762da70
+                                            <label class="col-lg-3 col-4 mt-md-2" for="middle-name">Contact Number</label>
+                                            <input class="col-lg-6 col-8 form-control" type="text" name="contact-num" id="contact-num" pattern=".{10,11}" maxlength="11" placeholder="Contact Number" value="{{user.customer.contact_number}}" required>
+=======
+                                            <label class="col-lg-3 col-12" for="middle-name">Contact Number</label>
+                                            <input class="col-lg-6 col-12 form-control" type="text" name="contact-num" id="contact-num" pattern=".{11}" maxlength="11" placeholder="Contact Number" value="{{user.customer.contact_number}}" required>
+>>>>>>> 4f02879d2f453867b60191d445fc50f1699625dc
                                         </div>
                                         <!-- feedback 
                                         <div class="form-group col-lg-12 col-12 row d-none" id="contact-num-feedback-div">
@@ -153,9 +161,17 @@
 
                                         <!-- farmer contact number -->
                                         <div class="form-group col-lg-12 col-12 row">
+<<<<<<< HEAD
                                             <label class="col-lg-3 col-4 mt-md-2" for="middle-name">Contact Number</label>
                                             <input class="col-lg-6 col-8 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" pattern=".{10,11}" maxlength="11" value="{{user.farmer.contact_number}}" required>
                                             <label class="offset-4 col-lg-6 col-8 invalid-feedback" id="contact-num-feedback">Contact Number Already Exists</label>                                        
+||||||| 762da70
+                                            <label class="col-lg-3 col-4 mt-md-2" for="middle-name">Contact Number</label>
+                                            <input class="col-lg-6 col-8 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" pattern=".{10,11}" maxlength="11" value="{{user.farmer.contact_number}}" required>
+=======
+                                            <label class="col-lg-3 col-12" for="middle-name">Contact Number</label>
+                                            <input class="col-lg-6 col-12 form-control" type="text" name="contact-num" id="contact-num" placeholder="Contact Number" pattern=".{11}" maxlength="11" value="{{user.farmer.contact_number}}" required>
+>>>>>>> 4f02879d2f453867b60191d445fc50f1699625dc
                                         </div>
                                         <!--
                                         <div class="form-group col-lg-12 col-12 row d-none" id="contact-num-feedback-div">

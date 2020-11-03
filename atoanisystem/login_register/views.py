@@ -208,14 +208,14 @@ class SettingsView(View):
                                 return JsonResponse({'result':'ok'},status=200)
                             else:
                                 print("owned by somebody else")
-                                return JsonResponse({'result':'used'},status=500)
+                                return JsonResponse({'result':'not ok'},status=500)
                         elif hasattr(request.user, 'farmer'):
                             if request.user.farmer.contact_number == request.POST.get('contact-num'):
                                 print("owned by current farmer")
                                 return JsonResponse({'result':'ok'},status=200)
                             else:
                                 print("owned by somebody else")
-                                return JsonResponse({'result':'used'},status=500)
+                                return JsonResponse({'result':'not ok'},status=500)
                     else:
                         print("does not exist")
                         return JsonResponse({'result':'ok'},status=200)
@@ -253,17 +253,6 @@ class SettingsView(View):
                     contact_number = request.POST.get("contact_number")
                     email = request.POST.get("email")
                     print("num: " + str(contact_number) + "\nemail: " + str(email))
-                    
-                    # result = {}
-
-                    # if Customer.objects.filter(contact_number=contact_number).exists() or Farmer.objects.filter(contact_number=contact_number).exists():
-                    #     result['contact-num'] = "Used"
-                    #     return JsonResponse(result ,status=500)
-                    # if User.objects.filter(email = email).exists():
-                    #     result['email'] = "Used"
-                    #     return JsonResponse(result ,status=500)
-
-                    # if passed
                     User.objects.filter(id = request.user.id).update(email=email)
                     if(hasattr(request.user, 'farmer')):
                         farmer = Farmer.objects.filter(id = request.user.farmer.id).update(contact_number = contact_number)
@@ -273,7 +262,6 @@ class SettingsView(View):
                         print(customer)
                     data['contact_number'] = contact_number
                     data['email'] = email
-                    # return JsonResponse(data, safe=False, status=200)
 
                 elif 'btn-edit-farmer-address' in request.POST:
                     farmer = request.user.farmer
@@ -300,11 +288,8 @@ class SettingsView(View):
                         data['brgy'] = existing_loc.brgy
                 
                 elif 'btn-edit-customer-address' in request.POST:
-                    print("clicked edit customer")
-                    print(request.POST)
                     customer = request.user.customer
                     location_id = request.POST.get('location-id')
-                    print(location_id)
                     province = request.POST.get('province')
                     city = request.POST.get('city')
                     brgy = request.POST.get('brgy')
@@ -356,16 +341,16 @@ class SettingsView(View):
                                 user.save()
                                 update_session_auth_hash(request, user)
                                 print("password changed")
-                                data['password_status'] = "successful";
+                                data['password_status'] = "successful"
                             else:
                                 print("new pass is empty -> old pass kept")
-                                data['password_status'] = "successful";
+                                data['password_status'] = "successful"
                         else:
                             print("new passwords not the same")
-                            data['password_status'] = "passwords not same";
+                            data['password_status'] = "passwords not same"
                     else:
                         print("password is incorrect or empty")
-                        data['password_status'] = "incorrect";
+                        data['password_status'] = "incorrect"
 
                 elif 'btn-add-customer-address':
                     customer = request.user.customer
@@ -395,22 +380,22 @@ class SettingsView(View):
                 return HttpResponse('')
 
 
-# class ChangePasswordView(View):
-#     def get(self, request):
-#         if request.method == 'POST':
-#             form = PasswordChangeForm(request.POST, instance=request.user)
-#             if form.is_valid():
-#                 user = form.save()
-#                 update_session_auth_hash(request, user)  # Important!
-#                 print('Your password was successfully updated!')
-#                 return redirect('login_register: login')
-#             else:
-#                 print('Please correct the error below.')
-#         else:
-#             form = PasswordChangeForm(request.user)
-#         return render(request, 'login_register/change-password.html', {
-#             'form': form
-#         })
+class ChangePasswordView(View):
+    def get(self, request):
+        if request.method == 'POST':
+            form = PasswordChangeForm(request.POST, instance=request.user)
+            if form.is_valid():
+                user = form.save()
+                update_session_auth_hash(request, user)  # Important!
+                print('Your password was successfully updated!')
+                return redirect('login_register: login')
+            else:
+                print('Please correct the error below.')
+        else:
+            form = PasswordChangeForm(request.user)
+        return render(request, 'login_register/change-password.html', {
+            'form': form
+        })
 
 class AboutUsView(View):
     def get(self,request):
