@@ -377,6 +377,15 @@ body {
   display: flex;
 }
 
+@media only screen and (max-width: 1200px) {
+  .body-dashoard #pending-table-orders, .body-dashoard #finished-table-orders {
+    margin-top: 60px !important;
+  }
+  .body-dashoard .date-range {
+    margin-top: 50px;
+  }
+}
+
 @media only screen and (max-width: 720px) {
   .body-dashoard .title {
     position: absolute;
@@ -424,6 +433,15 @@ body {
   }
   .body-dashoard .order-tab, .body-dashoard table, .body-dashoard input, .body-dashoard label, .body-dashoard .dataTables_info, .body-dashoard .pagination, .body-dashoard .modal-body .row div {
     font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 565px) {
+  .body-dashoard #pending-table-orders, .body-dashoard #finished-table-orders {
+    margin-top: 0px !important;
+  }
+  .body-dashoard .date-range {
+    margin-top: 00px;
   }
 }
 
