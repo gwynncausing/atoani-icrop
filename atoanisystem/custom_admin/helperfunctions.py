@@ -216,3 +216,16 @@ def deliver_order(order_id):
     order_pair.status = "Delivered"
     order_pair.delivered_date = tz.now()
     order_pair.save()
+
+def get_all_crops():
+    crops_dict = dashboard_utility.get_crop_list()
+    crops = Crop.objects.all()
+    location_crops = Location_Crop.objects.all()
+    for crop_dict in crops_dict:
+        crop = crops.get(id = crop_dict['id'])
+        location_crop = location_crops.get(name=crop)
+        crop_dict['location'] = location_crop.location.name
+    return list(crops_dict)
+
+def add_crop(crop_instance,location_instance):
+    Location_Crop.objects.create(name=crop_instance,location=location_instance)
