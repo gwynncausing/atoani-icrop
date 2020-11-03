@@ -12,16 +12,8 @@
   <div class="row h-100">
     <div class="col-2 sidebar d-flex column-vertical py-3 p-0">
 
-      <a class="orders-title active" href="{% url 'custom_admin:orders' %}">Orders<i class="fa fa-caret-down"></i></a>
+      <a class="orders-title" href="{% url 'custom_admin:orders' %}">Orders<i class="fa fa-caret-down"></i></a>
       <div class="dropdown-container">
-        <button id="" type="button" class="sidebar-nav" autofocus>All</button>
-        <button id="" type="button" class="sidebar-nav">Waitlist</button>
-        <button id="" type="button" class="sidebar-nav">Approved</button>
-        <button id="" type="button" class="sidebar-nav">Ongoing</button>
-        <button id="" type="button" class="sidebar-nav">Harvested</button>
-        <button id="" type="button" class="sidebar-nav">Collected</button>
-        <button id="" type="button" class="sidebar-nav">Delivered</button>
-        <button id="" type="button" class="sidebar-nav">Cancelled</button>
         <!-- <button id="" type="button" class="sidebar-nav border-0">Collected</button> -->
         <!-- <button id="collectedBtn" type="button" class="sidebar-nav border-0">Delivered</button> -->
       </div>
@@ -32,10 +24,10 @@
         <button id="" type="button" class="sidebar-nav border-0">Customers</button>
         <button id="" type="button" class="sidebar-nav border-0">Farmers</button>
       </div>
-      <a class="others-title" href="#">Others</a>
-      <div class="dropdown-container d-none">
-        <button id="" type="button" class="sidebar-nav">Crops</button>
-        <button id="" type="button" class="sidebar-nav">Django Admin</button>
+      <a class="orders-title active" href="{% url 'custom_admin:crops' %}">Others <i class="fa fa-caret-down"></i></a>
+      <div class="dropdown-container">
+        <button id="" type="button" class="sidebar-nav border-0" autofocus>Crops</button>
+        <a href="{% url 'admin:index' %}" class="sidebar-nav border-0">Django Admin</a>
       </div>
     </div>
     <div class="col-10 p-5 orders">
@@ -43,7 +35,7 @@
       <div class="row">
         <div class="view-order ol-12 pt-3 pb-3 rounded ">
           <div class="row">
-            <div class="label col-12 text-center pt-1 pb-1 mb-4"><b class="mr-3">Order ID:</b><span class="order-id" id="order-id">-</span></div>
+            <div class="label col-12 text-center pt-1 pb-1 mb-4"><b class="mr-3">Crop ID:</b><span class="order-id" id="order-id">-</span></div>
 
             <div class="label col-3 text-right pt-1 pb-1"><b>Crop Name:</b></div>
             <div class="col-3 pt-1 pb-1" id="crop-name">-</div>
@@ -100,11 +92,11 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
 <!-- Admin JS -->
 <script src="{% static '/js/custom-admin/custom-admin-sidebar.js' %}"></script>
-<script src="{% static '/js/custom-admin/custom-admin-orders.js' %}"></script>
-<script>
+<!-- <script src="{% static '/js/custom-admin/custom-admin-orders.js' %}"></script> -->
+<!-- <script>
   $(document).ready(function () {
     initialize();
     setCSRFToken("{{csrf_token}}")
   });
-</script>
+</script> -->
 {% endblock scripts %}
