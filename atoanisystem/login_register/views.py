@@ -220,7 +220,7 @@ class SettingsView(View):
                         print("does not exist")
                         return JsonResponse({'result':'ok'},status=200)
 
-                elif request.POST.get('input') == 'email':
+                if request.POST.get('input') == 'email':
                     # check email if it already exists
                     if User.objects.filter(email=request.POST.get('email')).exists():
                         # check if the existing email is owned by current user
