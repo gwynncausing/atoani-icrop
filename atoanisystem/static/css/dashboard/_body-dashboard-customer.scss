@@ -247,10 +247,10 @@ body{
     }
     @media only screen and (max-width: 565px) {
         #pending-table-orders, #finished-table-orders{
-            margin-top: 0px !important;
+            margin-top: 0px;
         }
         .date-range{
-            margin-top: 00px;
+            margin-top: 0px;
         }
     }
 }

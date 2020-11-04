@@ -382,7 +382,7 @@ body {
     margin-top: 60px !important;
   }
   .body-dashoard .date-range {
-    margin-top: 50px;
+    margin-top: 50px !important;
   }
 }
 
@@ -437,11 +437,11 @@ body {
 }
 
 .body-dashoard #farmer-finished-table {
-  margin-top: 0px !important;
+  margin-top: 0px;
 }
 
 .body-dashoard .date-range {
-  margin-top: 00px;
+  margin-top: 0px;
 }
 
 .modal-farmer {

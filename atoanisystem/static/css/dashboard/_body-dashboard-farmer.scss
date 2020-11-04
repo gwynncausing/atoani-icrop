@@ -194,8 +194,7 @@ body{
             margin-top: 60px !important;
         }
         .date-range{
-            margin-top: 50px;
-            // padding-top: 50px !important;
+            margin-top: 50px !important;
         }
     }
     @media only screen and (max-width: 720px) {
@@ -247,10 +246,10 @@ body{
         }
     }
     #farmer-finished-table{
-        margin-top: 0px !important;
+        margin-top: 0px;
     }
     .date-range{
-        margin-top: 00px;
+        margin-top: 0px;
     }
 }
 
