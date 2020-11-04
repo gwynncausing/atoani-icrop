@@ -109,13 +109,12 @@ function initialize(){
 //sample
 const url = "....";
 const form = document.querySelector(".form-crop");
+const inputs = document.querySelectorAll("input, select");
 
 //add crop
 function addCrop(e) {
     e.preventDefault();
     var formData = new FormData(form);
-    console.log(formData)
-    console.log("submitted");
 
     if(!form.checkValidity())
         form.classList.add("was-validated");
@@ -148,17 +147,16 @@ function addCrop(e) {
     }
 }
 
+//reset the modal
 function resetModal(){
-    /*
-    let elements = form.elements;
-    console.log(elements)
-    for(let i = 0; elements.length; i++){
-        console.log(form.elements[i])
-        elements[i].classList.remove('is-valid');
-        elements[i].classList.remove('is-valid');
-        elements[i].value = "";
-    }
-    */
+    inputs.forEach(input => {
+        if(input.id != "province"){
+            input.classList.remove("is-valid");
+            input.classList.remove("is-invalid");
+            input.value = "";
+            form.classList.remove("was-validated");
+        }
+    })   
 }
 
 console.log($("#modal-add-crop"));

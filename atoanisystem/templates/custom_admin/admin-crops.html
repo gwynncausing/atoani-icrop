@@ -140,9 +140,11 @@
                     <input id="crop-name" class="form-control" type="text" name="crop-name" maxlength="30" required>
                   </div>
                 </div>
-                <div class="form-group col-12 col-md-12 m-0 ml-2">
-                    <input type="checkbox" id="is-seasonal" class="form-check-input">
-                    <label for="is-seasonal" class="form-check-label">Is Seasonal</label>
+                <div class="form-group offset-4 col-12 col-md-12 m-0 ml-2 pb-3">
+                    <div class="offset-4 col-8">
+                      <input type="checkbox" id="is-seasonal" class="form-check-input">
+                      <label for="is-seasonal" class="form-check-label">Is Seasonal</label>
+                    </div>
                 </div>
                 <div class="form-group col-12 col-md-12 row">
                     <label class="col-4 d-flex mt-2" for="season-start">Season Start:</label>
@@ -159,7 +161,8 @@
                   </div>
                 </div>
                 <div class="form-group col-12 col-md-12 row">
-                  <div class="form-group col-12 col-md-12">
+                  <label class="col-4 d-flex mt-2" for="season-end">Province:</label>
+                  <div class="col-8">
                       <select class="form-control" name="province" id="province" required>
                       </select>
                       <div id="demand-invalid" class="invalid-feedback">
@@ -210,15 +213,13 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
 <!-- Admin JS -->
 <script src="{% static '/js/custom-admin/custom-admin-sidebar.js' %}"></script>
-<script src="{% static '/js/custom-admin/custom-admin-crops.js' %}" type="text/javascript"></script>
 <script src="{% static '/js/global/notify.js' %}"></script>
 <!-- load address-->
 <script src="{% static '/js/global/load-address.js' %}"></script>
 <script>
-    $(document).ready(function() {
-        loadAddresses("{% static '/js/json/philippine_address_2019v2.json' %}");
-    });
+  loadAddresses("{% static '/js/json/philippine_address_2019v2.json' %}");
 </script> 
+<script src="{% static '/js/custom-admin/custom-admin-crops.js' %}" type="text/javascript"></script>
 <!-- <script src="{% static '/js/custom-admin/custom-admin-orders.js' %}"></script> -->
 <!-- <script>
   $(document).ready(function () {
