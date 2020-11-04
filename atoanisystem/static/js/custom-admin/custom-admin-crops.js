@@ -113,7 +113,6 @@ const form = document.querySelector(".form-crop");
 //add crop
 function addCrop(e) {
     e.preventDefault();
-    
     var formData = new FormData(form);
     console.log(formData)
     console.log("submitted");
@@ -121,7 +120,7 @@ function addCrop(e) {
     if(!form.checkValidity())
         form.classList.add("was-validated");
     else{
-        //show the loading ui
+        //remove the loader
         $(".loading").removeClass("d-none");
         $.ajax({
             url: url,
@@ -135,8 +134,6 @@ function addCrop(e) {
                 $(".loading").addClass("d-none");
                 //show notify
                 notify('success','Crop Added!','You have successfully added a crop.');
-                //hide modal
-                $('#modal-add-crop').modal('hide');
             },
             error: function (response) {
                 //remove loading 
@@ -152,14 +149,19 @@ function addCrop(e) {
 }
 
 function resetModal(){
-    form.elements.forEach(function(element){
-        element.classList.remove('is-valid');
-        element.classList.remove('is-valid');
-        element.classList.value = "";
-    })
-    console.log("hello")
+    /*
+    let elements = form.elements;
+    console.log(elements)
+    for(let i = 0; elements.length; i++){
+        console.log(form.elements[i])
+        elements[i].classList.remove('is-valid');
+        elements[i].classList.remove('is-valid');
+        elements[i].value = "";
+    }
+    */
 }
 
+console.log($("#modal-add-crop"));
 //adding crop
 form.addEventListener("submit", addCrop);
 //reset the modal
