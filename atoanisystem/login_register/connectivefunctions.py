@@ -285,8 +285,7 @@ def check_obsolete_orders():
             #if a month has passed and order is not cancelled
             if (date_now - val['order_date']).days > 29 and not val['is_cancelled']:
                 print(val)
-                Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])
-
+                Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])  
         delete_obsolete_orders()
 
 def delete_obsolete_orders():

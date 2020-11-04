@@ -204,3 +204,28 @@ class GetCustomersView(View):
             json = {'data':arr}
             return JsonResponse(json)
         return render(request, 'custom_admin/admin-users.html')
+
+##############################
+#      OTHERS SECTION        #
+##############################
+class AdminCropsView(View):
+    def get(self,request):  
+        if request.user.is_authenticated:
+            currentUser = request.user
+            if currentUser.is_staff:
+                crops = hf.get_all_crops()
+                print(crops)
+                return render(request, 'custom_admin/admin-crops.html')
+            else:
+                return redirect('login_register:login')
+        else:
+            return redirect('login_register:login')
+
+class GetAllCropsView(View):
+    def get(self,request):
+        if request.is_ajax():
+            crops = hf.get_all_crops()
+            arr = crops
+            json = {'data':arr}
+            return JsonResponse(json)
+        return render(request, 'custom_admin/admin-users.html')
