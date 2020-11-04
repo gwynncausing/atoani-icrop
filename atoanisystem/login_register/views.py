@@ -1,13 +1,11 @@
 from django.contrib import auth
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import Group, User, auth
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, redirect, render
 from django.views.generic import View
-# from django.contrib.auth.views import PasswordChangeView
-from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
 
 from .forms import *
 from .models import Customer, Farmer, Location
@@ -241,12 +239,18 @@ class SettingsView(View):
 
                 elif 'btn-save-others' in request.POST:
                     print(request.POST)
-                    land_area = request.POST.get("land_area")
-                    company = request.POST.get("company")
-                    data['land_area'] = land_area
-                    data['company'] = company
-                    Farmer.objects.filter(id = request.user.farmer.id).update(land_area = land_area, company = company)
-                    return JsonResponse(data, safe=False, status=200)
+                    if hasattr(request.user, 'farmer'):
+                        land_area = request.POST.get("land_area")
+                        company = request.POST.get("company")
+                        data['land_area'] = land_area
+                        data['company'] = company
+                        Farmer.objects.filter(id = request.user.farmer.id).update(land_area = land_area, company = company)
+                        return JsonResponse(data, safe=False, status=200)
+                    elif hasattr(request.user, 'customer'):
+                        company = request.POST.get("company")
+                        data['company'] = company
+                        Customer.objects.filter(id = request.user.customer.id).update(company = company)
+                        return JsonResponse(data, safe=False, status=200)
 
                 elif 'btn-save-contact' in request.POST:
                     print(request.POST)

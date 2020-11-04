@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import View
 from django.http import JsonResponse
 from . import helperfunctions as hf
+from login_register.models import Crop, Location
 
 ##############################
 #       ORDERS SECTION       #
@@ -229,3 +230,47 @@ class GetAllCropsView(View):
             json = {'data':arr}
             return JsonResponse(json)
         return render(request, 'custom_admin/admin-users.html')
+    
+    def post(self,request):
+        if request.is_ajax():
+            if request.POST.get('operation') == 'delete-crop':
+                hf.delete_crop(request.POST.get("crop-id"))
+            elif request.POST.get('operation') == 'add-crop':
+                print('\n\n\n\n',request.POST)
+                is_seasonal = False
+                season_start = None
+                season_end = None
+                if request.POST.get('is-seasonal') == 'on':
+                    is_seasonal = True
+                    season_start = request.POST.get('season-start')
+                    season_end = request.POST.get('season-end')
+
+                name = request.POST.get('crop-name')
+                province = request.POST.get('province')
+                harvest_weight_per_land_area = request.POST.get('weight')
+                harvest_time = request.POST.get('harvest-time')
+                productivity = request.POST.get('productivity')
+                
+                crop = Crop(
+                    name = name,
+                    is_seasonal = is_seasonal,
+                    season_start = season_start,
+                    season_end = season_end,
+                    harvest_weight_per_land_area = harvest_weight_per_land_area,
+                    harvest_time = harvest_time,
+                    productivity = productivity
+                )
+                crop.save()
+                location = Location(province=province)
+                location.name = str(province)
+                duplicate_list = Location.objects.filter(name=location.name)
+                if len(duplicate_list) >= 1:
+                    location = duplicate_list.first()
+                else:
+                    location.save()
+                hf.add_crop(crop,location)
+            else:
+                pass
+            json = {'status':'OK'}
+            return JsonResponse(json)
+        return render(request, 'custom_admin/admin-crops.html') 

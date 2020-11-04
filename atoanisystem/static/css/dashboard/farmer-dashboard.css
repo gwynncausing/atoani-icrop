@@ -377,6 +377,15 @@ body {
   display: flex;
 }
 
+@media only screen and (max-width: 1200px) {
+  .body-dashoard #farmer-finished-table {
+    margin-top: 60px !important;
+  }
+  .body-dashoard .date-range {
+    margin-top: 50px;
+  }
+}
+
 @media only screen and (max-width: 720px) {
   .body-dashoard .title {
     position: absolute;
@@ -425,6 +434,14 @@ body {
   .body-dashoard .order-tab, .body-dashoard table, .body-dashoard input, .body-dashoard label, .body-dashoard .dataTables_info, .body-dashoard .pagination, .body-dashoard .modal-body .row div {
     font-size: 12px;
   }
+}
+
+.body-dashoard #farmer-finished-table {
+  margin-top: 0px !important;
+}
+
+.body-dashoard .date-range {
+  margin-top: 00px;
 }
 
 .modal-farmer {

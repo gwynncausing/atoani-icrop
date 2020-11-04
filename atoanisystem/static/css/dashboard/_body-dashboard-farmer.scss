@@ -189,6 +189,15 @@ body{
     //@media only screen and (max-width: 472px){ thead th:nth-of-type(2){ border-top-right-radius: 0.5rem; } }
     //@media only screen and (max-width: 352px){ thead th:nth-of-type(1){ border-top-right-radius: 0.5rem; } }
     /*this for breakpoint ui style*/
+    @media only screen and (max-width: 1200px) {
+        #farmer-finished-table{
+            margin-top: 60px !important;
+        }
+        .date-range{
+            margin-top: 50px;
+            // padding-top: 50px !important;
+        }
+    }
     @media only screen and (max-width: 720px) {
         .title{
             position: absolute;
@@ -236,6 +245,12 @@ body{
         .order-tab, table, input, label, .dataTables_info, .pagination, .modal-body .row div{
             font-size: 12px;
         }
+    }
+    #farmer-finished-table{
+        margin-top: 0px !important;
+    }
+    .date-range{
+        margin-top: 00px;
     }
 }
 
