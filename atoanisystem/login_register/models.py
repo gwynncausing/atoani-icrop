@@ -77,7 +77,7 @@ class Location_Soil(models.Model):
 
 class Location_Crop(models.Model):
     location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
-    name = models.ManyToManyField(Crop, help_text="Crop name")
+    name = models.ManyToManyField(Crop, help_text="Crop name",null=True)
 
     def __str__(self):
         return "{} - {}".format(self.location, self.name)

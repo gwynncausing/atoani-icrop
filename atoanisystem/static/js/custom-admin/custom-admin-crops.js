@@ -74,12 +74,12 @@ const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 
 function deleteCrop(button){
   selectedCropID = button.parentNode.parentNode.parentNode.getAttribute("crop-id");
-  console.log('THE FCKING ID IS '+selectedCropID);
 }
 
 function processDeletion(cropID,viewURL){
   let formData = new FormData();//.append('action','add');
   formData.append('crop-id', cropID);
+  formData.append('operation', 'delete-crop');
   formData.append('csrfmiddlewaretoken',csrf_token);
   $.ajax({
     url: viewURL,
@@ -114,15 +114,16 @@ const inputs = document.querySelectorAll("input, select");
 //add crop
 function addCrop(e) {
     e.preventDefault();
-    var formData = new FormData(form);
-
     if(!form.checkValidity())
         form.classList.add("was-validated");
     else{
         //remove the loader
         $(".loading").removeClass("d-none");
+        let formData = new FormData(form);//.append('action','add');
+        formData.append('operation', 'add-crop');
+        formData.append('csrfmiddlewaretoken',csrf_token);
         $.ajax({
-            url: url,
+            url: getAllCropsURL,
             type: 'post',
             //data to be passed to django view
             data: formData,
@@ -131,8 +132,12 @@ function addCrop(e) {
             success: function (response) {
                 //remove loading 
                 $(".loading").addClass("d-none");
+                $('#modal-add-crop').modal('hide');
+                cropsTable.ajax.reload(()=>{tableData = cropsTable.ajax.json().data;},true);
+                selectedCropID = -1;
                 //show notify
                 notify('success','Crop Added!','You have successfully added a crop.');
+                
             },
             error: function (response) {
                 //remove loading 
@@ -141,7 +146,6 @@ function addCrop(e) {
                 notify('error','Order Failed','Something is wrong with the server.');
                 //hide modal
                 $('#modal-add-crop').modal('hide');
-                console.log("hello")
             }
         });
     }

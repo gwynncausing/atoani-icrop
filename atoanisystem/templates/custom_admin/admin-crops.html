@@ -46,44 +46,8 @@
     <div class="col-10 p-5 orders">
       <h3 id="order-header">List of Crops</h3>
       <div class="row">
-        <div class="view-order ol-12 pt-3 pb-3 rounded position-relative">
-          <div class="label pt-1 pb-1 mb-4 position-absolute add-btn-holder">
-            <button id="addBtn" type="button m-0" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-crop">Add Crop</button>
-          </div>
-          <div class="row">
-            <div class="label col-12 text-center pt-1 pb-1 mb-4"><b class="mr-3">Crop ID:</b><span class="order-id" id="order-id">-</span></div>
-
-            <div class="label col-3 text-right pt-1 pb-1"><b>Crop Name:</b></div>
-            <div class="col-3 pt-1 pb-1" id="crop-name">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"><b>Customer ID:</b></div>
-            <div class="col-3 pt-1 pb-1" id="customer-id">-</div>
-
-            <div class="label col-3 text-right pt-1 pb-1"><b>Weight:</b></div>
-            <div class="col-3 pt-1 pb-1" id="weight">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"><b>Customer Name:</b></div>
-            <div class="col-3 pt-1 pb-1" id="customer-name">-</div>
-
-            <div class="label col-3 text-right pt-1 pb-1"><b>Status:</b></div>
-            <div class="col-3 pt-1 pb-1" id="status">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"><b>Farmer ID:</b></div>
-            <div class="col-3 pt-1 pb-1" id="farmer-id">-</div>
-
-            <div class="label col-3 text-right pt-1 pb-1"><b>Location:</b></div>
-            <div class="col-3 pt-1 pb-1" id="location">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"><b>Farmer Name:</b></div>
-            <div class="col-3 pt-1 pb-1" id="farmer-name">-</div>
-
-            <div class="label col-3 text-right pt-1 pb-1 mt-4"><b>Date Ordered:</b></div>
-            <div class="col-3 pt-1 pb-1 mt-4" id="date-ordered">-</div>
-            <div class="label col-3 text-right pt-1 pb-1"></div>
-            <div class="col-3 pt-1 pb-1"></div>
-            
-            <div class="label col-12 text-center justify-content-center pt-1 pb-1 mb-4">
-              <button id="cancelBtn" type="button m-0" class="btn btn-danger px-5 mx-auto">Delete Crop</button>
-            </div>
-          </div>
-        </div>
         <div class="col-12">
+          <button id="addBtn" type="button m-0" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-add-crop">Add Crop</button>
           <table class="table crops-table mx-auto">
             <thead>
               <tr>
@@ -110,7 +74,7 @@
             </button>
           </div>
           <div class="modal-body">
-            This will delete the selected crop.
+            This will delete the selected crop and all orders of this crop (including finished), continue?
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -132,7 +96,7 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form-crop" novalidate>     
+            <form id="form-crop" class="form-crop" novalidate>     
               <div class="modal-body"> 
                 <div class="form-group col-12 col-md-12 row ">
                   <label class="font-weight-bold col-4" for="crop-name">Crop Name:</label>
@@ -142,21 +106,47 @@
                 </div>
                 <div class="form-group offset-4 col-12 col-md-12 m-0 ml-2 pb-3">
                     <div class="offset-4 col-8">
-                      <input type="checkbox" id="is-seasonal" class="form-check-input">
+                      <input type="checkbox" id="is-seasonal" name="is-seasonal" class="form-check-input">
                       <label for="is-seasonal" class="form-check-label">Is Seasonal</label>
                     </div>
                 </div>
                 <div class="form-group col-12 col-md-12 row">
                     <label class="col-4 d-flex mt-2" for="season-start">Season Start:</label>
                     <div class="col-8">
-                      <input class="form-control" type="date" name="season-start">
+                      <select class="form-control" name="season-start" id="season-start">
+                        <option value="1" selected>January</option>
+                        <option value="2">Febuary</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                      </select>
                       <label><small>Start of the harvest season.</small></label>
                     </div>
                 </div>
                 <div class="form-group col-12 col-md-12 row">
                   <label class="col-4 d-flex mt-2" for="season-end">Season End:</label>
                   <div class="col-8">
-                    <input class="form-control" type="date" name="season-end" maxlength="30">
+                    <select class="form-control" name="season-end" id="season-end">
+                      <option value="1" selected>January</option>
+                      <option value="2">Febuary</option>
+                      <option value="3">March</option>
+                      <option value="4">April</option>
+                      <option value="5">May</option>
+                      <option value="6">June</option>
+                      <option value="7">July</option>
+                      <option value="8">August</option>
+                      <option value="9">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                    </select>
                     <label><small>Start of the harvest season.</small></label>
                   </div>
                 </div>
@@ -186,14 +176,14 @@
                 <div class="form-group col-12 col-md-12 row">
                   <label class="font-weight-bold label col-4 mt-2" for="harvest-time" required>Harvest Time:</label>
                   <div class="col-8">
-                    <input class="form-control col-8" type="number" name="harvest-time" maxlength="30">
+                    <input class="form-control col-8" type="number" name="harvest-time" maxlength="30" required>
                     <label for="harvest-time"><small>Harvest weight per land area tons/ha</small></label>
                   </div>
                 </div>
                 <div class="form-group col-12 col-md-12 row">
                   <label class="font-weight-bold label col-4 mt-2" for="productivity">Productivity:</label>
                   <div class="col-8">
-                    <input class="form-control col-8" type="number" name="productivity" maxlength="30">
+                    <input class="form-control col-8" type="number" name="productivity" maxlength="30" required>
                     <label for="productivity"><small>Arbitrary for now, set it later can be overriden.</small></label>
                   </div>
                 </div>
@@ -221,11 +211,10 @@
 </script> 
 <script src="{% static '/js/custom-admin/custom-admin-crops.js' %}" type="text/javascript"></script>
 <!-- <script src="{% static '/js/custom-admin/custom-admin-orders.js' %}"></script> -->
-<!-- <script>
+<script>
   $(document).ready(function () {
     initialize();
     setCSRFToken("{{csrf_token}}")
-    console.log("ASFSAFASF")
   });
-</script> -->
+</script>
 {% endblock scripts %}
