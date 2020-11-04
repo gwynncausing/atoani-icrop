@@ -91,8 +91,8 @@
     <div class="modal-dialog modal-dialog-centered"  role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Crops</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title text-white">Add Crop</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -153,15 +153,15 @@
                 <div class="form-group col-12 col-md-12 row">
                   <label class="col-4 d-flex mt-2" for="season-end">Province:</label>
                   <div class="col-8">
-                      <select class="form-control" name="province" id="province" required>
+                      <select class="form-control" name="province" id="province">
                       </select>
                       <div id="demand-invalid" class="invalid-feedback">
                           Please enter the province.
                       </div>
-                      <select class="form-control" name="city" id="city" disabled hidden>
+                      <select class="form-control" name="city" id="city"  hidden>
                           <option value="" disabled selected hidden>City *</option>
                       </select>
-                      <select class="form-control" name="brgy" id="barangay" disabled hidden>
+                      <select class="form-control" name="brgy" id="barangay" hidden>
                           <option value="" disabled selected hidden>Barangay *</option>
                       </select>
                   </div>
@@ -207,7 +207,7 @@
 <!-- load address-->
 <script src="{% static '/js/global/load-address.js' %}"></script>
 <script>
-  loadAddresses("{% static '/js/json/philippine_address_2019v2.json' %}");
+  loadAddressWithoutDefault("{% static '/js/json/philippine_address_2019v2.json' %}");
 </script> 
 <script src="{% static '/js/custom-admin/custom-admin-crops.js' %}" type="text/javascript"></script>
 <!-- <script src="{% static '/js/custom-admin/custom-admin-orders.js' %}"></script> -->

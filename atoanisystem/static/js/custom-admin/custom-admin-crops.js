@@ -110,7 +110,6 @@ function initialize(){
 const url = "....";
 const form = document.querySelector(".form-crop");
 const inputs = document.querySelectorAll("input, select");
-
 //add crop
 function addCrop(e) {
     e.preventDefault();
@@ -153,17 +152,8 @@ function addCrop(e) {
 
 //reset the modal
 function resetModal(){
-    inputs.forEach(input => {
-        if(input.id != "province"){
-            input.classList.remove("is-valid");
-            input.classList.remove("is-invalid");
-            input.value = "";
-            form.classList.remove("was-validated");
-        }
-    })   
+  form.classList.remove("was-validated"); 
 }
-
-console.log($("#modal-add-crop"));
 //adding crop
 form.addEventListener("submit", addCrop);
 //reset the modal

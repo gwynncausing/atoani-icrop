@@ -292,6 +292,11 @@ body {
   right: 2rem;
 }
 
+.modal-header {
+  background-color: #628474;
+  color: #fafafa;
+}
+
 .body-dashoard {
   position: relative;
   width: 90%;

@@ -118,3 +118,20 @@ function loadAddresses(address_url){
       //loadBarangay();
   });
 }
+
+function loadAddressWithoutDefault(address_url){
+  //getJSON is an ajax call to fetch the json content
+  $.getJSON(address_url, function(data) {
+    //assigns the data to ph address, to be used by other functions like loadCity()
+    phAddress = data;
+    //traversing the region and getting the province list as an array using Objects.keys then adding it to the dropdown for provinces
+    $.each(data, function(key, value) {
+        var provinces = Object.keys(value.province_list)
+        loadSelectData('province', provinces);
+    });
+    var sortedOptions = $("#province option").sort(function (a,b) { return a.value.toUpperCase().localeCompare(b.value.toUpperCase()) });
+    $("#province").empty();
+    $("#province").append(sortedOptions);
+    $("#province").val("Abra");
+});  
+}
