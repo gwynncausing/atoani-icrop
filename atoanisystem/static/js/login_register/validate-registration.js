@@ -66,7 +66,8 @@ function check(input){
     const securityQuestion2 = document.querySelector("[name=security-question-2]");
     const securityAnswer1 = document.querySelector("[name=answer-1]");
     const securityAnswer2 = document.querySelector("[name=answer-2]");
-    
+    const reminder = document.querySelector("#reminder");
+
     //ERROR MESSAGES:
     const usernameBlank  = "Please enter a username. It must not contain a space.";
     const usernameExists = "The username is already in use";
@@ -116,12 +117,15 @@ function check(input){
             isValid = false;
         }
         // end - check the credibility of password
-        if(isValid == false)
+        if(isValid == false){
             stopDefaultFormAction(e);
+            reminder.classList.remove("d-none");
+        }
         else if(isValid == true && termsAndConditions.checked == false){
             stopDefaultFormAction(e);
             termsAndConditionsErrorHolder.classList.remove("d-none");
-            termsAndConditionsErrorHolder.innerHTML = termsAndConditionsUnchecked;    
+            termsAndConditionsErrorHolder.innerHTML = termsAndConditionsUnchecked;   
+            reminder.classList.add("d-none"); 
         }
         else{
             //if all input data needed is valid

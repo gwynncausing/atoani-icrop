@@ -40,7 +40,7 @@
 
 
                     <div class="form-row row-12 mt-1 pb-4 pr-sm-5 pl-sm-5 pr-3 pl-3">
-                        <div  class="form-group col-12 col-md-4">
+                        <div  class="form-group col-12 col-md-4 input-group">
                             <input class="form-control" type="text" name="username" id="username" placeholder="Username *" maxlength="16" required>
                             <div id="username-invalid" class="invalid-feedback">
                                 Please enter your username. 
@@ -199,13 +199,16 @@
                     </div>
                     <div class="col-12 mt-5 text-center">
                         <input type="checkbox" class="form-check-input" id="termsAndConditions">
-                        <label class="form-check-label">I Agree to the <a href="{% url 'login_register:terms-and-conditions-of-use' %}" id="termsAndConditionsLink" target="_blank">terms and conditions</a></label>
+                        <label class="form-check-label">I Agree to the <a href="{% url 'login_register:terms-and-conditions-of-use' %}" id="termsAndConditionsLink" target="_blank">terms and conditions</a> *</label>
                     </div>
                     <div class="col-12 mt-3 text-center">
                         <input id="submit" class="btn order-sm-1 order-1 " type="submit" value="Sign Up">
                     </div>
                     <div id="terms-and-conditions-invalid" class="col-12 mt-3 text-center d-none">
                         Please mark check if you have read and agree the Terms and Conditions.
+                    </div>
+                    <div id="reminder" class="col-12 mt-3 text-center">
+                        Please answer all the fields with asterisk.
                     </div>
                     <div class="col-12 mt-5 text-center">
                         <a href="{% url 'login_register:login' %}" class="order-sm-1 order-2 mt-xs-0 mt-2">I already have an account</a>
