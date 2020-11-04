@@ -76,8 +76,8 @@ class Location_Soil(models.Model):
         verbose_name_plural = "Location-Soil type Relations"
 
 class Location_Crop(models.Model):
-    location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
-    name = models.ManyToManyField(Crop, help_text="Crop name")
+    location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
+    name = models.ManyToManyField(Crop, help_text="Crop name",null=True)
 
     def __str__(self):
         return "{} - {}".format(self.location, self.name)
@@ -327,7 +327,7 @@ class Order_Pairing(models.Model):
             pass
 
     def save(self, *args, **kwargs):
-        status = "Ongoing" if self.harvested_date == None else "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None else "Delivered" if self.delivered_date != None else ""
+        status = "Ongoing" if self.harvested_date == None else  "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None and self.delivered_date == None else "Delivered" if self.delivered_date != None else ""
         if self.status != status:
             # status has changed
             self.status = status

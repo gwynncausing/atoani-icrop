@@ -96,9 +96,16 @@ body{
             outline: none;
         }
     }
+    .add-btn-holder{
+        top: -1.4rem; 
+        right: 2rem;
+    }
 }
 
-
+.modal-header{
+    background-color: $secondary-color;
+    color: $white-color;
+}
 
 
 
