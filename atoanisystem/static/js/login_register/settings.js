@@ -45,28 +45,49 @@ $(document).ready(function () {
     const current_pass = document.getElementById('current-password');
     const new_password1 = document.getElementById('new_password1');
     const new_password2 = document.getElementById('new_password2');
+    const provinceSelector = document.getElementById("province");
 
 
     let isEmailValid = false;
     let isContactValid = false;
+    let contactFieldsEmpty = false;
 
     //Error Messages
     const contact_num_feedback = document.getElementById('contact-num-feedback')
-    const contact_num_feedback_div = document.getElementById('contact-num-feedback-div');
-
     const email_feedback = document.getElementById('email-feedback')
-    const email_feedback_div = document.getElementById('email-feedback-div');
-
-
-    const contact_form = document.getElementById('form-contact');
-
     const contactInvalidFormat = "Phone number must be in this format 09xxxxxxxxx";
     const contactExists = "The contact number is already in use";
     const emailInvalidFormat = "Please enter your email address in format: yourname@example.com";
     const emailExists = "The email address is already in use";
+    const bothFieldsNeeded = "Please enter either your contact number or email"
 
     //password Helper function
     passwordHelper.init($("#new_password1"), $("#new_password2"));
+
+
+    function checkContactFields(){
+        if(email.value.toString().length == 0 && contact_number.value.toString().length == 0){
+            email_feedback.innerHTML = bothFieldsNeeded;
+            contact_num_feedback.innerHTML = bothFieldsNeeded;
+            contactFieldsEmpty = true;
+            addInvalidClass(email);
+            addInvalidClass(contact_number);
+        }else{
+            // if(isEmailValid){
+            //     removeInvalidClass(email)
+            // }else if(isContactValid){
+            //     removeInvalidClass(contact_number)
+            // }else 
+            // if(isContactValid && isEmailValid){
+                removeValidClass(email);
+                removeInvalidClass(email);
+                removeValidClass(contact_number);
+                removeInvalidClass(contact_number);
+            // }
+            contactFieldsEmpty = false;
+        }
+    }
+
 
     const displayValidity = (field) => {
         if(field.checkValidity() === true){
@@ -96,18 +117,17 @@ $(document).ready(function () {
     const removeInvalidClass = field => field.classList.remove('is-invalid');
 
 
-    // let isEmailValid = false;
-    // let isContactValid = false;
-
     email.addEventListener("input", (e) => {  
         email_feedback.innerHTML = "";
         //if input length is 0
         //make it neutral
-        if(e.target.value.toString().length === 0){
+        if(e.target.value.toString().length === 0 && contactFieldsEmpty == false){
             removeValidClass(email);
             removeInvalidClass(email)
             isEmailValid = false;
+            checkContactFields();
         }else{
+            checkContactFields();
             isEmailValid = displayValidity(e.target);
             if(isEmailValid){
                 email.classList.add("is-invalid");
@@ -117,35 +137,20 @@ $(document).ready(function () {
             else
                 email_feedback.innerHTML = emailInvalidFormat;
         }
-        // else{
-        //     email_feedback.innerHTML = emailInvalidFormat;
-        //     email_feedback_div.classList.remove("d-none");
-        //     isEmailValid = displayValidity(e.target);
-        //     if(isEmailValid){
-        //         email_feedback_div.classList.add("d-none");
-        //         // check if it exists
-        //         checkFromServer(email,'email');
-        //         isEmailValid = displayValidity(e.target);
-        //         if(isEmailValid){
-        //             email_feedback_div.classList.add("d-none");
-        //         }
-        //         else{
-        //             email_feedback.innerHTML = emailExists;
-        //             email_feedback_div.classList.remove("d-none");
-        //         }
-        //     }
-        // }
+       
     })
 
     contact_number.addEventListener('input', e => {
         e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
         //if input length is 0
         //make it neutral
-        if(e.target.value.toString().length === 0){
+        if(e.target.value.toString().length === 0 && contactFieldsEmpty == false){
             removeValidClass(contact_number);
             removeInvalidClass(contact_number)
             isContactValid = false;
+            checkContactFields();
         }else{
+            checkContactFields();
             isContactValid = displayValidity(e.target);
             if(isContactValid){
                 // check if it exists
@@ -156,48 +161,17 @@ $(document).ready(function () {
             else
                 contact_num_feedback.innerHTML = contactInvalidFormat;
         }
-        // else{
-        //     contact_num_feedback.innerHTML = contactInvalidFormat;
-        //     contact_num_feedback_div.classList.remove("d-none");
-        //     isContactValid = displayValidity(e.target);
-        //     //check if contact num exists or not
-        //     if(isContactValid){
-        //         contact_num_feedback_div.classList.add("d-none");
-        //         // check if it exists
-        //         checkFromServer(contact,'contact_number');
-        //         isContactValid = displayValidity(contact_number);
-        //         if(isContactValid){
-        //             contact_num_feedback_div.classList.add("d-none");
-        //         }
-        //         else{
-        //             contact_num_feedback.innerHTML = contactExists;
-        //             contact_num_feedback_div.classList.remove("d-none");
-        //         }
-        //     }
-        // }
     })
 
-    // CONTACT FORM
-    /*
-    contact_form.addEventListener("submit", e => {
-        let isValid = true;
+    
+    addInvalidClass(provinceSelector);
 
-        if(isEmailValid || isContactValid){
-            contactInfo.value = "contact-info";
-            isValid = displayValidity(contactInfo);
-        }
-        
-        //check the validity of each fields
-        textFields.forEach(field => {
-            if(field.classList.contains("is-invalid"))
-                isValid = displayValidity(field);
-        });
-
-        if(isValid == false)
-            stopDefaultFormAction(e);
-        
+    provinceSelector.addEventListener("change", e => {
+        addValidClass(provinceSelector);
+        $("#barangay").prop("disabled", false);
+        $("#city").prop("disabled", false);
     })
-    */
+
 
     // ajax requests
     $('#btn-save-name').click(function(e){
@@ -225,7 +199,7 @@ $(document).ready(function () {
         e.preventDefault();
         
         //make sure that either of the fields is valid
-        if(contact_number.classList.contains("is-invalid") == false && email.classList.contains("is-invalid") == false){
+        if(contact_number.classList.contains("is-invalid") == false && email.classList.contains("is-invalid") == false && contactFieldsEmpty == false){
             $.ajax({
                 url: '/settings/',
                 type: 'POST',
@@ -269,71 +243,77 @@ $(document).ready(function () {
 
     $('#btn-add-customer-address').click(function(e){
         e.preventDefault();
-        $.ajax({
-            url: '/settings/',
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken' : csrf_token[0].value,
-                'province' : province.value,
-                'city' : city.value,
-                'brgy' : brgy.value,
-                'btn-add-customer-address' : $(this).html()
-            },
-            success: function(response){
-                console.log(response);
-                $("#modal-message-added").modal('show');
-            },
-            error: function(response){
-                console.log(response);
-            }
-        });
+        if(province.classList.contains("is-invalid") == false){
+            $.ajax({
+                url: '/settings/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken' : csrf_token[0].value,
+                    'province' : province.value,
+                    'city' : city.value,
+                    'brgy' : brgy.value,
+                    'btn-add-customer-address' : $(this).html()
+                },
+                success: function(response){
+                    console.log(response);
+                    $("#modal-message-added").modal('show');
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
     });
 
     $('#btn-edit-farmer-address').click(function(e){
         e.preventDefault();
-        $.ajax({
-            url: '/settings/',
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken' : csrf_token[0].value,
-                'id' : id.value,
-                'province' : province.value,
-                'city' : city.value,
-                'brgy' : brgy.value,
-                'btn-edit-farmer-address' : $(this).html()
-            },
-            success: function(response){
-                console.log(response);
-                name.value = response.name;
-                $("#modal-message").modal('show');
-            },
-            error: function(response){
-                console.log(response);
-            }
-        });
+        if(province.classList.contains("is-invalid") == false){
+            $.ajax({
+                url: '/settings/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken' : csrf_token[0].value,
+                    'id' : id.value,
+                    'province' : province.value,
+                    'city' : city.value,
+                    'brgy' : brgy.value,
+                    'btn-edit-farmer-address' : $(this).html()
+                },
+                success: function(response){
+                    console.log(response);
+                    name.value = response.name;
+                    $("#modal-message").modal('show');
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
     });
 
     $('#btn-edit-customer-address').click(function(e){
         e.preventDefault();
-        $.ajax({
-            url: '/settings/',
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken' : csrf_token[0].value,
-                'location-id' : id.value,
-                'province' : province.value,
-                'city' : city.value,
-                'brgy' : brgy.value,
-                'btn-edit-customer-address' : $(this).html()
-            },
-            success: function(response){
-                console.log(response);
-                $("#modal-message").modal('show');
-            },
-            error: function(response){
-                console.log(response);
-            }
-        });
+        if(province.classList.contains("is-invalid") == false){
+            $.ajax({
+                url: '/settings/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken' : csrf_token[0].value,
+                    'location-id' : id.value,
+                    'province' : province.value,
+                    'city' : city.value,
+                    'brgy' : brgy.value,
+                    'btn-edit-customer-address' : $(this).html()
+                },
+                success: function(response){
+                    console.log(response);
+                    $("#modal-message").modal('show');
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
     });
     
     $('#btn-delete-address').click(function(e){
@@ -360,7 +340,7 @@ $(document).ready(function () {
     $('#btn-save-account').click(function(e){
         console.log("clicked account")
         e.preventDefault();
-        if(passwordHelper.passwordValidity == true && passwordHelper.passwordConfirmValidity == true) {
+        if(passwordHelper.passwordValidity == true && passwordHelper.passwordConfirmValidity == true && isContactEmpty == false) {
             $.ajax({
                 url: '/settings/',
                 type: 'POST',
@@ -414,7 +394,7 @@ $(document).ready(function () {
         $('#modal-customer-address').modal('show');
         console.log("open edit")
 
-        document.getElementById("btn-edit-customer-address").removeAttribute("type", "hidden")
+        document.getElementById("btn-edit-customer-address").removeAttribute("type", "hidden");
         document.getElementById("btn-add-customer-address").setAttribute("type", "hidden");
     });
 
@@ -424,7 +404,7 @@ $(document).ready(function () {
         $('#modal-customer-address').modal('show');
         console.log("open add")
 
-        document.getElementById("btn-add-customer-address").removeAttribute("type", "hidden")
+        document.getElementById("btn-add-customer-address").removeAttribute("type", "hidden");
         document.getElementById("btn-edit-customer-address").setAttribute("type", "hidden");
     });
 
@@ -442,7 +422,11 @@ $(document).ready(function () {
         document.getElementById("location-name-delete").innerHTML = location_name;
 
         $('#modal-delete').modal('show');
-        // $( "#locations" ).load(window.location.href + " #locations" );
     });
 
+
+
+
 });
+
+

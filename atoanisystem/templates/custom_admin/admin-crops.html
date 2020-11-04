@@ -24,10 +24,11 @@
 <div class="container-fluid">
   <div class="row h-100">
     <div class="col-2 sidebar d-flex column-vertical py-3 p-0">
+
       <a class="orders-title" href="{% url 'custom_admin:orders' %}">Orders<i class="fa fa-caret-down"></i></a>
       <div class="dropdown-container">
-         <button id="" type="button" class="sidebar-nav border-0">Collected</button> 
-        <button id="collectedBtn" type="button" class="sidebar-nav border-0">Delivered</button> 
+        <!-- <button id="" type="button" class="sidebar-nav border-0">Collected</button> -->
+        <!-- <button id="collectedBtn" type="button" class="sidebar-nav border-0">Delivered</button> -->
       </div>
       <a class="orders-title" href="{% url 'custom_admin:users' %}">Users <i class="fa fa-caret-down"></i></a>
       <div class="dropdown-container d-none">
@@ -83,18 +84,38 @@
           </div>
         </div>
         <div class="col-12">
-          <table class="table orders-table mx-auto">
+          <table class="table crops-table mx-auto">
             <thead>
               <tr>
                 <th>Crop ID</th>
                 <th>Crop Name</th>
-                <th>Status</th>
+                <th>Location</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+    <!-- Confirm Delete Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Crop</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            This will delete the selected crop.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button id="confirmDeleteBtn" type="button" class="btn btn-primary">Confirm</button>
+          </div>
         </div>
       </div>
     </div>
@@ -203,6 +224,7 @@
   $(document).ready(function () {
     initialize();
     setCSRFToken("{{csrf_token}}")
+    console.log("ASFSAFASF")
   });
 </script> -->
 {% endblock scripts %}

@@ -229,3 +229,9 @@ def get_all_crops():
 
 def add_crop(crop_instance,location_instance):
     Location_Crop.objects.create(name=crop_instance,location=location_instance)
+
+def delete_crop(crop_id):
+    crop_instance = Crop.objects.filter(id=crop_id)
+    location_crop = Location_Crop.objects.filter(name=crop_instance.first())
+    crop_instance.delete()
+    location_crop.delete()
