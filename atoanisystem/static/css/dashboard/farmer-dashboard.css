@@ -382,7 +382,7 @@ body {
     margin-top: 60px !important;
   }
   .body-dashoard .date-range {
-    margin-top: 50px;
+    margin-top: 50px !important;
   }
 }
 
