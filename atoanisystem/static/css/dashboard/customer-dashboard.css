@@ -378,7 +378,7 @@ body {
 }
 
 @media only screen and (max-width: 1200px) {
-  .body-dashoard #pending-table-orders, .body-dashoard #finished-table-orders {
+  .body-dashoard #pending-table-orders, .body-dashoard #finished-table-orders, .body-dashoard #reserved-table-orders {
     margin-top: 60px !important;
   }
   .body-dashoard .date-range {
@@ -437,7 +437,7 @@ body {
 }
 
 @media only screen and (max-width: 565px) {
-  .body-dashoard #pending-table-orders, .body-dashoard #finished-table-orders {
+  .body-dashoard #pending-table-orders, .body-dashoard #finished-table-orders, .body-dashoard #reserved-table-orders {
     margin-top: 0px !important;
   }
   .body-dashoard .date-range {

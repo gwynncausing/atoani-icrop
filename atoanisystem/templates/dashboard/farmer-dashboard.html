@@ -385,5 +385,9 @@
     </script>
     <!-- shows the notification success or error when reserved -->
     <script src="{% static '/js/global/notify.js' %}"></script>
+    <script src="{% static '/js/dashboard/datatables-display.js' %}"></script>
+    <script>
+        datatablesDisplay(document.querySelector("#farmer-finished-table"));
+    </script>
 {% endblock %}
 

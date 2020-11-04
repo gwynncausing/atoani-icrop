@@ -436,12 +436,13 @@ body {
   }
 }
 
-.body-dashoard #farmer-finished-table {
-  margin-top: 0px !important;
-}
-
-.body-dashoard .date-range {
-  margin-top: 00px;
+@media only screen and (max-width: 565px) {
+  .body-dashoard #farmer-finished-table {
+    margin-top: 0px !important;
+  }
+  .body-dashoard .date-range {
+    margin-top: 00px;
+  }
 }
 
 .modal-farmer {

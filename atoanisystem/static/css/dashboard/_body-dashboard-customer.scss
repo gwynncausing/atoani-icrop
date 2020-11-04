@@ -190,7 +190,7 @@ body{
     //@media only screen and (max-width: 352px){ thead th:nth-of-type(1){ border-top-right-radius: 0.5rem; } }
     /*this for breakpoint ui style*/
     @media only screen and (max-width: 1200px) {
-        #pending-table-orders, #finished-table-orders{
+        #pending-table-orders, #finished-table-orders, #reserved-table-orders{
             margin-top: 60px !important;
         }
         .date-range{
@@ -246,7 +246,7 @@ body{
         }
     }
     @media only screen and (max-width: 565px) {
-        #pending-table-orders, #finished-table-orders{
+        #pending-table-orders, #finished-table-orders, #reserved-table-orders{
             margin-top: 0px !important;
         }
         .date-range{
