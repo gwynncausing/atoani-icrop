@@ -148,33 +148,24 @@ h6 {
   font-size: 1.2rem;
 }
 
-.body-content {
+.body-dashoard {
   position: relative;
+  width: 90%;
   min-height: 180px;
   border: 2px #114a44 solid;
   border-radius: 0.5rem;
-  color: black;
-  padding: 15px 15px 30px 15px;
 }
 
-.body-content .title {
+.body-dashoard .title {
   color: #114a44;
 }
 
-.body-content .content {
-  color: black;
-  padding: 0px 15px 0px 15px;
-}
-
-.body-content .subtitle {
-  margin-top: 15px;
-  font-weight: bold;
+.body-dashoard .content {
+  margin-top: 20px;
   color: #114a44;
 }
 
-.body-content .print {
-  color: black;
-  font-size: .8rem;
-  cursor: pointer;
+.body-dashoard .content p {
+  text-indent: 50px;
 }
-/*# sourceMappingURL=terms-and-conditions.css.map */
+/*# sourceMappingURL=others.css.map */

@@ -6,24 +6,34 @@
 {% endblock %}
 
 {% block content %}
-<div class="container mt-5 mb-5 p-0" style="height: 100vh;">
-	<div class="body-content ">
-		<span class="pr-1 pl-1 title">Terms and Conditions of Use</span>
+<div class="container mt-5 mb-5 p-0" style="min-height: 90vh;">
+	<div class="body-content" style="min-height: 50vh;">
+		<div class="col-12">
+			<div class="row col-12 justify-content-center">
+				<p class="font-weight-bold text-uppercase title">Terms and Conditions of Use</p>
+			</div>
+			<div class="row content">
+				<div class="subtitle">Subtitle</div>
+				<div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+					excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+					excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+					excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+					excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+					excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.</div>
+			</div>
 
-		<div class="row content">
-			<div class="subtitle">Subtitle</div>
-			<div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
-				excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.</div>
-		</div>
+			<div class="row content">
+				<div class="subtitle">Subtitle</div>
+				<div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+					excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+					excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+					excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
+					excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.</div>
+			</div>
 
-		<div class="row content">
-			<div class="subtitle">Subtitle</div>
-			<div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse numquam, ipsa totam natus nulla a alias eos
-				excepturi itaque blanditiis. Ad sit voluptas aspernatur delectus dolorem alias corporis aliquam non.</div>
-		</div>
-
-		<div class="row content">
-				<span class="print mx-auto mt-3"><i class="fa fa-print"></i> Print this page</span>
+			<div class="row content mt-5">
+				<span class="print mx-auto mt-3 d-print-none" onclick="window.print()"><i class="fa fa-print"></i> Print this page</span>
+			</div>
 		</div>
 	</div>
 </div>
@@ -31,6 +41,4 @@
 {% endblock %}
 
 {% block scripts %}
-<!-- Login JS -->
-<!-- <script src="{% static '/js/login-validation.js' %}"></script> -->
 {% endblock %}

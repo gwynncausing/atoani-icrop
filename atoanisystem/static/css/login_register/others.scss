@@ -1,0 +1,19 @@
+@import "../index";
+
+.body-dashoard{
+    position: relative; 
+    width: 90%; 
+    min-height: 180px; 
+    border: 2px $main-color solid; 
+    border-radius: 0.5rem;
+    .title{
+        color: $main-color;
+    }
+    .content{
+        margin-top: 20px;
+        color: $main-color;
+        p{
+            text-indent: 50px;
+        }
+    }
+}
