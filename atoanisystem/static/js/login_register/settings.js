@@ -47,7 +47,6 @@ $(document).ready(function () {
     const new_password2 = document.getElementById('new_password2');
     const provinceSelector = document.getElementById("province");
 
-
     let isEmailValid = false;
     let isContactValid = false;
     let contactFieldsEmpty = false;
@@ -64,7 +63,6 @@ $(document).ready(function () {
     //password Helper function
     passwordHelper.init($("#new_password1"), $("#new_password2"));
 
-
     function checkContactFields(){
         if(email.value.toString().length == 0 && contact_number.value.toString().length == 0){
             email_feedback.innerHTML = bothFieldsNeeded;
@@ -73,21 +71,12 @@ $(document).ready(function () {
             addInvalidClass(email);
             addInvalidClass(contact_number);
         }else{
-            // if(isEmailValid){
-            //     removeInvalidClass(email)
-            // }else if(isContactValid){
-            //     removeInvalidClass(contact_number)
-            // }else 
-            // if(isContactValid && isEmailValid){
-                removeValidClass(email);
-                removeInvalidClass(email);
-                removeValidClass(contact_number);
-                removeInvalidClass(contact_number);
-            // }
+            removeValidClass(email);
+            removeInvalidClass(email);
+            removeValidClass(contact_number);
             contactFieldsEmpty = false;
         }
     }
-
 
     const displayValidity = (field) => {
         if(field.checkValidity() === true){
@@ -227,7 +216,7 @@ $(document).ready(function () {
             type: 'POST',
             data: {
                 'csrfmiddlewaretoken' : csrf_token[0].value,
-                'land_area' : land_area.value,
+                // 'land_area' : land_area.value,
                 'company' : company.value,
                 'btn-save-others' : $(this).html()
             },
@@ -240,6 +229,25 @@ $(document).ready(function () {
             }
         });
     });
+
+    
+    function getCustomerLocationList(){
+        $.ajax({
+            url: '../get-customer-locations/',
+            type: 'GET',
+            data: { 
+                csrfmiddlewaretoken : csrf_token[0].value,
+            },
+            contentType: false,
+            processData: false,
+            success: function(response){
+                console.log(response);
+            },
+            error: function(response){
+                console.log(response);
+            }
+        });
+    }
 
     $('#btn-add-customer-address').click(function(e){
         e.preventDefault();
@@ -257,6 +265,7 @@ $(document).ready(function () {
                 success: function(response){
                     console.log(response);
                     $("#modal-message-added").modal('show');
+                    getCustomerLocationList();
                 },
                 error: function(response){
                     console.log(response);
@@ -424,9 +433,17 @@ $(document).ready(function () {
         $('#modal-delete').modal('show');
     });
 
+    
+    $('#modal-message').on('hidden.bs.modal', function () {
+        location.reload();
+    })
 
+    $('#modal-message-added').on('hidden.bs.modal', function () {
+        location.reload();
+    })
 
+    $('#modal-message-deleted').on('hidden.bs.modal', function () {
+        location.reload();
+    })
 
 });
-
-
