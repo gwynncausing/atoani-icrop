@@ -2,18 +2,19 @@
 
 .body-dashoard{
     position: relative; 
-    width: 90%; 
+    width: 95%; 
     min-height: 180px; 
     border: 2px $main-color solid; 
     border-radius: 0.5rem;
+    padding: 20px;
     .title{
         color: $main-color;
     }
     .content{
         margin-top: 20px;
         color: $main-color;
-        p{
-            text-indent: 50px;
+        span{
+            margin-top: 5px;
         }
     }
 }
