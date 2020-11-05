@@ -157,23 +157,18 @@ h6 {
   padding: 15px 15px 30px 15px;
 }
 
-.body-content .content {
-  color: black;
-  padding: 15px 15px 30px 15px;
-}
-
-.body-content .content .title {
+.body-content .title {
   color: #114a44;
 }
 
-.body-content .content .content {
+.body-content .content {
   color: black;
-  padding: 0px 15px 0px 15px;
+  padding: 20px 15px 0px 15px;
 }
 
 .body-content .content .subtitle {
   margin-top: 15px;
-  font-weight: bold;
+  font-weight: bolder;
   color: #114a44;
 }
 
@@ -181,5 +176,29 @@ h6 {
   color: black;
   font-size: .8rem;
   cursor: pointer;
+}
+
+.body-content .content p {
+  padding: 0;
+  margin: 0;
+  text-align: justify;
+}
+
+.body-content .content ol {
+  counter-reset: list;
+  margin: 0;
+}
+
+.body-content .content ol > li {
+  list-style: none;
+  position: relative;
+  text-align: justify;
+}
+
+.body-content .content ol > li:before {
+  counter-increment: list;
+  content: "(" counter(list, lower-alpha) ") ";
+  position: absolute;
+  left: -1.4em;
 }
 /*# sourceMappingURL=terms-and-conditions.css.map */
