@@ -226,7 +226,9 @@
     <script src="{% static '/js/login_register/password/password-validator.js' %}" type="text/javascript"></script>
     <script src="{% static '/js/login_register/validate-registration.js' %}" type="text/javascript"></script>  
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <!-- To avoid mix content, make sure it is in https, coincides with the webiste-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    
     <script src="{% static '/js/global/load-address.js' %}"></script>
     <script>
         $(document).ready(function() {
