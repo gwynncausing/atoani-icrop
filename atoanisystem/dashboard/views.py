@@ -2,20 +2,20 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, redirect, render
 from django.views.generic import View
-from login_register.models import Order 
+from login_register.models import Order
 from . import farmerfunctions as ff
 from . import customerfunctions as cf
 from login_register.models import *
 
 from login_register.forms import *
-
-from login_register.connectivefunctions import calculate_land_area_single
+#not needed as calcuation is done in the  overriden save function
+# from login_register.connectivefunctions import calculate_land_area_single
 
 #########################################################
 #               Farmer related views                    #
 #########################################################
 class FarmerDashboardView(View):
-    def get(self,request):  
+    def get(self,request):
         if request.user.is_authenticated:
             currentUser = request.user
             if currentUser.is_staff:
@@ -116,17 +116,17 @@ class CustomerDashboardView(View):
             elif hasattr(currentUser, 'customer'):
                 #Crop Context
                 if(currentUser.customer.is_approved):
-                    
+
                     #get all crops
                     crops = cf.get_all_crops()
                     context = {
                         'crops': crops,
                     }
-                    
+
                     #print(request.user.id)
                     #print(request.user.customer.id)
                     #print(request.user.customer.location.all())
-                    
+
                     return render(request,'dashboard/customer-dashboard.html', context)
                 else:
                     return redirect("login_register:approval")
@@ -141,8 +141,8 @@ class CustomerDashboardView(View):
                 demand = request.POST.get('weight')
                 location_id = request.POST.get('address')
                 orig_location_id = request.POST.get('original-address')
-                crop_id = request.POST.get('crop-id')            
-                crop = Crop.objects.get(id=crop_id)  
+                crop_id = request.POST.get('crop-id')
+                crop = Crop.objects.get(id=crop_id)
                 customer = request.user.customer
                 location = Location.objects.get(id=orig_location_id)
                 #check if address is custom, quick fix is to check if province is empty because if it does that means it is not a custom address
@@ -167,7 +167,7 @@ class CustomerDashboardView(View):
                 arr = cf.get_total_orders(request.user)
                 json = {'data':arr}
                 return JsonResponse(json)
-         
+
         return redirect('login_register:login')
 
 class CustomerTotalOrdersView(View):
@@ -252,7 +252,7 @@ class AccountView(View):
                 pass
         firstname = request.POST.get('first-name')
         lastname = request.POST.get('last-name')
-        #replace by username field 
+        #replace by username field
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password1')
@@ -281,5 +281,3 @@ class AccountView(View):
             new_user.location = location
             new_user.save()
         return render(request,'dashboard/customer-dashboard.html')
-    
-

@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from login_register.auxfunctions import *
 from enum import Enum
 from django.utils import timezone as tz
-from datetime import datetime as dt
+from datetime import datetime as dt, timedelta
 import copy
 from django.db.models import Q
 # Create your models here
@@ -131,16 +131,18 @@ class Customer(models.Model):
 
     def get_locations(self):
         splt = []
-        final_location = []
-        if self.street:
+        if self.street != None:
             splt = self.street.split("|")
-        # pairs street and location
+            final_location = []
+            # pairs street and location
             for i in self.location.all().values_list('name','id'):
-                final_location.append((i[0]+", " + splt.pop(0),i[1]))
+                if len(splt) != 0:
+                    final_location.append((i[0]+", " + splt.pop(0),i[1]))
+                else:
+                    final_location.append(i)
+            return final_location
         else:
-            for i in self.location.all().values_list('name','id'):
-                final_location.append((i))
-        return final_location
+            return [i for i in self.location.all().values_list('name','id')]
 
     def get_all_locations(self):
         return self.location.all()
@@ -185,6 +187,7 @@ class Order(models.Model):
     is_cancelled = models.BooleanField(default=False, null=True, blank=True)
     status = models.CharField(max_length=20, null=True, default="Pending")
     message = models.CharField(max_length=1000, null=True, blank=True, help_text="Cancellation Message")
+    approved_date= models.DateTimeField(null=True, blank=True, help_text="Date in which order was approved, automatically generated")
     cancelled_date = models.DateTimeField(null=True, blank=True, help_text="Date in which order was cancelled, automatically generated")
 
     def is_eligible(self):
@@ -211,6 +214,7 @@ class Order(models.Model):
                 self.status = "Pending"
 
             if self.is_approved and self.status == "Pending":
+                self.approved_date = dt.now()
                 self.status = "Posted"
 
             if prev.weight != self.weight or self.land_area_needed == None:
@@ -255,6 +259,7 @@ class Farmer(models.Model):
             # updates available_land_area based on ongoing orders
             if self.available_land_area == self.land_area:
                 for order in Order_Pairing.objects.filter(Q(farmer_id = self.id) & Q(status = "Ongoing")):
+                    print("naa pa ngari!")
                     self.available_land_area = self.available_land_area - order.order_id.land_area_needed
         except:
             pass
@@ -288,11 +293,13 @@ class Farmer(models.Model):
         self.location = new_loc
         self.save()
 
-    def add_land(new_land_area):
-        self.available_land_area = self.available_land_area+new_land_area
+    def add_land(self,new_land_area):
+        print("HANGGAWWWW " + str(self))
+        self.available_land_area = self.available_land_area + new_land_area
+        print(self.available_land_area)
         self.save()
 
-    def subtract_land(new_land_area):
+    def subtract_land(self,new_land_area):
         self.available_land_area = self.available_land_area-new_land_area
         self.save()
 
@@ -307,7 +314,7 @@ class Order_Pairing(models.Model):
     harvested_date = models.DateTimeField(blank=True,null=True)
     collected_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
     delivered_date = models.DateTimeField(blank=True,null=True, help_text="To be filled up by AtoAni")
-    status = models.CharField(max_length=100, default="Ongoing")
+    status = models.CharField(max_length=100, blank=True,default="")
 
     def __str__(self):
         return "{} - {}".format(self.order_id,self.farmer)
@@ -327,19 +334,26 @@ class Order_Pairing(models.Model):
             pass
 
     def save(self, *args, **kwargs):
-        status = "Ongoing" if self.harvested_date == None else  "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None and self.delivered_date == None else "Delivered" if self.delivered_date != None else ""
-        if self.status != status:
+        status = "Ongoing" if self.harvested_date == None else "Harvested" if self.harvested_date != None and self.collected_date == None else "Collected" if self.collected_date != None else "Delivered" if self.delivered_date != None else ""
+        if self.expected_time == None:
+            crop_time = Crop.objects.all().get(id=self.order_id.crop_id).harvest_time
+            self.expected_time = dt(self.accepted_date.year, self.accepted_date.month, self.accepted_date.day) + timedelta(days=crop_time)
+        if self.status == "" or Order_Pairing.objects.get(order_id=self.order_id).status != status:
             # status has changed
             self.status = status
-            super().save(*args, **kwargs)
+            super().save(*args,**kwargs)
             # sets order to the same status as the pairing
-            Order.objects.get(order_id=self.order_id_id).set_value([['status',status]])
+            order = Order.objects.get(order_id=self.order_id_id)
+            order.set_value([['status',status]])
             farmer = Farmer.objects.get(id=self.farmer_id)
             if status == "Ongoing":
-                farmer.subtract_land(self.order_id.land_area)
+                order.set_value([['is_reserved',True]])
+                farmer.subtract_land(self.order_id.land_area_needed)
             elif status == "Harvested":
                 # Farmer.objects.get()
-                farmer.add_land(self.order_id.land_area)
+                farmer.add_land(self.order_id.land_area_needed)
+            elif status == "Collected":
+                order.set_value([['is_done',True]])
         super().save(*args, **kwargs)
     #Add get_status(self) after boss martin pushes his changes to order_pair model
 

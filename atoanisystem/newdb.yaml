@@ -1,0 +1,4037 @@
+<generator object Months.choices.<locals>.<genexpr> at 0x7f0a62c64cf0>
+<generator object Months.choices.<locals>.<genexpr> at 0x7f0a62c64cf0>
+IN READY!
+Scheduler started...
+-   model: admin.logentry
+    pk: 0
+    fields:
+        action_time: 2020-10-29 12:28:12.699000+00:00
+        user: 1
+        content_type: 3
+        object_id: '1'
+        object_repr: Farmer
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 1
+    fields:
+        action_time: 2020-11-02 13:02:27.349000+00:00
+        user: 1
+        content_type: null
+        object_id: '1'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 2
+    fields:
+        action_time: 2020-10-29 12:28:18.657000+00:00
+        user: 1
+        content_type: 3
+        object_id: '2'
+        object_repr: Customer
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 3
+    fields:
+        action_time: 2020-10-29 12:28:28.422000+00:00
+        user: 1
+        content_type: 4
+        object_id: '2'
+        object_repr: farmer
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 4
+    fields:
+        action_time: 2020-11-02 13:32:48.311000+00:00
+        user: 1
+        content_type: null
+        object_id: '2'
+        object_repr: Customer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Permissions"]}}]'
+-   model: admin.logentry
+    pk: 5
+    fields:
+        action_time: 2020-11-02 13:33:17.906000+00:00
+        user: 1
+        content_type: null
+        object_id: '1'
+        object_repr: Farmer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Permissions"]}}]'
+-   model: admin.logentry
+    pk: 6
+    fields:
+        action_time: 2020-10-29 13:36:21.909000+00:00
+        user: 1
+        content_type: 4
+        object_id: '3'
+        object_repr: farmer
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 7
+    fields:
+        action_time: 2020-10-29 13:36:21.921000+00:00
+        user: 1
+        content_type: 4
+        object_id: '4'
+        object_repr: farmer1
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 8
+    fields:
+        action_time: 2020-10-29 13:36:37.205000+00:00
+        user: 1
+        content_type: 4
+        object_id: '5'
+        object_repr: Atoani
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 9
+    fields:
+        action_time: 2020-10-29 13:36:45.508000+00:00
+        user: 1
+        content_type: 17
+        object_id: '1'
+        object_repr: None
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 10
+    fields:
+        action_time: 2020-10-29 14:07:49.822000+00:00
+        user: 1
+        content_type: 9
+        object_id: '1'
+        object_repr: Experimental Potato
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 11
+    fields:
+        action_time: 2020-10-29 14:08:05.018000+00:00
+        user: 1
+        content_type: 13
+        object_id: '1'
+        object_repr: Alegria, Alicia, Zamboanga Sibugay - login_register.Crop.None
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 12
+    fields:
+        action_time: 2020-10-29 14:08:20.471000+00:00
+        user: 1
+        content_type: 13
+        object_id: '1'
+        object_repr: Alegria, Alicia, Zamboanga Sibugay - login_register.Crop.None
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 13
+    fields:
+        action_time: 2020-10-29 14:08:41.576000+00:00
+        user: 1
+        content_type: 13
+        object_id: '1'
+        object_repr: Alegria, Alicia, Zamboanga Sibugay - login_register.Crop.None
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 14
+    fields:
+        action_time: 2020-10-30 07:02:42.814000+00:00
+        user: 1
+        content_type: 10
+        object_id: '11'
+        object_repr: ', , -1'
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 15
+    fields:
+        action_time: 2020-10-30 07:02:42.824000+00:00
+        user: 1
+        content_type: 10
+        object_id: '10'
+        object_repr: ', , -1'
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 16
+    fields:
+        action_time: 2020-10-30 07:02:42.834000+00:00
+        user: 1
+        content_type: 10
+        object_id: '9'
+        object_repr: ', , -1'
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 17
+    fields:
+        action_time: 2020-10-30 07:02:42.842000+00:00
+        user: 1
+        content_type: 10
+        object_id: '8'
+        object_repr: ', , -1'
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 18
+    fields:
+        action_time: 2020-10-30 07:02:42.852000+00:00
+        user: 1
+        content_type: 10
+        object_id: '5'
+        object_repr: ', , -1'
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 19
+    fields:
+        action_time: 2020-10-30 07:02:42.862000+00:00
+        user: 1
+        content_type: 10
+        object_id: '4'
+        object_repr: ', , -1'
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 20
+    fields:
+        action_time: 2020-10-30 07:06:42.927000+00:00
+        user: 1
+        content_type: 16
+        object_id: f1b2f08d-9af6-4c30-ac15-1f5ac2593424
+        object_repr: customer - 145.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Location"]}}]'
+-   model: admin.logentry
+    pk: 21
+    fields:
+        action_time: 2020-10-30 08:50:00.745000+00:00
+        user: 1
+        content_type: 16
+        object_id: 40f455df-f8d3-4182-918e-09c176ee33c7
+        object_repr: customer - 33.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is approved"]}}]'
+-   model: admin.logentry
+    pk: 22
+    fields:
+        action_time: 2020-10-30 08:50:04.130000+00:00
+        user: 1
+        content_type: 16
+        object_id: c68f289a-dc59-417e-a1fa-f23f82feec12
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is approved"]}}]'
+-   model: admin.logentry
+    pk: 23
+    fields:
+        action_time: 2020-10-30 08:50:09.292000+00:00
+        user: 1
+        content_type: 16
+        object_id: 34de5a15-04ec-4bc2-af38-a16a51993779
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is approved"]}}]'
+-   model: admin.logentry
+    pk: 24
+    fields:
+        action_time: 2020-10-30 09:15:37.741000+00:00
+        user: 1
+        content_type: 17
+        object_id: '2'
+        object_repr: farmer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is available", "Available land
+            area", "First question answers", "Second question answers"]}}]'
+-   model: admin.logentry
+    pk: 25
+    fields:
+        action_time: 2020-10-30 09:26:18.042000+00:00
+        user: 1
+        content_type: 17
+        object_id: '3'
+        object_repr: farmer3
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 26
+    fields:
+        action_time: 2020-10-30 09:26:25.424000+00:00
+        user: 1
+        content_type: 15
+        object_id: '2'
+        object_repr: farmer1
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 27
+    fields:
+        action_time: 2020-10-30 09:26:36.252000+00:00
+        user: 1
+        content_type: 4
+        object_id: '8'
+        object_repr: farmer1
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 28
+    fields:
+        action_time: 2020-10-30 09:26:36.264000+00:00
+        user: 1
+        content_type: 4
+        object_id: '9'
+        object_repr: farmer2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 29
+    fields:
+        action_time: 2020-10-30 09:26:36.273000+00:00
+        user: 1
+        content_type: 4
+        object_id: '10'
+        object_repr: farmer3
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 30
+    fields:
+        action_time: 2020-10-30 09:26:36.282000+00:00
+        user: 1
+        content_type: 4
+        object_id: '11'
+        object_repr: farmer4
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 31
+    fields:
+        action_time: 2020-10-30 09:41:44.869000+00:00
+        user: 1
+        content_type: 17
+        object_id: '2'
+        object_repr: farmer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Available land area"]}}]'
+-   model: admin.logentry
+    pk: 32
+    fields:
+        action_time: 2020-10-30 09:44:57.623000+00:00
+        user: 1
+        content_type: 16
+        object_id: 96f7b75b-6ffe-4a53-9694-ba1c799f847d
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 33
+    fields:
+        action_time: 2020-10-30 09:45:02.486000+00:00
+        user: 1
+        content_type: 16
+        object_id: 5c9cde53-46f8-4448-bc2a-bdc426a4dd68
+        object_repr: customer - 12.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 34
+    fields:
+        action_time: 2020-10-30 09:45:09.387000+00:00
+        user: 1
+        content_type: 16
+        object_id: 96f7b75b-6ffe-4a53-9694-ba1c799f847d
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is approved"]}}]'
+-   model: admin.logentry
+    pk: 35
+    fields:
+        action_time: 2020-10-30 09:45:30.682000+00:00
+        user: 1
+        content_type: 16
+        object_id: 96f7b75b-6ffe-4a53-9694-ba1c799f847d
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Land area needed"]}}]'
+-   model: admin.logentry
+    pk: 36
+    fields:
+        action_time: 2020-10-30 09:45:35.617000+00:00
+        user: 1
+        content_type: 16
+        object_id: 5c9cde53-46f8-4448-bc2a-bdc426a4dd68
+        object_repr: customer - 12.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Land area needed"]}}]'
+-   model: admin.logentry
+    pk: 37
+    fields:
+        action_time: 2020-10-30 09:47:02.815000+00:00
+        user: 1
+        content_type: 16
+        object_id: 96f7b75b-6ffe-4a53-9694-ba1c799f847d
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 38
+    fields:
+        action_time: 2020-10-30 09:49:21.277000+00:00
+        user: 1
+        content_type: 16
+        object_id: 5c9cde53-46f8-4448-bc2a-bdc426a4dd68
+        object_repr: customer - 12.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Status"]}}]'
+-   model: admin.logentry
+    pk: 39
+    fields:
+        action_time: 2020-10-30 09:49:24.243000+00:00
+        user: 1
+        content_type: 16
+        object_id: 5c9cde53-46f8-4448-bc2a-bdc426a4dd68
+        object_repr: customer - 12.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 40
+    fields:
+        action_time: 2020-10-30 09:49:30.113000+00:00
+        user: 1
+        content_type: 16
+        object_id: 96f7b75b-6ffe-4a53-9694-ba1c799f847d
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Status"]}}]'
+-   model: admin.logentry
+    pk: 41
+    fields:
+        action_time: 2020-10-30 09:56:56.724000+00:00
+        user: 1
+        content_type: 16
+        object_id: 9b5fc064-d3de-4372-8f51-6a0dd61a5000
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Land area needed"]}}]'
+-   model: admin.logentry
+    pk: 42
+    fields:
+        action_time: 2020-10-30 10:37:31.066000+00:00
+        user: 1
+        content_type: 16
+        object_id: 2eb29b34-0ff8-4bc3-ba0f-00ca050757a8
+        object_repr: customer - 13.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 43
+    fields:
+        action_time: 2020-10-30 10:37:56.215000+00:00
+        user: 1
+        content_type: 16
+        object_id: 978e70c5-c3c6-49bc-ad53-cb0ce4981067
+        object_repr: customer - 66.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Land area needed"]}}]'
+-   model: admin.logentry
+    pk: 44
+    fields:
+        action_time: 2020-10-30 10:39:01.561000+00:00
+        user: 1
+        content_type: 16
+        object_id: 103706f4-2447-42b3-ae9b-b87a6787d25d
+        object_repr: customer - 55.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Land area needed"]}}]'
+-   model: admin.logentry
+    pk: 45
+    fields:
+        action_time: 2020-10-30 10:39:08.083000+00:00
+        user: 1
+        content_type: 16
+        object_id: 06818c92-f8b3-45a4-b5cf-19bc5dab04f1
+        object_repr: customer - 45.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Land area needed"]}}]'
+-   model: admin.logentry
+    pk: 46
+    fields:
+        action_time: 2020-10-30 10:39:14.023000+00:00
+        user: 1
+        content_type: 16
+        object_id: f37b184c-3da9-4972-bfad-a5696a80e7f6
+        object_repr: customer - 141.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Weight"]}}]'
+-   model: admin.logentry
+    pk: 47
+    fields:
+        action_time: 2020-10-30 10:39:23.290000+00:00
+        user: 1
+        content_type: 16
+        object_id: f72c076e-874c-484e-80a6-ddd90895a04f
+        object_repr: customer - 51.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Land area needed"]}}]'
+-   model: admin.logentry
+    pk: 48
+    fields:
+        action_time: 2020-10-30 10:39:29.268000+00:00
+        user: 1
+        content_type: 16
+        object_id: 96f7b75b-6ffe-4a53-9694-ba1c799f847d
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Land area needed"]}}]'
+-   model: admin.logentry
+    pk: 49
+    fields:
+        action_time: 2020-10-30 10:39:48.366000+00:00
+        user: 1
+        content_type: 16
+        object_id: 2eb29b34-0ff8-4bc3-ba0f-00ca050757a8
+        object_repr: customer - 13.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 50
+    fields:
+        action_time: 2020-10-30 10:39:48.376000+00:00
+        user: 1
+        content_type: 16
+        object_id: 5fe29ab7-09db-4361-9749-678144d3262d
+        object_repr: customer - 77.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 51
+    fields:
+        action_time: 2020-10-30 10:39:48.384000+00:00
+        user: 1
+        content_type: 16
+        object_id: 978e70c5-c3c6-49bc-ad53-cb0ce4981067
+        object_repr: customer - 66.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 52
+    fields:
+        action_time: 2020-10-30 10:39:48.393000+00:00
+        user: 1
+        content_type: 16
+        object_id: 103706f4-2447-42b3-ae9b-b87a6787d25d
+        object_repr: customer - 55.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 53
+    fields:
+        action_time: 2020-10-30 10:39:48.403000+00:00
+        user: 1
+        content_type: 16
+        object_id: 80390184-0a4d-477f-98d7-1b7465b235ec
+        object_repr: customer - 44.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 54
+    fields:
+        action_time: 2020-10-30 10:39:48.413000+00:00
+        user: 1
+        content_type: 16
+        object_id: 06818c92-f8b3-45a4-b5cf-19bc5dab04f1
+        object_repr: customer - 45.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 55
+    fields:
+        action_time: 2020-10-30 10:39:48.423000+00:00
+        user: 1
+        content_type: 16
+        object_id: f37b184c-3da9-4972-bfad-a5696a80e7f6
+        object_repr: customer - 141.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 56
+    fields:
+        action_time: 2020-10-30 10:39:48.434000+00:00
+        user: 1
+        content_type: 16
+        object_id: f72c076e-874c-484e-80a6-ddd90895a04f
+        object_repr: customer - 51.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 57
+    fields:
+        action_time: 2020-10-30 10:39:48.444000+00:00
+        user: 1
+        content_type: 16
+        object_id: 9b5fc064-d3de-4372-8f51-6a0dd61a5000
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 58
+    fields:
+        action_time: 2020-10-30 10:39:48.454000+00:00
+        user: 1
+        content_type: 16
+        object_id: 96f7b75b-6ffe-4a53-9694-ba1c799f847d
+        object_repr: customer - 123.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 59
+    fields:
+        action_time: 2020-10-30 10:39:48.464000+00:00
+        user: 1
+        content_type: 16
+        object_id: 5c9cde53-46f8-4448-bc2a-bdc426a4dd68
+        object_repr: customer - 12.0 kg of Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 60
+    fields:
+        action_time: 2020-10-30 10:40:52.428000+00:00
+        user: 1
+        content_type: 16
+        object_id: 974bf5b3-6dc8-4780-b0c0-c7582dc5afe4
+        object_repr: customer - 22.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is approved"]}}]'
+-   model: admin.logentry
+    pk: 61
+    fields:
+        action_time: 2020-10-30 10:40:56.021000+00:00
+        user: 1
+        content_type: 16
+        object_id: 389475c5-40db-4d5b-b078-2e718f2d39de
+        object_repr: customer - 22.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is approved"]}}]'
+-   model: admin.logentry
+    pk: 62
+    fields:
+        action_time: 2020-10-31 17:22:43.131000+00:00
+        user: 1
+        content_type: 4
+        object_id: '6'
+        object_repr: farmer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Email address"]}}]'
+-   model: admin.logentry
+    pk: 63
+    fields:
+        action_time: 2020-11-01 18:08:37.371000+00:00
+        user: 1
+        content_type: 4
+        object_id: '6'
+        object_repr: farmer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["password"]}}]'
+-   model: admin.logentry
+    pk: 64
+    fields:
+        action_time: 2020-11-01 18:08:39.886000+00:00
+        user: 1
+        content_type: 4
+        object_id: '6'
+        object_repr: farmer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["password"]}}]'
+-   model: admin.logentry
+    pk: 65
+    fields:
+        action_time: 2020-11-03 01:32:29.843000+00:00
+        user: 1
+        content_type: 10
+        object_id: '26'
+        object_repr: Antique
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 66
+    fields:
+        action_time: 2020-11-03 01:32:53.600000+00:00
+        user: 1
+        content_type: 15
+        object_id: '1'
+        object_repr: customer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Location", "First question answers",
+            "Second question answers"]}}]'
+-   model: admin.logentry
+    pk: 67
+    fields:
+        action_time: 2020-11-03 01:45:14.672000+00:00
+        user: 1
+        content_type: 16
+        object_id: 0656d16f-2086-40d4-9fd3-2de92c7ca988
+        object_repr: JDC - 49.0 kg of Experimental Potato
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 68
+    fields:
+        action_time: 2020-11-03 01:45:49.373000+00:00
+        user: 1
+        content_type: 16
+        object_id: 0656d16f-2086-40d4-9fd3-2de92c7ca988
+        object_repr: JDC - 49.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 69
+    fields:
+        action_time: 2020-11-03 01:45:55.107000+00:00
+        user: 1
+        content_type: 16
+        object_id: 0656d16f-2086-40d4-9fd3-2de92c7ca988
+        object_repr: JDC - 49.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is cancelled"]}}]'
+-   model: admin.logentry
+    pk: 70
+    fields:
+        action_time: 2020-11-03 01:46:31.902000+00:00
+        user: 1
+        content_type: 16
+        object_id: 0656d16f-2086-40d4-9fd3-2de92c7ca988
+        object_repr: JDC - 49.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is cancelled"]}}]'
+-   model: admin.logentry
+    pk: 71
+    fields:
+        action_time: 2020-11-03 01:56:18.494000+00:00
+        user: 1
+        content_type: 4
+        object_id: '3'
+        object_repr: magsasaka
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["password"]}}]'
+-   model: admin.logentry
+    pk: 72
+    fields:
+        action_time: 2020-11-03 01:58:37.379000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is approved"]}}]'
+-   model: admin.logentry
+    pk: 73
+    fields:
+        action_time: 2020-11-03 02:28:17.149000+00:00
+        user: 1
+        content_type: 18
+        object_id: '4'
+        object_repr: customer - 33.0 kg of Experimental Potato - magsasaka2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 74
+    fields:
+        action_time: 2020-11-03 02:28:38.255000+00:00
+        user: 1
+        content_type: 16
+        object_id: faf9dd8e-02a5-4bfc-a122-ada0d8cc18ed
+        object_repr: customer - 49.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is approved"]}}]'
+-   model: admin.logentry
+    pk: 75
+    fields:
+        action_time: 2020-11-03 02:31:00.241000+00:00
+        user: 1
+        content_type: 18
+        object_id: '5'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 76
+    fields:
+        action_time: 2020-11-03 02:31:19.325000+00:00
+        user: 1
+        content_type: 16
+        object_id: faf9dd8e-02a5-4bfc-a122-ada0d8cc18ed
+        object_repr: customer - 49.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Status"]}}]'
+-   model: admin.logentry
+    pk: 77
+    fields:
+        action_time: 2020-11-03 02:40:56.977000+00:00
+        user: 1
+        content_type: 16
+        object_id: faf9dd8e-02a5-4bfc-a122-ada0d8cc18ed
+        object_repr: customer - 49.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Status"]}}]'
+-   model: admin.logentry
+    pk: 78
+    fields:
+        action_time: 2020-11-03 02:41:06.431000+00:00
+        user: 1
+        content_type: 16
+        object_id: faf9dd8e-02a5-4bfc-a122-ada0d8cc18ed
+        object_repr: customer - 49.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Status"]}}]'
+-   model: admin.logentry
+    pk: 79
+    fields:
+        action_time: 2020-11-03 02:42:16.221000+00:00
+        user: 1
+        content_type: 18
+        object_id: '6'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 80
+    fields:
+        action_time: 2020-11-03 02:42:24.910000+00:00
+        user: 1
+        content_type: 18
+        object_id: '7'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 81
+    fields:
+        action_time: 2020-11-03 02:50:52.889000+00:00
+        user: 1
+        content_type: 18
+        object_id: '7'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 82
+    fields:
+        action_time: 2020-11-03 02:51:25.968000+00:00
+        user: 1
+        content_type: 18
+        object_id: '7'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 83
+    fields:
+        action_time: 2020-11-03 02:54:28.991000+00:00
+        user: 1
+        content_type: 18
+        object_id: '8'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 84
+    fields:
+        action_time: 2020-11-03 02:54:57.233000+00:00
+        user: 1
+        content_type: 18
+        object_id: '8'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 85
+    fields:
+        action_time: 2020-11-03 02:55:48.948000+00:00
+        user: 1
+        content_type: 18
+        object_id: '8'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 86
+    fields:
+        action_time: 2020-11-03 02:57:25.356000+00:00
+        user: 1
+        content_type: 18
+        object_id: '8'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 87
+    fields:
+        action_time: 2020-11-03 02:57:42.625000+00:00
+        user: 1
+        content_type: 18
+        object_id: '3'
+        object_repr: customer - 32.0 kg of Experimental Potato - farmer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 88
+    fields:
+        action_time: 2020-11-03 02:59:05.097000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Available land area"]}}]'
+-   model: admin.logentry
+    pk: 89
+    fields:
+        action_time: 2020-11-03 02:59:46.936000+00:00
+        user: 1
+        content_type: 18
+        object_id: '3'
+        object_repr: customer - 32.0 kg of Experimental Potato - farmer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 90
+    fields:
+        action_time: 2020-11-03 03:00:00.369000+00:00
+        user: 1
+        content_type: 18
+        object_id: '3'
+        object_repr: customer - 32.0 kg of Experimental Potato - farmer
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 91
+    fields:
+        action_time: 2020-11-03 03:00:38.240000+00:00
+        user: 1
+        content_type: 18
+        object_id: '8'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 92
+    fields:
+        action_time: 2020-11-03 03:01:56.790000+00:00
+        user: 1
+        content_type: 18
+        object_id: '8'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 93
+    fields:
+        action_time: 2020-11-03 03:02:08.622000+00:00
+        user: 1
+        content_type: 18
+        object_id: '8'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 94
+    fields:
+        action_time: 2020-11-03 03:02:27.348000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Available land area"]}}]'
+-   model: admin.logentry
+    pk: 95
+    fields:
+        action_time: 2020-11-03 03:02:39.545000+00:00
+        user: 1
+        content_type: 18
+        object_id: '8'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 96
+    fields:
+        action_time: 2020-11-03 03:03:28.492000+00:00
+        user: 1
+        content_type: 18
+        object_id: '9'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 97
+    fields:
+        action_time: 2020-11-03 03:03:41.191000+00:00
+        user: 1
+        content_type: 18
+        object_id: '9'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 98
+    fields:
+        action_time: 2020-11-03 03:05:12.167000+00:00
+        user: 1
+        content_type: 18
+        object_id: '9'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 99
+    fields:
+        action_time: 2020-11-03 03:05:19.808000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 100
+    fields:
+        action_time: 2020-11-03 03:05:25.421000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Available land area"]}}]'
+-   model: admin.logentry
+    pk: 101
+    fields:
+        action_time: 2020-11-03 03:05:38.551000+00:00
+        user: 1
+        content_type: 18
+        object_id: '10'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 102
+    fields:
+        action_time: 2020-11-03 03:05:51.039000+00:00
+        user: 1
+        content_type: 18
+        object_id: '10'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 103
+    fields:
+        action_time: 2020-11-03 03:07:51.694000+00:00
+        user: 1
+        content_type: 18
+        object_id: '10'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 104
+    fields:
+        action_time: 2020-11-03 03:08:04.731000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Available land area"]}}]'
+-   model: admin.logentry
+    pk: 105
+    fields:
+        action_time: 2020-11-03 03:08:17.746000+00:00
+        user: 1
+        content_type: 18
+        object_id: '11'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 106
+    fields:
+        action_time: 2020-11-03 03:08:27.864000+00:00
+        user: 1
+        content_type: 18
+        object_id: '11'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 107
+    fields:
+        action_time: 2020-11-03 03:09:31.866000+00:00
+        user: 1
+        content_type: 18
+        object_id: '11'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 108
+    fields:
+        action_time: 2020-11-03 03:10:08.543000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Available land area"]}}]'
+-   model: admin.logentry
+    pk: 109
+    fields:
+        action_time: 2020-11-03 03:10:24.038000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 110
+    fields:
+        action_time: 2020-11-03 03:10:36.254000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 111
+    fields:
+        action_time: 2020-11-03 03:12:27.873000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 112
+    fields:
+        action_time: 2020-11-03 03:12:36.454000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Available land area"]}}]'
+-   model: admin.logentry
+    pk: 113
+    fields:
+        action_time: 2020-11-03 03:12:45.957000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 114
+    fields:
+        action_time: 2020-11-03 03:12:53.815000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 115
+    fields:
+        action_time: 2020-11-03 03:14:17.607000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Available land area"]}}]'
+-   model: admin.logentry
+    pk: 116
+    fields:
+        action_time: 2020-11-03 03:14:25.064000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 117
+    fields:
+        action_time: 2020-11-03 03:14:33.353000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 118
+    fields:
+        action_time: 2020-11-03 03:15:31.895000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Available land area"]}}]'
+-   model: admin.logentry
+    pk: 119
+    fields:
+        action_time: 2020-11-03 03:15:35.789000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 120
+    fields:
+        action_time: 2020-11-03 03:15:52.695000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 121
+    fields:
+        action_time: 2020-11-03 03:16:55.037000+00:00
+        user: 1
+        content_type: 17
+        object_id: '6'
+        object_repr: magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Available land area"]}}]'
+-   model: admin.logentry
+    pk: 122
+    fields:
+        action_time: 2020-11-03 03:16:59.528000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 123
+    fields:
+        action_time: 2020-11-03 03:17:06.921000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 124
+    fields:
+        action_time: 2020-11-03 03:24:52.465000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Collected date"]}}]'
+-   model: admin.logentry
+    pk: 125
+    fields:
+        action_time: 2020-11-03 03:26:18.186000+00:00
+        user: 1
+        content_type: 16
+        object_id: faf9dd8e-02a5-4bfc-a122-ada0d8cc18ed
+        object_repr: customer - 49.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is done"]}}]'
+-   model: admin.logentry
+    pk: 126
+    fields:
+        action_time: 2020-11-03 03:26:27.532000+00:00
+        user: 1
+        content_type: 16
+        object_id: faf9dd8e-02a5-4bfc-a122-ada0d8cc18ed
+        object_repr: customer - 49.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Status"]}}]'
+-   model: admin.logentry
+    pk: 127
+    fields:
+        action_time: 2020-11-03 03:28:12.561000+00:00
+        user: 1
+        content_type: 18
+        object_id: '12'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 128
+    fields:
+        action_time: 2020-11-03 03:28:32.828000+00:00
+        user: 1
+        content_type: 18
+        object_id: '13'
+        object_repr: customer - 49.0 kg of Experimental Potato - farmer
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 129
+    fields:
+        action_time: 2020-11-03 04:39:23.245000+00:00
+        user: 1
+        content_type: 18
+        object_id: '13'
+        object_repr: customer - 49.0 kg of Experimental Potato - farmer
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 130
+    fields:
+        action_time: 2020-11-03 04:40:25.374000+00:00
+        user: 1
+        content_type: 18
+        object_id: '13'
+        object_repr: customer - 49.0 kg of Experimental Potato - farmer
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 131
+    fields:
+        action_time: 2020-11-03 04:40:32.369000+00:00
+        user: 1
+        content_type: 18
+        object_id: '14'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 132
+    fields:
+        action_time: 2020-11-03 04:41:00.611000+00:00
+        user: 1
+        content_type: 18
+        object_id: '14'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Harvested date"]}}]'
+-   model: admin.logentry
+    pk: 133
+    fields:
+        action_time: 2020-11-03 04:41:46.910000+00:00
+        user: 1
+        content_type: 18
+        object_id: '14'
+        object_repr: customer - 49.0 kg of Experimental Potato - magsasaka2
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Collected date"]}}]'
+-   model: admin.logentry
+    pk: 134
+    fields:
+        action_time: 2020-11-03 04:45:16.865000+00:00
+        user: 1
+        content_type: 15
+        object_id: '12'
+        object_repr: us2ko
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is approved"]}}]'
+-   model: admin.logentry
+    pk: 135
+    fields:
+        action_time: 2020-11-03 04:51:15.999000+00:00
+        user: 1
+        content_type: 16
+        object_id: 9b9f8d99-db27-4063-903b-5ae7ebcdd3e0
+        object_repr: us2ko - 44.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Is cancelled"]}}]'
+-   model: admin.logentry
+    pk: 136
+    fields:
+        action_time: 2020-11-03 04:51:24.329000+00:00
+        user: 1
+        content_type: 16
+        object_id: 9b9f8d99-db27-4063-903b-5ae7ebcdd3e0
+        object_repr: us2ko - 44.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Cancelled date"]}}]'
+-   model: admin.logentry
+    pk: 137
+    fields:
+        action_time: 2020-11-03 04:52:46.911000+00:00
+        user: 1
+        content_type: 16
+        object_id: 9b9f8d99-db27-4063-903b-5ae7ebcdd3e0
+        object_repr: us2ko - 44.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[]'
+-   model: admin.logentry
+    pk: 138
+    fields:
+        action_time: 2020-11-03 04:54:43.528000+00:00
+        user: 1
+        content_type: 16
+        object_id: 9b9f8d99-db27-4063-903b-5ae7ebcdd3e0
+        object_repr: us2ko - 44.0 kg of Experimental Potato
+        action_flag: 2
+        change_message: '[{"changed": {"fields": ["Cancelled date"]}}]'
+-   model: auth.permission
+    pk: 1
+    fields:
+        name: Can add log entry
+        content_type: 1
+        codename: add_logentry
+-   model: auth.permission
+    pk: 2
+    fields:
+        name: Can change log entry
+        content_type: 1
+        codename: change_logentry
+-   model: auth.permission
+    pk: 3
+    fields:
+        name: Can delete log entry
+        content_type: 1
+        codename: delete_logentry
+-   model: auth.permission
+    pk: 4
+    fields:
+        name: Can view log entry
+        content_type: 1
+        codename: view_logentry
+-   model: auth.permission
+    pk: 5
+    fields:
+        name: Can add permission
+        content_type: 2
+        codename: add_permission
+-   model: auth.permission
+    pk: 6
+    fields:
+        name: Can change permission
+        content_type: 2
+        codename: change_permission
+-   model: auth.permission
+    pk: 7
+    fields:
+        name: Can delete permission
+        content_type: 2
+        codename: delete_permission
+-   model: auth.permission
+    pk: 8
+    fields:
+        name: Can view permission
+        content_type: 2
+        codename: view_permission
+-   model: auth.permission
+    pk: 9
+    fields:
+        name: Can add group
+        content_type: 3
+        codename: add_group
+-   model: auth.permission
+    pk: 10
+    fields:
+        name: Can change group
+        content_type: 3
+        codename: change_group
+-   model: auth.permission
+    pk: 11
+    fields:
+        name: Can delete group
+        content_type: 3
+        codename: delete_group
+-   model: auth.permission
+    pk: 12
+    fields:
+        name: Can view group
+        content_type: 3
+        codename: view_group
+-   model: auth.permission
+    pk: 13
+    fields:
+        name: Can add user
+        content_type: 4
+        codename: add_user
+-   model: auth.permission
+    pk: 14
+    fields:
+        name: Can change user
+        content_type: 4
+        codename: change_user
+-   model: auth.permission
+    pk: 15
+    fields:
+        name: Can delete user
+        content_type: 4
+        codename: delete_user
+-   model: auth.permission
+    pk: 16
+    fields:
+        name: Can view user
+        content_type: 4
+        codename: view_user
+-   model: auth.permission
+    pk: 17
+    fields:
+        name: Can add content type
+        content_type: 5
+        codename: add_contenttype
+-   model: auth.permission
+    pk: 18
+    fields:
+        name: Can change content type
+        content_type: 5
+        codename: change_contenttype
+-   model: auth.permission
+    pk: 19
+    fields:
+        name: Can delete content type
+        content_type: 5
+        codename: delete_contenttype
+-   model: auth.permission
+    pk: 20
+    fields:
+        name: Can view content type
+        content_type: 5
+        codename: view_contenttype
+-   model: auth.permission
+    pk: 21
+    fields:
+        name: Can add session
+        content_type: 6
+        codename: add_session
+-   model: auth.permission
+    pk: 22
+    fields:
+        name: Can change session
+        content_type: 6
+        codename: change_session
+-   model: auth.permission
+    pk: 23
+    fields:
+        name: Can delete session
+        content_type: 6
+        codename: delete_session
+-   model: auth.permission
+    pk: 24
+    fields:
+        name: Can view session
+        content_type: 6
+        codename: view_session
+-   model: auth.permission
+    pk: 25
+    fields:
+        name: Can add django job
+        content_type: 7
+        codename: add_djangojob
+-   model: auth.permission
+    pk: 26
+    fields:
+        name: Can change django job
+        content_type: 7
+        codename: change_djangojob
+-   model: auth.permission
+    pk: 27
+    fields:
+        name: Can delete django job
+        content_type: 7
+        codename: delete_djangojob
+-   model: auth.permission
+    pk: 28
+    fields:
+        name: Can view django job
+        content_type: 7
+        codename: view_djangojob
+-   model: auth.permission
+    pk: 29
+    fields:
+        name: Can add django job execution
+        content_type: 8
+        codename: add_djangojobexecution
+-   model: auth.permission
+    pk: 30
+    fields:
+        name: Can change django job execution
+        content_type: 8
+        codename: change_djangojobexecution
+-   model: auth.permission
+    pk: 31
+    fields:
+        name: Can delete django job execution
+        content_type: 8
+        codename: delete_djangojobexecution
+-   model: auth.permission
+    pk: 32
+    fields:
+        name: Can view django job execution
+        content_type: 8
+        codename: view_djangojobexecution
+-   model: auth.permission
+    pk: 33
+    fields:
+        name: Can add crop
+        content_type: 9
+        codename: add_crop
+-   model: auth.permission
+    pk: 34
+    fields:
+        name: Can change crop
+        content_type: 9
+        codename: change_crop
+-   model: auth.permission
+    pk: 35
+    fields:
+        name: Can delete crop
+        content_type: 9
+        codename: delete_crop
+-   model: auth.permission
+    pk: 36
+    fields:
+        name: Can view crop
+        content_type: 9
+        codename: view_crop
+-   model: auth.permission
+    pk: 37
+    fields:
+        name: Can add location
+        content_type: 10
+        codename: add_location
+-   model: auth.permission
+    pk: 38
+    fields:
+        name: Can change location
+        content_type: 10
+        codename: change_location
+-   model: auth.permission
+    pk: 39
+    fields:
+        name: Can delete location
+        content_type: 10
+        codename: delete_location
+-   model: auth.permission
+    pk: 40
+    fields:
+        name: Can view location
+        content_type: 10
+        codename: view_location
+-   model: auth.permission
+    pk: 41
+    fields:
+        name: Can add soil_type
+        content_type: 11
+        codename: add_soil_type
+-   model: auth.permission
+    pk: 42
+    fields:
+        name: Can change soil_type
+        content_type: 11
+        codename: change_soil_type
+-   model: auth.permission
+    pk: 43
+    fields:
+        name: Can delete soil_type
+        content_type: 11
+        codename: delete_soil_type
+-   model: auth.permission
+    pk: 44
+    fields:
+        name: Can view soil_type
+        content_type: 11
+        codename: view_soil_type
+-   model: auth.permission
+    pk: 45
+    fields:
+        name: Can add location_ soil
+        content_type: 12
+        codename: add_location_soil
+-   model: auth.permission
+    pk: 46
+    fields:
+        name: Can change location_ soil
+        content_type: 12
+        codename: change_location_soil
+-   model: auth.permission
+    pk: 47
+    fields:
+        name: Can delete location_ soil
+        content_type: 12
+        codename: delete_location_soil
+-   model: auth.permission
+    pk: 48
+    fields:
+        name: Can view location_ soil
+        content_type: 12
+        codename: view_location_soil
+-   model: auth.permission
+    pk: 49
+    fields:
+        name: Can add location_ crop
+        content_type: 13
+        codename: add_location_crop
+-   model: auth.permission
+    pk: 50
+    fields:
+        name: Can change location_ crop
+        content_type: 13
+        codename: change_location_crop
+-   model: auth.permission
+    pk: 51
+    fields:
+        name: Can delete location_ crop
+        content_type: 13
+        codename: delete_location_crop
+-   model: auth.permission
+    pk: 52
+    fields:
+        name: Can view location_ crop
+        content_type: 13
+        codename: view_location_crop
+-   model: auth.permission
+    pk: 53
+    fields:
+        name: Can add crop_ soil
+        content_type: 14
+        codename: add_crop_soil
+-   model: auth.permission
+    pk: 54
+    fields:
+        name: Can change crop_ soil
+        content_type: 14
+        codename: change_crop_soil
+-   model: auth.permission
+    pk: 55
+    fields:
+        name: Can delete crop_ soil
+        content_type: 14
+        codename: delete_crop_soil
+-   model: auth.permission
+    pk: 56
+    fields:
+        name: Can view crop_ soil
+        content_type: 14
+        codename: view_crop_soil
+-   model: auth.permission
+    pk: 57
+    fields:
+        name: Can add customer
+        content_type: 15
+        codename: add_customer
+-   model: auth.permission
+    pk: 58
+    fields:
+        name: Can change customer
+        content_type: 15
+        codename: change_customer
+-   model: auth.permission
+    pk: 59
+    fields:
+        name: Can delete customer
+        content_type: 15
+        codename: delete_customer
+-   model: auth.permission
+    pk: 60
+    fields:
+        name: Can view customer
+        content_type: 15
+        codename: view_customer
+-   model: auth.permission
+    pk: 61
+    fields:
+        name: Can add order
+        content_type: 16
+        codename: add_order
+-   model: auth.permission
+    pk: 62
+    fields:
+        name: Can change order
+        content_type: 16
+        codename: change_order
+-   model: auth.permission
+    pk: 63
+    fields:
+        name: Can delete order
+        content_type: 16
+        codename: delete_order
+-   model: auth.permission
+    pk: 64
+    fields:
+        name: Can view order
+        content_type: 16
+        codename: view_order
+-   model: auth.permission
+    pk: 65
+    fields:
+        name: Can add farmer
+        content_type: 17
+        codename: add_farmer
+-   model: auth.permission
+    pk: 66
+    fields:
+        name: Can change farmer
+        content_type: 17
+        codename: change_farmer
+-   model: auth.permission
+    pk: 67
+    fields:
+        name: Can delete farmer
+        content_type: 17
+        codename: delete_farmer
+-   model: auth.permission
+    pk: 68
+    fields:
+        name: Can view farmer
+        content_type: 17
+        codename: view_farmer
+-   model: auth.permission
+    pk: 69
+    fields:
+        name: Can add order_ pairing
+        content_type: 18
+        codename: add_order_pairing
+-   model: auth.permission
+    pk: 70
+    fields:
+        name: Can change order_ pairing
+        content_type: 18
+        codename: change_order_pairing
+-   model: auth.permission
+    pk: 71
+    fields:
+        name: Can delete order_ pairing
+        content_type: 18
+        codename: delete_order_pairing
+-   model: auth.permission
+    pk: 72
+    fields:
+        name: Can view order_ pairing
+        content_type: 18
+        codename: view_order_pairing
+-   model: auth.group
+    pk: 1
+    fields:
+        name: Farmer
+        permissions: []
+-   model: auth.group
+    pk: 2
+    fields:
+        name: Customer
+        permissions: []
+-   model: auth.user
+    pk: 1
+    fields:
+        password: pbkdf2_sha256$216000$LcDc1VsIkZiP$SE0KjbDCWekmyOguXYilOEvNfS2G3ltAQ6K+2GkNbeI=
+        last_login: 2020-11-03 05:26:12.988000+00:00
+        is_superuser: true
+        username: atoani
+        first_name: ''
+        last_name: ''
+        email: ''
+        is_staff: true
+        is_active: true
+        date_joined: 2020-10-29 12:26:35.004000+00:00
+        groups: []
+        user_permissions: []
+-   model: auth.user
+    pk: 2
+    fields:
+        password: pbkdf2_sha256$216000$w6ViKZvv6Q1D$Sp65cptzkSxNNyAtz1aZ7tOv5piXUYnaOWmTQm+iEmo=
+        last_login: null
+        is_superuser: false
+        username: us2mer
+        first_name: us2
+        last_name: mer
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-11-02 13:19:58.793000+00:00
+        groups: []
+        user_permissions: []
+-   model: auth.user
+    pk: 3
+    fields:
+        password: pbkdf2_sha256$216000$ovT1MxvgTv3j$eH0kU5oYyHv6BqYE0dKGm6vZslnSUPAHO46G20BKzqY=
+        last_login: 2020-11-03 01:56:32.322000+00:00
+        is_superuser: false
+        username: magsasaka
+        first_name: magsa
+        last_name: saka
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-11-02 13:21:46.559000+00:00
+        groups: []
+        user_permissions: []
+-   model: auth.user
+    pk: 4
+    fields:
+        password: pbkdf2_sha256$216000$fcqLZ2DJI3eJ$L8NLHaEh5x69DNSLLLtbkBp4rHvmo/rrq5/8BoPmG/o=
+        last_login: 2020-11-03 04:43:13.675000+00:00
+        is_superuser: false
+        username: us2merz
+        first_name: us2
+        last_name: mer
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-11-02 13:34:05.640000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 6
+    fields:
+        password: pbkdf2_sha256$216000$VnRYM7wjCBQM$su/kobeMJteRtj4vPeRrw6GXLVKZgthtutp26++CxoU=
+        last_login: 2020-11-01 18:09:00.382000+00:00
+        is_superuser: false
+        username: farmer
+        first_name: Juan
+        last_name: De la Cruz
+        email: gwynn.causing23@gmail.com
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-29 13:37:39+00:00
+        groups:
+        - 1
+        user_permissions: []
+-   model: auth.user
+    pk: 7
+    fields:
+        password: pbkdf2_sha256$216000$KRS7sC3eoszH$6ww51+QAfb6nTRUGwlDB8WZ2TNA3ndbD17OQqkuoY0M=
+        last_login: 2020-11-01 17:37:14.563000+00:00
+        is_superuser: false
+        username: customer
+        first_name: Jose
+        last_name: Talong
+        email: customer@gmail.com
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-29 13:38:12.427000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 12
+    fields:
+        password: pbkdf2_sha256$216000$k4MAtMlqdwMg$n5WKLejD1/fZr+W7qSxArb/eYyoLPptqYMUQIw0OS0c=
+        last_login: 2020-10-30 09:45:45.787000+00:00
+        is_superuser: false
+        username: juan
+        first_name: juan
+        last_name: tzamadz
+        email: juan@gmail.com
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-30 09:25:40.412000+00:00
+        groups:
+        - 1
+        user_permissions: []
+-   model: auth.user
+    pk: 13
+    fields:
+        password: pbkdf2_sha256$216000$ynvFxBC8z5J5$d6NqFfGoCfisX8x6B8olPdItmh9QaHolUOFFTKXPsPE=
+        last_login: null
+        is_superuser: false
+        username: JRrosalijos
+        first_name: Joshua
+        last_name: Rosalijos
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-30 16:56:37.325000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 14
+    fields:
+        password: pbkdf2_sha256$216000$FRDr8NdfVzLW$P5j3l84P5FboCHr2QxW3qMC1qL2V9hDV9/nUT54uAzU=
+        last_login: null
+        is_superuser: false
+        username: Cary1997
+        first_name: Cary
+        last_name: Legaspi
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-30 17:05:26.223000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 15
+    fields:
+        password: pbkdf2_sha256$216000$XazbOiqrp8ZC$gv+FyqIh2D0GgPGAl82+/V+Ymm6CUP8aGCX7CDNPvTQ=
+        last_login: 2020-10-31 03:32:22.909000+00:00
+        is_superuser: false
+        username: JDC
+        first_name: Juan
+        last_name: Dela Cruz
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 03:32:07.644000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 16
+    fields:
+        password: pbkdf2_sha256$216000$9hJ8S5YPuORJ$86glNXWg5Q1AvgmKg6NK+CA/qWTIOEunw/dQsVCMSxA=
+        last_login: null
+        is_superuser: false
+        username: Lebron123
+        first_name: Lebron
+        last_name: James
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 03:36:23.435000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 17
+    fields:
+        password: pbkdf2_sha256$216000$qO0knpqQJiMi$Qmm7frLcvO0B+k3ta6bkjoj7GrTgB25fkmxSlF6dGu4=
+        last_login: null
+        is_superuser: false
+        username: Lebron23
+        first_name: Lebron
+        last_name: James
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 03:43:55.833000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 18
+    fields:
+        password: pbkdf2_sha256$216000$2H8gSXRINIOF$vfzfWXQXfRRfGqRETsxS2x+E/gd6aiqgxZ4wDYMXCX8=
+        last_login: null
+        is_superuser: false
+        username: blackmamba
+        first_name: 'Kobe '
+        last_name: Bryant
+        email: rosalijos@gmail.com
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 04:32:19.616000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 19
+    fields:
+        password: pbkdf2_sha256$216000$eos2FBu5w6Av$Y/DuHIBbZXAs9TZTdHSrykfH9IZCfGu+Q9sGFBRoLLg=
+        last_login: null
+        is_superuser: false
+        username: StephCurry
+        first_name: 'Stephen '
+        last_name: Curry
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 05:34:24.094000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 20
+    fields:
+        password: pbkdf2_sha256$216000$bJ2SIFTMPp8M$1cLXc9ZL1ahYXNY0ZflrwHNSKB4y/jrJM5whAeMiJSM=
+        last_login: null
+        is_superuser: false
+        username: KobeParas
+        first_name: Kobe
+        last_name: Paras
+        email: kobe@gmail.com
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 05:37:35.633000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 21
+    fields:
+        password: pbkdf2_sha256$216000$bR8UeFK4DT8Z$GBX9QKdI8wNsy5rnHk/Xpq+RfuhTtMiRa8o/IxM+Z0c=
+        last_login: null
+        is_superuser: false
+        username: Kevin09
+        first_name: Kevin
+        last_name: Durant
+        email: kevin@gmail.com
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 05:50:45.382000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 22
+    fields:
+        password: pbkdf2_sha256$216000$jmRhE9kHONan$yU9BL4jw+AqZXuCmTyeRKDs7+MANXSwjUrBwPSpnYhM=
+        last_login: null
+        is_superuser: false
+        username: HelloWorld
+        first_name: Hello
+        last_name: World
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 05:59:56.466000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 23
+    fields:
+        password: pbkdf2_sha256$216000$gSj5JMXzCDWV$gsNQ0D3bT9pKndU3yawFjwYQbPU+DiohuMRXFRvBiiw=
+        last_login: null
+        is_superuser: false
+        username: DonFarmer
+        first_name: Don
+        last_name: Farmer
+        email: donfarmer@gmail.com
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 06:41:25.700000+00:00
+        groups:
+        - 1
+        user_permissions: []
+-   model: auth.user
+    pk: 24
+    fields:
+        password: pbkdf2_sha256$216000$wthRUtt5KtYF$vq9r9n+nGaVzdY4+uHZ65y9w/a8Ziq6eWxsR97g7ctg=
+        last_login: null
+        is_superuser: false
+        username: Kobe123
+        first_name: ''
+        last_name: ''
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 07:28:42.618000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 25
+    fields:
+        password: pbkdf2_sha256$216000$mWzLTZWJfPQ0$wNd+3nBCs/92vQwXM7ogBixrEwyop4vhfcC83KKzGzI=
+        last_login: null
+        is_superuser: false
+        username: Warlock
+        first_name: Warlock
+        last_name: James
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 08:58:46.898000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 26
+    fields:
+        password: pbkdf2_sha256$216000$PWHR47CQTJMW$lztKefrIh0rsGUiC40VW7/1SRZvpiNgL0Svp0T+/Ux8=
+        last_login: null
+        is_superuser: false
+        username: zzzz
+        first_name: zzzzzzzz
+        last_name: zzzzzzzzz
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-10-31 09:00:12.974000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: auth.user
+    pk: 27
+    fields:
+        password: pbkdf2_sha256$216000$TyUR1KBlZRZS$XIz8Gshll8bVfZYS6KCESe0x3A1rQEXO2TCJaRtLDvc=
+        last_login: 2020-11-03 05:22:04.971000+00:00
+        is_superuser: false
+        username: magsasaka2
+        first_name: magsasa
+        last_name: ka
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-11-03 01:57:36.294000+00:00
+        groups:
+        - 1
+        user_permissions: []
+-   model: auth.user
+    pk: 28
+    fields:
+        password: pbkdf2_sha256$216000$n98e8fIsq4HN$BweYSF1jBt5zW4Fhivmdig7mug8bq8JBxM83TG1q2Ec=
+        last_login: 2020-11-03 05:14:20.097000+00:00
+        is_superuser: false
+        username: us2ko
+        first_name: us2
+        last_name: ko
+        email: ''
+        is_staff: false
+        is_active: true
+        date_joined: 2020-11-03 04:44:55.380000+00:00
+        groups:
+        - 2
+        user_permissions: []
+-   model: contenttypes.contenttype
+    pk: 1
+    fields:
+        app_label: admin
+        model: logentry
+-   model: contenttypes.contenttype
+    pk: 2
+    fields:
+        app_label: auth
+        model: permission
+-   model: contenttypes.contenttype
+    pk: 3
+    fields:
+        app_label: auth
+        model: group
+-   model: contenttypes.contenttype
+    pk: 4
+    fields:
+        app_label: auth
+        model: user
+-   model: contenttypes.contenttype
+    pk: 5
+    fields:
+        app_label: contenttypes
+        model: contenttype
+-   model: contenttypes.contenttype
+    pk: 6
+    fields:
+        app_label: sessions
+        model: session
+-   model: contenttypes.contenttype
+    pk: 7
+    fields:
+        app_label: django_apscheduler
+        model: djangojob
+-   model: contenttypes.contenttype
+    pk: 8
+    fields:
+        app_label: django_apscheduler
+        model: djangojobexecution
+-   model: contenttypes.contenttype
+    pk: 9
+    fields:
+        app_label: login_register
+        model: crop
+-   model: contenttypes.contenttype
+    pk: 10
+    fields:
+        app_label: login_register
+        model: location
+-   model: contenttypes.contenttype
+    pk: 11
+    fields:
+        app_label: login_register
+        model: soil_type
+-   model: contenttypes.contenttype
+    pk: 12
+    fields:
+        app_label: login_register
+        model: location_soil
+-   model: contenttypes.contenttype
+    pk: 13
+    fields:
+        app_label: login_register
+        model: location_crop
+-   model: contenttypes.contenttype
+    pk: 14
+    fields:
+        app_label: login_register
+        model: crop_soil
+-   model: contenttypes.contenttype
+    pk: 15
+    fields:
+        app_label: login_register
+        model: customer
+-   model: contenttypes.contenttype
+    pk: 16
+    fields:
+        app_label: login_register
+        model: order
+-   model: contenttypes.contenttype
+    pk: 17
+    fields:
+        app_label: login_register
+        model: farmer
+-   model: contenttypes.contenttype
+    pk: 18
+    fields:
+        app_label: login_register
+        model: order_pairing
+-   model: sessions.session
+    pk: 2s061d0519csjo5imlwmkxzzthmgw64k
+    fields:
+        session_data: .eJxVjMEOwiAQRP-FsyFsywbw6N1vIMsCUjWQlPZk_Hcl6UFPk8x7My_had-K33ta_RLFWYA4_XaB-JHqAPFO9dYkt7qtS5BDkQft8tpiel4O9--gUC9jPevsjNFxcjpbNmiJLdBsgIGdA83fVIGjshwAiRAxG0CMap5UyOL9Ad3zN8g:1kYVMw:KX32nzvdGT1Wd6AntiILcUqr92m6YJZsS5sOI2fSB5E
+        expire_date: 2020-11-13 14:27:06.590000+00:00
+-   model: sessions.session
+    pk: 84lx4oxi5iz4z1p894tl073b3p9kn9gg
+    fields:
+        session_data: .eJxVjMEOwiAQRP-FsyFsywbw6N1vIMsCUjWQlPZk_Hcl6UFPk8x7My_had-K33ta_RLFWYA4_XaB-JHqAPFO9dYkt7qtS5BDkQft8tpiel4O9--gUC9jPevsjNFxcjpbNmiJLdBsgIGdA83fVIGjshwAiRAxG0CMap5UyOL9Ad3zN8g:1kYsRb:xKPb3cf6wFVua84yEVlxAD4R_OZFuvklf3XqobC87NM
+        expire_date: 2020-11-14 15:05:27.604000+00:00
+-   model: sessions.session
+    pk: 8nkzl9ljcclhlzmpf2lc8c94726wj3tn
+    fields:
+        session_data: e30:1kZoA5:_IB5HWQ2jinNraAKRFYrot4Eweq4O2DkljqJjW_orDM
+        expire_date: 2020-11-17 04:43:13.672000+00:00
+-   model: sessions.session
+    pk: 8p9nodjyf0wuh668mh01nvhikkf3amfc
+    fields:
+        session_data: e30:1kZo9p:fAdXci6NrGUmbXW_tsNiYx7Kzbp_3F_5Wq3qsHQehzY
+        expire_date: 2020-11-17 04:42:57.474000+00:00
+-   model: sessions.session
+    pk: a8l2icfkifxvt7vu7q12ctzwsyxcfx73
+    fields:
+        session_data: .eJxVjEEOwiAQRe_C2hBgKFCX7j0DYZhBqoYmpV0Z765NutDtf-_9l4hpW2vcOi9xInEWXpx-N0z5wW0HdE_tNss8t3WZUO6KPGiX15n4eTncv4Oaev3WwKakDB6YsBApdtoHGjQ7LD4YHNUAYLMZrfJgVApgWSvl0GYywWTx_gD08jeW:1kYn5p:CeqrLeknT1JnwNvZl7CDt6VezlWzPeg1idc9xkPIoQw
+        expire_date: 2020-11-14 09:22:37.119000+00:00
+-   model: sessions.session
+    pk: b5p4q0b6phvly3jsq8u9sbrn7236glnt
+    fields:
+        session_data: .eJxVjDsOAjEMBe-SGkWrfLwxJT1niOzYIgsokfZTIe4OK20B7ZuZ9zKZtrXmbdE5T2LOBszpd2MqD207kDu1W7elt3We2O6KPehir130eTncv4NKS_3W5JHAs9PkCAYInJCCIGvyBeOo5HhECC6mQskLFw-iA5SIKB4VzPsD5bA39A:1kZGyv:Hm2k8H-POg7V4AwMJ27b41jIOGcXdsIbcGNmz0kwJaY
+        expire_date: 2020-11-15 17:17:29.895000+00:00
+-   model: sessions.session
+    pk: ds42dgi2svq8wu3le7hra18s1oz1hsfk
+    fields:
+        session_data: .eJxVjMEKwyAQRP_Fc5GYRY099t5vkN11rWmLgZicQv-9CeTQwpzmvZlNRVyXEtcmcxyTuiqnLr8dIb-kHiA9sT4mzVNd5pH0oeiTNn2fkrxvp_t3ULCVfU0QENnkIYkPYU8fBu86cNYgYWLKBm1mFHaZGB0EEQvZdB7YJOjV5wsFJzjO:1kZHmm:up9JwMtIWLBkGaTtWh7WgSK7Bs3zYSHdoWl6syJQCvw
+        expire_date: 2020-11-15 18:09:00.651000+00:00
+-   model: sessions.session
+    pk: k1sdkest2ffqgakglj7ybi8n8fq1484t
+    fields:
+        session_data: .eJxVjEEOwiAQRe_C2hBgKFCX7j0DYZhBqoYmpV0Z765NutDtf-_9l4hpW2vcOi9xInEWXpx-N0z5wW0HdE_tNss8t3WZUO6KPGiX15n4eTncv4Oaev3WwKakDB6YsBApdtoHGjQ7LD4YHNUAYLMZrfJgVApgWSvl0GYywWTx_gD08jeW:1kYNUS:11lWvJY6FPciz1BeXiIA_XUZpwjVQLpSypPDW7cmT2I
+        expire_date: 2020-11-13 06:02:20.392000+00:00
+-   model: sessions.session
+    pk: ns0815jfau56ps12j7dc1yeyoofhp9so
+    fields:
+        session_data: e30:1kZ6vo:MYOQUYKE1-C3iosc4wtg-wjzmvXTwK0dcr9rgcQXeSU
+        expire_date: 2020-11-15 06:33:36.711000+00:00
+-   model: sessions.session
+    pk: o95x1qdukifx5uu8yqpzwkqfr01kehdt
+    fields:
+        session_data: .eJxVjMEOwiAQRP-FsyFsywbw6N1vIMsCUjWQlPZk_Hcl6UFPk8x7My_had-K33ta_RLFWYA4_XaB-JHqAPFO9dYkt7qtS5BDkQft8tpiel4O9--gUC9jPevsjNFxcjpbNmiJLdBsgIGdA83fVIGjshwAiRAxG0CMap5UyOL9Ad3zN8g:1kYsRc:X4JQo54OHtOP8BYmNiZV0S1YxFC7ypTbj8cUTxEmTVo
+        expire_date: 2020-11-14 15:05:28.957000+00:00
+-   model: sessions.session
+    pk: obvv5gl9g2sdyjk1jnqfd8i7iyk127dq
+    fields:
+        session_data: .eJxVjMEOwiAQRP-FsyFsywbw6N1vIMsCUjWQlPZk_Hcl6UFPk8x7My_had-K33ta_RLFWYA4_XaB-JHqAPFO9dYkt7qtS5BDkQft8tpiel4O9--gUC9jPevsjNFxcjpbNmiJLdBsgIGdA83fVIGjshwAiRAxG0CMap5UyOL9Ad3zN8g:1kYsRd:J-At8n4zcRTNlNcFd-1HHEXxScqeQ84cHQcyVEYoi3Y
+        expire_date: 2020-11-14 15:05:29.039000+00:00
+-   model: sessions.session
+    pk: od7qep4t1lkrharis4tzx4crjfpqsdc3
+    fields:
+        session_data: .eJxVjMEOwiAQRP-FsyFsywbw6N1vIMsCUjWQlPZk_Hcl6UFPk8x7My_had-K33ta_RLFWYA4_XaB-JHqAPFO9dYkt7qtS5BDkQft8tpiel4O9--gUC9jPevsjNFxcjpbNmiJLdBsgIGdA83fVIGjshwAiRAxG0CMap5UyOL9Ad3zN8g:1kYsRU:7sYVxokR6rB8EunqFfZwnFl8ag_BNJV9AXCKMaWEkXE
+        expire_date: 2020-11-14 15:05:20.791000+00:00
+-   model: sessions.session
+    pk: qbvl3lo2c1z5hkvy7x2htnulbfowl6mm
+    fields:
+        session_data: e30:1kZo9N:DirMCmq0MDlUBIkCqvXEUKRaBaLQY0DaIpGsYAMmz-E
+        expire_date: 2020-11-17 04:42:29.637000+00:00
+-   model: sessions.session
+    pk: qphw1dy6ljedadpv37xptsrv9icv12sk
+    fields:
+        session_data: .eJxVjEEOwiAQRe_C2hBBhlGX7nsGMsyAVA0kpV0Z726bdKHb997_bxVomUtYeprCKOqqQB1-WSR-proJeVC9N82tztMY9Zbo3XY9NEmv297-HRTqZV27ozGSnLC7QM6AkVA8OxYWEQsC6E9gTUJzjj4TgUe0dgVeyAGi-nwB-pY4Cg:1kY7z4:dyDUBOXo_qPGM1ba61pvAVdxps-YP9f1ZAYrYiJuu10
+        expire_date: 2020-11-12 13:28:54.029000+00:00
+-   model: sessions.session
+    pk: ta1qucrbgv1qn2pabjfyqtzftrt4j7zx
+    fields:
+        session_data: e30:1kZlYm:nk_bStT8tRGpIA6lB7ezKatkkBb_N-_SN1OLiOk0YKU
+        expire_date: 2020-11-17 01:56:32.320000+00:00
+-   model: sessions.session
+    pk: tq4j4lf8heou0o8pzwen9wodlsz1qoxz
+    fields:
+        session_data: .eJxVjEEOwiAQRe_C2hBgKFCX7j0DYZhBqoYmpV0Z765NutDtf-_9l4hpW2vcOi9xInEWXpx-N0z5wW0HdE_tNss8t3WZUO6KPGiX15n4eTncv4Oaev3WwKakDB6YsBApdtoHGjQ7LD4YHNUAYLMZrfJgVApgWSvl0GYywWTx_gD08jeW:1kYOjm:m7LdMk8DiqikDUMA__cb-K3FVP-r6lyXSzIRzT45Mo0
+        expire_date: 2020-11-13 07:22:14.464000+00:00
+-   model: sessions.session
+    pk: tzsm50gow8tuh728k4eoh4kgzt1ihew1
+    fields:
+        session_data: .eJxVjMEOwiAQRP-FsyFsywbw6N1vIMsCUjWQlPZk_Hcl6UFPk8x7My_had-K33ta_RLFWYA4_XaB-JHqAPFO9dYkt7qtS5BDkQft8tpiel4O9--gUC9jPevsjNFxcjpbNmiJLdBsgIGdA83fVIGjshwAiRAxG0CMap5UyOL9Ad3zN8g:1kZopg:76uyocnRya_OEh0dgvQ6fnLEjQw0Waoq344hynEBWQU
+        expire_date: 2020-11-17 05:26:12.990000+00:00
+-   model: sessions.session
+    pk: xml23ih3lrj0hzelsjmkgs03yys22ylp
+    fields:
+        session_data: .eJxVjEsOwiAUAO_C2hAon6JL956BvA9I1UBS2pXx7oakC93OTOYtIuxbiXtPa1xYXIQXp1-GQM9Uh-AH1HuT1Oq2LihHIg_b5a1xel2P9m9QoJexTQzGKWu1YiSHmjOhAfYW2JHJU1BT0pZYBZ3JBfbnOYPi2ZMnZ434fAEEqjiB:1kYU8X:gbPGU0_ewPRbWEsrmKh_mXS-A1eW_zibENJBPxJd23U
+        expire_date: 2020-11-13 13:08:09.725000+00:00
+-   model: sessions.session
+    pk: ym14q6cookhogc4jxj9gq2tbfcel4bmj
+    fields:
+        session_data: .eJxVjEEOwiAQRe_C2pBCYQCX7j0DGZhRqgaS0q6Md7dNutDte-__t4i4LiWunec4kTgLEKdfljA_ue6CHljvTeZWl3lKck_kYbu8NuLX5Wj_Dgr2sq2NCTdP2puRs_aIBBrdANalMQcKTB4ZzaAJAiqwY1Ybt47BKPA-o_h8AeRQN7g:1kZGyv:mobcAlPZV1hE0NTmew8h0tBxHFH6P4lrYt0VTYj8rp0
+        expire_date: 2020-11-15 17:17:29.263000+00:00
+-   model: django_apscheduler.djangojob
+    pk: check_obsolete_orders
+    fields:
+        next_run_time: 2020-11-04 05:28:47.411030+00:00
+        job_state: gAWV0AEAAAAAAAB9lCiMB3ZlcnNpb26USwGMAmlklIwVY2hlY2tfb2Jzb2xldGVfb3JkZXJzlIwEZnVuY5SMOGxvZ2luX3JlZ2lzdGVyLmNvbm5lY3RpdmVmdW5jdGlvbnM6Y2hlY2tfb2Jzb2xldGVfb3JkZXJzlIwHdHJpZ2dlcpSMHWFwc2NoZWR1bGVyLnRyaWdnZXJzLmludGVydmFslIwPSW50ZXJ2YWxUcmlnZ2VylJOUKYGUfZQoaAFLAowIdGltZXpvbmWUjARweXR6lIwEX1VUQ5STlClSlIwKc3RhcnRfZGF0ZZSMCGRhdGV0aW1llIwIZGF0ZXRpbWWUk5RDCgfkCwQFHC8GRZaUaBCGlFKUjAhlbmRfZGF0ZZROjAhpbnRlcnZhbJRoEowJdGltZWRlbHRhlJOUSwFLAEsAh5RSlIwGaml0dGVylE51YowIZXhlY3V0b3KUjAdkZWZhdWx0lIwEYXJnc5QpjAZrd2FyZ3OUfZSMBG5hbWWUjAxjbGVhbl9vcmRlcnOUjBJtaXNmaXJlX2dyYWNlX3RpbWWUSwGMCGNvYWxlc2NllIiMDW1heF9pbnN0YW5jZXOUSwGMDW5leHRfcnVuX3RpbWWUaBd1Lg==
+-   model: django_apscheduler.djangojobexecution
+    pk: 1
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-30 10:17:13.721000+00:00
+        duration: '0.09'
+        finished: '1604053033.81'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 2
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-30 10:32:13.721000+00:00
+        duration: '0.07'
+        finished: '1604053933.79'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 3
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-30 14:41:52.518000+00:00
+        duration: '0.04'
+        finished: '1604068912.56'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 4
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-30 15:36:48.935000+00:00
+        duration: '0.22'
+        finished: '1604072209.16'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 5
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-30 15:51:48.935000+00:00
+        duration: '0.22'
+        finished: '1604073109.16'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 6
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-30 16:06:48.935000+00:00
+        duration: '0.28'
+        finished: '1604074009.21'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 7
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-30 16:21:48.935000+00:00
+        duration: '2.05'
+        finished: '1604074910.98'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 8
+    fields:
+        job: check_obsolete_orders
+        status: Missed!
+        run_time: 2020-10-30 16:36:48.935000+00:00
+        duration: '1.17'
+        finished: '1604075810.10'
+        exception: Run time of job 'check_obsolete_orders' was missed!
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 9
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-30 16:51:48.935000+00:00
+        duration: '0.16'
+        finished: '1604076709.10'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 10
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 02:16:00.547000+00:00
+        duration: '0.21'
+        finished: '1604110560.75'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 11
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 02:31:00.547000+00:00
+        duration: '0.21'
+        finished: '1604111460.76'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 12
+    fields:
+        job: check_obsolete_orders
+        status: Missed!
+        run_time: 2020-10-31 02:46:00.547000+00:00
+        duration: '1.17'
+        finished: '1604112361.72'
+        exception: Run time of job 'check_obsolete_orders' was missed!
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 13
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 03:01:00.547000+00:00
+        duration: '1.00'
+        finished: '1604113261.55'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 14
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 04:15:46.688000+00:00
+        duration: '0.21'
+        finished: '1604117746.90'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 15
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 04:50:06.050000+00:00
+        duration: '1.17'
+        finished: '1604119807.22'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 16
+    fields:
+        job: check_obsolete_orders
+        status: Missed!
+        run_time: 2020-10-31 05:05:06.050000+00:00
+        duration: '1.05'
+        finished: '1604120707.10'
+        exception: Run time of job 'check_obsolete_orders' was missed!
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 17
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 05:50:07.956000+00:00
+        duration: '1.32'
+        finished: '1604123409.28'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 18
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 06:17:25.165000+00:00
+        duration: '0.25'
+        finished: '1604125045.42'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 19
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 06:32:25.165000+00:00
+        duration: '0.12'
+        finished: '1604125945.29'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 20
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 06:53:43.515000+00:00
+        duration: '1.19'
+        finished: '1604127224.70'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 21
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 07:29:33.213000+00:00
+        duration: '0.36'
+        finished: '1604129373.57'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 22
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 07:44:33.213000+00:00
+        duration: '0.19'
+        finished: '1604130273.40'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 23
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 07:59:33.213000+00:00
+        duration: '0.13'
+        finished: '1604131173.34'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 24
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 08:14:33.213000+00:00
+        duration: '0.74'
+        finished: '1604132073.96'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 25
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 08:29:33.213000+00:00
+        duration: '0.04'
+        finished: '1604132973.25'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 26
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 09:02:38.022000+00:00
+        duration: '0.96'
+        finished: '1604134958.98'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 27
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 09:17:38.022000+00:00
+        duration: '1.92'
+        finished: '1604135859.95'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 28
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 13:06:15.051000+00:00
+        duration: '0.28'
+        finished: '1604149575.33'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 29
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 13:21:15.051000+00:00
+        duration: '0.40'
+        finished: '1604150475.45'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 30
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 13:36:15.051000+00:00
+        duration: '0.25'
+        finished: '1604151375.30'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 31
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 13:51:15.051000+00:00
+        duration: '0.21'
+        finished: '1604152275.27'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 32
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 14:06:15.051000+00:00
+        duration: '0.16'
+        finished: '1604153175.21'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 33
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 14:21:15.051000+00:00
+        duration: '0.11'
+        finished: '1604154075.16'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 34
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 14:36:15.051000+00:00
+        duration: '0.30'
+        finished: '1604154975.36'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 35
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 15:38:58.560000+00:00
+        duration: '1.17'
+        finished: '1604158739.73'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 36
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 15:53:58.560000+00:00
+        duration: '1.18'
+        finished: '1604159639.74'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 37
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-10-31 18:10:00.455000+00:00
+        duration: '0.81'
+        finished: '1604167801.26'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 38
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 03:32:21.455000+00:00
+        duration: '0.79'
+        finished: '1604201542.25'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 39
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 03:32:21.455000+00:00
+        duration: '0.43'
+        finished: '1604201541.89'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 40
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 04:14:03.144000+00:00
+        duration: '1.48'
+        finished: '1604204044.63'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 41
+    fields:
+        job: check_obsolete_orders
+        status: Missed!
+        run_time: 2020-11-01 04:29:03.144000+00:00
+        duration: '1.44'
+        finished: '1604204944.58'
+        exception: Run time of job 'check_obsolete_orders' was missed!
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 42
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 04:44:03.144000+00:00
+        duration: '1.15'
+        finished: '1604205844.29'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 43
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 04:59:03.144000+00:00
+        duration: '1.46'
+        finished: '1604206744.60'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 44
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 05:14:03.144000+00:00
+        duration: '1.53'
+        finished: '1604207644.67'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 45
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 05:29:03.144000+00:00
+        duration: '1.21'
+        finished: '1604208544.36'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 46
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 05:44:03.144000+00:00
+        duration: '1.15'
+        finished: '1604209444.30'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 47
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 05:59:03.144000+00:00
+        duration: '1.13'
+        finished: '1604210344.27'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 48
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 06:14:03.144000+00:00
+        duration: '0.74'
+        finished: '1604211243.88'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 49
+    fields:
+        job: check_obsolete_orders
+        status: Missed!
+        run_time: 2020-11-01 06:29:03.144000+00:00
+        duration: '1.42'
+        finished: '1604212144.56'
+        exception: Run time of job 'check_obsolete_orders' was missed!
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 50
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 06:54:20.139000+00:00
+        duration: '1.13'
+        finished: '1604213661.27'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 51
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 07:09:20.139000+00:00
+        duration: '0.77'
+        finished: '1604214560.91'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 52
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 07:24:20.139000+00:00
+        duration: '0.64'
+        finished: '1604215460.78'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 53
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 07:39:20.139000+00:00
+        duration: '1.31'
+        finished: '1604216361.45'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 54
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 07:54:20.139000+00:00
+        duration: '1.18'
+        finished: '1604217261.32'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 55
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 08:09:20.139000+00:00
+        duration: '1.21'
+        finished: '1604218161.35'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 56
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 08:24:20.139000+00:00
+        duration: '1.17'
+        finished: '1604219061.31'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 57
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 08:39:20.139000+00:00
+        duration: '1.18'
+        finished: '1604219961.32'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 58
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 08:54:20.139000+00:00
+        duration: '1.20'
+        finished: '1604220861.34'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 59
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 09:09:20.139000+00:00
+        duration: '1.18'
+        finished: '1604221761.32'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 60
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 09:24:20.139000+00:00
+        duration: '1.39'
+        finished: '1604222661.53'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 61
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 09:39:20.139000+00:00
+        duration: '0.83'
+        finished: '1604223560.97'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 62
+    fields:
+        job: check_obsolete_orders
+        status: Missed!
+        run_time: 2020-11-01 09:54:20.139000+00:00
+        duration: '3.14'
+        finished: '1604224463.28'
+        exception: Run time of job 'check_obsolete_orders' was missed!
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 63
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 10:09:20.139000+00:00
+        duration: '0.86'
+        finished: '1604225361.00'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 64
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 10:24:20.139000+00:00
+        duration: '0.67'
+        finished: '1604226260.81'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 65
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 11:03:23.578000+00:00
+        duration: '0.92'
+        finished: '1604228604.49'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 66
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 11:18:23.578000+00:00
+        duration: '1.22'
+        finished: '1604229504.80'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 67
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 11:33:23.578000+00:00
+        duration: '0.69'
+        finished: '1604230404.27'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 68
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 11:48:23.578000+00:00
+        duration: '0.77'
+        finished: '1604231304.35'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 69
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 12:23:32.341000+00:00
+        duration: '0.94'
+        finished: '1604233413.28'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 70
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 12:38:32.341000+00:00
+        duration: '1.20'
+        finished: '1604234313.54'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 71
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 12:53:32.341000+00:00
+        duration: '0.35'
+        finished: '1604235212.69'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 72
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 13:08:32.341000+00:00
+        duration: '1.21'
+        finished: '1604236113.55'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 73
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 13:23:32.341000+00:00
+        duration: '1.11'
+        finished: '1604237013.45'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 74
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 13:38:32.341000+00:00
+        duration: '1.22'
+        finished: '1604237913.57'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 75
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 13:53:32.341000+00:00
+        duration: '0.93'
+        finished: '1604238813.27'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 76
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 17:22:34.788000+00:00
+        duration: '0.69'
+        finished: '1604251355.48'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 77
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 17:37:34.788000+00:00
+        duration: '0.86'
+        finished: '1604252255.65'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 78
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 17:52:34.788000+00:00
+        duration: '0.74'
+        finished: '1604253155.52'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 79
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-01 18:07:34.788000+00:00
+        duration: '0.90'
+        finished: '1604254055.69'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 80
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 01:59:19.394000+00:00
+        duration: '0.09'
+        finished: '1604368759.49'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 81
+    fields:
+        job: check_obsolete_orders
+        status: Missed!
+        run_time: 2020-11-03 04:24:49.184000+00:00
+        duration: '830.15'
+        finished: '1604378319.34'
+        exception: Run time of job 'check_obsolete_orders' was missed!
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 82
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:39:49.184000+00:00
+        duration: '0.21'
+        finished: '1604378389.40'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 83
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:52:06.477000+00:00
+        duration: '0.09'
+        finished: '1604379126.57'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 84
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:52:31.241000+00:00
+        duration: '0.06'
+        finished: '1604379151.31'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 85
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:52:41.241000+00:00
+        duration: '0.08'
+        finished: '1604379161.32'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 86
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:52:51.241000+00:00
+        duration: '0.24'
+        finished: '1604379171.48'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 87
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:53:01.241000+00:00
+        duration: '0.24'
+        finished: '1604379181.48'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 88
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:53:11.241000+00:00
+        duration: '0.12'
+        finished: '1604379191.36'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 89
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:53:21.241000+00:00
+        duration: '0.11'
+        finished: '1604379201.36'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 90
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:53:31.241000+00:00
+        duration: '0.12'
+        finished: '1604379211.37'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 91
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:53:41.241000+00:00
+        duration: '0.14'
+        finished: '1604379221.38'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 92
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:53:51.241000+00:00
+        duration: '0.12'
+        finished: '1604379231.36'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 93
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:54:01.241000+00:00
+        duration: '0.12'
+        finished: '1604379241.36'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 94
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:54:13.535000+00:00
+        duration: '0.08'
+        finished: '1604379253.62'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 95
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:54:23.535000+00:00
+        duration: '0.13'
+        finished: '1604379263.66'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 96
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:54:33.535000+00:00
+        duration: '0.14'
+        finished: '1604379273.67'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 97
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:54:43.535000+00:00
+        duration: '0.08'
+        finished: '1604379283.62'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 98
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:54:53.535000+00:00
+        duration: '0.09'
+        finished: '1604379293.63'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 99
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:55:03.535000+00:00
+        duration: '0.16'
+        finished: '1604379303.69'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 100
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:55:13.535000+00:00
+        duration: '0.08'
+        finished: '1604379313.61'
+        exception: null
+        traceback: null
+-   model: django_apscheduler.djangojobexecution
+    pk: 101
+    fields:
+        job: check_obsolete_orders
+        status: Executed
+        run_time: 2020-11-03 04:55:23.535000+00:00
+        duration: '0.10'
+        finished: '1604379323.63'
+        exception: null
+        traceback: null
+-   model: login_register.crop
+    pk: 1
+    fields:
+        name: Experimental Potato
+        is_seasonal: true
+        season_start: March
+        season_end: August
+        harvest_weight_per_land_area: 2.0
+        harvest_time: 4
+        productivity: 0.0
+-   model: login_register.location
+    pk: 1
+    fields:
+        name: Mambaling, Cebu City, Cebu
+        brgy: Mambaling
+        city: Cebu City
+        province: Cebu
+-   model: login_register.location
+    pk: 2
+    fields:
+        name: Alegria, Alicia, Zamboanga Sibugay
+        brgy: Alegria
+        city: Alicia
+        province: Zamboanga Sibugay
+-   model: login_register.location
+    pk: 3
+    fields:
+        name: Alegria, Alicia, Zamboanga Sibugay
+        brgy: Alegria
+        city: Alicia
+        province: Zamboanga Sibugay
+-   model: login_register.location
+    pk: 6
+    fields:
+        name: Gosoon, Carmen, Agusan Del Norte
+        brgy: Gosoon
+        city: Carmen
+        province: Agusan Del Norte
+-   model: login_register.location
+    pk: 7
+    fields:
+        name: Berseba, Bayugan City, Agusan Del Sur
+        brgy: Berseba
+        city: Bayugan City
+        province: Agusan Del Sur
+-   model: login_register.location
+    pk: 12
+    fields:
+        name: Bayo Grande, Anini-y, Antique
+        brgy: Bayo Grande
+        city: Anini-y
+        province: Antique
+-   model: login_register.location
+    pk: 13
+    fields:
+        name: Cabadiangan, Alcantara, Cebu
+        brgy: Cabadiangan
+        city: Alcantara
+        province: Cebu
+-   model: login_register.location
+    pk: 14
+    fields:
+        name: Abilan, Buenavista, Agusan Del Norte
+        brgy: Abilan
+        city: Buenavista
+        province: Agusan Del Norte
+-   model: login_register.location
+    pk: 15
+    fields:
+        name: Cabangila, Altavas, Aklan
+        brgy: Cabangila
+        city: Altavas
+        province: Aklan
+-   model: login_register.location
+    pk: 16
+    fields:
+        name: San Roque, Pateros, Taguig - Pateros
+        brgy: San Roque
+        city: Pateros
+        province: Taguig - Pateros
+-   model: login_register.location
+    pk: 17
+    fields:
+        name: Caucab, Almeria, Biliran
+        brgy: Caucab
+        city: Almeria
+        province: Biliran
+-   model: login_register.location
+    pk: 18
+    fields:
+        name: Bangkal, Abucay, Bataan
+        brgy: Bangkal
+        city: Abucay
+        province: Bataan
+-   model: login_register.location
+    pk: 19
+    fields:
+        name: Agdangan Pob. (San Cayetano), Baao, Camarines Sur
+        brgy: Agdangan Pob. (San Cayetano)
+        city: Baao
+        province: Camarines Sur
+-   model: login_register.location
+    pk: 20
+    fields:
+        name: Balintad, Baungon, Bukidnon
+        brgy: Balintad
+        city: Baungon
+        province: Bukidnon
+-   model: login_register.location
+    pk: 21
+    fields:
+        name: Agcabugao, Cuartero, Capiz
+        brgy: Agcabugao
+        city: Cuartero
+        province: Capiz
+-   model: login_register.location
+    pk: 22
+    fields:
+        name: Adia, Agoncillo, Batangas
+        brgy: Adia
+        city: Agoncillo
+        province: Batangas
+-   model: login_register.location
+    pk: 23
+    fields:
+        name: Alinunu, Abulug, Cagayan
+        brgy: Alinunu
+        city: Abulug
+        province: Cagayan
+-   model: login_register.location
+    pk: 24
+    fields:
+        name: Cabangila, Altavas, Aklan
+        brgy: Cabangila
+        city: Altavas
+        province: Aklan
+-   model: login_register.location
+    pk: 25
+    fields:
+        name: Bayo Grande, Anini-y, Antique
+        brgy: Bayo Grande
+        city: Anini-y
+        province: Antique
+-   model: login_register.location
+    pk: 26
+    fields:
+        name: Antique
+        brgy: null
+        city: null
+        province: Antique
+-   model: login_register.location
+    pk: 27
+    fields:
+        name: Angas, Basud, Camarines Norte
+        brgy: Angas
+        city: Basud
+        province: Camarines Norte
+-   model: login_register.location
+    pk: 28
+    fields:
+        name: Basilan,Akbar,Caddayan
+        brgy: Caddayan
+        city: Akbar
+        province: Basilan
+-   model: login_register.location_crop
+    pk: 1
+    fields:
+        location: 2
+        name:
+        - 1
+-   model: login_register.customer
+    pk: 1
+    fields:
+        name: 7
+        street: null
+        contact_number: null
+        company: null
+        registration_date: 2020-10-29 13:38:12.587000+00:00
+        is_approved: true
+        first_question_answers: 'Yes'
+        second_question_answers: 'No'
+        location:
+        - 26
+-   model: login_register.customer
+    pk: 3
+    fields:
+        name: 14
+        street: ''
+        contact_number: null
+        company: ''
+        registration_date: 2020-10-30 17:05:26.497000+00:00
+        is_approved: false
+        first_question_answers: null
+        second_question_answers: null
+        location:
+        - 15
+-   model: login_register.customer
+    pk: 4
+    fields:
+        name: 15
+        street: ''
+        contact_number: null
+        company: ''
+        registration_date: 2020-10-31 03:32:09.812000+00:00
+        is_approved: false
+        first_question_answers: '[object HTMLSelectElement] : [object HTMLInputElement]'
+        second_question_answers: '[object HTMLSelectElement] : [object HTMLInputElement]'
+        location:
+        - 16
+-   model: login_register.customer
+    pk: 5
+    fields:
+        name: 18
+        street: ''
+        contact_number: null
+        company: ''
+        registration_date: 2020-10-31 04:32:19.895000+00:00
+        is_approved: false
+        first_question_answers: ''
+        second_question_answers: ''
+        location:
+        - 17
+-   model: login_register.customer
+    pk: 6
+    fields:
+        name: 19
+        street: ''
+        contact_number: 09772721740
+        company: ''
+        registration_date: 2020-10-31 05:34:24.376000+00:00
+        is_approved: false
+        first_question_answers: ''
+        second_question_answers: ''
+        location:
+        - 18
+-   model: login_register.customer
+    pk: 7
+    fields:
+        name: 20
+        street: ''
+        contact_number: 09772721745
+        company: CITU
+        registration_date: 2020-10-31 05:37:35.977000+00:00
+        is_approved: false
+        first_question_answers: ''
+        second_question_answers: ''
+        location:
+        - 19
+-   model: login_register.customer
+    pk: 8
+    fields:
+        name: 21
+        street: ''
+        contact_number: 09772721743
+        company: CITU
+        registration_date: 2020-10-31 05:50:47.244000+00:00
+        is_approved: false
+        first_question_answers: 'What is the maiden name of your mother? : mama 3'
+        second_question_answers: 'What was the name of your elementary / primary school?
+            : school 3'
+        location:
+        - 20
+-   model: login_register.customer
+    pk: 9
+    fields:
+        name: 22
+        street: ''
+        contact_number: 09772721748
+        company: ''
+        registration_date: 2020-10-31 05:59:58.778000+00:00
+        is_approved: false
+        first_question_answers: 'What is the maiden name of your mother? : mama 3'
+        second_question_answers: 'What was the name of your elementary / primary school?
+            : school 3'
+        location:
+        - 21
+-   model: login_register.customer
+    pk: 10
+    fields:
+        name: 25
+        street: ''
+        contact_number: 09772721711
+        company: CITU
+        registration_date: 2020-10-31 08:58:47.924000+00:00
+        is_approved: false
+        first_question_answers: 'What is the maiden name of your mother? : 134134'
+        second_question_answers: 'What was the name of your elementary / primary school?
+            : 123412'
+        location:
+        - 23
+-   model: login_register.customer
+    pk: 11
+    fields:
+        name: 26
+        street: ''
+        contact_number: 09134132413
+        company: zzzzzz
+        registration_date: 2020-10-31 09:00:14.659000+00:00
+        is_approved: false
+        first_question_answers: 'In what city did you meet your spouse/significant
+            other? : zzzzzz'
+        second_question_answers: 'Who was your childhood hero? : zzzzz'
+        location:
+        - 24
+-   model: login_register.customer
+    pk: 12
+    fields:
+        name: 28
+        street: '44'
+        contact_number: '9823123221'
+        company: null
+        registration_date: 2020-11-03 04:44:55.538000+00:00
+        is_approved: true
+        first_question_answers: 'What is the maiden name of your mother? : yse'
+        second_question_answers: 'What was the name of your elementary / primary school?
+            : ser'
+        location:
+        - 2
+        - 28
+-   model: login_register.order
+    pk: 0656d16f-2086-40d4-9fd3-2de92c7ca988
+    fields:
+        customer: 4
+        crop: 1
+        custom_crop: null
+        order_date: 2020-10-11 01:44:49+00:00
+        weight: 49.0
+        location: 20
+        land_area_needed: 515.0
+        is_done: false
+        is_reserved: false
+        is_approved: false
+        is_cancelled: true
+        status: Cancelled
+        message: null
+        approved_date: null
+        cancelled_date: 2020-11-03 01:46:31.896000+00:00
+-   model: login_register.order
+    pk: 223c3e6a-3ca0-4df0-9992-5596c60d512e
+    fields:
+        customer: 12
+        crop: 1
+        custom_crop: null
+        order_date: 2020-11-03 05:12:55.591000+00:00
+        weight: 10.0
+        location: 2
+        land_area_needed: 125.0
+        is_done: false
+        is_reserved: false
+        is_approved: true
+        is_cancelled: false
+        status: Harvested
+        message: null
+        approved_date: 2020-11-03 05:13:49.615000+00:00
+        cancelled_date: null
+-   model: login_register.order
+    pk: 2ee3c10e-4505-4b8e-9675-48377c40d7a2
+    fields:
+        customer: 1
+        crop: 1
+        custom_crop: null
+        order_date: 2020-10-30 14:30:25.912000+00:00
+        weight: 50.0
+        location: 14
+        land_area_needed: 525.0
+        is_done: false
+        is_reserved: false
+        is_approved: true
+        is_cancelled: false
+        status: Posted
+        message: null
+        approved_date: null
+        cancelled_date: null
+-   model: login_register.order
+    pk: 389475c5-40db-4d5b-b078-2e718f2d39de
+    fields:
+        customer: 1
+        crop: 1
+        custom_crop: null
+        order_date: 2020-10-30 10:40:18+00:00
+        weight: 22.0
+        location: 3
+        land_area_needed: 245.0
+        is_done: false
+        is_reserved: false
+        is_approved: true
+        is_cancelled: false
+        status: Ongoing
+        message: null
+        approved_date: null
+        cancelled_date: null
+-   model: login_register.order
+    pk: 4f28e1da-9a63-48d5-b486-912fb6703c7f
+    fields:
+        customer: 1
+        crop: 1
+        custom_crop: null
+        order_date: 2020-10-30 13:07:47.760000+00:00
+        weight: 32.0
+        location: 3
+        land_area_needed: 345.0
+        is_done: false
+        is_reserved: false
+        is_approved: true
+        is_cancelled: false
+        status: Harvested
+        message: null
+        approved_date: null
+        cancelled_date: null
+-   model: login_register.order
+    pk: 527b59d2-a9cd-4b0b-9bcc-482b1a7221ef
+    fields:
+        customer: 1
+        crop: 1
+        custom_crop: null
+        order_date: 2020-10-30 14:33:15.529000+00:00
+        weight: 68.0
+        location: 3
+        land_area_needed: 705.0
+        is_done: false
+        is_reserved: false
+        is_approved: true
+        is_cancelled: false
+        status: Posted
+        message: null
+        approved_date: null
+        cancelled_date: null
+-   model: login_register.order
+    pk: 7687e729-1867-4932-84c7-431be1f34d2f
+    fields:
+        customer: 1
+        crop: 1
+        custom_crop: null
+        order_date: 2020-10-31 09:23:53.349000+00:00
+        weight: 52.0
+        location: 25
+        land_area_needed: 545.0
+        is_done: false
+        is_reserved: false
+        is_approved: true
+        is_cancelled: false
+        status: Posted
+        message: null
+        approved_date: 2020-11-03 05:26:57.729000+00:00
+        cancelled_date: null
+-   model: login_register.order
+    pk: 974bf5b3-6dc8-4780-b0c0-c7582dc5afe4
+    fields:
+        customer: 1
+        crop: 1
+        custom_crop: null
+        order_date: 2020-10-30 10:40:22+00:00
+        weight: 22.0
+        location: 3
+        land_area_needed: 245.0
+        is_done: false
+        is_reserved: false
+        is_approved: true
+        is_cancelled: false
+        status: Ongoing
+        message: null
+        approved_date: null
+        cancelled_date: null
+-   model: login_register.order
+    pk: aedc6cd6-d163-4df4-ad27-98102f49c8ce
+    fields:
+        customer: 1
+        crop: 1
+        custom_crop: null
+        order_date: 2020-10-30 10:49:10.577000+00:00
+        weight: 33.0
+        location: 3
+        land_area_needed: 355.0
+        is_done: false
+        is_reserved: true
+        is_approved: true
+        is_cancelled: false
+        status: Ongoing
+        message: null
+        approved_date: null
+        cancelled_date: null
+-   model: login_register.order
+    pk: babddab5-c4d8-48e9-99bf-155f9d9b3643
+    fields:
+        customer: 1
+        crop: 1
+        custom_crop: null
+        order_date: 2020-10-30 14:34:05.743000+00:00
+        weight: 21.0
+        location: 3
+        land_area_needed: 235.0
+        is_done: false
+        is_reserved: false
+        is_approved: false
+        is_cancelled: false
+        status: Pending
+        message: null
+        approved_date: null
+        cancelled_date: null
+-   model: login_register.order
+    pk: faf9dd8e-02a5-4bfc-a122-ada0d8cc18ed
+    fields:
+        customer: 1
+        crop: 1
+        custom_crop: null
+        order_date: 2020-11-02 13:35:45+00:00
+        weight: 49.0
+        location: 3
+        land_area_needed: 55.0
+        is_done: true
+        is_reserved: true
+        is_approved: true
+        is_cancelled: false
+        status: Collected
+        message: null
+        approved_date: 2020-11-03 02:40:56+00:00
+        cancelled_date: null
+-   model: login_register.farmer
+    pk: 2
+    fields:
+        name: 6
+        location: 2
+        street: null
+        contact_number: null
+        company: null
+        registration_date: 2020-10-29 13:37:39.362000+00:00
+        is_approved: true
+        land_area: 120099.0
+        is_available: true
+        available_land_area: 120091409.0111
+        first_question_answers: '1'
+        second_question_answers: '1'
+-   model: login_register.farmer
+    pk: 4
+    fields:
+        name: 12
+        location: 2
+        street: ''
+        contact_number: null
+        company: ''
+        registration_date: 2020-10-30 09:25:40.574000+00:00
+        is_approved: true
+        land_area: 2311.0
+        is_available: true
+        available_land_area: 2311.0
+        first_question_answers: null
+        second_question_answers: null
+-   model: login_register.farmer
+    pk: 5
+    fields:
+        name: 23
+        location: 22
+        street: ''
+        contact_number: 09772721741
+        company: ''
+        registration_date: 2020-10-31 06:41:27.348000+00:00
+        is_approved: true
+        land_area: 5000.0
+        is_available: true
+        available_land_area: 5000.0
+        first_question_answers: 'What is the maiden name of your mother? : mama 5'
+        second_question_answers: 'What was the name of your elementary / primary school?
+            : school 5'
+-   model: login_register.farmer
+    pk: 6
+    fields:
+        name: 27
+        location: 2
+        street: null
+        contact_number: '9123123442'
+        company: null
+        registration_date: 2020-11-03 01:57:36.433000+00:00
+        is_approved: true
+        land_area: 400.0
+        is_available: true
+        available_land_area: 400.0
+        first_question_answers: 'What is the maiden name of your mother? : mamsh'
+        second_question_answers: 'What was the name of your elementary / primary school?
+            : titser'
+-   model: login_register.order_pairing
+    pk: 1
+    fields:
+        order_id: 974bf5b3-6dc8-4780-b0c0-c7582dc5afe4
+        farmer: 2
+        expected_time: null
+        accepted_date: 2020-10-30 10:41:16.954000+00:00
+        harvested_date: null
+        collected_date: null
+        delivered_date: null
+        status: Ongoing
+-   model: login_register.order_pairing
+    pk: 2
+    fields:
+        order_id: 389475c5-40db-4d5b-b078-2e718f2d39de
+        farmer: 2
+        expected_time: null
+        accepted_date: 2020-10-30 10:47:16.741000+00:00
+        harvested_date: null
+        collected_date: null
+        delivered_date: null
+        status: Ongoing
+-   model: login_register.order_pairing
+    pk: 3
+    fields:
+        order_id: 4f28e1da-9a63-48d5-b486-912fb6703c7f
+        farmer: 2
+        expected_time: 2020-11-04 00:00:00+00:00
+        accepted_date: 2020-10-31 13:54:57+00:00
+        harvested_date: 2020-11-03 02:59:57+00:00
+        collected_date: null
+        delivered_date: null
+        status: Harvested
+-   model: login_register.order_pairing
+    pk: 14
+    fields:
+        order_id: faf9dd8e-02a5-4bfc-a122-ada0d8cc18ed
+        farmer: 6
+        expected_time: 2020-11-07 00:00:00+00:00
+        accepted_date: 2020-11-03 04:40:26+00:00
+        harvested_date: 2020-11-03 04:40:59+00:00
+        collected_date: 2020-11-03 04:41:11+00:00
+        delivered_date: null
+        status: Collected
+-   model: login_register.order_pairing
+    pk: 15
+    fields:
+        order_id: 223c3e6a-3ca0-4df0-9992-5596c60d512e
+        farmer: 6
+        expected_time: 2020-11-07 00:00:00+00:00
+        accepted_date: 2020-11-03 05:14:10.882000+00:00
+        harvested_date: 2020-11-03 05:21:06.711000+00:00
+        collected_date: null
+        delivered_date: null
+        status: Harvested
