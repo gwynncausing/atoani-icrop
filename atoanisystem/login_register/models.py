@@ -1,8 +1,3 @@
-# step 2: creating classes
-
-#migrate every time you change something
-# create mutations for status
-# change name in katong users py
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
@@ -54,46 +49,25 @@ class Location(models.Model):
     brgy = models.CharField(max_length=50,default="", blank=True, null=True)
     city = models.CharField(max_length=50,default="", blank=True, null=True)
     province = models.CharField(max_length=50,default="")
+
     def __str__(self):
         return str(self.name)
 
-class Soil_type(models.Model):
-    name = models.CharField(max_length=220)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "Soil Types"
-
-class Location_Soil(models.Model):
-    location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
-    soil_type = models.ManyToManyField(Soil_type)
-    def __str__(self):
-        return "{} - {}".format(self.location, self.soil_type)
-
-    class Meta:
-        verbose_name_plural = "Location-Soil type Relations"
+    def save(self, *args, **kwargs):
+        self.name = self.brgy if self.brgy != "" else ""
+        self.name += ", " + self.city if self.city != "" else ""
+        self.name += ", " + self.province if len(self.name) != 0 else self.province
+        super().save(*args, **kwargs)
 
 class Location_Crop(models.Model):
     location = models.ForeignKey(Location, null=True, on_delete=models.SET_NULL)
-    name = models.ManyToManyField(Crop, help_text="Crop name",null=True)
+    name = models.ManyToManyField(Crop, help_text="Crop name")
 
     def __str__(self):
         return "{} - {}".format(self.location, self.name)
 
     class Meta:
         verbose_name_plural = "Location-Crop Relations"
-
-class Crop_Soil(models.Model):
-    name = models.ForeignKey(Crop, null=True, on_delete=models.CASCADE, help_text="Crop name")
-    soil_type = models.ManyToManyField(Soil_type)
-
-    def __str__(self):
-        return "{} - {}".format(self.name, self.soil_type)
-
-    class Meta:
-        verbose_name_plural = "Crop-Soil type Relations"
 
 # to save street in customer?
 class Customer(models.Model):
@@ -119,9 +93,6 @@ class Customer(models.Model):
             return getattr(self,attr)
         except:
             return None
-
-    # def save(*args,**kwargs):
-    #     super().save(*args,**kwargs)
 
     def __str__(self):
         return str(self.name)
@@ -152,20 +123,6 @@ class Customer(models.Model):
         self.location.add(new_loc)
         self.street += "|" + street
         self.save()
-
-    # def replace_location(self,old_id,new_id):
-    #     all_loc = self.location.all()
-    #     new_loc = Location.objects.get(id=new_id)
-    #     print("new loc")
-    #     print(new_loc)
-    #     for location in all_loc:
-    #         if(location.id == old_id):
-    #             location = None
-    #             location = new_loc
-    #             print(location)
-    #             self.save()
-    #             break
-    #     print(self.get_all_locations())
 
     class Meta:
         ordering = ['name']
@@ -294,7 +251,6 @@ class Farmer(models.Model):
         self.save()
 
     def add_land(self,new_land_area):
-        print("HANGGAWWWW " + str(self))
         self.available_land_area = self.available_land_area + new_land_area
         print(self.available_land_area)
         self.save()

@@ -1,5 +1,5 @@
-<generator object Months.choices.<locals>.<genexpr> at 0x7f0a62c64cf0>
-<generator object Months.choices.<locals>.<genexpr> at 0x7f0a62c64cf0>
+<generator object Months.choices.<locals>.<genexpr> at 0x7f1c7266af90>
+<generator object Months.choices.<locals>.<genexpr> at 0x7f1c7266af90>
 IN READY!
 Scheduler started...
 -   model: admin.logentry
@@ -1394,6 +1394,1446 @@ Scheduler started...
         object_repr: us2ko - 44.0 kg of Experimental Potato
         action_flag: 2
         change_message: '[{"changed": {"fields": ["Cancelled date"]}}]'
+-   model: admin.logentry
+    pk: 139
+    fields:
+        action_time: 2020-11-03 23:45:13.775830+00:00
+        user: 1
+        content_type: 9
+        object_id: '2'
+        object_repr: Pexperimental Otato
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 140
+    fields:
+        action_time: 2020-11-03 23:45:26.827990+00:00
+        user: 1
+        content_type: 13
+        object_id: '2'
+        object_repr: Cabangila, Altavas, Aklan - login_register.Crop.None
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 141
+    fields:
+        action_time: 2020-11-03 23:45:46.290068+00:00
+        user: 1
+        content_type: 9
+        object_id: '2'
+        object_repr: Pexperimental Otato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 142
+    fields:
+        action_time: 2020-11-03 23:48:31.336454+00:00
+        user: 1
+        content_type: 9
+        object_id: '3'
+        object_repr: Experimental Strawberry
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 143
+    fields:
+        action_time: 2020-11-05 00:25:53.428724+00:00
+        user: 1
+        content_type: 10
+        object_id: '28'
+        object_repr: Basilan,Akbar,Caddayan
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 144
+    fields:
+        action_time: 2020-11-05 00:25:53.431416+00:00
+        user: 1
+        content_type: 10
+        object_id: '27'
+        object_repr: Angas, Basud, Camarines Norte
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 145
+    fields:
+        action_time: 2020-11-05 00:25:53.432457+00:00
+        user: 1
+        content_type: 10
+        object_id: '26'
+        object_repr: Antique
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 146
+    fields:
+        action_time: 2020-11-05 00:25:53.433512+00:00
+        user: 1
+        content_type: 10
+        object_id: '25'
+        object_repr: Bayo Grande, Anini-y, Antique
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 147
+    fields:
+        action_time: 2020-11-05 00:25:53.434574+00:00
+        user: 1
+        content_type: 10
+        object_id: '24'
+        object_repr: Cabangila, Altavas, Aklan
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 148
+    fields:
+        action_time: 2020-11-05 00:25:53.435713+00:00
+        user: 1
+        content_type: 10
+        object_id: '23'
+        object_repr: Alinunu, Abulug, Cagayan
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 149
+    fields:
+        action_time: 2020-11-05 00:25:53.436787+00:00
+        user: 1
+        content_type: 10
+        object_id: '22'
+        object_repr: Adia, Agoncillo, Batangas
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 150
+    fields:
+        action_time: 2020-11-05 00:25:53.437782+00:00
+        user: 1
+        content_type: 10
+        object_id: '21'
+        object_repr: Agcabugao, Cuartero, Capiz
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 151
+    fields:
+        action_time: 2020-11-05 00:25:53.438718+00:00
+        user: 1
+        content_type: 10
+        object_id: '20'
+        object_repr: Balintad, Baungon, Bukidnon
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 152
+    fields:
+        action_time: 2020-11-05 00:25:53.439647+00:00
+        user: 1
+        content_type: 10
+        object_id: '19'
+        object_repr: Agdangan Pob. (San Cayetano), Baao, Camarines Sur
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 153
+    fields:
+        action_time: 2020-11-05 00:25:53.440556+00:00
+        user: 1
+        content_type: 10
+        object_id: '18'
+        object_repr: Bangkal, Abucay, Bataan
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 154
+    fields:
+        action_time: 2020-11-05 00:25:53.442064+00:00
+        user: 1
+        content_type: 10
+        object_id: '17'
+        object_repr: Caucab, Almeria, Biliran
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 155
+    fields:
+        action_time: 2020-11-05 00:25:53.443324+00:00
+        user: 1
+        content_type: 10
+        object_id: '16'
+        object_repr: San Roque, Pateros, Taguig - Pateros
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 156
+    fields:
+        action_time: 2020-11-05 00:25:53.444460+00:00
+        user: 1
+        content_type: 10
+        object_id: '15'
+        object_repr: Cabangila, Altavas, Aklan
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 157
+    fields:
+        action_time: 2020-11-05 00:25:53.445605+00:00
+        user: 1
+        content_type: 10
+        object_id: '14'
+        object_repr: Abilan, Buenavista, Agusan Del Norte
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 158
+    fields:
+        action_time: 2020-11-05 00:25:53.446541+00:00
+        user: 1
+        content_type: 10
+        object_id: '13'
+        object_repr: Cabadiangan, Alcantara, Cebu
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 159
+    fields:
+        action_time: 2020-11-05 00:25:53.447328+00:00
+        user: 1
+        content_type: 10
+        object_id: '12'
+        object_repr: Bayo Grande, Anini-y, Antique
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 160
+    fields:
+        action_time: 2020-11-05 00:25:53.448101+00:00
+        user: 1
+        content_type: 10
+        object_id: '7'
+        object_repr: Berseba, Bayugan City, Agusan Del Sur
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 161
+    fields:
+        action_time: 2020-11-05 00:25:53.449136+00:00
+        user: 1
+        content_type: 10
+        object_id: '6'
+        object_repr: Gosoon, Carmen, Agusan Del Norte
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 162
+    fields:
+        action_time: 2020-11-05 00:25:53.450030+00:00
+        user: 1
+        content_type: 10
+        object_id: '3'
+        object_repr: Alegria, Alicia, Zamboanga Sibugay
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 163
+    fields:
+        action_time: 2020-11-05 00:25:53.450923+00:00
+        user: 1
+        content_type: 10
+        object_id: '2'
+        object_repr: Alegria, Alicia, Zamboanga Sibugay
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 164
+    fields:
+        action_time: 2020-11-05 00:25:53.451876+00:00
+        user: 1
+        content_type: 10
+        object_id: '1'
+        object_repr: Mambaling, Cebu City, Cebu
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 165
+    fields:
+        action_time: 2020-11-05 00:26:05.598566+00:00
+        user: 1
+        content_type: 9
+        object_id: '1'
+        object_repr: Experimental Potato
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 166
+    fields:
+        action_time: 2020-11-05 00:26:13.846549+00:00
+        user: 1
+        content_type: 15
+        object_id: '1'
+        object_repr: customer
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 167
+    fields:
+        action_time: 2020-11-05 00:26:13.850618+00:00
+        user: 1
+        content_type: 15
+        object_id: '3'
+        object_repr: Cary1997
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 168
+    fields:
+        action_time: 2020-11-05 00:26:13.853483+00:00
+        user: 1
+        content_type: 15
+        object_id: '4'
+        object_repr: JDC
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 169
+    fields:
+        action_time: 2020-11-05 00:26:13.856533+00:00
+        user: 1
+        content_type: 15
+        object_id: '5'
+        object_repr: blackmamba
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 170
+    fields:
+        action_time: 2020-11-05 00:26:13.859279+00:00
+        user: 1
+        content_type: 15
+        object_id: '6'
+        object_repr: StephCurry
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 171
+    fields:
+        action_time: 2020-11-05 00:26:13.861902+00:00
+        user: 1
+        content_type: 15
+        object_id: '7'
+        object_repr: KobeParas
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 172
+    fields:
+        action_time: 2020-11-05 00:26:13.864506+00:00
+        user: 1
+        content_type: 15
+        object_id: '8'
+        object_repr: Kevin09
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 173
+    fields:
+        action_time: 2020-11-05 00:26:13.866880+00:00
+        user: 1
+        content_type: 15
+        object_id: '9'
+        object_repr: HelloWorld
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 174
+    fields:
+        action_time: 2020-11-05 00:26:13.869228+00:00
+        user: 1
+        content_type: 15
+        object_id: '10'
+        object_repr: Warlock
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 175
+    fields:
+        action_time: 2020-11-05 00:26:13.871666+00:00
+        user: 1
+        content_type: 15
+        object_id: '11'
+        object_repr: zzzz
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 176
+    fields:
+        action_time: 2020-11-05 00:26:13.874826+00:00
+        user: 1
+        content_type: 15
+        object_id: '12'
+        object_repr: us2ko
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 177
+    fields:
+        action_time: 2020-11-05 00:26:21.894886+00:00
+        user: 1
+        content_type: 13
+        object_id: '2'
+        object_repr: None - login_register.Crop.None
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 178
+    fields:
+        action_time: 2020-11-05 00:26:21.896584+00:00
+        user: 1
+        content_type: 13
+        object_id: '1'
+        object_repr: None - login_register.Crop.None
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 179
+    fields:
+        action_time: 2020-11-05 00:46:01.090097+00:00
+        user: 1
+        content_type: 10
+        object_id: '109'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 180
+    fields:
+        action_time: 2020-11-05 00:46:01.092720+00:00
+        user: 1
+        content_type: 10
+        object_id: '108'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 181
+    fields:
+        action_time: 2020-11-05 00:46:01.094528+00:00
+        user: 1
+        content_type: 10
+        object_id: '107'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 182
+    fields:
+        action_time: 2020-11-05 00:46:01.096138+00:00
+        user: 1
+        content_type: 10
+        object_id: '106'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 183
+    fields:
+        action_time: 2020-11-05 00:46:01.097420+00:00
+        user: 1
+        content_type: 10
+        object_id: '105'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 184
+    fields:
+        action_time: 2020-11-05 00:46:01.098920+00:00
+        user: 1
+        content_type: 10
+        object_id: '104'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 185
+    fields:
+        action_time: 2020-11-05 00:46:01.100634+00:00
+        user: 1
+        content_type: 10
+        object_id: '103'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 186
+    fields:
+        action_time: 2020-11-05 00:46:01.102278+00:00
+        user: 1
+        content_type: 10
+        object_id: '102'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 187
+    fields:
+        action_time: 2020-11-05 00:46:01.103611+00:00
+        user: 1
+        content_type: 10
+        object_id: '101'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 188
+    fields:
+        action_time: 2020-11-05 00:46:01.104818+00:00
+        user: 1
+        content_type: 10
+        object_id: '100'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 189
+    fields:
+        action_time: 2020-11-05 00:46:01.106240+00:00
+        user: 1
+        content_type: 10
+        object_id: '99'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 190
+    fields:
+        action_time: 2020-11-05 00:46:01.107451+00:00
+        user: 1
+        content_type: 10
+        object_id: '98'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 191
+    fields:
+        action_time: 2020-11-05 00:46:01.108579+00:00
+        user: 1
+        content_type: 10
+        object_id: '97'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 192
+    fields:
+        action_time: 2020-11-05 00:46:01.109505+00:00
+        user: 1
+        content_type: 10
+        object_id: '96'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 193
+    fields:
+        action_time: 2020-11-05 00:46:01.110373+00:00
+        user: 1
+        content_type: 10
+        object_id: '95'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 194
+    fields:
+        action_time: 2020-11-05 00:46:01.111283+00:00
+        user: 1
+        content_type: 10
+        object_id: '94'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 195
+    fields:
+        action_time: 2020-11-05 00:46:01.112160+00:00
+        user: 1
+        content_type: 10
+        object_id: '93'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 196
+    fields:
+        action_time: 2020-11-05 00:46:01.113015+00:00
+        user: 1
+        content_type: 10
+        object_id: '92'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 197
+    fields:
+        action_time: 2020-11-05 00:46:01.113869+00:00
+        user: 1
+        content_type: 10
+        object_id: '91'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 198
+    fields:
+        action_time: 2020-11-05 00:46:01.114727+00:00
+        user: 1
+        content_type: 10
+        object_id: '90'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 199
+    fields:
+        action_time: 2020-11-05 00:46:01.115544+00:00
+        user: 1
+        content_type: 10
+        object_id: '89'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 200
+    fields:
+        action_time: 2020-11-05 00:46:01.116338+00:00
+        user: 1
+        content_type: 10
+        object_id: '88'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 201
+    fields:
+        action_time: 2020-11-05 00:46:01.117128+00:00
+        user: 1
+        content_type: 10
+        object_id: '87'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 202
+    fields:
+        action_time: 2020-11-05 00:46:01.117922+00:00
+        user: 1
+        content_type: 10
+        object_id: '86'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 203
+    fields:
+        action_time: 2020-11-05 00:46:01.118955+00:00
+        user: 1
+        content_type: 10
+        object_id: '85'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 204
+    fields:
+        action_time: 2020-11-05 00:46:01.119757+00:00
+        user: 1
+        content_type: 10
+        object_id: '84'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 205
+    fields:
+        action_time: 2020-11-05 00:46:01.120560+00:00
+        user: 1
+        content_type: 10
+        object_id: '83'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 206
+    fields:
+        action_time: 2020-11-05 00:46:01.121382+00:00
+        user: 1
+        content_type: 10
+        object_id: '82'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 207
+    fields:
+        action_time: 2020-11-05 00:46:01.122355+00:00
+        user: 1
+        content_type: 10
+        object_id: '81'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 208
+    fields:
+        action_time: 2020-11-05 00:46:01.123499+00:00
+        user: 1
+        content_type: 10
+        object_id: '80'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 209
+    fields:
+        action_time: 2020-11-05 00:46:01.124762+00:00
+        user: 1
+        content_type: 10
+        object_id: '79'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 210
+    fields:
+        action_time: 2020-11-05 00:46:01.125769+00:00
+        user: 1
+        content_type: 10
+        object_id: '78'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 211
+    fields:
+        action_time: 2020-11-05 00:46:01.126702+00:00
+        user: 1
+        content_type: 10
+        object_id: '77'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 212
+    fields:
+        action_time: 2020-11-05 00:46:01.127720+00:00
+        user: 1
+        content_type: 10
+        object_id: '76'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 213
+    fields:
+        action_time: 2020-11-05 00:46:01.128760+00:00
+        user: 1
+        content_type: 10
+        object_id: '75'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 214
+    fields:
+        action_time: 2020-11-05 00:46:01.129748+00:00
+        user: 1
+        content_type: 10
+        object_id: '74'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 215
+    fields:
+        action_time: 2020-11-05 00:46:01.130738+00:00
+        user: 1
+        content_type: 10
+        object_id: '73'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 216
+    fields:
+        action_time: 2020-11-05 00:46:01.131761+00:00
+        user: 1
+        content_type: 10
+        object_id: '72'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 217
+    fields:
+        action_time: 2020-11-05 00:46:01.132766+00:00
+        user: 1
+        content_type: 10
+        object_id: '71'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 218
+    fields:
+        action_time: 2020-11-05 00:46:01.133726+00:00
+        user: 1
+        content_type: 10
+        object_id: '70'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 219
+    fields:
+        action_time: 2020-11-05 00:46:01.134752+00:00
+        user: 1
+        content_type: 10
+        object_id: '69'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 220
+    fields:
+        action_time: 2020-11-05 00:46:01.135742+00:00
+        user: 1
+        content_type: 10
+        object_id: '68'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 221
+    fields:
+        action_time: 2020-11-05 00:46:01.136729+00:00
+        user: 1
+        content_type: 10
+        object_id: '67'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 222
+    fields:
+        action_time: 2020-11-05 00:46:01.137703+00:00
+        user: 1
+        content_type: 10
+        object_id: '66'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 223
+    fields:
+        action_time: 2020-11-05 00:46:01.139057+00:00
+        user: 1
+        content_type: 10
+        object_id: '65'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 224
+    fields:
+        action_time: 2020-11-05 00:46:01.140358+00:00
+        user: 1
+        content_type: 10
+        object_id: '64'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 225
+    fields:
+        action_time: 2020-11-05 00:46:01.141523+00:00
+        user: 1
+        content_type: 10
+        object_id: '63'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 226
+    fields:
+        action_time: 2020-11-05 00:46:01.142552+00:00
+        user: 1
+        content_type: 10
+        object_id: '62'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 227
+    fields:
+        action_time: 2020-11-05 00:46:01.143487+00:00
+        user: 1
+        content_type: 10
+        object_id: '61'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 228
+    fields:
+        action_time: 2020-11-05 00:46:01.144412+00:00
+        user: 1
+        content_type: 10
+        object_id: '60'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 229
+    fields:
+        action_time: 2020-11-05 00:46:01.145349+00:00
+        user: 1
+        content_type: 10
+        object_id: '59'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 230
+    fields:
+        action_time: 2020-11-05 00:46:01.146284+00:00
+        user: 1
+        content_type: 10
+        object_id: '58'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 231
+    fields:
+        action_time: 2020-11-05 00:46:01.147210+00:00
+        user: 1
+        content_type: 10
+        object_id: '57'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 232
+    fields:
+        action_time: 2020-11-05 00:46:01.148217+00:00
+        user: 1
+        content_type: 10
+        object_id: '56'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 233
+    fields:
+        action_time: 2020-11-05 00:46:01.149303+00:00
+        user: 1
+        content_type: 10
+        object_id: '55'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 234
+    fields:
+        action_time: 2020-11-05 00:46:01.150383+00:00
+        user: 1
+        content_type: 10
+        object_id: '54'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 235
+    fields:
+        action_time: 2020-11-05 00:46:01.151471+00:00
+        user: 1
+        content_type: 10
+        object_id: '53'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 236
+    fields:
+        action_time: 2020-11-05 00:46:01.152539+00:00
+        user: 1
+        content_type: 10
+        object_id: '52'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 237
+    fields:
+        action_time: 2020-11-05 00:46:01.153609+00:00
+        user: 1
+        content_type: 10
+        object_id: '51'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 238
+    fields:
+        action_time: 2020-11-05 00:46:01.154564+00:00
+        user: 1
+        content_type: 10
+        object_id: '50'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 239
+    fields:
+        action_time: 2020-11-05 00:46:01.155515+00:00
+        user: 1
+        content_type: 10
+        object_id: '49'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 240
+    fields:
+        action_time: 2020-11-05 00:46:01.156556+00:00
+        user: 1
+        content_type: 10
+        object_id: '48'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 241
+    fields:
+        action_time: 2020-11-05 00:46:01.157846+00:00
+        user: 1
+        content_type: 10
+        object_id: '47'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 242
+    fields:
+        action_time: 2020-11-05 00:46:01.158951+00:00
+        user: 1
+        content_type: 10
+        object_id: '46'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 243
+    fields:
+        action_time: 2020-11-05 00:46:01.159903+00:00
+        user: 1
+        content_type: 10
+        object_id: '45'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 244
+    fields:
+        action_time: 2020-11-05 00:46:01.160825+00:00
+        user: 1
+        content_type: 10
+        object_id: '44'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 245
+    fields:
+        action_time: 2020-11-05 00:46:01.161727+00:00
+        user: 1
+        content_type: 10
+        object_id: '43'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 246
+    fields:
+        action_time: 2020-11-05 00:46:01.162667+00:00
+        user: 1
+        content_type: 10
+        object_id: '42'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 247
+    fields:
+        action_time: 2020-11-05 00:46:01.163598+00:00
+        user: 1
+        content_type: 10
+        object_id: '41'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 248
+    fields:
+        action_time: 2020-11-05 00:46:01.164515+00:00
+        user: 1
+        content_type: 10
+        object_id: '40'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 249
+    fields:
+        action_time: 2020-11-05 00:46:01.165452+00:00
+        user: 1
+        content_type: 10
+        object_id: '39'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 250
+    fields:
+        action_time: 2020-11-05 00:46:01.166380+00:00
+        user: 1
+        content_type: 10
+        object_id: '38'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 251
+    fields:
+        action_time: 2020-11-05 00:46:01.167338+00:00
+        user: 1
+        content_type: 10
+        object_id: '37'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 252
+    fields:
+        action_time: 2020-11-05 00:46:01.168385+00:00
+        user: 1
+        content_type: 10
+        object_id: '36'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 253
+    fields:
+        action_time: 2020-11-05 00:46:01.169719+00:00
+        user: 1
+        content_type: 10
+        object_id: '35'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 254
+    fields:
+        action_time: 2020-11-05 00:46:01.171078+00:00
+        user: 1
+        content_type: 10
+        object_id: '34'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 255
+    fields:
+        action_time: 2020-11-05 00:46:01.172551+00:00
+        user: 1
+        content_type: 10
+        object_id: '33'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 256
+    fields:
+        action_time: 2020-11-05 00:46:01.173700+00:00
+        user: 1
+        content_type: 10
+        object_id: '32'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 257
+    fields:
+        action_time: 2020-11-05 00:46:01.174853+00:00
+        user: 1
+        content_type: 10
+        object_id: '31'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 258
+    fields:
+        action_time: 2020-11-05 00:46:01.175835+00:00
+        user: 1
+        content_type: 10
+        object_id: '30'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 259
+    fields:
+        action_time: 2020-11-05 00:46:01.176710+00:00
+        user: 1
+        content_type: 10
+        object_id: '29'
+        object_repr: ''
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 260
+    fields:
+        action_time: 2020-11-05 01:20:48.750731+00:00
+        user: 1
+        content_type: 9
+        object_id: '4'
+        object_repr: Experimental Kamote
+        action_flag: 1
+        change_message: '[{"added": {}}]'
+-   model: admin.logentry
+    pk: 261
+    fields:
+        action_time: 2020-11-05 01:40:34.679048+00:00
+        user: 1
+        content_type: 4
+        object_id: '18'
+        object_repr: blackmamba
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 262
+    fields:
+        action_time: 2020-11-05 01:40:34.680919+00:00
+        user: 1
+        content_type: 4
+        object_id: '14'
+        object_repr: Cary1997
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 263
+    fields:
+        action_time: 2020-11-05 01:40:34.682322+00:00
+        user: 1
+        content_type: 4
+        object_id: '7'
+        object_repr: customer
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 264
+    fields:
+        action_time: 2020-11-05 01:40:34.683565+00:00
+        user: 1
+        content_type: 4
+        object_id: '23'
+        object_repr: DonFarmer
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 265
+    fields:
+        action_time: 2020-11-05 01:40:34.684759+00:00
+        user: 1
+        content_type: 4
+        object_id: '6'
+        object_repr: farmer
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 266
+    fields:
+        action_time: 2020-11-05 01:40:34.685716+00:00
+        user: 1
+        content_type: 4
+        object_id: '22'
+        object_repr: HelloWorld
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 267
+    fields:
+        action_time: 2020-11-05 01:40:34.686567+00:00
+        user: 1
+        content_type: 4
+        object_id: '15'
+        object_repr: JDC
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 268
+    fields:
+        action_time: 2020-11-05 01:40:34.687345+00:00
+        user: 1
+        content_type: 4
+        object_id: '13'
+        object_repr: JRrosalijos
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 269
+    fields:
+        action_time: 2020-11-05 01:40:34.688185+00:00
+        user: 1
+        content_type: 4
+        object_id: '12'
+        object_repr: juan
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 270
+    fields:
+        action_time: 2020-11-05 01:40:34.689023+00:00
+        user: 1
+        content_type: 4
+        object_id: '21'
+        object_repr: Kevin09
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 271
+    fields:
+        action_time: 2020-11-05 01:40:34.689981+00:00
+        user: 1
+        content_type: 4
+        object_id: '24'
+        object_repr: Kobe123
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 272
+    fields:
+        action_time: 2020-11-05 01:40:34.690880+00:00
+        user: 1
+        content_type: 4
+        object_id: '20'
+        object_repr: KobeParas
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 273
+    fields:
+        action_time: 2020-11-05 01:40:34.691802+00:00
+        user: 1
+        content_type: 4
+        object_id: '16'
+        object_repr: Lebron123
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 274
+    fields:
+        action_time: 2020-11-05 01:40:34.692649+00:00
+        user: 1
+        content_type: 4
+        object_id: '17'
+        object_repr: Lebron23
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 275
+    fields:
+        action_time: 2020-11-05 01:40:34.693535+00:00
+        user: 1
+        content_type: 4
+        object_id: '3'
+        object_repr: magsasaka
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 276
+    fields:
+        action_time: 2020-11-05 01:40:34.694385+00:00
+        user: 1
+        content_type: 4
+        object_id: '27'
+        object_repr: magsasaka2
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 277
+    fields:
+        action_time: 2020-11-05 01:40:34.695243+00:00
+        user: 1
+        content_type: 4
+        object_id: '19'
+        object_repr: StephCurry
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 278
+    fields:
+        action_time: 2020-11-05 01:40:34.696434+00:00
+        user: 1
+        content_type: 4
+        object_id: '28'
+        object_repr: us2ko
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 279
+    fields:
+        action_time: 2020-11-05 01:40:34.697939+00:00
+        user: 1
+        content_type: 4
+        object_id: '2'
+        object_repr: us2mer
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 280
+    fields:
+        action_time: 2020-11-05 01:40:34.699373+00:00
+        user: 1
+        content_type: 4
+        object_id: '4'
+        object_repr: us2merz
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 281
+    fields:
+        action_time: 2020-11-05 01:40:34.700991+00:00
+        user: 1
+        content_type: 4
+        object_id: '25'
+        object_repr: Warlock
+        action_flag: 3
+        change_message: ''
+-   model: admin.logentry
+    pk: 282
+    fields:
+        action_time: 2020-11-05 01:40:34.702254+00:00
+        user: 1
+        content_type: 4
+        object_id: '26'
+        object_repr: zzzz
+        action_flag: 3
+        change_message: ''
 -   model: auth.permission
     pk: 1
     fields:
@@ -1840,7 +3280,7 @@ Scheduler started...
     pk: 1
     fields:
         password: pbkdf2_sha256$216000$LcDc1VsIkZiP$SE0KjbDCWekmyOguXYilOEvNfS2G3ltAQ6K+2GkNbeI=
-        last_login: 2020-11-03 05:26:12.988000+00:00
+        last_login: 2020-11-03 23:44:45.939523+00:00
         is_superuser: true
         username: atoani
         first_name: ''
@@ -1850,356 +3290,6 @@ Scheduler started...
         is_active: true
         date_joined: 2020-10-29 12:26:35.004000+00:00
         groups: []
-        user_permissions: []
--   model: auth.user
-    pk: 2
-    fields:
-        password: pbkdf2_sha256$216000$w6ViKZvv6Q1D$Sp65cptzkSxNNyAtz1aZ7tOv5piXUYnaOWmTQm+iEmo=
-        last_login: null
-        is_superuser: false
-        username: us2mer
-        first_name: us2
-        last_name: mer
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-11-02 13:19:58.793000+00:00
-        groups: []
-        user_permissions: []
--   model: auth.user
-    pk: 3
-    fields:
-        password: pbkdf2_sha256$216000$ovT1MxvgTv3j$eH0kU5oYyHv6BqYE0dKGm6vZslnSUPAHO46G20BKzqY=
-        last_login: 2020-11-03 01:56:32.322000+00:00
-        is_superuser: false
-        username: magsasaka
-        first_name: magsa
-        last_name: saka
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-11-02 13:21:46.559000+00:00
-        groups: []
-        user_permissions: []
--   model: auth.user
-    pk: 4
-    fields:
-        password: pbkdf2_sha256$216000$fcqLZ2DJI3eJ$L8NLHaEh5x69DNSLLLtbkBp4rHvmo/rrq5/8BoPmG/o=
-        last_login: 2020-11-03 04:43:13.675000+00:00
-        is_superuser: false
-        username: us2merz
-        first_name: us2
-        last_name: mer
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-11-02 13:34:05.640000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 6
-    fields:
-        password: pbkdf2_sha256$216000$VnRYM7wjCBQM$su/kobeMJteRtj4vPeRrw6GXLVKZgthtutp26++CxoU=
-        last_login: 2020-11-01 18:09:00.382000+00:00
-        is_superuser: false
-        username: farmer
-        first_name: Juan
-        last_name: De la Cruz
-        email: gwynn.causing23@gmail.com
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-29 13:37:39+00:00
-        groups:
-        - 1
-        user_permissions: []
--   model: auth.user
-    pk: 7
-    fields:
-        password: pbkdf2_sha256$216000$KRS7sC3eoszH$6ww51+QAfb6nTRUGwlDB8WZ2TNA3ndbD17OQqkuoY0M=
-        last_login: 2020-11-01 17:37:14.563000+00:00
-        is_superuser: false
-        username: customer
-        first_name: Jose
-        last_name: Talong
-        email: customer@gmail.com
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-29 13:38:12.427000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 12
-    fields:
-        password: pbkdf2_sha256$216000$k4MAtMlqdwMg$n5WKLejD1/fZr+W7qSxArb/eYyoLPptqYMUQIw0OS0c=
-        last_login: 2020-10-30 09:45:45.787000+00:00
-        is_superuser: false
-        username: juan
-        first_name: juan
-        last_name: tzamadz
-        email: juan@gmail.com
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-30 09:25:40.412000+00:00
-        groups:
-        - 1
-        user_permissions: []
--   model: auth.user
-    pk: 13
-    fields:
-        password: pbkdf2_sha256$216000$ynvFxBC8z5J5$d6NqFfGoCfisX8x6B8olPdItmh9QaHolUOFFTKXPsPE=
-        last_login: null
-        is_superuser: false
-        username: JRrosalijos
-        first_name: Joshua
-        last_name: Rosalijos
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-30 16:56:37.325000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 14
-    fields:
-        password: pbkdf2_sha256$216000$FRDr8NdfVzLW$P5j3l84P5FboCHr2QxW3qMC1qL2V9hDV9/nUT54uAzU=
-        last_login: null
-        is_superuser: false
-        username: Cary1997
-        first_name: Cary
-        last_name: Legaspi
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-30 17:05:26.223000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 15
-    fields:
-        password: pbkdf2_sha256$216000$XazbOiqrp8ZC$gv+FyqIh2D0GgPGAl82+/V+Ymm6CUP8aGCX7CDNPvTQ=
-        last_login: 2020-10-31 03:32:22.909000+00:00
-        is_superuser: false
-        username: JDC
-        first_name: Juan
-        last_name: Dela Cruz
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 03:32:07.644000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 16
-    fields:
-        password: pbkdf2_sha256$216000$9hJ8S5YPuORJ$86glNXWg5Q1AvgmKg6NK+CA/qWTIOEunw/dQsVCMSxA=
-        last_login: null
-        is_superuser: false
-        username: Lebron123
-        first_name: Lebron
-        last_name: James
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 03:36:23.435000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 17
-    fields:
-        password: pbkdf2_sha256$216000$qO0knpqQJiMi$Qmm7frLcvO0B+k3ta6bkjoj7GrTgB25fkmxSlF6dGu4=
-        last_login: null
-        is_superuser: false
-        username: Lebron23
-        first_name: Lebron
-        last_name: James
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 03:43:55.833000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 18
-    fields:
-        password: pbkdf2_sha256$216000$2H8gSXRINIOF$vfzfWXQXfRRfGqRETsxS2x+E/gd6aiqgxZ4wDYMXCX8=
-        last_login: null
-        is_superuser: false
-        username: blackmamba
-        first_name: 'Kobe '
-        last_name: Bryant
-        email: rosalijos@gmail.com
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 04:32:19.616000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 19
-    fields:
-        password: pbkdf2_sha256$216000$eos2FBu5w6Av$Y/DuHIBbZXAs9TZTdHSrykfH9IZCfGu+Q9sGFBRoLLg=
-        last_login: null
-        is_superuser: false
-        username: StephCurry
-        first_name: 'Stephen '
-        last_name: Curry
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 05:34:24.094000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 20
-    fields:
-        password: pbkdf2_sha256$216000$bJ2SIFTMPp8M$1cLXc9ZL1ahYXNY0ZflrwHNSKB4y/jrJM5whAeMiJSM=
-        last_login: null
-        is_superuser: false
-        username: KobeParas
-        first_name: Kobe
-        last_name: Paras
-        email: kobe@gmail.com
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 05:37:35.633000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 21
-    fields:
-        password: pbkdf2_sha256$216000$bR8UeFK4DT8Z$GBX9QKdI8wNsy5rnHk/Xpq+RfuhTtMiRa8o/IxM+Z0c=
-        last_login: null
-        is_superuser: false
-        username: Kevin09
-        first_name: Kevin
-        last_name: Durant
-        email: kevin@gmail.com
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 05:50:45.382000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 22
-    fields:
-        password: pbkdf2_sha256$216000$jmRhE9kHONan$yU9BL4jw+AqZXuCmTyeRKDs7+MANXSwjUrBwPSpnYhM=
-        last_login: null
-        is_superuser: false
-        username: HelloWorld
-        first_name: Hello
-        last_name: World
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 05:59:56.466000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 23
-    fields:
-        password: pbkdf2_sha256$216000$gSj5JMXzCDWV$gsNQ0D3bT9pKndU3yawFjwYQbPU+DiohuMRXFRvBiiw=
-        last_login: null
-        is_superuser: false
-        username: DonFarmer
-        first_name: Don
-        last_name: Farmer
-        email: donfarmer@gmail.com
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 06:41:25.700000+00:00
-        groups:
-        - 1
-        user_permissions: []
--   model: auth.user
-    pk: 24
-    fields:
-        password: pbkdf2_sha256$216000$wthRUtt5KtYF$vq9r9n+nGaVzdY4+uHZ65y9w/a8Ziq6eWxsR97g7ctg=
-        last_login: null
-        is_superuser: false
-        username: Kobe123
-        first_name: ''
-        last_name: ''
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 07:28:42.618000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 25
-    fields:
-        password: pbkdf2_sha256$216000$mWzLTZWJfPQ0$wNd+3nBCs/92vQwXM7ogBixrEwyop4vhfcC83KKzGzI=
-        last_login: null
-        is_superuser: false
-        username: Warlock
-        first_name: Warlock
-        last_name: James
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 08:58:46.898000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 26
-    fields:
-        password: pbkdf2_sha256$216000$PWHR47CQTJMW$lztKefrIh0rsGUiC40VW7/1SRZvpiNgL0Svp0T+/Ux8=
-        last_login: null
-        is_superuser: false
-        username: zzzz
-        first_name: zzzzzzzz
-        last_name: zzzzzzzzz
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-10-31 09:00:12.974000+00:00
-        groups:
-        - 2
-        user_permissions: []
--   model: auth.user
-    pk: 27
-    fields:
-        password: pbkdf2_sha256$216000$TyUR1KBlZRZS$XIz8Gshll8bVfZYS6KCESe0x3A1rQEXO2TCJaRtLDvc=
-        last_login: 2020-11-03 05:22:04.971000+00:00
-        is_superuser: false
-        username: magsasaka2
-        first_name: magsasa
-        last_name: ka
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-11-03 01:57:36.294000+00:00
-        groups:
-        - 1
-        user_permissions: []
--   model: auth.user
-    pk: 28
-    fields:
-        password: pbkdf2_sha256$216000$n98e8fIsq4HN$BweYSF1jBt5zW4Fhivmdig7mug8bq8JBxM83TG1q2Ec=
-        last_login: 2020-11-03 05:14:20.097000+00:00
-        is_superuser: false
-        username: us2ko
-        first_name: us2
-        last_name: ko
-        email: ''
-        is_staff: false
-        is_active: true
-        date_joined: 2020-11-03 04:44:55.380000+00:00
-        groups:
-        - 2
         user_permissions: []
 -   model: contenttypes.contenttype
     pk: 1
@@ -2297,6 +3387,11 @@ Scheduler started...
         session_data: .eJxVjMEOwiAQRP-FsyFsywbw6N1vIMsCUjWQlPZk_Hcl6UFPk8x7My_had-K33ta_RLFWYA4_XaB-JHqAPFO9dYkt7qtS5BDkQft8tpiel4O9--gUC9jPevsjNFxcjpbNmiJLdBsgIGdA83fVIGjshwAiRAxG0CMap5UyOL9Ad3zN8g:1kYVMw:KX32nzvdGT1Wd6AntiILcUqr92m6YJZsS5sOI2fSB5E
         expire_date: 2020-11-13 14:27:06.590000+00:00
 -   model: sessions.session
+    pk: 418zh08mwylr55sqha4qfilrrtgbaur7
+    fields:
+        session_data: .eJxVjMEOwiAQRP-FsyFsywbw6N1vIMsCUjWQlPZk_Hcl6UFPk8x7My_had-K33ta_RLFWYA4_XaB-JHqAPFO9dYkt7qtS5BDkQft8tpiel4O9--gUC9jPevsjNFxcjpbNmiJLdBsgIGdA83fVIGjshwAiRAxG0CMap5UyOL9Ad3zN8g:1ka5yn:rJVtUtwpAo0PhJkCDYQ-7uFc7gtFGsD3-yUGafrAZ78
+        expire_date: 2020-11-17 23:44:45.942520+00:00
+-   model: sessions.session
     pk: 84lx4oxi5iz4z1p894tl073b3p9kn9gg
     fields:
         session_data: .eJxVjMEOwiAQRP-FsyFsywbw6N1vIMsCUjWQlPZk_Hcl6UFPk8x7My_had-K33ta_RLFWYA4_XaB-JHqAPFO9dYkt7qtS5BDkQft8tpiel4O9--gUC9jPevsjNFxcjpbNmiJLdBsgIGdA83fVIGjshwAiRAxG0CMap5UyOL9Ad3zN8g:1kYsRb:xKPb3cf6wFVua84yEVlxAD4R_OZFuvklf3XqobC87NM
@@ -2372,11 +3467,6 @@ Scheduler started...
         session_data: .eJxVjEEOwiAQRe_C2hBgKFCX7j0DYZhBqoYmpV0Z765NutDtf-_9l4hpW2vcOi9xInEWXpx-N0z5wW0HdE_tNss8t3WZUO6KPGiX15n4eTncv4Oaev3WwKakDB6YsBApdtoHGjQ7LD4YHNUAYLMZrfJgVApgWSvl0GYywWTx_gD08jeW:1kYOjm:m7LdMk8DiqikDUMA__cb-K3FVP-r6lyXSzIRzT45Mo0
         expire_date: 2020-11-13 07:22:14.464000+00:00
 -   model: sessions.session
-    pk: tzsm50gow8tuh728k4eoh4kgzt1ihew1
-    fields:
-        session_data: .eJxVjMEOwiAQRP-FsyFsywbw6N1vIMsCUjWQlPZk_Hcl6UFPk8x7My_had-K33ta_RLFWYA4_XaB-JHqAPFO9dYkt7qtS5BDkQft8tpiel4O9--gUC9jPevsjNFxcjpbNmiJLdBsgIGdA83fVIGjshwAiRAxG0CMap5UyOL9Ad3zN8g:1kZopg:76uyocnRya_OEh0dgvQ6fnLEjQw0Waoq344hynEBWQU
-        expire_date: 2020-11-17 05:26:12.990000+00:00
--   model: sessions.session
     pk: xml23ih3lrj0hzelsjmkgs03yys22ylp
     fields:
         session_data: .eJxVjEsOwiAUAO_C2hAon6JL956BvA9I1UBS2pXx7oakC93OTOYtIuxbiXtPa1xYXIQXp1-GQM9Uh-AH1HuT1Oq2LihHIg_b5a1xel2P9m9QoJexTQzGKWu1YiSHmjOhAfYW2JHJU1BT0pZYBZ3JBfbnOYPi2ZMnZ434fAEEqjiB:1kYU8X:gbPGU0_ewPRbWEsrmKh_mXS-A1eW_zibENJBPxJd23U
@@ -2389,8 +3479,8 @@ Scheduler started...
 -   model: django_apscheduler.djangojob
     pk: check_obsolete_orders
     fields:
-        next_run_time: 2020-11-04 05:28:47.411030+00:00
-        job_state: gAWV0AEAAAAAAAB9lCiMB3ZlcnNpb26USwGMAmlklIwVY2hlY2tfb2Jzb2xldGVfb3JkZXJzlIwEZnVuY5SMOGxvZ2luX3JlZ2lzdGVyLmNvbm5lY3RpdmVmdW5jdGlvbnM6Y2hlY2tfb2Jzb2xldGVfb3JkZXJzlIwHdHJpZ2dlcpSMHWFwc2NoZWR1bGVyLnRyaWdnZXJzLmludGVydmFslIwPSW50ZXJ2YWxUcmlnZ2VylJOUKYGUfZQoaAFLAowIdGltZXpvbmWUjARweXR6lIwEX1VUQ5STlClSlIwKc3RhcnRfZGF0ZZSMCGRhdGV0aW1llIwIZGF0ZXRpbWWUk5RDCgfkCwQFHC8GRZaUaBCGlFKUjAhlbmRfZGF0ZZROjAhpbnRlcnZhbJRoEowJdGltZWRlbHRhlJOUSwFLAEsAh5RSlIwGaml0dGVylE51YowIZXhlY3V0b3KUjAdkZWZhdWx0lIwEYXJnc5QpjAZrd2FyZ3OUfZSMBG5hbWWUjAxjbGVhbl9vcmRlcnOUjBJtaXNmaXJlX2dyYWNlX3RpbWWUSwGMCGNvYWxlc2NllIiMDW1heF9pbnN0YW5jZXOUSwGMDW5leHRfcnVuX3RpbWWUaBd1Lg==
+        next_run_time: 2020-11-06 01:42:58.659785+00:00
+        job_state: gAWV0AEAAAAAAAB9lCiMB3ZlcnNpb26USwGMAmlklIwVY2hlY2tfb2Jzb2xldGVfb3JkZXJzlIwEZnVuY5SMOGxvZ2luX3JlZ2lzdGVyLmNvbm5lY3RpdmVmdW5jdGlvbnM6Y2hlY2tfb2Jzb2xldGVfb3JkZXJzlIwHdHJpZ2dlcpSMHWFwc2NoZWR1bGVyLnRyaWdnZXJzLmludGVydmFslIwPSW50ZXJ2YWxUcmlnZ2VylJOUKYGUfZQoaAFLAowIdGltZXpvbmWUjARweXR6lIwEX1VUQ5STlClSlIwKc3RhcnRfZGF0ZZSMCGRhdGV0aW1llIwIZGF0ZXRpbWWUk5RDCgfkCwYBKjoKEUmUaBCGlFKUjAhlbmRfZGF0ZZROjAhpbnRlcnZhbJRoEowJdGltZWRlbHRhlJOUSwFLAEsAh5RSlIwGaml0dGVylE51YowIZXhlY3V0b3KUjAdkZWZhdWx0lIwEYXJnc5QpjAZrd2FyZ3OUfZSMBG5hbWWUjAxjbGVhbl9vcmRlcnOUjBJtaXNmaXJlX2dyYWNlX3RpbWWUSwGMCGNvYWxlc2NllIiMDW1heF9pbnN0YW5jZXOUSwGMDW5leHRfcnVuX3RpbWWUaBd1Lg==
 -   model: django_apscheduler.djangojobexecution
     pk: 1
     fields:
@@ -3402,636 +4492,999 @@ Scheduler started...
         exception: null
         traceback: null
 -   model: login_register.crop
-    pk: 1
-    fields:
-        name: Experimental Potato
-        is_seasonal: true
-        season_start: March
-        season_end: August
-        harvest_weight_per_land_area: 2.0
-        harvest_time: 4
-        productivity: 0.0
--   model: login_register.location
-    pk: 1
-    fields:
-        name: Mambaling, Cebu City, Cebu
-        brgy: Mambaling
-        city: Cebu City
-        province: Cebu
--   model: login_register.location
-    pk: 2
-    fields:
-        name: Alegria, Alicia, Zamboanga Sibugay
-        brgy: Alegria
-        city: Alicia
-        province: Zamboanga Sibugay
--   model: login_register.location
-    pk: 3
-    fields:
-        name: Alegria, Alicia, Zamboanga Sibugay
-        brgy: Alegria
-        city: Alicia
-        province: Zamboanga Sibugay
--   model: login_register.location
-    pk: 6
-    fields:
-        name: Gosoon, Carmen, Agusan Del Norte
-        brgy: Gosoon
-        city: Carmen
-        province: Agusan Del Norte
--   model: login_register.location
-    pk: 7
-    fields:
-        name: Berseba, Bayugan City, Agusan Del Sur
-        brgy: Berseba
-        city: Bayugan City
-        province: Agusan Del Sur
--   model: login_register.location
-    pk: 12
-    fields:
-        name: Bayo Grande, Anini-y, Antique
-        brgy: Bayo Grande
-        city: Anini-y
-        province: Antique
--   model: login_register.location
-    pk: 13
-    fields:
-        name: Cabadiangan, Alcantara, Cebu
-        brgy: Cabadiangan
-        city: Alcantara
-        province: Cebu
--   model: login_register.location
-    pk: 14
-    fields:
-        name: Abilan, Buenavista, Agusan Del Norte
-        brgy: Abilan
-        city: Buenavista
-        province: Agusan Del Norte
--   model: login_register.location
-    pk: 15
-    fields:
-        name: Cabangila, Altavas, Aklan
-        brgy: Cabangila
-        city: Altavas
-        province: Aklan
--   model: login_register.location
-    pk: 16
-    fields:
-        name: San Roque, Pateros, Taguig - Pateros
-        brgy: San Roque
-        city: Pateros
-        province: Taguig - Pateros
--   model: login_register.location
-    pk: 17
-    fields:
-        name: Caucab, Almeria, Biliran
-        brgy: Caucab
-        city: Almeria
-        province: Biliran
--   model: login_register.location
-    pk: 18
-    fields:
-        name: Bangkal, Abucay, Bataan
-        brgy: Bangkal
-        city: Abucay
-        province: Bataan
--   model: login_register.location
-    pk: 19
-    fields:
-        name: Agdangan Pob. (San Cayetano), Baao, Camarines Sur
-        brgy: Agdangan Pob. (San Cayetano)
-        city: Baao
-        province: Camarines Sur
--   model: login_register.location
-    pk: 20
-    fields:
-        name: Balintad, Baungon, Bukidnon
-        brgy: Balintad
-        city: Baungon
-        province: Bukidnon
--   model: login_register.location
-    pk: 21
-    fields:
-        name: Agcabugao, Cuartero, Capiz
-        brgy: Agcabugao
-        city: Cuartero
-        province: Capiz
--   model: login_register.location
-    pk: 22
-    fields:
-        name: Adia, Agoncillo, Batangas
-        brgy: Adia
-        city: Agoncillo
-        province: Batangas
--   model: login_register.location
-    pk: 23
-    fields:
-        name: Alinunu, Abulug, Cagayan
-        brgy: Alinunu
-        city: Abulug
-        province: Cagayan
--   model: login_register.location
-    pk: 24
-    fields:
-        name: Cabangila, Altavas, Aklan
-        brgy: Cabangila
-        city: Altavas
-        province: Aklan
--   model: login_register.location
-    pk: 25
-    fields:
-        name: Bayo Grande, Anini-y, Antique
-        brgy: Bayo Grande
-        city: Anini-y
-        province: Antique
--   model: login_register.location
-    pk: 26
-    fields:
-        name: Antique
-        brgy: null
-        city: null
-        province: Antique
--   model: login_register.location
-    pk: 27
-    fields:
-        name: Angas, Basud, Camarines Norte
-        brgy: Angas
-        city: Basud
-        province: Camarines Norte
--   model: login_register.location
-    pk: 28
-    fields:
-        name: Basilan,Akbar,Caddayan
-        brgy: Caddayan
-        city: Akbar
-        province: Basilan
--   model: login_register.location_crop
-    pk: 1
-    fields:
-        location: 2
-        name:
-        - 1
--   model: login_register.customer
-    pk: 1
-    fields:
-        name: 7
-        street: null
-        contact_number: null
-        company: null
-        registration_date: 2020-10-29 13:38:12.587000+00:00
-        is_approved: true
-        first_question_answers: 'Yes'
-        second_question_answers: 'No'
-        location:
-        - 26
--   model: login_register.customer
-    pk: 3
-    fields:
-        name: 14
-        street: ''
-        contact_number: null
-        company: ''
-        registration_date: 2020-10-30 17:05:26.497000+00:00
-        is_approved: false
-        first_question_answers: null
-        second_question_answers: null
-        location:
-        - 15
--   model: login_register.customer
     pk: 4
     fields:
-        name: 15
-        street: ''
-        contact_number: null
-        company: ''
-        registration_date: 2020-10-31 03:32:09.812000+00:00
-        is_approved: false
-        first_question_answers: '[object HTMLSelectElement] : [object HTMLInputElement]'
-        second_question_answers: '[object HTMLSelectElement] : [object HTMLInputElement]'
-        location:
-        - 16
--   model: login_register.customer
+        name: Experimental Kamote
+        is_seasonal: false
+        season_start: Febuary
+        season_end: April
+        harvest_weight_per_land_area: 22.0
+        harvest_time: 40
+        productivity: 50.0
+-   model: login_register.crop
     pk: 5
     fields:
-        name: 18
-        street: ''
-        contact_number: null
-        company: ''
-        registration_date: 2020-10-31 04:32:19.895000+00:00
-        is_approved: false
-        first_question_answers: ''
-        second_question_answers: ''
-        location:
-        - 17
--   model: login_register.customer
+        name: Patatas
+        is_seasonal: true
+        season_start: April
+        season_end: July
+        harvest_weight_per_land_area: 23.0
+        harvest_time: 50
+        productivity: 50.0
+-   model: login_register.crop
     pk: 6
     fields:
-        name: 19
-        street: ''
-        contact_number: 09772721740
-        company: ''
-        registration_date: 2020-10-31 05:34:24.376000+00:00
-        is_approved: false
-        first_question_answers: ''
-        second_question_answers: ''
-        location:
-        - 18
--   model: login_register.customer
+        name: Ampalaya
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 20.0
+        harvest_time: 65
+        productivity: 50.0
+-   model: login_register.crop
     pk: 7
     fields:
-        name: 20
-        street: ''
-        contact_number: 09772721745
-        company: CITU
-        registration_date: 2020-10-31 05:37:35.977000+00:00
-        is_approved: false
-        first_question_answers: ''
-        second_question_answers: ''
-        location:
-        - 19
--   model: login_register.customer
+        name: Onion Bulb
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 15.0
+        harvest_time: 110
+        productivity: 50.0
+-   model: login_register.crop
     pk: 8
     fields:
-        name: 21
-        street: ''
-        contact_number: 09772721743
-        company: CITU
-        registration_date: 2020-10-31 05:50:47.244000+00:00
-        is_approved: false
-        first_question_answers: 'What is the maiden name of your mother? : mama 3'
-        second_question_answers: 'What was the name of your elementary / primary school?
-            : school 3'
-        location:
-        - 20
--   model: login_register.customer
+        name: Cabbage
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 40.0
+        harvest_time: 130
+        productivity: 50.0
+-   model: login_register.crop
     pk: 9
     fields:
-        name: 22
-        street: ''
-        contact_number: 09772721748
-        company: ''
-        registration_date: 2020-10-31 05:59:58.778000+00:00
-        is_approved: false
-        first_question_answers: 'What is the maiden name of your mother? : mama 3'
-        second_question_answers: 'What was the name of your elementary / primary school?
-            : school 3'
-        location:
-        - 21
--   model: login_register.customer
+        name: Carrots
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 25.0
+        harvest_time: 105
+        productivity: 50.0
+-   model: login_register.crop
     pk: 10
     fields:
-        name: 25
-        street: ''
-        contact_number: 09772721711
-        company: CITU
-        registration_date: 2020-10-31 08:58:47.924000+00:00
-        is_approved: false
-        first_question_answers: 'What is the maiden name of your mother? : 134134'
-        second_question_answers: 'What was the name of your elementary / primary school?
-            : 123412'
-        location:
-        - 23
--   model: login_register.customer
+        name: Cauliflower
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 30.0
+        harvest_time: 75
+        productivity: 50.0
+-   model: login_register.crop
     pk: 11
     fields:
-        name: 26
-        street: ''
-        contact_number: 09134132413
-        company: zzzzzz
-        registration_date: 2020-10-31 09:00:14.659000+00:00
-        is_approved: false
-        first_question_answers: 'In what city did you meet your spouse/significant
-            other? : zzzzzz'
-        second_question_answers: 'Who was your childhood hero? : zzzzz'
-        location:
-        - 24
--   model: login_register.customer
+        name: Eggplant
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 22.5
+        harvest_time: 75
+        productivity: 50.0
+-   model: login_register.crop
     pk: 12
     fields:
-        name: 28
-        street: '44'
-        contact_number: '9823123221'
-        company: null
-        registration_date: 2020-11-03 04:44:55.538000+00:00
-        is_approved: true
-        first_question_answers: 'What is the maiden name of your mother? : yse'
-        second_question_answers: 'What was the name of your elementary / primary school?
-            : ser'
-        location:
-        - 2
-        - 28
--   model: login_register.order
-    pk: 0656d16f-2086-40d4-9fd3-2de92c7ca988
+        name: Garlic
+        is_seasonal: true
+        season_start: February
+        season_end: April
+        harvest_weight_per_land_area: 4.5
+        harvest_time: 120
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 13
     fields:
-        customer: 4
-        crop: 1
-        custom_crop: null
-        order_date: 2020-10-11 01:44:49+00:00
-        weight: 49.0
-        location: 20
-        land_area_needed: 515.0
-        is_done: false
-        is_reserved: false
-        is_approved: false
-        is_cancelled: true
-        status: Cancelled
-        message: null
-        approved_date: null
-        cancelled_date: 2020-11-03 01:46:31.896000+00:00
--   model: login_register.order
-    pk: 223c3e6a-3ca0-4df0-9992-5596c60d512e
-    fields:
-        customer: 12
-        crop: 1
-        custom_crop: null
-        order_date: 2020-11-03 05:12:55.591000+00:00
-        weight: 10.0
-        location: 2
-        land_area_needed: 125.0
-        is_done: false
-        is_reserved: false
-        is_approved: true
-        is_cancelled: false
-        status: Harvested
-        message: null
-        approved_date: 2020-11-03 05:13:49.615000+00:00
-        cancelled_date: null
--   model: login_register.order
-    pk: 2ee3c10e-4505-4b8e-9675-48377c40d7a2
-    fields:
-        customer: 1
-        crop: 1
-        custom_crop: null
-        order_date: 2020-10-30 14:30:25.912000+00:00
-        weight: 50.0
-        location: 14
-        land_area_needed: 525.0
-        is_done: false
-        is_reserved: false
-        is_approved: true
-        is_cancelled: false
-        status: Posted
-        message: null
-        approved_date: null
-        cancelled_date: null
--   model: login_register.order
-    pk: 389475c5-40db-4d5b-b078-2e718f2d39de
-    fields:
-        customer: 1
-        crop: 1
-        custom_crop: null
-        order_date: 2020-10-30 10:40:18+00:00
-        weight: 22.0
-        location: 3
-        land_area_needed: 245.0
-        is_done: false
-        is_reserved: false
-        is_approved: true
-        is_cancelled: false
-        status: Ongoing
-        message: null
-        approved_date: null
-        cancelled_date: null
--   model: login_register.order
-    pk: 4f28e1da-9a63-48d5-b486-912fb6703c7f
-    fields:
-        customer: 1
-        crop: 1
-        custom_crop: null
-        order_date: 2020-10-30 13:07:47.760000+00:00
-        weight: 32.0
-        location: 3
-        land_area_needed: 345.0
-        is_done: false
-        is_reserved: false
-        is_approved: true
-        is_cancelled: false
-        status: Harvested
-        message: null
-        approved_date: null
-        cancelled_date: null
--   model: login_register.order
-    pk: 527b59d2-a9cd-4b0b-9bcc-482b1a7221ef
-    fields:
-        customer: 1
-        crop: 1
-        custom_crop: null
-        order_date: 2020-10-30 14:33:15.529000+00:00
-        weight: 68.0
-        location: 3
-        land_area_needed: 705.0
-        is_done: false
-        is_reserved: false
-        is_approved: true
-        is_cancelled: false
-        status: Posted
-        message: null
-        approved_date: null
-        cancelled_date: null
--   model: login_register.order
-    pk: 7687e729-1867-4932-84c7-431be1f34d2f
-    fields:
-        customer: 1
-        crop: 1
-        custom_crop: null
-        order_date: 2020-10-31 09:23:53.349000+00:00
-        weight: 52.0
-        location: 25
-        land_area_needed: 545.0
-        is_done: false
-        is_reserved: false
-        is_approved: true
-        is_cancelled: false
-        status: Posted
-        message: null
-        approved_date: 2020-11-03 05:26:57.729000+00:00
-        cancelled_date: null
--   model: login_register.order
-    pk: 974bf5b3-6dc8-4780-b0c0-c7582dc5afe4
-    fields:
-        customer: 1
-        crop: 1
-        custom_crop: null
-        order_date: 2020-10-30 10:40:22+00:00
-        weight: 22.0
-        location: 3
-        land_area_needed: 245.0
-        is_done: false
-        is_reserved: false
-        is_approved: true
-        is_cancelled: false
-        status: Ongoing
-        message: null
-        approved_date: null
-        cancelled_date: null
--   model: login_register.order
-    pk: aedc6cd6-d163-4df4-ad27-98102f49c8ce
-    fields:
-        customer: 1
-        crop: 1
-        custom_crop: null
-        order_date: 2020-10-30 10:49:10.577000+00:00
-        weight: 33.0
-        location: 3
-        land_area_needed: 355.0
-        is_done: false
-        is_reserved: true
-        is_approved: true
-        is_cancelled: false
-        status: Ongoing
-        message: null
-        approved_date: null
-        cancelled_date: null
--   model: login_register.order
-    pk: babddab5-c4d8-48e9-99bf-155f9d9b3643
-    fields:
-        customer: 1
-        crop: 1
-        custom_crop: null
-        order_date: 2020-10-30 14:34:05.743000+00:00
-        weight: 21.0
-        location: 3
-        land_area_needed: 235.0
-        is_done: false
-        is_reserved: false
-        is_approved: false
-        is_cancelled: false
-        status: Pending
-        message: null
-        approved_date: null
-        cancelled_date: null
--   model: login_register.order
-    pk: faf9dd8e-02a5-4bfc-a122-ada0d8cc18ed
-    fields:
-        customer: 1
-        crop: 1
-        custom_crop: null
-        order_date: 2020-11-02 13:35:45+00:00
-        weight: 49.0
-        location: 3
-        land_area_needed: 55.0
-        is_done: true
-        is_reserved: true
-        is_approved: true
-        is_cancelled: false
-        status: Collected
-        message: null
-        approved_date: 2020-11-03 02:40:56+00:00
-        cancelled_date: null
--   model: login_register.farmer
-    pk: 2
-    fields:
-        name: 6
-        location: 2
-        street: null
-        contact_number: null
-        company: null
-        registration_date: 2020-10-29 13:37:39.362000+00:00
-        is_approved: true
-        land_area: 120099.0
-        is_available: true
-        available_land_area: 120091409.0111
-        first_question_answers: '1'
-        second_question_answers: '1'
--   model: login_register.farmer
-    pk: 4
-    fields:
-        name: 12
-        location: 2
-        street: ''
-        contact_number: null
-        company: ''
-        registration_date: 2020-10-30 09:25:40.574000+00:00
-        is_approved: true
-        land_area: 2311.0
-        is_available: true
-        available_land_area: 2311.0
-        first_question_answers: null
-        second_question_answers: null
--   model: login_register.farmer
-    pk: 5
-    fields:
-        name: 23
-        location: 22
-        street: ''
-        contact_number: 09772721741
-        company: ''
-        registration_date: 2020-10-31 06:41:27.348000+00:00
-        is_approved: true
-        land_area: 5000.0
-        is_available: true
-        available_land_area: 5000.0
-        first_question_answers: 'What is the maiden name of your mother? : mama 5'
-        second_question_answers: 'What was the name of your elementary / primary school?
-            : school 5'
--   model: login_register.farmer
-    pk: 6
-    fields:
-        name: 27
-        location: 2
-        street: null
-        contact_number: '9123123442'
-        company: null
-        registration_date: 2020-11-03 01:57:36.433000+00:00
-        is_approved: true
-        land_area: 400.0
-        is_available: true
-        available_land_area: 400.0
-        first_question_answers: 'What is the maiden name of your mother? : mamsh'
-        second_question_answers: 'What was the name of your elementary / primary school?
-            : titser'
--   model: login_register.order_pairing
-    pk: 1
-    fields:
-        order_id: 974bf5b3-6dc8-4780-b0c0-c7582dc5afe4
-        farmer: 2
-        expected_time: null
-        accepted_date: 2020-10-30 10:41:16.954000+00:00
-        harvested_date: null
-        collected_date: null
-        delivered_date: null
-        status: Ongoing
--   model: login_register.order_pairing
-    pk: 2
-    fields:
-        order_id: 389475c5-40db-4d5b-b078-2e718f2d39de
-        farmer: 2
-        expected_time: null
-        accepted_date: 2020-10-30 10:47:16.741000+00:00
-        harvested_date: null
-        collected_date: null
-        delivered_date: null
-        status: Ongoing
--   model: login_register.order_pairing
-    pk: 3
-    fields:
-        order_id: 4f28e1da-9a63-48d5-b486-912fb6703c7f
-        farmer: 2
-        expected_time: 2020-11-04 00:00:00+00:00
-        accepted_date: 2020-10-31 13:54:57+00:00
-        harvested_date: 2020-11-03 02:59:57+00:00
-        collected_date: null
-        delivered_date: null
-        status: Harvested
--   model: login_register.order_pairing
+        name: Habitchuelas(beans)
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 5.5
+        harvest_time: 65
+        productivity: 50.0
+-   model: login_register.crop
     pk: 14
     fields:
-        order_id: faf9dd8e-02a5-4bfc-a122-ada0d8cc18ed
-        farmer: 6
-        expected_time: 2020-11-07 00:00:00+00:00
-        accepted_date: 2020-11-03 04:40:26+00:00
-        harvested_date: 2020-11-03 04:40:59+00:00
-        collected_date: 2020-11-03 04:41:11+00:00
-        delivered_date: null
-        status: Collected
--   model: login_register.order_pairing
+        name: Potato
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 20.0
+        harvest_time: 82
+        productivity: 50.0
+-   model: login_register.crop
     pk: 15
     fields:
-        order_id: 223c3e6a-3ca0-4df0-9992-5596c60d512e
-        farmer: 6
-        expected_time: 2020-11-07 00:00:00+00:00
-        accepted_date: 2020-11-03 05:14:10.882000+00:00
-        harvested_date: 2020-11-03 05:21:06.711000+00:00
-        collected_date: null
-        delivered_date: null
-        status: Harvested
+        name: Tomato
+        is_seasonal: true
+        season_start: May
+        season_end: October
+        harvest_weight_per_land_area: 12.5
+        harvest_time: 77
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 16
+    fields:
+        name: Cacao
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 1.75
+        harvest_time: 170
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 17
+    fields:
+        name: Sugarcane
+        is_seasonal: true
+        season_start: December
+        season_end: March
+        harvest_weight_per_land_area: 58.75
+        harvest_time: 390
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 18
+    fields:
+        name: Banana
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 20.25
+        harvest_time: 84
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 19
+    fields:
+        name: Calamansi
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 6.0
+        harvest_time: 120
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 20
+    fields:
+        name: Lanzones
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 0.6875
+        harvest_time: 206
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 21
+    fields:
+        name: Mangosteen
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 6.0
+        harvest_time: 113
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 22
+    fields:
+        name: Papaya
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 70.0
+        harvest_time: 195
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 23
+    fields:
+        name: Pineapple
+        is_seasonal: true
+        season_start: May
+        season_end: July
+        harvest_weight_per_land_area: 35.0
+        harvest_time: 480
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 24
+    fields:
+        name: Watermelon
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 17.5
+        harvest_time: 95
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 25
+    fields:
+        name: Asparagus
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 8.125
+        harvest_time: 360
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 26
+    fields:
+        name: Broccoli
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 9.5
+        harvest_time: 125
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 27
+    fields:
+        name: Cassava
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 25.0
+        harvest_time: 285
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 28
+    fields:
+        name: Ginger
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 25.0
+        harvest_time: 225
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 29
+    fields:
+        name: Greater yam/Ubi
+        is_seasonal: true
+        season_start: November
+        season_end: February
+        harvest_weight_per_land_area: 17.5
+        harvest_time: 135
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 30
+    fields:
+        name: Lady's finger/Okra
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 15.0
+        harvest_time: 75
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 31
+    fields:
+        name: Lettuce
+        is_seasonal: true
+        season_start: March
+        season_end: Oct
+        harvest_weight_per_land_area: 9.0
+        harvest_time: 77
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 32
+    fields:
+        name: Mung bean/Mongo
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 0.7749999999999999
+        harvest_time: 75
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 33
+    fields:
+        name: Peanut
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 0.9
+        harvest_time: 120
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 34
+    fields:
+        name: Pechay, Native
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 5.85
+        harvest_time: 35
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 35
+    fields:
+        name: Radish
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 11.5
+        harvest_time: 35
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 36
+    fields:
+        name: Squash Fruit
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 15.25
+        harvest_time: 60
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 37
+    fields:
+        name: Swamp cabbage/Kangkong
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 10.7
+        harvest_time: 60
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 38
+    fields:
+        name: Taro/Gabi
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 7.085
+        harvest_time: 240
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 39
+    fields:
+        name: Potato
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 22.5
+        harvest_time: 107
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 40
+    fields:
+        name: Hot Pepper
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 15.0
+        harvest_time: 150
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 41
+    fields:
+        name: Bell Pepper
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 25.0
+        harvest_time: 90
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 42
+    fields:
+        name: Malabar spinach(Alugbati)
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 11.0
+        harvest_time: 45
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 43
+    fields:
+        name: Mango
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 3.95
+        harvest_time: 85
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 44
+    fields:
+        name: Orange
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 1.85
+        harvest_time: 300
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 45
+    fields:
+        name: Durian
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 4.35
+        harvest_time: 103
+        productivity: 50.0
+-   model: login_register.crop
+    pk: 46
+    fields:
+        name: Rambutan
+        is_seasonal: false
+        season_start: ''
+        season_end: ''
+        harvest_weight_per_land_area: 1.35
+        harvest_time: 30
+        productivity: 50.0
+-   model: login_register.location
+    pk: 110
+    fields:
+        name: Abra
+        brgy: ''
+        city: ''
+        province: Abra
+-   model: login_register.location
+    pk: 111
+    fields:
+        name: Agusan del Norte
+        brgy: ''
+        city: ''
+        province: Agusan del Norte
+-   model: login_register.location
+    pk: 112
+    fields:
+        name: Agusan del Sur
+        brgy: ''
+        city: ''
+        province: Agusan del Sur
+-   model: login_register.location
+    pk: 113
+    fields:
+        name: Aklan
+        brgy: ''
+        city: ''
+        province: Aklan
+-   model: login_register.location
+    pk: 114
+    fields:
+        name: Albay
+        brgy: ''
+        city: ''
+        province: Albay
+-   model: login_register.location
+    pk: 115
+    fields:
+        name: Antique
+        brgy: ''
+        city: ''
+        province: Antique
+-   model: login_register.location
+    pk: 116
+    fields:
+        name: Apayao
+        brgy: ''
+        city: ''
+        province: Apayao
+-   model: login_register.location
+    pk: 117
+    fields:
+        name: Aurora
+        brgy: ''
+        city: ''
+        province: Aurora
+-   model: login_register.location
+    pk: 118
+    fields:
+        name: Basilan
+        brgy: ''
+        city: ''
+        province: Basilan
+-   model: login_register.location
+    pk: 119
+    fields:
+        name: Bataan
+        brgy: ''
+        city: ''
+        province: Bataan
+-   model: login_register.location
+    pk: 120
+    fields:
+        name: Batanes
+        brgy: ''
+        city: ''
+        province: Batanes
+-   model: login_register.location
+    pk: 121
+    fields:
+        name: Batangas
+        brgy: ''
+        city: ''
+        province: Batangas
+-   model: login_register.location
+    pk: 122
+    fields:
+        name: Benguet
+        brgy: ''
+        city: ''
+        province: Benguet
+-   model: login_register.location
+    pk: 123
+    fields:
+        name: Biliran
+        brgy: ''
+        city: ''
+        province: Biliran
+-   model: login_register.location
+    pk: 124
+    fields:
+        name: Bohol
+        brgy: ''
+        city: ''
+        province: Bohol
+-   model: login_register.location
+    pk: 125
+    fields:
+        name: Bukidnon
+        brgy: ''
+        city: ''
+        province: Bukidnon
+-   model: login_register.location
+    pk: 126
+    fields:
+        name: Bulacan
+        brgy: ''
+        city: ''
+        province: Bulacan
+-   model: login_register.location
+    pk: 127
+    fields:
+        name: Cagayan
+        brgy: ''
+        city: ''
+        province: Cagayan
+-   model: login_register.location
+    pk: 128
+    fields:
+        name: Camarines Norte
+        brgy: ''
+        city: ''
+        province: Camarines Norte
+-   model: login_register.location
+    pk: 129
+    fields:
+        name: Camarines Sur
+        brgy: ''
+        city: ''
+        province: Camarines Sur
+-   model: login_register.location
+    pk: 130
+    fields:
+        name: Camiguin
+        brgy: ''
+        city: ''
+        province: Camiguin
+-   model: login_register.location
+    pk: 131
+    fields:
+        name: Capiz
+        brgy: ''
+        city: ''
+        province: Capiz
+-   model: login_register.location
+    pk: 132
+    fields:
+        name: Catanduanes
+        brgy: ''
+        city: ''
+        province: Catanduanes
+-   model: login_register.location
+    pk: 133
+    fields:
+        name: Cavite
+        brgy: ''
+        city: ''
+        province: Cavite
+-   model: login_register.location
+    pk: 134
+    fields:
+        name: Cebu
+        brgy: ''
+        city: ''
+        province: Cebu
+-   model: login_register.location
+    pk: 135
+    fields:
+        name: Compostela Valley
+        brgy: ''
+        city: ''
+        province: Compostela Valley
+-   model: login_register.location
+    pk: 136
+    fields:
+        name: Davao del Norte
+        brgy: ''
+        city: ''
+        province: Davao del Norte
+-   model: login_register.location
+    pk: 137
+    fields:
+        name: Davao del Sur
+        brgy: ''
+        city: ''
+        province: Davao del Sur
+-   model: login_register.location
+    pk: 138
+    fields:
+        name: Davao Oriental
+        brgy: ''
+        city: ''
+        province: Davao Oriental
+-   model: login_register.location
+    pk: 139
+    fields:
+        name: Dinagat Islands
+        brgy: ''
+        city: ''
+        province: Dinagat Islands
+-   model: login_register.location
+    pk: 140
+    fields:
+        name: Eastern Samar
+        brgy: ''
+        city: ''
+        province: Eastern Samar
+-   model: login_register.location
+    pk: 141
+    fields:
+        name: Guimaras
+        brgy: ''
+        city: ''
+        province: Guimaras
+-   model: login_register.location
+    pk: 142
+    fields:
+        name: Ifugao
+        brgy: ''
+        city: ''
+        province: Ifugao
+-   model: login_register.location
+    pk: 143
+    fields:
+        name: Ilocos Norte
+        brgy: ''
+        city: ''
+        province: Ilocos Norte
+-   model: login_register.location
+    pk: 144
+    fields:
+        name: Ilocos Sur
+        brgy: ''
+        city: ''
+        province: Ilocos Sur
+-   model: login_register.location
+    pk: 145
+    fields:
+        name: Iloilo
+        brgy: ''
+        city: ''
+        province: Iloilo
+-   model: login_register.location
+    pk: 146
+    fields:
+        name: Isabela
+        brgy: ''
+        city: ''
+        province: Isabela
+-   model: login_register.location
+    pk: 147
+    fields:
+        name: Kalinga
+        brgy: ''
+        city: ''
+        province: Kalinga
+-   model: login_register.location
+    pk: 148
+    fields:
+        name: La Union
+        brgy: ''
+        city: ''
+        province: La Union
+-   model: login_register.location
+    pk: 149
+    fields:
+        name: Laguna
+        brgy: ''
+        city: ''
+        province: Laguna
+-   model: login_register.location
+    pk: 150
+    fields:
+        name: Lanao del Norte
+        brgy: ''
+        city: ''
+        province: Lanao del Norte
+-   model: login_register.location
+    pk: 151
+    fields:
+        name: Lanao del Sur
+        brgy: ''
+        city: ''
+        province: Lanao del Sur
+-   model: login_register.location
+    pk: 152
+    fields:
+        name: Leyte
+        brgy: ''
+        city: ''
+        province: Leyte
+-   model: login_register.location
+    pk: 153
+    fields:
+        name: Maguindanao
+        brgy: ''
+        city: ''
+        province: Maguindanao
+-   model: login_register.location
+    pk: 154
+    fields:
+        name: Marinduque
+        brgy: ''
+        city: ''
+        province: Marinduque
+-   model: login_register.location
+    pk: 155
+    fields:
+        name: Masbate
+        brgy: ''
+        city: ''
+        province: Masbate
+-   model: login_register.location
+    pk: 156
+    fields:
+        name: Metropolitan Manila
+        brgy: ''
+        city: ''
+        province: Metropolitan Manila
+-   model: login_register.location
+    pk: 157
+    fields:
+        name: Misamis Occidental
+        brgy: ''
+        city: ''
+        province: Misamis Occidental
+-   model: login_register.location
+    pk: 158
+    fields:
+        name: Misamis Oriental
+        brgy: ''
+        city: ''
+        province: Misamis Oriental
+-   model: login_register.location
+    pk: 159
+    fields:
+        name: Mountain Province
+        brgy: ''
+        city: ''
+        province: Mountain Province
+-   model: login_register.location
+    pk: 160
+    fields:
+        name: Negros Occidental
+        brgy: ''
+        city: ''
+        province: Negros Occidental
+-   model: login_register.location
+    pk: 161
+    fields:
+        name: Negros Oriental
+        brgy: ''
+        city: ''
+        province: Negros Oriental
+-   model: login_register.location
+    pk: 162
+    fields:
+        name: North Cotabato
+        brgy: ''
+        city: ''
+        province: North Cotabato
+-   model: login_register.location
+    pk: 163
+    fields:
+        name: Northern Samar
+        brgy: ''
+        city: ''
+        province: Northern Samar
+-   model: login_register.location
+    pk: 164
+    fields:
+        name: Nueva Ecija
+        brgy: ''
+        city: ''
+        province: Nueva Ecija
+-   model: login_register.location
+    pk: 165
+    fields:
+        name: Nueva Vizcaya
+        brgy: ''
+        city: ''
+        province: Nueva Vizcaya
+-   model: login_register.location
+    pk: 166
+    fields:
+        name: Occidental Mindoro
+        brgy: ''
+        city: ''
+        province: Occidental Mindoro
+-   model: login_register.location
+    pk: 167
+    fields:
+        name: Oriental Mindoro
+        brgy: ''
+        city: ''
+        province: Oriental Mindoro
+-   model: login_register.location
+    pk: 168
+    fields:
+        name: Palawan
+        brgy: ''
+        city: ''
+        province: Palawan
+-   model: login_register.location
+    pk: 169
+    fields:
+        name: Pampanga
+        brgy: ''
+        city: ''
+        province: Pampanga
+-   model: login_register.location
+    pk: 170
+    fields:
+        name: Pangasinan
+        brgy: ''
+        city: ''
+        province: Pangasinan
+-   model: login_register.location
+    pk: 171
+    fields:
+        name: Quezon
+        brgy: ''
+        city: ''
+        province: Quezon
+-   model: login_register.location
+    pk: 172
+    fields:
+        name: Quirino
+        brgy: ''
+        city: ''
+        province: Quirino
+-   model: login_register.location
+    pk: 173
+    fields:
+        name: Rizal
+        brgy: ''
+        city: ''
+        province: Rizal
+-   model: login_register.location
+    pk: 174
+    fields:
+        name: Romblon
+        brgy: ''
+        city: ''
+        province: Romblon
+-   model: login_register.location
+    pk: 175
+    fields:
+        name: Samar
+        brgy: ''
+        city: ''
+        province: Samar
+-   model: login_register.location
+    pk: 176
+    fields:
+        name: Sarangani
+        brgy: ''
+        city: ''
+        province: Sarangani
+-   model: login_register.location
+    pk: 177
+    fields:
+        name: Siquijor
+        brgy: ''
+        city: ''
+        province: Siquijor
+-   model: login_register.location
+    pk: 178
+    fields:
+        name: Sorsogon
+        brgy: ''
+        city: ''
+        province: Sorsogon
+-   model: login_register.location
+    pk: 179
+    fields:
+        name: South Cotabato
+        brgy: ''
+        city: ''
+        province: South Cotabato
+-   model: login_register.location
+    pk: 180
+    fields:
+        name: Southern Leyte
+        brgy: ''
+        city: ''
+        province: Southern Leyte
+-   model: login_register.location
+    pk: 181
+    fields:
+        name: Sultan Kudarat
+        brgy: ''
+        city: ''
+        province: Sultan Kudarat
+-   model: login_register.location
+    pk: 182
+    fields:
+        name: Sulu
+        brgy: ''
+        city: ''
+        province: Sulu
+-   model: login_register.location
+    pk: 183
+    fields:
+        name: Surigao del Norte
+        brgy: ''
+        city: ''
+        province: Surigao del Norte
+-   model: login_register.location
+    pk: 184
+    fields:
+        name: Surigao del Sur
+        brgy: ''
+        city: ''
+        province: Surigao del Sur
+-   model: login_register.location
+    pk: 185
+    fields:
+        name: Tarlac
+        brgy: ''
+        city: ''
+        province: Tarlac
+-   model: login_register.location
+    pk: 186
+    fields:
+        name: Tawi-Tawi
+        brgy: ''
+        city: ''
+        province: Tawi-Tawi
+-   model: login_register.location
+    pk: 187
+    fields:
+        name: Zambales
+        brgy: ''
+        city: ''
+        province: Zambales
+-   model: login_register.location
+    pk: 188
+    fields:
+        name: Zamboanga del Norte
+        brgy: ''
+        city: ''
+        province: Zamboanga del Norte
+-   model: login_register.location
+    pk: 189
+    fields:
+        name: Zamboanga del Sur
+        brgy: ''
+        city: ''
+        province: Zamboanga del Sur
+-   model: login_register.location
+    pk: 190
+    fields:
+        name: Zamboanga Sibugay
+        brgy: ''
+        city: ''
+        province: Zamboanga Sibugay
