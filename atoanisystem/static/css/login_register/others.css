@@ -148,59 +148,25 @@ h6 {
   font-size: 1.2rem;
 }
 
-.body-content {
+.body-dashoard {
   position: relative;
+  width: 95%;
   min-height: 180px;
   border: 2px #114a44 solid;
   border-radius: 0.5rem;
-  color: black;
-  padding: 15px 15px 30px 15px;
-  margin-left: 20px;
-  margin-right: 20px;
+  padding: 20px;
 }
 
-.body-content .title {
+.body-dashoard .title {
   color: #114a44;
 }
 
-.body-content .content {
-  color: black;
-  padding: 20px 15px 0px 15px;
-}
-
-.body-content .content .subtitle {
-  margin-top: 15px;
-  font-weight: bolder;
+.body-dashoard .content {
+  margin-top: 20px;
   color: #114a44;
 }
 
-.body-content .content .print {
-  color: black;
-  font-size: .8rem;
-  cursor: pointer;
+.body-dashoard .content span {
+  margin-top: 5px;
 }
-
-.body-content .content p {
-  padding: 0;
-  margin: 0;
-  text-align: justify;
-}
-
-.body-content .content ol {
-  counter-reset: list;
-  margin: 0;
-}
-
-.body-content .content ol > li {
-  list-style: none;
-  position: relative;
-  text-align: justify;
-}
-
-.body-content .content ol > li:before {
-  counter-increment: list;
-  content: "(" counter(list, lower-alpha) ") ";
-  position: absolute;
-  left: -1.4em;
-}
-/*# sourceMappingURL=terms-and-conditions.css.map */
+/*# sourceMappingURL=others.css.map */
