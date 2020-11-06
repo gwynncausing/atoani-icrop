@@ -1,6 +1,6 @@
 from login_register.models import *
 import pandas as pd
-from datetime import date, timedelta
+from datetime import date
 from django.contrib.auth.models import User
 
 '''
@@ -113,11 +113,26 @@ def convert(time):
     except:
         return None
 
+def printable_convert(time):
+    try:
+        return convert(time).strftime('%B %d, %Y')
+    except:
+        return "N/A"
+
+def printable_month(time):
+    try:
+        return convert(time).strftime('%B %Y')
+    except:
+        return "N/A"
 # get farmer's accepted orders
 def get_order_pairing_farmer(id):
     df = pd.DataFrame(Order_Pairing.objects.filter(farmer_id=id).values())
     if len(df) != 0:
-        df['accepted_date'] = df['accepted_date'].apply(convert)
+        df['accepted_date'] = df['accepted_date'].apply(printable_convert)
+        df['expected_time'] = df['expected_time'].apply(printable_month)
+        df['harvested_date'] = df['harvested_date'].apply(printable_convert)
+        df['delivered_date'] = df['delivered_date'].apply(printable_convert)
+        df['collected_date'] = df['collected_date'].apply(printable_convert)
         return df.rename(columns={"id":"order_pair_id"})
     return df
 
@@ -166,19 +181,21 @@ def datatable_customer(id):
     order= get_complete_order_customer(id)
     if len(order) !=0:
         #df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val[0] for val in order.values]).values()).drop(columns=["status"])
-        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val for val in order['order_id'].to_list()]).values()).drop(columns="status")
-        print(df['accepted_date'])
+        df = pd.DataFrame(Order_Pairing.objects.filter(order_id_id__in=[val for val in order['order_id'].to_list()]).values())
         if len(df) == 0:
+            order['order_date'] = order['order_date'].apply(printable_convert)
             order[['order_pair_id', 'farmer_id', 'expected_time', 'accepted_date', 'harvested_date', 'collected_date', 'delivered_date']] = "N/A"
             return order
         else:
+            df.drop(columns="status",inplace=True)
             df = order.merge(df, how="left", left_on="order_id", right_on="order_id_id").fillna("N/A").drop(columns=["order_id_id"])
-            print(df['accepted_date'])
             if len(df) != 0:
-                df['accepted_date'] = df['accepted_date'].apply(convert)
-                df['harvested_date'] = df['harvested_date'].apply(convert)
-                df['collected_date'] = df['collected_date'].apply(convert)
-                df['delivered_date'] = df['delivered_date'].apply(convert)
+                df['order_date'] = df['order_date'].apply(printable_convert)
+                df['accepted_date'] = df['accepted_date'].apply(printable_convert)
+                df['harvested_date'] = df['harvested_date'].apply(printable_convert)
+                df['collected_date'] = df['collected_date'].apply(printable_convert)
+                df['delivered_date'] = df['delivered_date'].apply(printable_convert)
+                df['approved_date'] = df['approved_date'].apply(printable_convert)
                 return df.rename(columns={'id':'order_pair_id'})
     return order
 
@@ -189,15 +206,9 @@ def display_customer_table(df):
         return None
     else:
         df = df.sort_values('order_date',ascending=False).reset_index(drop=True).rename(columns={'status_y':'status'})
-        return df[['order_id','order_pair_id','order_date','accepted_date','harvested_date','collected_date','delivered_date','location_id','name','weight','status']].to_dict('records')
+        df.rename(columns={'accepted_date':'reserved_date'},inplace=True)
+        return df[['order_id','order_pair_id','order_date','approved_date','reserved_date','harvested_date','collected_date','delivered_date','location_id','name','weight','status']].to_dict('records')
 
-# search a database based on date
-def search_pairing(predate,postdate,df):
-    return df[(df['accepted_date'] >= predate) & (df['accepted_date'] <= postdate)]
-
-# count order_pair status for farmer
-def count_status(df):
-    return df['status'].value_counts().reindex(['Pending','Ongoing','Harvested','Collected','Delivered'], fill_value=0)
 # BACKEND FUNCTIONS
 
 def change_farmer_details(id,details):
@@ -209,7 +220,6 @@ def change_customer_details(id,details):
 def reserve_order(order_id,farmer_id):
     d = Order_Pairing(order_id_id=order_id,farmer_id=farmer_id)
     d.save()
-    update_time_single(d)
 # order related functions
 
 def update_time_single(order_pair):
@@ -221,21 +231,13 @@ def update_time_single(order_pair):
 def add_order(customer_id, crop_id, demand, location_id):
     new_order = Order(customer_id=customer_id, crop_id=crop_id, weight=demand, location_id=location_id)
     new_order.save()
-    #print(new_order)
-    calculate_land_area_single(new_order)
-    new_order.save()
     return new_order
-
-def update_land_area():
-    for x in Order.objects.all().values():
-        calculate_land_area(x)
 
 # algorithm, to be launched as part of the
 def matching_algorithm(farmer):
     # based on province
 
     available_order = pd.DataFrame(Order.objects.filter(Q(status="Posted") & Q(location__province=farmer.location.province)).values())
-    print('AVIALBLEEEEEE',available_order)
     if len(available_order) != 0:
         loc_list = available_order['location_id'].unique()
         available_order = available_order.merge(pd.DataFrame(Location.objects.filter(id__in=loc_list).values('id','name')),  left_on="location_id", right_on="id").drop(columns=["id"]).rename(columns={'name':'location'})
@@ -254,21 +256,6 @@ def matching_algorithm(farmer):
 def matching_algorithm_all():
     pass
 
-# added 25 as a contingency measure
-def calculate_land_area_single(new_order):
-    if type(new_order) == Order:
-        order = Order.objects.filter(order_id=new_order.order_id).values()[0]
-        print(order)
-    order_crop = Crop.objects.filter(id=order['crop_id']).values('harvest_weight_per_land_area','productivity')[0]
-    land_area = ((order['weight'] * 0.001)/order_crop['harvest_weight_per_land_area']) * 10000
-    land_area = land_area + (land_area * (1-(order_crop['productivity']/100))) + 25
-    new_order.set_value([['land_area_needed',round(land_area)]])
-    print("ORDER SAVEDDD? LANDAREA:",new_order.land_area_needed)
-    #order.set_value([['land_area_needed',round(land_area)]])
-
-def calculate_land_area():
-    [calculate_land_area_single(order) for order in Order.objects.filter(Q(land_area_needed__isnull=True) & Q(crop_id__isnull=False)).values()]
-
 # CHECK IF IT ALSO WORKS FOR NON ONGOING FUNCTIONS
 def check_obsolete_orders():
     order = pd.DataFrame(Order.objects.all().filter(message__isnull=True).values())
@@ -285,7 +272,7 @@ def check_obsolete_orders():
             #if a month has passed and order is not cancelled
             if (date_now - val['order_date']).days > 29 and not val['is_cancelled']:
                 print(val)
-                Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])  
+                Order.objects.get(order_id = merged_df.iloc[i]['order_id']).set_value([["is_cancelled",True],["message","1 month overdue"]])
         delete_obsolete_orders()
 
 def delete_obsolete_orders():
@@ -313,7 +300,6 @@ def get_order_location(id,loc):
 def get_customer_location(id):
     return Customer.objects.get(id=id).get_locations()
 
-
 def get_name(name_id):
     user = User.objects.get(id=name_id)
     return user.first_name,user.last_name
@@ -334,9 +320,7 @@ def datatable_orders(orders=None):
         customers = customers[['id','customer_names']]
 
         return orders.merge(customers, left_on="customer_id",right_on="id").drop(columns='id')
-    except Exception as e:
-        print(e)
-        print("aaaaaaaaaa")
+    except:
         return []
 
 def display_all_orders(df):
@@ -344,6 +328,7 @@ def display_all_orders(df):
         return None
     else:
         df = df.sort_values('order_date',ascending=False).reset_index(drop=True)
+        df['order_date'] = df['order_date'].apply(printable_convert)
         return df[['customer_id','customer_names','order_id','order_date','location','crop_name','weight','status']].to_dict('records')
 
 def datatable_order_pairs():
@@ -362,6 +347,7 @@ def display_all_order_pairs(df):
         return None
     else:
         df = df.sort_values('order_date',ascending=False).reset_index(drop=True)
+        df['order_date'] = df['order_date'].apply(printable_convert)
         return df[['customer_id','customer_names','farmer_id','farmer_names','order_id','order_date','location','crop_name','weight','status']].to_dict('records')
 
 def display_all_users():
@@ -377,6 +363,7 @@ def display_all_users():
         f_unique_locs = farmers['location'].unique()
         farmers = farmers.merge(pd.DataFrame(Location.objects.filter(id__in=f_unique_locs).values('name','id')), left_on="location", right_on="id").drop(columns=["location","id"]).rename(columns={'name':'location'})
         farmers = farmers.merge(users, left_on="farmer_name", right_on="user_id").drop(columns="farmer_name")
+
         return {'customer':customers_df.to_dict('records'), 'farmer':farmers.to_dict('records')}
     except:
         return []
