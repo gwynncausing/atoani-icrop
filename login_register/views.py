@@ -240,6 +240,7 @@ class SettingsView(View):
                 elif 'btn-save-others' in request.POST:
                     print(request.POST)
                     if hasattr(request.user, 'farmer'):
+                        print("is farmer")
                         land_area = request.POST.get("land_area")
                         company = request.POST.get("company")
                         data['land_area'] = land_area
@@ -247,10 +248,26 @@ class SettingsView(View):
                         Farmer.objects.filter(id = request.user.farmer.id).update(land_area = land_area, company = company)
                         return JsonResponse(data, safe=False, status=200)
                     elif hasattr(request.user, 'customer'):
+                        print("is customer")
                         company = request.POST.get("company")
                         data['company'] = company
                         Customer.objects.filter(id = request.user.customer.id).update(company = company)
                         return JsonResponse(data, safe=False, status=200)
+
+                # elif 'btn-customer-save-others' in request.POST:
+                #     print(request.POST)
+                #     if hasattr(request.user, 'farmer'):
+                #         land_area = request.POST.get("land_area")
+                #         company = request.POST.get("company")
+                #         data['land_area'] = land_area
+                #         data['company'] = company
+                #         Farmer.objects.filter(id = request.user.farmer.id).update(land_area = land_area, company = company)
+                #         return JsonResponse(data, safe=False, status=200)
+                #     elif hasattr(request.user, 'customer'):
+                #         company = request.POST.get("company")
+                #         data['company'] = company
+                #         Customer.objects.filter(id = request.user.customer.id).update(company = company)
+                #         return JsonResponse(data, safe=False, status=200)
 
                 elif 'btn-save-contact' in request.POST:
                     print(request.POST)

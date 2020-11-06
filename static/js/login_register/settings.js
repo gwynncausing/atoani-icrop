@@ -18,7 +18,6 @@ function doesInputExist(form,inputElement,inputName){
         processData: false,
         success: function(response){
             inputElement.classList.add('is-valid');
-            console.log(response.result);
         },
         error: function(response){
             inputElement.classList.add('is-invalid');
@@ -176,7 +175,6 @@ $(document).ready(function () {
             },
             success: function(response){
                 $("#modal-message").modal('toggle');
-                console.log(response);
             },
             error: function(response){
                 console.log(response);
@@ -200,7 +198,6 @@ $(document).ready(function () {
                 },
                 success: function(response){
                     $("#modal-message").modal('toggle');
-                    console.log(response);
                 },
                 error: function(response){
                     console.log(response);
@@ -216,12 +213,11 @@ $(document).ready(function () {
             type: 'POST',
             data: {
                 'csrfmiddlewaretoken' : csrf_token[0].value,
-                // 'land_area' : land_area.value,
+                'land_area' : land_area.value,
                 'company' : company.value,
                 'btn-save-others' : $(this).html()
             },
             success: function(response){
-                console.log(response);
                 $("#modal-message").modal('toggle');
             },
             error: function(response){
@@ -230,24 +226,6 @@ $(document).ready(function () {
         });
     });
 
-    
-    function getCustomerLocationList(){
-        $.ajax({
-            url: '../get-customer-locations/',
-            type: 'GET',
-            data: { 
-                csrfmiddlewaretoken : csrf_token[0].value,
-            },
-            contentType: false,
-            processData: false,
-            success: function(response){
-                console.log(response);
-            },
-            error: function(response){
-                console.log(response);
-            }
-        });
-    }
 
     $('#btn-add-customer-address').click(function(e){
         e.preventDefault();
@@ -263,9 +241,7 @@ $(document).ready(function () {
                     'btn-add-customer-address' : $(this).html()
                 },
                 success: function(response){
-                    console.log(response);
                     $("#modal-message-added").modal('show');
-                    getCustomerLocationList();
                 },
                 error: function(response){
                     console.log(response);
@@ -289,9 +265,8 @@ $(document).ready(function () {
                     'btn-edit-farmer-address' : $(this).html()
                 },
                 success: function(response){
-                    console.log(response);
                     name.value = response.name;
-                    $("#modal-message").modal('show');
+                    $("#modal-message-address-edited").modal('show');
                 },
                 error: function(response){
                     console.log(response);
@@ -315,8 +290,7 @@ $(document).ready(function () {
                     'btn-edit-customer-address' : $(this).html()
                 },
                 success: function(response){
-                    console.log(response);
-                    $("#modal-message").modal('show');
+                    $("#modal-message-address-edited").modal('show');
                 },
                 error: function(response){
                     console.log(response);
@@ -326,7 +300,6 @@ $(document).ready(function () {
     });
     
     $('#btn-delete-address').click(function(e){
-        console.log("clicked delete")
         e.preventDefault();
         $.ajax({
             url: '/settings/',
@@ -337,7 +310,6 @@ $(document).ready(function () {
                 'btn-delete-address' : $(this).html()
             },
             success: function(response){
-                console.log(response);
                 $("#modal-message-deleted").modal('show');
             },
             error: function(response){
@@ -347,9 +319,8 @@ $(document).ready(function () {
     });
     
     $('#btn-save-account').click(function(e){
-        console.log("clicked account")
         e.preventDefault();
-        if(passwordHelper.passwordValidity == true && passwordHelper.passwordConfirmValidity == true && isContactEmpty == false) {
+        if(passwordHelper.passwordValidity == true && passwordHelper.passwordConfirmValidity == true && contactFieldsEmpty == false) {
             $.ajax({
                 url: '/settings/',
                 type: 'POST',
@@ -361,8 +332,6 @@ $(document).ready(function () {
                     'btn-save-account' : $(this).html()
                 },
                 success: function(response){
-                    // console.log(response);
-                    // $("#modal-message-deleted").modal('show');
                     if(response.password_status == "incorrect")
                         document.getElementById("current-password").classList.add("is-invalid");
                     else if(response.password_status == "successful"){
@@ -397,11 +366,9 @@ $(document).ready(function () {
     $(document).on("click", "#btn-edit-address-modal", function () {
         document.getElementById("customer-modal-title").innerHTML = "Edit Address"
         var location_id = $(this).data('location-id');
-        console.log(location_id)
         //set id
         $(".modal-body #location-id").val(location_id);
         $('#modal-customer-address').modal('show');
-        console.log("open edit")
 
         document.getElementById("btn-edit-customer-address").removeAttribute("type", "hidden");
         document.getElementById("btn-add-customer-address").setAttribute("type", "hidden");
@@ -411,7 +378,6 @@ $(document).ready(function () {
     $(document).on("click", "#btn-add-address-modal", function () {
         document.getElementById("customer-modal-title").innerHTML = "Add Address"
         $('#modal-customer-address').modal('show');
-        console.log("open add")
 
         document.getElementById("btn-add-customer-address").removeAttribute("type", "hidden");
         document.getElementById("btn-edit-customer-address").setAttribute("type", "hidden");
@@ -423,10 +389,6 @@ $(document).ready(function () {
         var location_name = $(this).data('location-name')
         document.getElementById("customer-modal-title").innerHTML = "Add Address"
 
-        console.log("open delete modal")
-        console.log(location_id)
-        console.log(location_name)
-
         $(".modal-body #location-id-delete").val(location_id);
         document.getElementById("location-name-delete").innerHTML = location_name;
 
@@ -434,7 +396,7 @@ $(document).ready(function () {
     });
 
     
-    $('#modal-message').on('hidden.bs.modal', function () {
+    $('#modal-message-address-edited').on('hidden.bs.modal', function () {
         location.reload();
     })
 
