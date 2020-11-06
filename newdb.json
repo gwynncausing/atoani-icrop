@@ -1,7 +1,3 @@
-<generator object Months.choices.<locals>.<genexpr> at 0x7ff7b31b5f90>
-<generator object Months.choices.<locals>.<genexpr> at 0x7ff7b31b5f90>
-IN READY!
-Scheduler started...
 [
 {
     "model": "admin.logentry",
