@@ -446,6 +446,7 @@ $(document).ready(function () {
   $.fn.dataTable.ext.search.push((settings, data, dataIndex ) => {
       let minDate = $('.min-date').val();
       let maxDate = $('.max-date').val();
+      const date = data[0];
       
       if (minDate === '' || maxDate === '' )
         return true;
@@ -456,13 +457,13 @@ $(document).ready(function () {
     }
   );
 
-  $('.min-date, .max-date').keyup(() => finishedTable.draw());
-  $('.min-date, .max-date').change(() => finishedTable.draw());
+  $('.min-date, .max-date').keyup(() => finishTable.draw());
+  $('.min-date, .max-date').change(() => finishTable.draw());
 
   const clear = () => {
     $('.min-date').val("");
     $('.max-date').val("");
-    finishedTable.draw();
+    finishTable.draw();
   } 
 
   $("#finished-table").find('#refresh-btn').click(clear);
