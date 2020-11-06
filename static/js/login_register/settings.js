@@ -349,7 +349,7 @@ $(document).ready(function () {
     $('#btn-save-account').click(function(e){
         console.log("clicked account")
         e.preventDefault();
-        if(passwordHelper.passwordValidity == true && passwordHelper.passwordConfirmValidity == true && contactFieldsEmpty == false) {
+        if(passwordHelper.passwordValidity == true && passwordHelper.passwordConfirmValidity == true && isContactEmpty == false) {
             $.ajax({
                 url: '/settings/',
                 type: 'POST',
