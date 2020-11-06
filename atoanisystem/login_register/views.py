@@ -45,17 +45,17 @@ class LoginView(View):
                 auth.login(request, user)
                 currentUser = user
                 if currentUser.is_staff:
-                    return JsonResponse({'result':'admin', 'url':'http://127.0.0.1:8000/admin/'},status=200)
+                    return JsonResponse({'result':'admin', 'url':'/admin/'},status=200)
                 elif hasattr(currentUser, 'farmer'):
                     if(currentUser.farmer.is_approved):
-                        return JsonResponse({'result':'farmer ok', 'url':'http://127.0.0.1:8000/dashboard/farmer/'},status=200)
+                        return JsonResponse({'result':'farmer ok', 'url':'/dashboard/farmer/'},status=200)
                     else:
                         print("farmer not approved")
                         logout(request)
                         return JsonResponse({'result':'approval'},status=200)
                 elif hasattr(currentUser, 'customer'):
                     if(currentUser.customer.is_approved):
-                        return JsonResponse({'result':'customer ok', 'url':'http://127.0.0.1:8000/dashboard/customer/'},status=200)
+                        return JsonResponse({'result':'customer ok', 'url':'/dashboard/customer/'},status=200)
                     else:
                         print("customer not approved")
                         logout(request)

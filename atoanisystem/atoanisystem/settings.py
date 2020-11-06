@@ -12,6 +12,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+#import mimetypes
+#mimetypes.add_type("text/css", ".css", True)
+
+#If "refused to from .... because it's MIME type text/html is not supported stylesheet MIME type, 
+#and strict MIME type checking is enabled" still persits and show in browser console tag during hosting
+#uncomment the above code and try to rerun
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

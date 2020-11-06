@@ -8,26 +8,44 @@
 	border-radius: 0.5rem;
 	color: black;
 	padding: 15px 15px 30px 15px;
+	margin-left: 20px;
+	margin-right: 20px;
+	.title{
+		color: $main-color;
+	}
 	.content {
 		color: black;
-		padding: 15px 15px 30px 15px;
-		.title{
-        	color: $main-color;
-		}
-		.content {
-			color: black;
-			padding: 0px 15px 0px 15px;
-		}
+		padding: 20px 15px 0px 15px;
 		.subtitle{
 			margin-top: 15px;
-			font-weight: bold;
+			font-weight: bolder;
 			color: $main-color;
 		}
-		
 		.print {
 			color: black;
 			font-size: .8rem;
 			cursor: pointer;
+		}
+		p{
+			padding: 0;
+			margin: 0;
+			// text-indent: 50px;
+			text-align: justify;
+		}
+		ol {
+			counter-reset: list;
+			margin: 0;
+		}
+		ol > li {
+			list-style: none;
+			position: relative;
+			text-align: justify;
+		}
+		ol > li:before {
+			counter-increment: list;
+			content: "("counter(list, lower-alpha) ") ";
+			position: absolute;
+			left: -1.4em;
 		}
 	}
 }

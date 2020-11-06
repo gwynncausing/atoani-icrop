@@ -150,10 +150,11 @@ h6 {
 
 .body-dashoard {
   position: relative;
-  width: 90%;
+  width: 95%;
   min-height: 180px;
   border: 2px #114a44 solid;
   border-radius: 0.5rem;
+  padding: 20px;
 }
 
 .body-dashoard .title {
@@ -165,7 +166,7 @@ h6 {
   color: #114a44;
 }
 
-.body-dashoard .content p {
-  text-indent: 50px;
+.body-dashoard .content span {
+  margin-top: 5px;
 }
 /*# sourceMappingURL=others.css.map */
