@@ -354,16 +354,21 @@ def display_all_users():
     try:
         users = pd.DataFrame(User.objects.all().values("id","username","email","first_name","last_name")).rename(columns={'id':'user_id'})
         customers = Customer.objects.all()
-        customers_df = pd.DataFrame(customers.values('contact_number','name','is_approved')).rename(columns={'name':'customer_name'})
-        customers_df['location'] = [cust.get_locations() for cust in customers]
-        customers_df['location'] = [[w[0] for w in x] for x in customers_df['location']]
-        customers_df = customers_df.merge(users, left_on="customer_name", right_on="user_id").drop(columns=["customer_name"])
+        final_dic = {}
+        if len(customers) > 0:
+            customers_df = pd.DataFrame(customers.values('contact_number','name','is_approved')).rename(columns={'name':'customer_name'})
+            customers_df['location'] = [cust.get_locations() for cust in customers]
+            customers_df['location'] = [[w[0] for w in x] for x in customers_df['location']]
+            customers_df = customers_df.merge(users, left_on="customer_name", right_on="user_id").drop(columns=["customer_name"])
+            final_dic.update({'customer':customers_df.to_dict('records')})
 
         farmers = pd.DataFrame(Farmer.objects.all().values('contact_number','location','name','is_approved','land_area')).rename(columns={'name':'farmer_name'})
-        f_unique_locs = farmers['location'].unique()
-        farmers = farmers.merge(pd.DataFrame(Location.objects.filter(id__in=f_unique_locs).values('name','id')), left_on="location", right_on="id").drop(columns=["location","id"]).rename(columns={'name':'location'})
-        farmers = farmers.merge(users, left_on="farmer_name", right_on="user_id").drop(columns="farmer_name")
+        if len(farmers) > 0:
+            f_unique_locs = farmers['location'].unique()
+            farmers = farmers.merge(pd.DataFrame(Location.objects.filter(id__in=f_unique_locs).values('name','id')), left_on="location", right_on="id").drop(columns=["location","id"]).rename(columns={'name':'location'})
+            farmers = farmers.merge(users, left_on="farmer_name", right_on="user_id").drop(columns="farmer_name")
+            final_dic.update({'farmer':farmers.to_dict('records')})
 
-        return {'customer':customers_df.to_dict('records'), 'farmer':farmers.to_dict('records')}
+        return final_dic 
     except:
         return []
