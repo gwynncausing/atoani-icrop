@@ -118,9 +118,12 @@ function addCrop(e) {
     else{
         //remove the loader
         $(".loading").removeClass("d-none");
+        $('#modal-add-crop').modal('hide');
+        
         let formData = new FormData(form);//.append('action','add');
         formData.append('operation', 'add-crop');
         formData.append('csrfmiddlewaretoken',csrf_token);
+
         $.ajax({
             url: getAllCropsURL,
             type: 'post',
@@ -131,7 +134,6 @@ function addCrop(e) {
             success: function (response) {
                 //remove loading 
                 $(".loading").addClass("d-none");
-                $('#modal-add-crop').modal('hide');
                 cropsTable.ajax.reload(()=>{tableData = cropsTable.ajax.json().data;},true);
                 selectedCropID = -1;
                 //show notify

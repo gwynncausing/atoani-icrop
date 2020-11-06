@@ -93,11 +93,14 @@ function check(input){
         }
         //check the validity of each fields
         textFields.forEach(field => {
-            if(field.id != 'username')
-                isValid = displayValidity(field)
+            if(field.id != 'username'){
+                if(displayValidity(field) == false)
+                    isValid = false;
+            }
             else{
                 if(field.classList.contains("is-invalid") == false)
-                    isValid = displayValidity(field);
+                    if(displayValidity(field) == false)
+                        isValid = false;
             }
         });
         //check the validity of the province
