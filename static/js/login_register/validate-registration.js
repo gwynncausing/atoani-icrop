@@ -92,17 +92,14 @@ function check(input){
         if(email.checkValidity() == false){
             isValid = false;
             flag++;
-            console.log("3")
         }
         if(contact.checkValidity() == false){
             isValid = false;
             flag++;
-            console.log("4")
         }
         if(flag == 0){
             if(email.value.trim() == "" && contact.value.trim() == ""){
                 isValid = false;
-                console.log("5")
             }
             else{
                 contactInfo.value = "contact-info";
@@ -115,15 +112,12 @@ function check(input){
             if(field.id != 'username'){
                 if(displayValidity(field) == false){
                     isValid = false;
-                    console.log("1")
-                    console.log
                 }
             }
             else{
                 if(field.classList.contains("is-invalid") == true || field.value.trim() == ""){
                     addInvalidClass(field);
                     isValid = false;
-                    console.log("2")
                 }
             }
         });
@@ -132,26 +126,22 @@ function check(input){
         if(provinceSelector.options[provinceSelector.selectedIndex].value === "-1"){
             addInvalidClass(provinceSelector);
             isValid = false;
-            console.log("6")
         }
         // start - check the credibility of password
         //check the validity of password
         if(passwordHelper.passwordValidity == false){
             addInvalidClass(password);
             isValid = false;
-            console.log("7")
         }
         //check the validity of confirm password
         if(passwordHelper.passwordConfirmValidity == false){
             addInvalidClass(passwordConfirm);
             isValid = false;
-            console.log("8");
         }
         // end - check the credibility of password
         if(isValid == false){
             stopDefaultFormAction(e);
             reminder.classList.remove("d-none");
-            console.log("errror")
         }
         else if(isValid == true && termsAndConditions.checked == false){
             stopDefaultFormAction(e);
