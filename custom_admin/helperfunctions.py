@@ -23,10 +23,8 @@ def get_users():
 def get_farmers():
     users = get_users()
     farmers = []
-    try:
+    if len(users)>0:
         farmers = users['farmer']
-    except:
-        pass
     format_nan_values(farmers,'land_area')
     return farmers
 
@@ -40,11 +38,10 @@ def get_unapproved_farmers():
 
 def get_customers():
     users = get_users()
+    print('\n\n\n\n',users)
     customers = []
-    try:
+    if len(users)>0:
         customers = users['customer']
-    except:
-        pass
     return customers
 
 def get_unapproved_customers():
