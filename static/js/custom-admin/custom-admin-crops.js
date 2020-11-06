@@ -41,7 +41,7 @@ const cropsTableConfig = {
   columnDefs: [
     { orderable: false, "targets": -1 },
     {
-      targets: 3,
+      targets: 2,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
                                                   <button type="button" class="btn btn-danger text-light py-0" data-toggle="modal" data-target="#confirmDeleteModal" onclick="deleteCrop(this)">
@@ -57,8 +57,7 @@ const cropsTableConfig = {
   //matches the data to appropriate column
   columns: [
     { "data": 'id' },
-    { "data": 'name' },
-    { "data": 'location' }
+    { "data": 'name' }
   ],
   createdRow: function (row, data, dataIndex) {
     $(row).attr('crop-id', data.id);

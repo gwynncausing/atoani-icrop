@@ -229,22 +229,11 @@ def deliver_order(order_id):
 
 def get_all_crops():
     crops_dict = dashboard_utility.get_crop_list()
-    crops = Crop.objects.all()
-    location_crops = Location_Crop.objects.all()
-    for crop_dict in crops_dict:
-        crop = crops.get(id = crop_dict['id'])
-        location_crop = location_crops.get(name=crop)
-        crop_dict['location'] = location_crop.location.name
     return list(crops_dict)
 
 def add_crop(crop_instance,location_instance):
-    location_crop = Location_Crop(location=location_instance)
-    location_crop.save()
+    location_crop = Location_Crop.objects.get(location=location_instance)
     location_crop.name.add(crop_instance)
-    location_crop.save()
 
 def delete_crop(crop_id):
-    crop_instance = Crop.objects.get(id=crop_id)
-    location_crop = Location_Crop.objects.get(name=crop_instance)
-    crop_instance.delete()
-    location_crop.delete()
+    Crop.objects.filter(id=crop_id).delete()
