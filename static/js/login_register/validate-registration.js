@@ -71,7 +71,7 @@ function check(input){
     //ERROR MESSAGES:
     const usernameBlank  = "Please enter a username. It must not contain a space.";
     const usernameExists = "The username is already in use";
-    const contactInvalidFormat = "Phone number must be in one of these formats: 9xxxxxxxxx or 09xxxxxxxxx";
+    const contactInvalidFormat = "Phone number must be in this format: 09xxxxxxxxx";
     const contactExists = "The contact number is already in use";
     const emailInvalidFormat = "Please enter your email address in format: yourname@example.com";
     const emailExists = "The email address is already in use";
@@ -86,43 +86,72 @@ function check(input){
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
         let isValid = true;
+        
         //check if email or phone number is answered
-        if(isEmailValid || isContactValid){
-            contactInfo.value = "contact-info";
-            isValid = displayValidity(contactInfo);
+        let flag = 0;
+        if(email.checkValidity() == false){
+            isValid = false;
+            flag++;
+            console.log("3")
         }
+        if(contact.checkValidity() == false){
+            isValid = false;
+            flag++;
+            console.log("4")
+        }
+        if(flag == 0){
+            if(email.value.trim() == "" && contact.value.trim() == ""){
+                isValid = false;
+                console.log("5")
+            }
+            else{
+                contactInfo.value = "contact-info";
+                displayValidity(contactInfo);
+            }
+        }
+
         //check the validity of each fields
         textFields.forEach(field => {
             if(field.id != 'username'){
-                if(displayValidity(field) == false)
+                if(displayValidity(field) == false){
                     isValid = false;
+                    console.log("1")
+                    console.log
+                }
             }
             else{
-                if(field.classList.contains("is-invalid") == false)
-                    if(displayValidity(field) == false)
-                        isValid = false;
+                if(field.classList.contains("is-invalid") == true || field.value.trim() == ""){
+                    addInvalidClass(field);
+                    isValid = false;
+                    console.log("2")
+                }
             }
         });
+
         //check the validity of the province
         if(provinceSelector.options[provinceSelector.selectedIndex].value === "-1"){
             addInvalidClass(provinceSelector);
             isValid = false;
+            console.log("6")
         }
         // start - check the credibility of password
         //check the validity of password
         if(passwordHelper.passwordValidity == false){
             addInvalidClass(password);
             isValid = false;
+            console.log("7")
         }
         //check the validity of confirm password
         if(passwordHelper.passwordConfirmValidity == false){
             addInvalidClass(passwordConfirm);
             isValid = false;
+            console.log("8");
         }
         // end - check the credibility of password
         if(isValid == false){
             stopDefaultFormAction(e);
             reminder.classList.remove("d-none");
+            console.log("errror")
         }
         else if(isValid == true && termsAndConditions.checked == false){
             stopDefaultFormAction(e);
@@ -183,6 +212,7 @@ function check(input){
     //contact input listener
     //checks availability of contact
     contact.addEventListener('input', e => {
+        //e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
         e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
 
         //if input length is 0

@@ -3,10 +3,41 @@
 
 {% block tags %}
     <link rel="stylesheet" type="text/css" href="{% static '/css/login_register/registration.css' %}">
+    <script>
+        //make sure all elements are loaded
+        window.addEventListener("load", function(event) {
+            document.querySelector(".loading").classList.add("d-none");
+        });
+    </script>	
 {% endblock %}
 
 
 {% block content %}
+    <!-- Loader -->
+    <div class="loading">
+        <div class="overlay"></div>
+        <div class="loader">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+        </div>
+    </div>
+
+    <div class="loading d-none">
+        <div class="overlay"></div>
+        <div class="loader">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+        </div>
+    </div>
+
     <div class="container pr-0 pl-0 pb-4 mt-5 mb-5 form-registration">
         <div class="form-header d-flex justify-content-between align-items-center pl-3 pr-3 text-white">
             <span>Registration</span><span class="font-italic">Fields with * are required</span>
@@ -135,12 +166,9 @@
                     <div class="form-row row-12 mt-2 pr-sm-5 pl-sm-5 pr-3 pl-3">
                         <div class="form-group col-12 col-md-4">
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="prep">+63</span>
-                                </div>
-                                <input class="form-control" type="text" name="contact_number" pattern=".{10,11}" maxlength="11"  id="contact-number" placeholder="Contact Number">
+                                <input class="form-control" type="text" name="contact_number" pattern="^(09|\+639)\d{9}$" maxlength="11"  id="contact-number" placeholder="Contact Number">
                                 <div id="contact-invalid" class="invalid-feedback">
-                                    Phone number must be in one of these formats: 9xxxxxxxxx or 09xxxxxxxxx
+                                    "Phone number must be in this format: 09xxxxxxxxx";
                                 </div>
                             </div>  
                         </div>
