@@ -152,12 +152,12 @@ def datatable_farmer(id):
 # to be called after datatable_farmer to generate datatable dictionary
 # if no order_pairs exist, returns None
 def display_farmer_table(df):
-    print(df)
+    print(df.columns)
     if len(df) == 0:
         return df
     else:
         df = df.sort_values('accepted_date',ascending=False).reset_index(drop=True).rename(columns={'status_y':'status'})
-        return df[['order_pair_id','accepted_date','order_date','approved_date','name','weight','land_area_needed','location_id','harvested_date','status']].to_dict('records')
+        return df[['order_pair_id','accepted_date','order_date','approved_date','name','weight','land_area_needed','location_id','harvested_date','status','expected_time']].to_dict('records')
 
 # get customer's orders
 def get_order_customer(id):
