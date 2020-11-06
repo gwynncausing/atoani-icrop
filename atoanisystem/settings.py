@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-#import mimetypes
-#mimetypes.add_type("text/css", ".css", True)
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
 
 #If "refused to from .... because it's MIME type text/html is not supported stylesheet MIME type, 
 #and strict MIME type checking is enabled" still persits and show in browser console tag during hosting
@@ -32,12 +32,13 @@ SECRET_KEY = 'g2cct))hzg!f*k#2(hh830itybd%y6j&m^+d792%==cu!8fzry'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = []
 
 #to allow testing of error pages
 #uncomment these codes
 #DEBUG = False
 #ALLOWED_HOSTS = ['127.0.0.1']
+#python manage.py runserver --insecure to test the error pages
 
 
 # Application definition
@@ -168,6 +169,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
 os.path.join(BASE_DIR, "static")
 ]
+
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static")
 

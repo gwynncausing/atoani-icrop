@@ -32,5 +32,5 @@ urlpatterns = [
 handler500 = 'login_register.views.handler500'
 handler404 = 'login_register.views.handler404'
 
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
