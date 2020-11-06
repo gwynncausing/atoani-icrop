@@ -1,0 +1,12 @@
+@import "../index";
+
+.error-holder{
+    height: 85vh;
+    
+    a{
+        background: $secondary-color;
+        font-weight: bold;  
+        width: 8rem;     
+        color: $white-color;
+    }
+}

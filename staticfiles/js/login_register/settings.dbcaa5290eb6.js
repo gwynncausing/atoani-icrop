@@ -1,0 +1,411 @@
+
+
+function checkFromServer(inputElement,inputName){
+    inputElement.classList.remove('is-valid');
+    inputElement.classList.remove('is-invalid');
+    const form = document.querySelector("#form-contact");
+    doesInputExist(form,inputElement,inputName);
+}
+
+function doesInputExist(form,inputElement,inputName){
+    let formData = new FormData(form);
+    formData.append('input',inputName);
+    $.ajax({
+        url: '',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(response){
+            inputElement.classList.add('is-valid');
+        },
+        error: function(response){
+            inputElement.classList.add('is-invalid');
+        }
+    });
+}
+
+
+$(document).ready(function () {
+    const csrf_token = document.getElementsByName('csrfmiddlewaretoken');
+    const firstname = document.getElementById('first-name');
+    const lastname = document.getElementById('last-name');
+    const contact_number = document.getElementById('contact-num');
+    const email = document.getElementById('email');
+    const land_area = document.getElementById('land-area');
+    const company = document.getElementById('company');
+    const id = document.getElementById("location-id");
+    const province = document.getElementById("province");
+    const city = document.getElementById("city");
+    const brgy = document.getElementById("barangay");
+    const name = document.getElementById("address");
+    const contactInfo = document.querySelector("#contact-info");
+    const location_id_delete = document.getElementById('location-id-delete');
+    const current_pass = document.getElementById('current-password');
+    const new_password1 = document.getElementById('new_password1');
+    const new_password2 = document.getElementById('new_password2');
+    const provinceSelector = document.getElementById("province");
+
+    let isEmailValid = false;
+    let isContactValid = false;
+    let contactFieldsEmpty = false;
+
+    //Error Messages
+    const contact_num_feedback = document.getElementById('contact-num-feedback')
+    const email_feedback = document.getElementById('email-feedback')
+    const contactInvalidFormat = "Phone number must be in this format 09xxxxxxxxx";
+    const contactExists = "The contact number is already in use";
+    const emailInvalidFormat = "Please enter your email address in format: yourname@example.com";
+    const emailExists = "The email address is already in use";
+    const bothFieldsNeeded = "Please enter either your contact number or email"
+
+    //password Helper function
+    passwordHelper.init($("#new_password1"), $("#new_password2"));
+
+    function checkContactFields(){
+        if(email.value.toString().length == 0 && contact_number.value.toString().length == 0){
+            email_feedback.innerHTML = bothFieldsNeeded;
+            contact_num_feedback.innerHTML = bothFieldsNeeded;
+            contactFieldsEmpty = true;
+            addInvalidClass(email);
+            addInvalidClass(contact_number);
+        }else{
+            removeValidClass(email);
+            removeInvalidClass(email);
+            removeValidClass(contact_number);
+            contactFieldsEmpty = false;
+        }
+    }
+
+    const displayValidity = (field) => {
+        if(field.checkValidity() === true){
+            addValidClass(field);
+            return true;
+        }
+        else{
+            addInvalidClass(field);
+            return false;
+        }
+    }
+
+    const stopDefaultFormAction = e => {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    const addInvalidClass = field => {
+        field.classList.remove('is-valid');
+        field.classList.add('is-invalid');
+    };
+    const addValidClass = field => {
+        field.classList.remove('is-invalid');
+        field.classList.add('is-valid');
+    }
+    const removeValidClass = field => field.classList.remove('is-valid');
+    const removeInvalidClass = field => field.classList.remove('is-invalid');
+
+
+    email.addEventListener("input", (e) => {  
+        email_feedback.innerHTML = "";
+        //if input length is 0
+        //make it neutral
+        if(e.target.value.toString().length === 0 && contactFieldsEmpty == false){
+            removeValidClass(email);
+            removeInvalidClass(email)
+            isEmailValid = false;
+            checkContactFields();
+        }else{
+            checkContactFields();
+            isEmailValid = displayValidity(e.target);
+            if(isEmailValid){
+                email.classList.add("is-invalid");
+                email_feedback.innerHTML = contactExists;
+                checkFromServer(email,'email');
+            }
+            else
+                email_feedback.innerHTML = emailInvalidFormat;
+        }
+       
+    })
+
+    contact_number.addEventListener('input', e => {
+        e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+        //if input length is 0
+        //make it neutral
+        if(e.target.value.toString().length === 0 && contactFieldsEmpty == false){
+            removeValidClass(contact_number);
+            removeInvalidClass(contact_number)
+            isContactValid = false;
+            checkContactFields();
+        }else{
+            checkContactFields();
+            isContactValid = displayValidity(e.target);
+            if(isContactValid){
+                // check if it exists
+                contact_number.classList.add("is-invalid");
+                contact_num_feedback.innerHTML = contactExists;
+                checkFromServer(contact_number,'contact_number');
+            }
+            else
+                contact_num_feedback.innerHTML = contactInvalidFormat;
+        }
+    })
+
+    
+    addInvalidClass(provinceSelector);
+
+    provinceSelector.addEventListener("change", e => {
+        addValidClass(provinceSelector);
+        $("#barangay").prop("disabled", false);
+        $("#city").prop("disabled", false);
+    })
+
+
+    // ajax requests
+    $('#btn-save-name').click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: '/settings/',
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken' : csrf_token[0].value,
+                'firstname' : firstname.value,
+                'lastname' : lastname.value,
+                'btn-save-name' : $(this).html()
+            },
+            success: function(response){
+                $("#modal-message").modal('toggle');
+            },
+            error: function(response){
+                console.log(response);
+            }
+        });
+    });
+
+    $('#btn-save-contact').click(function(e){
+        e.preventDefault();
+        
+        //make sure that either of the fields is valid
+        if(contact_number.classList.contains("is-invalid") == false && email.classList.contains("is-invalid") == false && contactFieldsEmpty == false){
+            $.ajax({
+                url: '/settings/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken' : csrf_token[0].value,
+                    'contact_number' : contact_number.value,
+                    'email' : email.value,
+                    'btn-save-contact' : $(this).html()
+                },
+                success: function(response){
+                    $("#modal-message").modal('toggle');
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
+    });
+
+    $('#btn-save-others').click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: '/settings/',
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken' : csrf_token[0].value,
+                'land_area' : land_area.value,
+                'company' : company.value,
+                'btn-save-others' : $(this).html()
+            },
+            success: function(response){
+                $("#modal-message").modal('toggle');
+            },
+            error: function(response){
+                console.log(response);
+            }
+        });
+    });
+
+
+    $('#btn-add-customer-address').click(function(e){
+        e.preventDefault();
+        if(province.classList.contains("is-invalid") == false){
+            $.ajax({
+                url: '/settings/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken' : csrf_token[0].value,
+                    'province' : province.value,
+                    'city' : city.value,
+                    'brgy' : brgy.value,
+                    'btn-add-customer-address' : $(this).html()
+                },
+                success: function(response){
+                    $("#modal-message-added").modal('show');
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
+    });
+
+    $('#btn-edit-farmer-address').click(function(e){
+        e.preventDefault();
+        if(province.classList.contains("is-invalid") == false){
+            $.ajax({
+                url: '/settings/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken' : csrf_token[0].value,
+                    'id' : id.value,
+                    'province' : province.value,
+                    'city' : city.value,
+                    'brgy' : brgy.value,
+                    'btn-edit-farmer-address' : $(this).html()
+                },
+                success: function(response){
+                    name.value = response.name;
+                    $("#modal-message-address-edited").modal('show');
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
+    });
+
+    $('#btn-edit-customer-address').click(function(e){
+        e.preventDefault();
+        if(province.classList.contains("is-invalid") == false){
+            $.ajax({
+                url: '/settings/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken' : csrf_token[0].value,
+                    'location-id' : id.value,
+                    'province' : province.value,
+                    'city' : city.value,
+                    'brgy' : brgy.value,
+                    'btn-edit-customer-address' : $(this).html()
+                },
+                success: function(response){
+                    $("#modal-message-address-edited").modal('show');
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
+    });
+    
+    $('#btn-delete-address').click(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: '/settings/',
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken' : csrf_token[0].value,
+                'location-id-delete' : location_id_delete.value,
+                'btn-delete-address' : $(this).html()
+            },
+            success: function(response){
+                $("#modal-message-deleted").modal('show');
+            },
+            error: function(response){
+                console.log(response);
+            }
+        });
+    });
+    
+    $('#btn-save-account').click(function(e){
+        e.preventDefault();
+        if(passwordHelper.passwordValidity == true && passwordHelper.passwordConfirmValidity == true && contactFieldsEmpty == false) {
+            $.ajax({
+                url: '/settings/',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken' : csrf_token[0].value,
+                    'current_pass' : current_pass.value,
+                    'new_password1': new_password1.value,
+                    'new_password2': new_password2.value,
+                    'btn-save-account' : $(this).html()
+                },
+                success: function(response){
+                    if(response.password_status == "incorrect")
+                        document.getElementById("current-password").classList.add("is-invalid");
+                    else if(response.password_status == "successful"){
+                        $("#modal-message").modal('show');
+                        current_pass.value = "";
+                        new_password1.value = "";
+                        new_password2.value = "";
+                        passwordHelper.reset();
+                        document.getElementById("current-password").classList.remove("is-invalid");
+                    }
+                    else if(response.password_status == "passwords not same")
+                        document.getElementById("new_password2").classList.add("is-invalid");
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
+        else
+            console.log("invalid");
+    });
+
+    $('#account').on('hidden.bs.collapse', function () {
+        current_pass.value = "";
+        new_password1.value = "";
+        new_password2.value = "";
+        passwordHelper.reset();
+        document.getElementById("current-password").classList.remove("is-invalid");
+    })
+
+    // open edit address modal
+    $(document).on("click", "#btn-edit-address-modal", function () {
+        document.getElementById("customer-modal-title").innerHTML = "Edit Address"
+        var location_id = $(this).data('location-id');
+        //set id
+        $(".modal-body #location-id").val(location_id);
+        $('#modal-customer-address').modal('show');
+
+        document.getElementById("btn-edit-customer-address").removeAttribute("type", "hidden");
+        document.getElementById("btn-add-customer-address").setAttribute("type", "hidden");
+    });
+
+    //open add address modal
+    $(document).on("click", "#btn-add-address-modal", function () {
+        document.getElementById("customer-modal-title").innerHTML = "Add Address"
+        $('#modal-customer-address').modal('show');
+
+        document.getElementById("btn-add-customer-address").removeAttribute("type", "hidden");
+        document.getElementById("btn-edit-customer-address").setAttribute("type", "hidden");
+    });
+
+    //open delete address modal
+    $(document).on("click", "#btn-delete-address-modal", function () {
+        var location_id = $(this).data('location-id');
+        var location_name = $(this).data('location-name')
+        document.getElementById("customer-modal-title").innerHTML = "Add Address"
+
+        $(".modal-body #location-id-delete").val(location_id);
+        document.getElementById("location-name-delete").innerHTML = location_name;
+
+        $('#modal-delete').modal('show');
+    });
+
+    
+    $('#modal-message-address-edited').on('hidden.bs.modal', function () {
+        location.reload();
+    })
+
+    $('#modal-message-added').on('hidden.bs.modal', function () {
+        location.reload();
+    })
+
+    $('#modal-message-deleted').on('hidden.bs.modal', function () {
+        location.reload();
+    })
+
+});

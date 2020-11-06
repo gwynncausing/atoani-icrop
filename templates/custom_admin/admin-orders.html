@@ -3,7 +3,7 @@
 
 {% block tags %}
 <!-- Customized CSS -->
-<link rel="stylesheet" type="text/css" href="{% static '/css/custom_admin/custom-admin.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin/custom-admin.css' %}">
 <!-- Datatables CSS -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css" />
 {% endblock tags %}
@@ -114,8 +114,8 @@
 <!-- Datatables JS -->
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
 <!-- Admin JS -->
-<script src="{% static '/js/custom-admin/custom-admin-sidebar.js' %}"></script>
-<script src="{% static '/js/custom-admin/custom-admin-orders.js' %}"></script>
+<script src="{% static 'js/custom-admin/custom-admin-sidebar.js' %}"></script>
+<script src="{% static 'js/custom-admin/custom-admin-orders.js' %}"></script>
 <script>
   $(document).ready(function () {
     initialize();

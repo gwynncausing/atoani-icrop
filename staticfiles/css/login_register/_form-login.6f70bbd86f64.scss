@@ -1,0 +1,51 @@
+.form-login {
+    color: $text-color2;
+    background-color: $light-green;
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-top: 20%;
+    margin-bottom: 20%;
+    a {
+        color: $white-color;
+    }
+    .form-body {
+        padding-left: 10%;
+        padding-right: 10%;
+        span#error {
+            color: red;
+        }
+        #number-prep {
+            border: 0;
+            background: none;
+            color: $white-color;
+        }
+        .btnSignIn {
+            background-color: $secondary-color;
+            color: $white-color;
+        }
+        .forgotpassword {
+            color: $secondary-color;
+            margin-top: -20px;
+        }
+    }
+}
+
+#accountInReviewModal {
+    .modal-content {
+        background: $light-green;
+        .modal-header,
+        .modal-title,
+        .modal-body span {
+            color: $text-color2;
+            border: none;
+        }
+        .modal-footer {
+            border: none;
+            button {
+                color: white;
+                background: $secondary-color;
+                border: none;
+            }
+        }
+    }
+}

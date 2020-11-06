@@ -9,11 +9,10 @@ from login_register.connectivefunctions import check_obsolete_orders
 
 # test value for start fxn, for debugging purposes (when debugging, set hours and minutes to 0, seconds to 5)
 def start():
-    pass
-    # scheduler = BackgroundScheduler()
-    # scheduler.add_jobstore(DjangoJobStore(), "default")
-    # # run this job every 24 hours
-    # scheduler.add_job(check_obsolete_orders, 'interval', hours=24, name='clean_orders', jobstore='default', id="check_obsolete_orders", replace_existing=True)
-    # register_events(scheduler)
-    # scheduler.start()
-    # print("Scheduler started...", file=sys.stdout)
+    scheduler = BackgroundScheduler()
+    scheduler.add_jobstore(DjangoJobStore(), "default")
+    # run this job every 24 hours
+    scheduler.add_job(check_obsolete_orders, 'interval', hours=24, name='clean_orders', jobstore='default', id="check_obsolete_orders", replace_existing=True)
+    register_events(scheduler)
+    scheduler.start()
+    print("Scheduler started...", file=sys.stdout)

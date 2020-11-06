@@ -158,8 +158,8 @@ function viewReservedOrders(selectedOrderID){
     }
   }
   document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
-  document.getElementById('reserved-date-approved').innerHTML = String("wala sa JSON");
-  document.getElementById('reserved-date-reserved').innerHTML = String("wala sa JSON");
+  document.getElementById('reserved-date-approved').innerHTML = String(order.approved_date);
+  document.getElementById('reserved-date-reserved').innerHTML = String(order.accepted_date);
   //document.getElementById('reserved-status').innerHTML = String(order.status);
   document.getElementById('reserved-crop-name').innerHTML = String(order.name);
   document.getElementById('reserved-demand').innerHTML = String(order.weight) + " kilos";
@@ -179,10 +179,10 @@ function viewFinishedOrders(selectedOrderID){
   }
   //console.log(JSON.stringify(order));
   document.getElementById('finished-date-ordered').innerHTML = String(order.order_date);
-  document.getElementById('finished-date-approved').innerHTML = String("wala sa JSON");
-  document.getElementById('finished-date-reserved').innerHTML = String("wala sa JSON");
-  document.getElementById('finished-date-collected').innerHTML = String("wala sa JSON");
-  document.getElementById('finished-date-harvested').innerHTML = String("wala sa JSON");
+  document.getElementById('finished-date-approved').innerHTML = String(order.approved_date);
+  document.getElementById('finished-date-reserved').innerHTML = String(order.reserved_date);
+  document.getElementById('finished-date-collected').innerHTML = String(order.collected_date);
+  document.getElementById('finished-date-harvested').innerHTML = String(order.harvested_date);
   document.getElementById('finished-crop-name').innerHTML = String(order.name);
   document.getElementById('finished-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('finished-location').innerHTML = String(order.location_id);
@@ -215,7 +215,7 @@ function viewPendingOrders(selectedOrderID){
   //console.log(JSON.stringify(order));
 
   document.getElementById('pending-date-ordered').innerHTML = order.order_date;
-  document.getElementById('pending-date-approved').innerHTML = order.order_date;//String("wala sa JSON");
+  document.getElementById('pending-date-approved').innerHTML = order.order_date;
   document.getElementById('pending-crop-name').innerHTML = String(order.name);
   document.getElementById('pending-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('pending-location').innerHTML = String(order.location_id);

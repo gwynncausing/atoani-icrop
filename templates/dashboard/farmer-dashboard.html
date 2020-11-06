@@ -195,9 +195,9 @@
                 <div class="row d-flex justify-content-center mt-3 pb-2" style="font-size: 16px">
                     <div class="col-md-6 col-12 row">
                         <div class="label col-6 text-right pt-1 pb-1">Date Ordered:</div>
-                        <div class="col-6 pt-1 pb-1" id="reserved-date-ordered">wa sa json</div>
+                        <div class="col-6 pt-1 pb-1" id="reserved-date-ordered"></div>
                         <div class="label col-6 text-right pt-1 pb-1">Date Approved:</div>
-                        <div class="col-6 pt-1 pb-1" id="reserved-date-approved">wa sa json</div>
+                        <div class="col-6 pt-1 pb-1" id="reserved-date-approved"></div>
                         <div class="label col-sm-6 col-4 text-right pt-1 pb-1">Date Reserved:</div>
                         <div class="col-sm-6 col-8 pt-1 pb-1" id="reserved-date-reserved">-</div>
                     </div>
@@ -378,14 +378,14 @@
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>  
     <!-- dashboard js -->
-    <script src="{% static '/js/dashboard/farmer-dashboard.js' %}"></script>
+    <script src="{% static 'js/dashboard/farmer-dashboard.js' %}"></script>
     <script>
         const csrftoken = '{{ csrf_token }}';
         setCSRF(csrftoken)
     </script>
     <!-- shows the notification success or error when reserved -->
-    <script src="{% static '/js/global/notify.js' %}"></script>
-    <script src="{% static '/js/dashboard/datatables-display.js' %}"></script>
+    <script src="{% static 'js/global/notify.js' %}"></script>
+    <script src="{% static 'js/dashboard/datatables-display.js' %}"></script>
     <script>
         datatablesDisplay(document.querySelector("#farmer-finished-table"));
     </script>

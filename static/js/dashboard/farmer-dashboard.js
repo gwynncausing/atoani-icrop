@@ -160,9 +160,9 @@ function viewFinishedOrders(orderID){
     }
   }
   //console.log(JSON.stringify(order));
-  // document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
-  // document.getElementById('reserved-date-approved').innerHTML = String(order.date_approved);
-  document.getElementById('finished-date-reserved').innerHTML = String(order.accepted_date);
+  document.getElementById('finished-date-ordered').innerHTML = String(order.order_date);
+  document.getElementById('finished-date-approved').innerHTML = String(order.date_approved);
+  document.getElementById('finished-date-reserved').innerHTML = String(order.accepted_date)||String(order.reserved_date)||'-';
   document.getElementById('finished-date-harvested').innerHTML = String(order.harvested_date);
   document.getElementById('finished-status').innerHTML = String(order.status);
   document.getElementById('finished-crop-name').innerHTML = String(order.name);
