@@ -209,7 +209,7 @@ function viewReservedOrders(orderID){
   document.getElementById('reserved-location').innerHTML = String(order.location_id);
   document.getElementById('reserved-order-number').innerHTML = String(order.order_pair_id);
   document.getElementById('reserved-area-needed').innerHTML = String(order.land_area_needed);
-  
+  document.getElementById('reserved-days').innerHTML = String(order.expected_time);
 
   // document.getElementById('reserved-days').innerHTML = String(order.weight);
   $("#reserved-modal-farmer").modal("show");
@@ -244,7 +244,7 @@ function viewIncomingOrders(orderID){
   document.getElementById('incoming-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('incoming-location').innerHTML = String(order.location);
   document.getElementById('incoming-area-needed').innerHTML = String(order.land_area_needed);
-  document.getElementById('incoming-days').innerHTML = String(order.weight);
+  document.getElementById('incoming-days').innerHTML = String(order.expected_time);
   $("#incoming-modal-farmer").modal("show");
 }
 
