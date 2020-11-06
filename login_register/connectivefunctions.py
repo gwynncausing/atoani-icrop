@@ -244,7 +244,7 @@ def matching_algorithm(farmer):
         # based on available_land_area
         available_order = available_order[available_order['land_area_needed'] <= farmer.available_land_area].sort_values('land_area_needed',ascending=False)
         # based on suitability (refer to Location_Crop)
-        suitable_crops = Location_Crop.objects.get(location_id=farmer.location_id).name.values_list("id",flat=True)
+        suitable_crops = Location_Crop.objects.get(location__province=farmer.location.province).name.values_list("id",flat=True)
         available_order['is_suitable'] = available_order['crop_id'].apply(lambda crop: crop in suitable_crops)
         available_order.sort_values(["is_suitable",'weight'], ascending=False)
         available_order['index'] = [i for i in range(1,len(available_order)+1)]
