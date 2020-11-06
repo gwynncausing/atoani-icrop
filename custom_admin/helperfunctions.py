@@ -17,6 +17,7 @@ def format_nan_values(list,column_key):
 
 def get_users():
     users = dashboard_utility.display_all_users()
+    print('BEFORE GETTING CUST/FARM',users)
     return users
 
 def get_farmers():
@@ -37,6 +38,7 @@ def get_unapproved_farmers():
 
 def get_customers():
     users = get_users()
+    print('\n\n\n\n',users)
     customers = []
     if len(users)>0:
         customers = users['customer']
