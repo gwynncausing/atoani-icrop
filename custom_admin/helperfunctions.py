@@ -17,13 +17,16 @@ def format_nan_values(list,column_key):
 
 def get_users():
     users = dashboard_utility.display_all_users()
+    print('BEFORE GETTING CUST/FARM',users)
     return users
 
 def get_farmers():
     users = get_users()
     farmers = []
-    if len(users)>0:
+    try:
         farmers = users['farmer']
+    except:
+        pass
     format_nan_values(farmers,'land_area')
     return farmers
 
@@ -38,8 +41,10 @@ def get_unapproved_farmers():
 def get_customers():
     users = get_users()
     customers = []
-    if len(users)>0:
+    try:
         customers = users['customer']
+    except:
+        pass
     return customers
 
 def get_unapproved_customers():

@@ -152,11 +152,12 @@ def datatable_farmer(id):
 # to be called after datatable_farmer to generate datatable dictionary
 # if no order_pairs exist, returns None
 def display_farmer_table(df):
+    print(df)
     if len(df) == 0:
         return df
     else:
         df = df.sort_values('accepted_date',ascending=False).reset_index(drop=True).rename(columns={'status_y':'status'})
-        return df[['order_pair_id','accepted_date','name','weight','land_area_needed','location_id','harvested_date','status']].to_dict('records')
+        return df[['order_pair_id','accepted_date','order_date','approved_date','name','weight','land_area_needed','location_id','harvested_date','status']].to_dict('records')
 
 # get customer's orders
 def get_order_customer(id):
@@ -244,7 +245,7 @@ def matching_algorithm(farmer):
         # based on available_land_area
         available_order = available_order[available_order['land_area_needed'] <= farmer.available_land_area].sort_values('land_area_needed',ascending=False)
         # based on suitability (refer to Location_Crop)
-        suitable_crops = Location_Crop.objects.get(location_id=farmer.location_id).name.values_list("id",flat=True)
+        suitable_crops = Location_Crop.objects.get(location__province=farmer.location.province).name.values_list("id",flat=True)
         available_order['is_suitable'] = available_order['crop_id'].apply(lambda crop: crop in suitable_crops)
         available_order.sort_values(["is_suitable",'weight'], ascending=False)
         available_order['index'] = [i for i in range(1,len(available_order)+1)]
