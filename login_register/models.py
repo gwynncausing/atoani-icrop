@@ -54,8 +54,8 @@ class Location(models.Model):
         return str(self.name)
 
     def save(self, *args, **kwargs):
-        self.name = self.brgy if self.brgy != "" else ""
-        self.name += ", " + self.city if self.city != "" else ""
+        self.name = self.brgy if self.brgy != None and self.brgy != "" else ""
+        self.name += ", " + self.city if self.city != None and self.city != "" else ""
         self.name += ", " + self.province if len(self.name) != 0 else self.province
         super().save(*args, **kwargs)
 
