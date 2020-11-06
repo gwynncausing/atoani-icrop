@@ -18,7 +18,7 @@ def get_location_str(location_id,street):
 #formats the nan values to None because it will cause a parse error in javascript
 def format_nan_values(list,column_key):
     for x in list:
-        if math.isnan(x[column_key]):
+        if x[column_key] != None and math.isnan(x[column_key]):
             x[column_key]=None
 
 #formats the location_id in orders list so that it will return the sting format of the location instance
@@ -49,6 +49,7 @@ def get_reserved_orders(user):
     orders = dashboard_utility.display_farmer_table(df)
     format_location(orders,user)
     format_nan_values(orders,'land_area_needed')
+    print('\n\n\n\n\n',orders)
     #print(orders)
     reserved_orders = []
     for order in orders:

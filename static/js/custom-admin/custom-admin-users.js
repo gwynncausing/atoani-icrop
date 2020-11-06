@@ -182,7 +182,7 @@ function hideElement(e) {
 }
 
 function getDataFromServer(url) {
-  usersTable.ajax.url(url).load()
+  usersTable.ajax.url(url).load(() => { tableData = usersTable.ajax.json().data; }, true);
 }
 
 let usersTable = null;

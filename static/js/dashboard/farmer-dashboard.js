@@ -200,8 +200,8 @@ function viewReservedOrders(orderID){
     
     reserveButton.addEventListener('click',checkOrder);
   }
-  //document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date)
-  //document.getElementById('reserved-date-approved').innerHTML = String(order.date_approved);
+  document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
+  document.getElementById('reserved-date-approved').innerHTML = String(order.approved_date);
   document.getElementById('reserved-date-reserved').innerHTML = String(order.accepted_date);
   document.getElementById('reserved-status').innerHTML = String(order.status);
   document.getElementById('reserved-crop-name').innerHTML = String(order.name);
@@ -238,7 +238,7 @@ function viewIncomingOrders(orderID){
   reserveButton.addEventListener('click',checkOrder);
   //Assigning values
   document.getElementById('incoming-date-ordered').innerHTML = String(order.order_date);
-  document.getElementById('incoming-date-approved').innerHTML = "Not Yet Approved";
+  document.getElementById('incoming-date-approved').innerHTML = String(order.approved_date);
   document.getElementById('incoming-status').innerHTML = String(order.status);
   document.getElementById('incoming-crop-name').innerHTML = String(order.name);
   document.getElementById('incoming-demand').innerHTML = String(order.weight) + " kilos";
@@ -347,6 +347,7 @@ function cancelReservation() {
     processData: false,
 
     success: function (response) {
+      isOrderReserved = false;
       console.log("reservation cancelled");
     },
     error: function (response) {
