@@ -71,7 +71,7 @@ function check(input){
     //ERROR MESSAGES:
     const usernameBlank  = "Please enter a username. It must not contain a space.";
     const usernameExists = "The username is already in use";
-    const contactInvalidFormat = "Phone number must be in one of these formats: 9xxxxxxxxx or 09xxxxxxxxx";
+    const contactInvalidFormat = "Phone number must be in this format: 09xxxxxxxxx";
     const contactExists = "The contact number is already in use";
     const emailInvalidFormat = "Please enter your email address in format: yourname@example.com";
     const emailExists = "The email address is already in use";
@@ -86,20 +86,42 @@ function check(input){
     //Calls necessary validation functions
     forms.addEventListener("submit", e => {
         let isValid = true;
+        
         //check if email or phone number is answered
-        if(isEmailValid || isContactValid){
-            contactInfo.value = "contact-info";
-            isValid = displayValidity(contactInfo);
+        let flag = 0;
+        if(email.checkValidity() == false){
+            isValid = false;
+            flag++;
         }
+        if(contact.checkValidity() == false){
+            isValid = false;
+            flag++;
+        }
+        if(flag == 0){
+            if(email.value.trim() == "" && contact.value.trim() == ""){
+                isValid = false;
+            }
+            else{
+                contactInfo.value = "contact-info";
+                displayValidity(contactInfo);
+            }
+        }
+
         //check the validity of each fields
         textFields.forEach(field => {
-            if(field.id != 'username')
-                isValid = displayValidity(field)
+            if(field.id != 'username'){
+                if(displayValidity(field) == false){
+                    isValid = false;
+                }
+            }
             else{
-                if(field.classList.contains("is-invalid") == false)
-                    isValid = displayValidity(field);
+                if(field.classList.contains("is-invalid") == true || field.value.trim() == ""){
+                    addInvalidClass(field);
+                    isValid = false;
+                }
             }
         });
+
         //check the validity of the province
         if(provinceSelector.options[provinceSelector.selectedIndex].value === "-1"){
             addInvalidClass(provinceSelector);
@@ -180,6 +202,7 @@ function check(input){
     //contact input listener
     //checks availability of contact
     contact.addEventListener('input', e => {
+        //e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
         e.target.value = e.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
 
         //if input length is 0

@@ -49,6 +49,7 @@ def get_reserved_orders(user):
     orders = dashboard_utility.display_farmer_table(df)
     format_location(orders,user)
     format_nan_values(orders,'land_area_needed')
+    print('\n\n\n\n\n',orders)
     #print(orders)
     reserved_orders = []
     for order in orders:

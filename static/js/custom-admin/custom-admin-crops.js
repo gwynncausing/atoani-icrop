@@ -41,7 +41,7 @@ const cropsTableConfig = {
   columnDefs: [
     { orderable: false, "targets": -1 },
     {
-      targets: 3,
+      targets: 2,
       data: null,
       defaultContent: `<div class="button-container d-flex justify-content-center">
                                                   <button type="button" class="btn btn-danger text-light py-0" data-toggle="modal" data-target="#confirmDeleteModal" onclick="deleteCrop(this)">
@@ -57,8 +57,7 @@ const cropsTableConfig = {
   //matches the data to appropriate column
   columns: [
     { "data": 'id' },
-    { "data": 'name' },
-    { "data": 'location' }
+    { "data": 'name' }
   ],
   createdRow: function (row, data, dataIndex) {
     $(row).attr('crop-id', data.id);
@@ -118,9 +117,12 @@ function addCrop(e) {
     else{
         //remove the loader
         $(".loading").removeClass("d-none");
+        $('#modal-add-crop').modal('hide');
+        
         let formData = new FormData(form);//.append('action','add');
         formData.append('operation', 'add-crop');
         formData.append('csrfmiddlewaretoken',csrf_token);
+
         $.ajax({
             url: getAllCropsURL,
             type: 'post',
@@ -131,7 +133,6 @@ function addCrop(e) {
             success: function (response) {
                 //remove loading 
                 $(".loading").addClass("d-none");
-                $('#modal-add-crop').modal('hide');
                 cropsTable.ajax.reload(()=>{tableData = cropsTable.ajax.json().data;},true);
                 selectedCropID = -1;
                 //show notify
