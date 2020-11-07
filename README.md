@@ -1,7 +1,7 @@
 # AtoANI Recommendation System
 
 ## Purpose
-This recommendation system aims to help farmers using data analytics. The system asks for inputs from the user based on their location, what month to plant on, crop to plant, demand and productivity rate. The system will give back the recommendation based on their input on the land area needed and expected time of harvest.
+This recommendation system aims to help farmers using a demand-based matching algorithm. The recommendations are based on the crop, demand, and the order location. This project also comes with a dashboard where customers can post orders and farmers can take on the said orders.
 
 ## Authors
 - Cary Legaspi
