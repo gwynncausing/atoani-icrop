@@ -66,7 +66,7 @@ class GetOngoingOrdersView(View):
     def get(self,request):
         if request.is_ajax():
             #does not include deleted customer
-            orders = hf.get_all_orders()
+            orders = hf.get_all_order_pairs()
             #orders.extend(hf.get_all_order_pairs())
             arr = hf.get_ongoing_orders(orders)
             json = {'data':arr}
@@ -82,7 +82,7 @@ class GetHarvestedOrdersView(View):
     def get(self,request):
         if request.is_ajax():
             #does not include deleted customer
-            orders = hf.get_all_orders()
+            orders = hf.get_all_order_pairs()
             #orders.extend(hf.get_all_order_pairs())
             arr = hf.get_harvested_orders(orders)
             json = {'data':arr}
@@ -98,7 +98,7 @@ class GetCollectedOrders(View):
     def get(self,request):
         if request.is_ajax():
             #does not include deleted customer
-            orders = hf.get_all_orders()
+            orders = hf.get_all_order_pairs()
             #orders.extend(hf.get_all_order_pairs())
             arr = hf.get_collected_orders(orders)
             json = {'data':arr}
@@ -114,7 +114,7 @@ class GetDeliveredOrders(View):
     def get(self,request):
         if request.is_ajax():
             #does not include deleted customer
-            orders = hf.get_all_orders()
+            orders = hf.get_all_order_pairs()
             #orders.extend(hf.get_all_order_pairs())
             arr = hf.get_delivered_orders(orders)
             json = {'data':arr}

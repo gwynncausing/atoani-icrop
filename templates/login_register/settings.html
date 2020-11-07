@@ -119,11 +119,11 @@
                                                 <label class="col-lg-3 col-4 mt-md-2"></label>
                                                 {% endif %}
                                                 <input class="col-lg-6 col-8 form-control mt-2" type="text" name="address" id="address" placeholder="Address" required value="{{ location.name }}" readonly>
-                                                <button type="button" class="col btn edit-address-btn form-control mt-l-0 mt-2" data-toggle="modal" data-target="#modal-customer-address" data-location-id="{{ location.id }}" id="btn-edit-address-modal" name="btn-edit-address-modal">Edit</button>
-                                                <button type="button" class="col btn delete-address-btn form-control btn-danger ml-3 mt-l-0 mt-2" data-toggle="modal" data-target="#modal-delete" id="btn-delete-address-modal" name="btn-delete-address-modal" data-location-name="{{ location.name }}" data-location-id="{{ location.id }}">Delete</button>
+                                                <button type="button" class="col btn edit-address-btn form-control mt-l-0 mt-2 d-none" data-toggle="modal" data-target="#modal-customer-address" data-location-id="{{ location.id }}" id="btn-edit-address-modal" name="btn-edit-address-modal">Edit</button>
+                                                <button type="button" class="col btn delete-address-btn form-control btn-danger ml-3 mt-l-0 mt-2 d-none" data-toggle="modal" data-target="#modal-delete" id="btn-delete-address-modal" name="btn-delete-address-modal" data-location-name="{{ location.name }}" data-location-id="{{ location.id }}">Delete</button>
                                             {% endfor %}
                                         </div>
-                                        <div class="form-group col-12">
+                                        <div class="form-group col-12 d-none">
                                             <button type="button" class="btn btn-primary float-right" id="btn-add-address-modal" name="btn-add-address-modal" data-toggle="modal" data-target="#modal-customer-address">Add Address</button>
                                         </div>
                                         <div class="form-group col-lg-12 col-12 row">
@@ -141,7 +141,7 @@
                                         <div class="form-group col-lg-12 col-12 row">
                                             <label class="col-lg-3 col-4 mt-md-2">Address *</label>
                                             <input class="col-lg-6 col-8 form-control" type="text" name="address" id="address" placeholder="Address" required value="{{ user.farmer.location.name }}" readonly>
-                                            <button type="button" class="col btn float-right edit-address-btn form-control" data-toggle="modal" data-target="#modal-edit-farmer-{{user.farmer.location.id}}">Edit Address</button>
+                                            <button type="button" class="col btn float-right edit-address-btn form-control d-none" data-toggle="modal" data-target="#modal-edit-farmer-{{user.farmer.location.id}}">Edit Address</button>
                                         </div>
                                         <!-- farmer contact number -->
                                         <div class="form-group col-lg-12 col-12 row">

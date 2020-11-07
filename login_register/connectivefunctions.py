@@ -338,12 +338,15 @@ def display_all_orders(df):
 def datatable_order_pairs():
     try:
         pairs = pd.DataFrame(Order_Pairing.objects.all().values())
-        orders = datatable_orders(pd.DataFrame(Order.objects.filter(order_id__in=pairs['order_id_id']).values())).drop(columns="status")
+        print(pairs)
+        orders = datatable_orders(pd.DataFrame(Order.objects.filter(order_id__in=pairs['order_id_id']).values()))
+        print(orders)
         farmers = pd.DataFrame(Farmer.objects.all().values()).rename(columns={'id':'farm_id'})
         farmers['farmer_names'] = farmers['name_id'].apply(get_name)
         farmers = farmers[['farm_id','farmer_names']]
         return pairs.merge(orders, left_on="order_id_id", right_on="order_id").drop(columns="order_id_id").merge(farmers, left_on="farmer_id", right_on="farm_id").drop(columns="farm_id")
-    except:
+    except Exception as e:
+        print(e)
         return []
 
 def display_all_order_pairs(df):

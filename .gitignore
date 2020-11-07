@@ -70,7 +70,6 @@ custom_admin/__pycache__/helperfunctions.cpython-38.pyc
 custom_admin/__pycache__/models.cpython-38.pyc
 custom_admin/__pycache__/urls.cpython-38.pyc
 custom_admin/__pycache__/views.cpython-38.pyc
-custom_admin/helperfunctions.py
 custom_admin/migrations/__pycache__/__init__.cpython-38.pyc
 dashboard/__pycache__/__init__.cpython-38.pyc
 dashboard/__pycache__/customerfunctions.cpython-38.pyc
