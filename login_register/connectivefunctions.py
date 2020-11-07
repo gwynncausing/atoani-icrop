@@ -146,6 +146,7 @@ def datatable_farmer(id):
         orders = pd.DataFrame(Order.objects.filter(order_id__in=order_ids).values()).drop(columns=["status"])
         crops = pd.DataFrame(Crop.objects.filter(id__in=[item[2] for item in orders.values]).values('id','name'))
         final_order = orders.merge(crops, left_on="crop_id",right_on="id").drop(columns=["crop_id","id"])
+        final_order['order_date'] = final_order['order_date'].apply(printable_convert)
 
         return df.merge(final_order, left_on="order_id_id", right_on="order_id").drop(columns=["order_id_id","order_id"])
 
