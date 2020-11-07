@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #Temporary, must be set as variable in heroku
 SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = "g2cct))hzg!f*k#2(hh830itybd%y6j&m^+d792%==cu!8fzry"
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 DEBUG_PROPAGATE_EXCEPTIONS = True
@@ -179,6 +179,10 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media")
+
+SECURE_SSL_REDIRECT = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Session
 PASSWORD_RESET_TIMEOUT = 86400
