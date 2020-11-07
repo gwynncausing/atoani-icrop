@@ -159,7 +159,8 @@ function viewReservedOrders(selectedOrderID){
   }
   document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
   document.getElementById('reserved-date-approved').innerHTML = String(order.approved_date);
-  document.getElementById('reserved-date-reserved').innerHTML = String(order.accepted_date);
+  document.getElementById('reserved-date-reserved').innerHTML = String(order.reserved_date);
+  console.log(order);
   //document.getElementById('reserved-status').innerHTML = String(order.status);
   document.getElementById('reserved-crop-name').innerHTML = String(order.name);
   document.getElementById('reserved-demand').innerHTML = String(order.weight) + " kilos";
