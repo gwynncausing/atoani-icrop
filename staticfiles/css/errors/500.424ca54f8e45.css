@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Sriracha&display=swap");
+body {
+  background-color: white;
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Sriracha", cursive;
+}
+
+.header {
+  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #0b3531), color-stop(50%, #628474));
+  background: linear-gradient(to right, #0b3531 50%, #628474 50%);
+}
+
+.navbar {
+  border-bottom: 2px solid #0b3531;
+}
+
+.navbar .wraper {
+  width: 100%;
+  height: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.navbar .div-1 {
+  width: calc( 25% - 40px);
+  height: 100%;
+  background: #0b3531;
+}
+
+.navbar .div-1 .imgLogo {
+  margin-top: 10px;
+  height: 45px;
+  width: auto;
+}
+
+.navbar .div-2 {
+  width: calc( 75% + 40px);
+  height: 100%;
+  border-left: 50px solid #0b3531;
+  border-bottom: 70px solid transparent;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: #628474;
+}
+
+.navbar .div-2 div.navbar-collapse ul li:hover {
+  background-color: #114a44;
+  border-radius: 5px;
+}
+
+.navbar .div-2 div.navbar-collapse ul li a.nav-link {
+  text-align: right;
+}
+
+.navbar .div-2 a {
+  color: white;
+}
+
+.navbar .div-2 a.dropdown-item {
+  color: #0a0a0a;
+}
+
+.navbar .div-2 a.dropdown-item:hover {
+  background: #628474;
+  color: white;
+}
+
+.navbar .div-2 .navbar-toggler-icon {
+  color: white;
+}
+
+@media only screen and (max-width: 990px) {
+  .navbar .div-1 {
+    width: calc( 35% - 40px);
+  }
+  .navbar .div-1 .imgLogo {
+    margin-top: 10px;
+    height: 35px;
+  }
+  .navbar .div-2 {
+    width: calc( 65% + 40px);
+  }
+  .navbar .div-2 div.navbar-collapse {
+    background-color: #628474;
+  }
+  .navbar .div-2 div.navbar-collapse ul li:hover {
+    border-radius: 0px;
+  }
+  .navbar .div-2 div.navbar-collapse ul li a.nav-link {
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .navbar .div-1 {
+    width: calc( 40% - 40px);
+  }
+  .navbar .div-1 .imgLogo {
+    margin-top: 13px;
+    height: 35px;
+  }
+  .navbar .div-2 {
+    width: calc( 60% + 40px);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar .div-1 {
+    width: calc( 60% - 40px);
+  }
+  .navbar .div-1 .imgLogo {
+    margin-top: 13px;
+    height: 35px;
+  }
+  .navbar .div-2 {
+    width: calc( 40% + 40px);
+  }
+}
+
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #628474;
+}
+
+.footer .container {
+  color: white;
+  text-align: right;
+}
+
+.footer .container span {
+  font-size: .8rem;
+}
+
+.footer .container span .icon {
+  font-size: 1.2rem;
+}
+
+.error-holder {
+  height: 85vh;
+}
+
+.error-holder a {
+  background: #628474;
+  font-weight: bold;
+  width: 8rem;
+  color: #fafafa;
+}
+/*# sourceMappingURL=500.424ca54f8e45.css.map */

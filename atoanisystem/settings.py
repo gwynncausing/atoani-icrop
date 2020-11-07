@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #Temporary, must be set as variable in heroku
 SECRET_KEY = os.environ.get('SECRET_KEY')
-
+SECRET_KEY = "g2cct))hzg!f*k#2(hh830itybd%y6j&m^+d792%==cu!8fzry"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 DEBUG_PROPAGATE_EXCEPTIONS = True
