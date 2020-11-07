@@ -44,7 +44,6 @@
 
     yesBtn.on("click", e => {
         yesBtn.prop("disabled", true);
-        orderForm.submit();
     });
     //when the user click yes to confirm 
     //this submit the form
