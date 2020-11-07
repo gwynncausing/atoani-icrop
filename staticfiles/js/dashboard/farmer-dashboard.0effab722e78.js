@@ -161,14 +161,14 @@ function viewFinishedOrders(orderID){
   }
   //console.log(JSON.stringify(order));
   document.getElementById('finished-date-ordered').innerHTML = String(order.order_date);
-  document.getElementById('finished-date-reserved').innerHTML = String(order.accepted_date);
+  document.getElementById('finished-date-approved').innerHTML = String(order.date_approved);
   document.getElementById('finished-date-harvested').innerHTML = String(order.harvested_date);
   document.getElementById('finished-status').innerHTML = String(order.status);
   document.getElementById('finished-crop-name').innerHTML = String(order.name);
   document.getElementById('finished-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('finished-location').innerHTML = String(order.location_id);
   document.getElementById('finished-order-number').innerHTML = String(order.order_pair_id);
-  document.getElementById('finished-area-needed').innerHTML = String(order.land_area_needed)+ " sqm";
+  document.getElementById('finished-area-needed').innerHTML = String(order.land_area_needed);
   
   // document.getElementById('reserved-days').innerHTML = String(order.weight);
   $("#finished-modal-farmer").modal("show");
@@ -207,7 +207,7 @@ function viewReservedOrders(orderID){
   document.getElementById('reserved-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('reserved-location').innerHTML = String(order.location_id);
   document.getElementById('reserved-order-number').innerHTML = String(order.order_pair_id);
-  document.getElementById('reserved-area-needed').innerHTML = String(order.land_area_needed)+ " sqm";
+  document.getElementById('reserved-area-needed').innerHTML = String(order.land_area_needed);
   document.getElementById('reserved-days').innerHTML = String(order.expected_time);
 
   // document.getElementById('reserved-days').innerHTML = String(order.weight);
@@ -242,7 +242,7 @@ function viewIncomingOrders(orderID){
   document.getElementById('incoming-crop-name').innerHTML = String(order.name);
   document.getElementById('incoming-demand').innerHTML = String(order.weight) + " kilos";
   document.getElementById('incoming-location').innerHTML = String(order.location);
-  document.getElementById('incoming-area-needed').innerHTML = String(order.land_area_needed)+ " sqm";
+  document.getElementById('incoming-area-needed').innerHTML = String(order.land_area_needed);
   document.getElementById('incoming-days').innerHTML = String(order.expected_time);
   $("#incoming-modal-farmer").modal("show");
 }
