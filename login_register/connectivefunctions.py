@@ -312,20 +312,16 @@ def all_orders_datatable():
     return datatable_orders(pd.DataFrame(Order.objects.all().values()))
 
 def datatable_orders(orders=None):
-    try:
+    if orders is None:
+        orders = pd.DataFrame(Order.objects.all().values())
+    orders = orders.merge(pd.DataFrame(Crop.objects.filter(id__in=orders['crop_id'].unique()).values('name','id')), left_on="crop_id", right_on="id").drop(columns="id").rename(columns={'name':'crop_name'})
+    orders = orders.merge(pd.DataFrame(Location.objects.filter(id__in=orders['location_id'].unique()).values('name','id')), left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
 
-        if orders == None:
-            orders = pd.DataFrame(Order.objects.all().values())
-        orders = orders.merge(pd.DataFrame(Crop.objects.filter(id__in=orders['crop_id'].unique()).values('name','id')), left_on="crop_id", right_on="id").drop(columns="id").rename(columns={'name':'crop_name'})
-        orders = orders.merge(pd.DataFrame(Location.objects.filter(id__in=orders['location_id'].unique()).values('name','id')), left_on="location_id", right_on="id").drop(columns=["location_id","id"]).rename(columns={'name':'location'})
+    customers = pd.DataFrame(Customer.objects.all().values())
+    customers['customer_names'] = customers['name_id'].apply(get_name)
+    customers = customers[['id','customer_names']]
 
-        customers = pd.DataFrame(Customer.objects.all().values())
-        customers['customer_names'] = customers['name_id'].apply(get_name)
-        customers = customers[['id','customer_names']]
-
-        return orders.merge(customers, left_on="customer_id",right_on="id").drop(columns='id')
-    except:
-        return []
+    return orders.merge(customers, left_on="customer_id",right_on="id").drop(columns='id')
 
 def display_all_orders(df):
     if len(df) == 0:
@@ -338,15 +334,13 @@ def display_all_orders(df):
 def datatable_order_pairs():
     try:
         pairs = pd.DataFrame(Order_Pairing.objects.all().values())
-        print(pairs)
-        orders = datatable_orders(pd.DataFrame(Order.objects.filter(order_id__in=pairs['order_id_id']).values()))
-        print(orders)
+        orders = datatable_orders(pd.DataFrame(Order.objects.filter(order_id__in=pairs['order_id_id']).values())).drop(columns="status")
         farmers = pd.DataFrame(Farmer.objects.all().values()).rename(columns={'id':'farm_id'})
         farmers['farmer_names'] = farmers['name_id'].apply(get_name)
         farmers = farmers[['farm_id','farmer_names']]
         return pairs.merge(orders, left_on="order_id_id", right_on="order_id").drop(columns="order_id_id").merge(farmers, left_on="farmer_id", right_on="farm_id").drop(columns="farm_id")
     except Exception as e:
-        print(e)
+        print('--------------exception:\n',e)
         return []
 
 def display_all_order_pairs(df):
