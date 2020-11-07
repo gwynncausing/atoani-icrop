@@ -113,9 +113,9 @@ def get_all_orders():
 
 def get_all_order_pairs():
     df = dashboard_utility.datatable_order_pairs()
-    print('\n\n\n',df)
     orders = dashboard_utility.display_all_order_pairs(df)
-    print(orders)
+    if orders is None:
+        orders = []
     orders = format_name(orders,'customer_names','customer_name')
     orders = format_name(orders,'farmer_names','farmer_name')
     orders = list(filter(lambda order: order['status'] != "Cancelled", orders))
