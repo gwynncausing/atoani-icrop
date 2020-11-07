@@ -159,7 +159,7 @@ function viewReservedOrders(selectedOrderID){
   }
   document.getElementById('reserved-date-ordered').innerHTML = String(order.order_date);
   document.getElementById('reserved-date-approved').innerHTML = String(order.approved_date);
-  document.getElementById('reserved-date-reserved').innerHTML = String(order.accepted_date);
+  document.getElementById('reserved-date-reserved').innerHTML = String(order.reserved_date);
   //document.getElementById('reserved-status').innerHTML = String(order.status);
   document.getElementById('reserved-crop-name').innerHTML = String(order.name);
   document.getElementById('reserved-demand').innerHTML = String(order.weight) + " kilos";
@@ -185,7 +185,8 @@ function viewFinishedOrders(selectedOrderID){
   document.getElementById('finished-date-harvested').innerHTML = String(order.harvested_date);
   document.getElementById('finished-crop-name').innerHTML = String(order.name);
   document.getElementById('finished-demand').innerHTML = String(order.weight) + " kilos";
-  document.getElementById('finished-location').innerHTML = String(order.location_id);
+  document.getElementById('finished-location2').innerHTML = String(order.location_id);
+  console.log(order);
   document.getElementById('finished-order-number').innerHTML = String(order.order_pair_id);
 
   //reset the modal
