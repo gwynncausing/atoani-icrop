@@ -95,7 +95,6 @@ function viewOrder(button){
   document.getElementById('customer-name').innerHTML = order.customer_name;
   document.getElementById('location').innerHTML = order.location;
   document.getElementById('farmer-id').innerHTML = order.farmer_id || "N/A";
-  console.log(order);
   document.getElementById('status').innerHTML = order.status;
   document.getElementById('farmer-name').innerHTML = order.farmer_name || "N/A";
   document.getElementById('date-ordered').innerHTML = String(order.order_date) || "N/A";

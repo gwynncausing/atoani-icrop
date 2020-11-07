@@ -382,7 +382,7 @@ body {
     position: absolute;
     z-index: 100;
   }
-  .body-dashoard #pending-table-orders_filter, .body-dashoard #pending-table-orders_length {
+  .body-dashoard #farmer-finished-table_filter, .body-dashoard #farmer-finished-table_length {
     margin-top: 3rem;
   }
 }
@@ -438,14 +438,14 @@ body {
 }
 
 @media only screen and (max-width: 565px) {
-  .body-dashoard #pending-table-orders, .body-dashoard #finished-table-orders, .body-dashoard #reserved-table-orders {
+  .body-dashoard #farmer-finished-table {
     margin-top: 0px !important;
   }
   .body-dashoard .date-range {
     margin-top: 00px;
     position: relative;
   }
-  .body-dashoard #pending-table-orders_filter, .body-dashoard #pending-table-orders_length {
+  .body-dashoard #farmer-finished-table_filter, .body-dashoard #farmer-finished-table_length {
     margin-top: 0px;
   }
 }
