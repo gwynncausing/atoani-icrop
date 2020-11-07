@@ -1,0 +1,146 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block tags %}
+<!-- Customized CSS -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin/custom-admin.css' %}">
+<!-- Datatables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css" />
+{% endblock tags %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row h-100">
+        <div class="col-2 sidebar d-flex column-vertical py-3 p-0">
+            <a class="orders-title" href="{% url 'custom_admin:orders' %}">Orders<i class="fa fa-caret-down"></i></a>
+            <a class="orders-title active" href="{% url 'custom_admin:users' %}">Users <i
+                    class="fa fa-caret-down"></i></a>
+            <div class="dropdown-container">
+                <button id="allBtn" type="button" class="sidebar-nav">All</button>
+                <button id="waitlistBtn" type="button" class="sidebar-nav">Waitlist</button>
+                <button id="customersBtn" type="button" class="sidebar-nav">Customers</button>
+                <button id="farmersBtn" type="button" class="sidebar-nav">Farmers</button>
+            </div>
+            <a class="orders-title" href="{% url 'custom_admin:crops' %}">Others <i
+                    class="fa fa-caret-down"></i></a>
+            <div class="dropdown-container d-none">
+                <button id="" type="button" class="sidebar-nav border-0" autofocus>Crops</button>
+                <a href="{% url 'admin:index' %}" class="sidebar-nav border-0">Django Admin</a>
+            </div>
+        </div>
+        <div class="col-10 p-5 orders">
+            <h3 id="order-header">List of <span id="labelTop">All</span> Users</h3>
+            <div class="row">
+                <div class="view-order ol-12 pt-3 pb-3 rounded ">
+                    <div class="row">
+                        <div class="label col-12 text-center pt-1 pb-1 mb-4"><b class="mr-3">User ID:</b><span
+                                class="order-id" id="user-id">-</span></div>
+
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Name:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="name">-</div>
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Username:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="username">-</div>
+
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Email:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="email">-</div>
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Approved:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="status">-</div>
+
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Contact Number:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="contact-number">-</div>
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Land Area:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="land-area">-</div>
+
+
+                        <div class="label col-3 text-right pt-1 pb-1"><b>Address:</b></div>
+                        <div class="col-3 pt-1 pb-1" id="address">-</div>
+                        <div class="label col-3 text-right pt-1 pb-1"></div>
+                        <div class="col-3 pt-1 pb-1"></div>
+
+                        <!-- <div class="label col-3 text-right pt-1 pb-1 mt-4"><b>Date Registered:</b></div>
+                        <div class="col-3 pt-1 pb-1 mt-4" id="date-ordered">-</div>
+                        <div class="label col-3 text-right pt-1 pb-1"></div>
+                        <div class="col-3 pt-1 pb-1"></div> -->
+
+                        <!-- <div class="label col-3 text-right pt-1 pb-1"><b>Date Reserved:</b></div>
+                    <div class="col-3 pt-1 pb-1" id="date-reserved">-</div>
+                    <div class="label col-3 text-right pt-1 pb-1"></div>
+                    <div class="col-3 pt-1 pb-1"></div>
+
+                    <div class="label col-3 text-right pt-1 pb-1"><b>Date Collected:</b></div>
+                    <div class="col-3 pt-1 pb-1" id="date-collected">-</div>
+                    <div class="label col-3 text-right pt-1 pb-1"></div>
+                    <div class="col-3 pt-1 pb-1"></div>// -->
+                        <div class="label col-12 text-center justify-content-center pt-1 pb-1 mb-4">
+                            <button id="approveBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Approve
+                                User</button>
+                            <button id="unapproveBtn" type="button m-0" class="btn btn-danger px-5 mx-auto">Unapprove
+                                User</button>
+                            <br>
+                            <button id="resetPasswordBtn" type="button m-0" class="btn btn-info px-5 mx-auto"
+                                data-toggle="modal" data-target="#resetPasswordModal">Reset
+                                Password</button>
+
+                            <div class="modal" id="resetPasswordModal" tabindex="-1" role="dialog"
+                                aria-labelledby="resetPasswordModal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Confirm Reset Password</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            This will reset the user's password to: <br><br>
+                                            <h4>atoani.<span id="username-password-reset"></span></h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button id="confirmResetBtn" type="button" data-dismiss="modal"
+                                                class="btn btn-primary">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <button id="collectBtn" type="button m-0" class="btn btn-success px-5 mx-auto">Mark as
+                                Collected</button> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <table class="table users-table mx-auto">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Address</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<!-- Datatables JS -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
+<!-- Admin JS -->
+<script src="{% static 'js/custom-admin/custom-admin-sidebar.js' %}"></script>
+<script src="{% static 'js/custom-admin/custom-admin-users.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        initialize();
+        setCSRFToken("{{csrf_token}}")
+    });
+</script>
+{% endblock scripts %}

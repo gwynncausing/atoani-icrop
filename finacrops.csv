@@ -1,0 +1,48 @@
+,name,season_start,season_end,productivity,flags,is_seasonal,harvest_weight_per_land_area,harvest_time
+0,Rice,,,50,,False,3.95,123
+1,Corn,,,50,,False,3.0,80
+2,Ampalaya,,,50,Vegetable,False,20.0,65
+3,Onion Bulb,,,50,Vegetable,False,15.0,110
+4,Cabbage,,,50,Vegetable,False,40.0,130
+5,Carrots,,,50,Vegetable,False,25.0,105
+6,Cauliflower,,,50,Vegetable,False,30.0,75
+7,Eggplant,,,50,Vegetable,False,22.5,75
+8,Garlic,February,April,50,,True,4.5,120
+9,Habitchuelas(beans),,,50,Legumes,False,5.5,65
+10,Potato,,,50,Vegetable,False,20.0,82
+11,Tomato,May,October,50,,True,12.5,77
+12,Cacao,,,50,,False,1.75,170
+13,Sugarcane,December,March,50,,True,58.75,390
+14,Banana,,,50,,False,20.25,84
+15,Calamansi,,,50,,False,6.0,120
+16,Lanzones,,,50,,False,0.6875,206
+17,Mangosteen,,,50,,False,6.0,113
+18,Papaya,,,50,,False,70.0,195
+19,Pineapple,May,July,50,,True,35.0,480
+20,Watermelon,,,50,,False,17.5,95
+21,Asparagus,,,50,Vegetable,False,8.125,360
+22,Broccoli,,,50,Vegetable,False,9.5,125
+23,Cassava,,,50,Vegetable,False,25.0,285
+24,Ginger,,,50,Vegetable,False,25.0,225
+25,Greater yam/Ubi,November,February,50,Vegetable,True,17.5,135
+26,Lady's finger/Okra,,,50,Vegetable,False,15.0,75
+27,Lettuce,March,Oct,50,Vegetable,True,9.0,77
+28,Mung bean/Mongo,,,50,Legumes,False,0.7749999999999999,75
+29,Peanut,,,50,Legumes,False,0.9,120
+30,"Pechay, Native",,,50,Vegetable,False,5.85,35
+31,Radish,,,50,Vegetable,False,11.5,35
+32,Squash Fruit,,,50,Vegetable,False,15.25,60
+33,Swamp cabbage/Kangkong,,,50,Vegetable,False,10.7,60
+34,Taro/Gabi,,,50,Vegetable,False,7.085,240
+35,Potato,,,50,Vegetable,False,22.5,107
+36,Hot Pepper,,,50,,False,15.0,150
+37,Bell Pepper,,,50,,False,25.0,90
+38,Malabar spinach(Alugbati),,,50,Vegetable,False,11.0,45
+39,Mango,,,50,,False,3.95,85
+40,Orange,,,50,,False,1.85,300
+41,Durian,,,50,,False,4.35,103
+42,Rambutan,,,50,,False,1.35,30
+43,Coconut,,,50,,False,3.95,75
+44,Coffee,,,50,,False,0.55,180
+45,Oil Palm,,,50,,False,7.75,15
+46,Sweet Potato,,,50,Vegetable,False,6.35,105

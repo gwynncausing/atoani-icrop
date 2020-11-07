@@ -1,0 +1,86 @@
+.form-registration {
+    color: $main-color;
+    background-color: $light-green;
+    width: 100%;
+    border-radius: 0.5rem;
+
+    a {
+        color: $main-color;
+    }
+
+    #account-type-tag{
+        font-size: 18px;
+    }
+
+    .group-inputs{
+        color: $main-color;
+        border-radius: 0.5rem;
+        .group-title{
+            color: $white-color;
+            background-color: $secondary-color;
+            border-top-right-radius: 0.5rem;
+            border-top-left-radius: 0.5rem;
+        }
+    }
+
+    .form-header {
+        background-color: $secondary-color;
+        height: 2.75rem;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+    }
+    .form-body {
+        margin-top: -2rem;
+        width: 91%;
+
+        .account-type{
+            width: 5rem;
+            height: 3.2rem;
+            border-radius: 0.5rem;
+        }
+
+        #prep {
+            border: 0;
+            background: #165a53;
+            color: $white-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;  
+        }
+
+        .view-password, .view-password-confirm{
+            background: #165a53;          
+            color: $white-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 38px;
+            cursor: pointer;
+        }
+
+        #submit {
+            background-color: $main-color;
+            color: $white-color;
+            width: 8rem;
+        }
+
+        #termsAndConditionsLink {
+            text-decoration: underline;
+        }
+    }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+

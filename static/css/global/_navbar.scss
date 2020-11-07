@@ -1,0 +1,110 @@
+.header {
+    background: linear-gradient(to right, $tertiary-color 50%, $secondary-color 50%);
+}
+
+.navbar {
+    border-bottom: 2px solid $tertiary-color;
+    .wraper {
+        width: 100%;
+        height: 70px; // kung pili ang ni mao sad ang border-bottom sa div-2
+        display: flex;
+    }
+    .div-1 {
+        width: calc( 25% - 40px);
+        height: 100%;
+        background: $tertiary-color;
+        .imgLogo {
+            margin-top: 10px;
+            height: 45px;
+            width: auto;
+        }
+    }
+    .div-2 {
+        div.navbar-collapse {
+            
+            ul{
+                li{
+                    &:hover{
+                        background-color: $main-color;
+                        border-radius: 5px;
+                    }
+                    a.nav-link {
+                        text-align: right;
+                        // padding-right: 20px;
+                    }
+                }
+            }
+        }
+        width: calc( 75% + 40px);
+        height: 100%;
+        border-left: 50px solid $tertiary-color;
+        border-bottom: 70px solid transparent;
+        box-sizing: border-box;
+        background: $secondary-color;
+        a {
+            color: white;
+        }
+        a.dropdown-item {
+            color: $black;
+            &:hover {
+                background: $secondary-color;
+                color: white;
+            }
+        }
+        .navbar-toggler-icon {
+            color: white;
+        }
+    }
+    @media only screen and (max-width: 990px) {
+        .div-1 {
+            width: calc( 35% - 40px);
+            .imgLogo {
+                margin-top: 10px;
+                height: 35px;
+            }
+        }
+        .div-2 {
+            width: calc( 65% + 40px);
+            div.navbar-collapse{
+                background-color: $secondary-color;
+                ul{
+                    li{
+                        &:hover{
+                            // background-color: $main-color;
+                            border-radius: 0px;
+                        }
+                        a.nav-link {
+                            // text-align: right;
+                            padding-right: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media only screen and (max-width: 770px) {
+        .div-1 {
+            width: calc( 40% - 40px);
+            .imgLogo {
+                margin-top: 13px;
+                height: 35px;
+            }
+        }
+        .div-2 {
+            width: calc( 60% + 40px);
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .div-1 {
+            width: calc( 60% - 40px);
+            .imgLogo {
+                margin-top: 13px;
+                height: 35px;
+            }
+        }
+        .div-2 {
+            width: calc( 40% + 40px);
+        }
+    }
+}

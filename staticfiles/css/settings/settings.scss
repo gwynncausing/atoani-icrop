@@ -1,0 +1,121 @@
+
+@import "../login_register/_password-hint.scss";
+
+.settings-container{
+    width: 85%;
+    background: #EBF2F2;
+    min-height: 90vh;
+    height: 90%;
+    border-radius: 5px;
+    margin-bottom: 40px;
+
+    .setting-header{
+        color: black; 
+        background: #628474;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .card{
+        background: #B2D1C0;
+        
+        #name,
+        #account,
+        #others,
+        #contact{
+            background: #D4E4DB;
+        }
+
+        .edit-address-btn,
+        .save-btn{
+            color: #FFFFFF;
+            background-color: #628474;
+            margin-left: 5% ;
+        }
+
+        .cancel-btn{
+            color: #FFFFFF;
+            background-color: #ABABAB;
+        }
+
+        #contact{
+            .card-body{
+                .edit-address-btn{
+                    margin-left: 5% ;
+                }
+
+                .add-address-btn{
+                    color: #0677E0;
+                }
+            }
+        }
+        .card-header{
+            cursor: pointer;
+        }
+    }
+
+    .btn-header{
+        color: #010101;
+        text-decoration: none;
+        &:focus{
+            box-shadow: none;
+        }
+    }
+}
+
+.modal-delete{
+    justify-content: center;
+    .modal-content{
+        .modal-header{
+            background-color: #6ba389;
+            .h5{
+                font-weight: bold;
+            }
+        }
+        .delete-btn{
+            outline: none;
+            border: 0;
+            width: 7rem;
+            color: #FFFFFF;
+        }
+
+        .cancel-btn{
+            outline: none;
+            border: 0;
+            width: 7rem;
+            color: #FFFFFF;
+            background-color: #ABABAB;
+        }
+    }
+}
+
+.modal-add,
+.modal-edit{
+    justify-content: center;
+    .modal-content{
+        .modal-header{
+            background-color: #6ba389;
+        }
+    
+        .h5{
+            font-weight: bold;
+        }
+    
+        .edit-btn{
+            outline: none;
+            border: 0;
+            width: 7rem;
+            color: #FFFFFF;
+            background-color: #628474;
+        }
+
+        .cancel-btn{
+            outline: none;
+            border: 0;
+            width: 7rem;
+            color: #FFFFFF;
+            background-color: #ABABAB;
+        }
+    }
+
+}

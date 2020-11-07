@@ -1,0 +1,20 @@
+@import "../index";
+
+.approval{
+    h3{
+        color: rgb(220, 250, 234);
+    }
+    h4,h5, span{
+        color: $white-color;
+    }
+
+    html, body {
+        height: 100%;
+    }
+
+    .fill-height {
+        min-height: 100%;
+        height:auto !important; /* cross-browser */
+        height: 100%; /* cross-browser */
+    }
+}

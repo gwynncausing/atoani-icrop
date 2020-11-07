@@ -1,0 +1,219 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block tags %}
+    <!-- Customized CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin/custom-admin.css' %}">
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.css"/>
+{% endblock tags %}
+{% block content %}
+<!-- Loader -->
+<div class="loading d-none">
+    <div class="overlay"></div>
+    <div class="loader">
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+    </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row h-100">
+    <div class="col-2 sidebar d-flex column-vertical py-3 p-0">
+
+      <a class="orders-title" href="{% url 'custom_admin:orders' %}">Orders<i class="fa fa-caret-down"></i></a>
+      <div class="dropdown-container">
+        <!-- <button id="" type="button" class="sidebar-nav border-0">Collected</button> -->
+        <!-- <button id="collectedBtn" type="button" class="sidebar-nav border-0">Delivered</button> -->
+      </div>
+      <a class="orders-title" href="{% url 'custom_admin:users' %}">Users <i class="fa fa-caret-down"></i></a>
+      <div class="dropdown-container d-none">
+        <button id="" type="button" class="sidebar-nav border-0">All</button>
+        <button id="" type="button" class="sidebar-nav border-0">Waitlist</button>
+        <button id="" type="button" class="sidebar-nav border-0">Customers</button>
+        <button id="" type="button" class="sidebar-nav border-0">Farmers</button>
+      </div>
+      <a class="orders-title active" href="{% url 'custom_admin:crops' %}">Others <i class="fa fa-caret-down"></i></a>
+      <div class="dropdown-container">
+        <button id="" type="button" class="sidebar-nav border-0" autofocus>Crops</button>
+        <a href="{% url 'admin:index' %}" class="sidebar-nav border-0">Django Admin</a>
+      </div>
+    </div>
+    <div class="col-10 p-5 orders">
+      <h3 id="order-header">List of Crops</h3>
+      <div class="row">
+        <div class="col-12">
+          <button id="addBtn" type="button m-0" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-add-crop">Add Crop</button>
+          <table class="table crops-table mx-auto">
+            <thead>
+              <tr>
+                <th>Crop ID</th>
+                <th>Crop Name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Confirm Delete Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Crop</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            This will delete the selected crop and all orders of this crop (including finished), continue?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button id="confirmDeleteBtn" type="button" class="btn btn-primary">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Add Crop -->
+<div class="modal-customer modal fade" id="modal-add-crop" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"  role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-white">Add Crop</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="form-crop" class="form-crop" novalidate>     
+              <div class="modal-body"> 
+                <div class="form-group col-12 col-md-12 row ">
+                  <label class="font-weight-bold col-4" for="crop-name">Crop Name:</label>
+                  <div class="col-8">
+                    <input id="crop-name" class="form-control" type="text" name="crop-name" maxlength="30" required>
+                  </div>
+                </div>
+                <div class="form-group offset-4 col-12 col-md-12 m-0 ml-2 pb-3">
+                    <div class="offset-4 col-8">
+                      <input type="checkbox" id="is-seasonal" name="is-seasonal" class="form-check-input">
+                      <label for="is-seasonal" class="form-check-label">Is Seasonal</label>
+                    </div>
+                </div>
+                <div class="form-group col-12 col-md-12 row">
+                    <label class="col-4 d-flex mt-2" for="season-start">Season Start:</label>
+                    <div class="col-8">
+                      <select class="form-control" name="season-start" id="season-start">
+                        <option value="1" selected>January</option>
+                        <option value="2">Febuary</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                      </select>
+                      <label><small>Start of the harvest season.</small></label>
+                    </div>
+                </div>
+                <div class="form-group col-12 col-md-12 row">
+                  <label class="col-4 d-flex mt-2" for="season-end">Season End:</label>
+                  <div class="col-8">
+                    <select class="form-control" name="season-end" id="season-end">
+                      <option value="1" selected>January</option>
+                      <option value="2">Febuary</option>
+                      <option value="3">March</option>
+                      <option value="4">April</option>
+                      <option value="5">May</option>
+                      <option value="6">June</option>
+                      <option value="7">July</option>
+                      <option value="8">August</option>
+                      <option value="9">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                    </select>
+                    <label><small>Start of the harvest season.</small></label>
+                  </div>
+                </div>
+                <div class="form-group col-12 col-md-12 row">
+                  <label class="col-4 d-flex mt-2" for="season-end">Province:</label>
+                  <div class="col-8">
+                      <select class="form-control" name="province" id="province">
+                      </select>
+                      <div id="demand-invalid" class="invalid-feedback">
+                          Please enter the province.
+                      </div>
+                      <select class="form-control" name="city" id="city"  hidden>
+                          <option value="" disabled selected hidden>City *</option>
+                      </select>
+                      <select class="form-control" name="brgy" id="barangay" hidden>
+                          <option value="" disabled selected hidden>Barangay *</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="form-group col-12 col-md-12 row">
+                  <label class="font-weight-bold label col-4 mt-1" for="weight">Harvest weight per land area:</label>
+                  <div class="col-8">
+                    <input class="form-control col-8" type="number" name="weight" maxlength="30" required>
+                    <label><small>Harvest weight per land area tons/ha</small></label>
+                  </div>
+                </div>
+                <div class="form-group col-12 col-md-12 row">
+                  <label class="font-weight-bold label col-4 mt-2" for="harvest-time" required>Harvest Time:</label>
+                  <div class="col-8">
+                    <input class="form-control col-8" type="number" name="harvest-time" maxlength="30" required>
+                    <label for="harvest-time"><small>Harvest weight per land area tons/ha</small></label>
+                  </div>
+                </div>
+                <div class="form-group col-12 col-md-12 row">
+                  <label class="font-weight-bold label col-4 mt-2" for="productivity">Productivity:</label>
+                  <div class="col-8">
+                    <input class="form-control col-8" type="number" name="productivity" maxlength="30" required>
+                    <label for="productivity"><small>Arbitrary for now, set it later can be overriden.</small></label>
+                  </div>
+                </div>
+              </div>
+              <div class="py-2 px-sm-5 px-2 text-right">
+                <button id="cancelBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success ok-btn" style="width: 7rem;">Save</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+{% block scripts %}
+<!-- Datatables JS -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.22/datatables.min.js"></script>
+<!-- Admin JS -->
+<script src="{% static 'js/custom-admin/custom-admin-sidebar.js' %}"></script>
+<script src="{% static 'js/global/notify.js' %}"></script>
+<!-- load address-->
+<script src="{% static 'js/global/load-address.js' %}"></script>
+<script>
+  loadAddressWithoutDefault("{% static 'js/json/philippine_address_2019v2.json' %}");
+</script> 
+<script src="{% static 'js/custom-admin/custom-admin-crops.js' %}" type="text/javascript"></script>
+<!-- <script src="{% static 'js/custom-admin/custom-admin-orders.js' %}"></script> -->
+<script>
+  $(document).ready(function () {
+    initialize();
+    setCSRFToken("{{csrf_token}}")
+  });
+</script>
+{% endblock scripts %}
